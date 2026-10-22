@@ -7,7 +7,9 @@ void ui_init(const Game *g);
 void ui_reset(const Game *g);
 void ui_step(const Game *g);
 void ui_begin(void);
+void ui_health_sync(const Game *g);
 void ui_text(int x,int y,const char *text);
 void ui_draw(const Game *g,int selftest_error);
+void ui_food(void);
 void ui_end(void);
 #endif

@@ -4,6 +4,7 @@
 #include <string.h>
 #include "sprites.h"
 #include "stage.h"
+#include "level.h"
 #include "sprite_data.h"
 
 #define TEXTURE_BYTES (512*512*3)
@@ -14,15 +15,20 @@ static Animation animation[5];
 static float actor_lift[5];
 static void *texture_vram;
 unsigned actor_frames[5],actor_states[5];
-unsigned sprite_draw_count,sprite_slice_count,missing_sprite_frames;
+unsigned sprite_draw_count,sprite_slice_count,missing_sprite_frames,missing_sprite_family,missing_sprite_id;
 static unsigned frame_draws,frame_slices;
+/* Captain: Donovan geometry, red trousers; no extra atlas or VRAM allocation. */
+static const unsigned __attribute__((aligned(16))) captain_palette[256]={
+ 0,0xffe3e3e3u,0xff202020u,0xff61a2e3u,0xff2061a2u,0xff002061u,0xffff00ffu,0xffff00ffu,
+ 0xff6060e8u,0xff202098u,0xff824120u,0xffa2a2a2u,0xff616161u,0xffff00ffu,0xffff00ffu,0xff202020u
+};
 
 static const Actor *get_actor(const Game *g,int i) { return i ? &g->enemies[i-1] : &g->player; }
 static int family(int i) { return i==0 ? 0 : (i%2 ? 1 : 2); }
 static const SpriteFrame *find_frame(int set,unsigned id) {
     unsigned i;
     for(i=0;i<SPRITE_FRAME_COUNT;++i) if(sprite_frames[i].family==set && sprite_frames[i].id==(int)id) return &sprite_frames[i];
-    ++missing_sprite_frames;return &sprite_frames[0];
+    ++missing_sprite_frames;missing_sprite_family=(unsigned)set;missing_sprite_id=id;return &sprite_frames[0];
 }
 void sprites_reset(const Game *g) {
     int i;
@@ -66,8 +72,8 @@ void sprites_step(const Game *g) {
             unsigned elapsed=18-g->moves.special;
             frame=g->moves.special_forward?forward[elapsed*5/18]:neutral[elapsed*10/18];
         } else if(state==ANIM_GRAB)frame=a->attack?(a->attack>5?71:a->attack>2?72:73):68;
-        else if(state==ANIM_HURT) frame=set==0?47:7;
-        else if(state==ANIM_JUMP) frame=a->attack && g->moves.attack_kind==HIT_AIR?(g->motion.jump_x!=0?23:20):a->jump>18?11:a->jump>12?12:a->jump>4?13:11;
+        else if(state==ANIM_HURT) frame=set==0?148:7;
+        else if(state==ANIM_JUMP) frame=a->attack && g->moves.attack_kind==HIT_AIR?(g->motion.jump_x!=0?23:20):a->jump>18?60:a->jump>12?12:a->jump>4?13:60;
         else if(state==ANIM_ATTACK) {
             if(set==0) {
                 if(g->moves.attack_kind==HIT_BLITZ){static const unsigned blitz[]={60,61,62,63,64,65,66,67};frame=blitz[(12-a->attack)*8/12];}
@@ -88,7 +94,8 @@ void sprites_step(const Game *g) {
         if(!i && g->bk3.active && a->hp>0 && !a->stun)frame=g->bk3.fpg;
         if(i)frame=g->pose[i-1].fpg?g->pose[i-1].fpg:enemy_frames(i-1,a->hp<=0?EP_FLOOR:EP_IDLE)[0].fpg;
         if(g->physics.body[i].phase){frame=g->physics.body[i].fpg;actor_states[i]=g->physics.body[i].phase==BODY_HURT?ANIM_HURT:ANIM_DOWN;}
-        actor_frames[i]=frame;actor_lift[i]=g->motion.z[i];v->x=a->x;v->y=a->y;
+        actor_frames[i]=frame;actor_lift[i]=g->motion.z[i];
+        v->x=a->x;v->y=a->y;
     }
 }
 void sprites_begin(void) {
@@ -112,7 +119,7 @@ void sprites_draw(const Actor *a,int index) {
     left=x-(flip ? f->w-f->px : f->px);
     /* Source pose/palette retained during hurt; no synthetic red tint. */
     sceGuTexImage(0,512,512,512,(unsigned char *)texture_vram+(f->v/512)*512*512);
-    sceGuClutLoad(32,sprite_palettes[set]);
+    sceGuClutLoad(32,index && level_is_boss(index-1)?captain_palette:sprite_palettes[set]);
     v=(SpriteVertex *)sceGuGetMemory(count*2*sizeof(SpriteVertex));
     for(slice=0;slice<count;++slice) {
         int sx=slice*32,ex=sx+32;
@@ -152,5 +159,12 @@ int sprites_selftest(void){
     for(n=10;n>0;--n){g.player.attack=n;sprites_step(&g);expected=n>7?74:n>3?75:76;if(actor_frames[0]!=expected)return 108;}
     game_reset(&g);sprites_reset(&g);
     for(n=24;n>0;--n){g.moves.roll=n;sprites_step(&g);if(actor_frames[0]!=roll[(24-n)*5/24])return 109;}
+    game_reset(&g);g.combat.action=CB_VAULT;g.bk3.active=1;g.motion.z[0]=64;
+    for(n=900;n<=904;++n){g.bk3.fpg=n;sprites_step(&g);if(actor_frames[0]!=(unsigned)n || actor_lift[0]!=64)return 110;}
+    g.combat.action=CB_NONE;g.bk3.fpg=11;sprites_step(&g);if(actor_lift[0]!=64)return 111;
+    g.combat.action=CB_HOLD;g.bk3.fpg=68;g.motion.z[0]=0;sprites_step(&g);if(actor_lift[0]!=0)return 112;
+    game_reset(&g);g.player.stun=1;sprites_step(&g);if(actor_frames[0]!=148 || find_frame(0,actor_frames[0])->id!=148)return 113;
     return 0;
 }
+
+

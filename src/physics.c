@@ -3,6 +3,7 @@
 #include "combat_data.h"
 #include "physics_data.h"
 #include "stage.h"
+#include "sfx.h"
 #include <string.h>
 static Actor *actor(Game *g,int i){return i?&g->enemies[i-1]:&g->player;}
 static float bound(float x,float lo,float hi){return x<lo?lo:x>hi?hi:x;}
@@ -29,14 +30,18 @@ void physics_hit(Game *g,int i,int damage,int down,int facing){Body *b=&g->physi
 }
 void physics_victim_start(Game *g,int i,int back){Body *b=&g->physics.body[i];int n;const EnemyFrame *f=body_frames(i,BODY_VICTIM,back,&n);
  memset(b,0,sizeof(*b));b->phase=BODY_VICTIM;b->timer=f[0].ticks;b->back=back;b->hurt=f[0].hurt;b->fpg=f[0].fpg;
+ /* While attached, vx stores the victim's own held X origin (16.16 screen pixels). */
+ b->vx=(int)(actor(g,i)->x*131072);
  b->pending=back?(back_release[1]&65535):front_release[3];sync_body(g,i);
 }
 int physics_victim_tick(Game *g,int i){Body *b=&g->physics.body[i];int n,remaining;const EnemyFrame *f=body_frames(i,BODY_VICTIM,b->back,&n);const unsigned *offset=b->back?back_offsets:front_offsets;unsigned packed;
  if(!b->timer){++b->frame;b->timer=f[b->frame].ticks;}
  /* Enemy_Forward/BackwardThrow: the final timer tick uses the NEXT remaining ID. */
  remaining=n-b->frame-(b->timer==1);packed=offset[remaining+1];
- actor(g,i)->x=bound(g->player.x+g->player.facing*(b->back?-1:1)*(signed char)(packed>>8)/2.0f,10,230);
- actor(g,i)->y=g->player.y;b->z=(signed char)(packed&255)*65536;b->fpg=f[b->frame].fpg;b->hurt=f[b->frame].hurt;
+ /* Source offsets are relative to the victim's held origin, not Axel's pivot.
+    Retain its ground Y as well, so attachment does not reverse depth ordering. */
+ actor(g,i)->x=bound(b->vx/131072.0f+g->player.facing*(b->back?-1:1)*(signed char)(packed>>8)/2.0f,10,230);
+ b->z=(signed char)(packed&255)*65536;b->fpg=f[b->frame].fpg;b->hurt=f[b->frame].hurt;
  --b->timer;
  if(remaining*2==(int)offset[0]){
   b->phase=BODY_FLIGHT;b->vz=b->back?(int)back_release[0]:(int)(short)front_release[0]*65536+(int)front_release[1];
@@ -54,6 +59,7 @@ int physics_rect(const Game *g,int index,float r[4]){const Actor *a=index?&g->en
  r[0]=a->x*2+box[0];r[1]=r[0]+(unsigned char)box[1];r[2]=stage_foot_y(a->y)-g->motion.z[index]+box[2];r[3]=r[2]+(unsigned char)box[3];return 1;
 }
 static void floor_impact(Game *g,int i){Body *b=&g->physics.body[i];Actor *a=actor(g,i);
+ sfx_emit(0x346,g->combat.ticks,(int)(a->x*256/240));
  /* loc_24380: throw damage is applied ONCE on the first ground impact. */
  if(b->pending){a->hp-=b->pending;if(a->hp<0)a->hp=0;b->pending=0;}
  b->phase=BODY_BOUNCE;b->z=-1;b->vz=BK3_BOUNCE_VZ;b->vx=(b->vx/65536>>1)*65536;
@@ -64,14 +70,22 @@ void physics_body_tick(Game *g,int i){Body *b=&g->physics.body[i];Actor *a=actor
  if(!b->phase || b->phase==BODY_VICTIM)return;
  if(b->freeze){--b->freeze;sync_body(g,i);return;}
  if(b->phase==BODY_FLIGHT || b->phase==BODY_BOUNCE){
-  if(i && b->phase==BODY_FLIGHT){const EnemyFrame *flight=enemy_frames(i-1,EP_FLIGHT);if(b->timer>0)--b->timer;b->fpg=flight[b->timer>0?0:1].fpg;}
+  if(i && b->phase==BODY_FLIGHT){
+   if(b->back>=0){
+    /* Release changes motion, not the source throw animation. Finish its somersault. */
+    f=body_frames(i,BODY_VICTIM,b->back,&n);
+    if(b->timer<=0 && b->frame<n-1){++b->frame;b->timer=f[b->frame].ticks;}
+    b->fpg=f[b->frame].fpg;if(b->timer>0)--b->timer;
+   }else {const EnemyFrame *flight=enemy_frames(i-1,EP_FLIGHT);if(b->timer>0)--b->timer;b->fpg=flight[b->timer>0?0:1].fpg;}
+  }
   if(b->phase==BODY_FLIGHT || b->z<0){
    a->x=bound(a->x+b->vx/131072.0f,10,230);b->z+=b->vz;b->vz+=BK3_GRAVITY_FP;
    if(i && b->phase==BODY_FLIGHT && b->back>=0){EnemyBrain *e=&g->combat.enemy[i-1];
     for(j=1;j<=4;++j)if(j!=i && !(e->mask&(1u<<(j-1))) && g->enemies[j-1].hp>0 && !g->moves.down[j-1] && !g->physics.body[j].inv){
      float box[4],x=a->x*2,y=stage_foot_y(a->y)+b->z/65536.0f;
      if(rules_depth_overlap(g,i,j) && physics_rect(g,j,box) && x>=box[0] && x<=box[1] && y>=box[2] && y<=box[3]){
-      physics_hit(g,j,16,1,b->vx<0?-1:1);g->physics.body[j].inv=5;g->physics.body[j].freeze=8;b->freeze=8;e->mask|=1u<<(j-1);g->moves.throw_hit[i-1]=e->mask;
+      int encoded=0x90;if((b->vx<0?-1:1)!=a->facing)encoded|=64;
+      if(impact_apply(g,i,j,encoded)){g->impact.freeze[i]=0;g->physics.body[j].freeze=8;b->freeze=8;e->mask|=1u<<(j-1);g->moves.throw_hit[i-1]=e->mask;}
      }
     }
    }
@@ -108,5 +122,9 @@ int physics_selftest(void){Game g;int i,k,released;
  for(i=0;i<70;++i){physics_body_tick(&g,1);}if(g.physics.body[1].phase!=BODY_GETUP)return 407;
  game_reset(&g);g.bk3.mode=1;g.bk3.script=BK_BLITZ;physics_hit(&g,1,4,1,1);if(g.physics.body[1].vz!=-474112)return 408;
  game_reset(&g);g.bk3.script=BK_BLITZ;physics_hit(&g,1,4,1,1);if(g.physics.body[1].vz!=BK3_HIT_VZ)return 409;
+ for(k=0;k<2;++k){game_reset(&g);g.player.x=112;g.player.y=101.31579f;g.enemies[0].x=120;g.enemies[0].y=100;physics_victim_start(&g,1,k);physics_victim_tick(&g,1);if(g.enemies[0].x!=(k?120:108) || g.enemies[0].y!=100)return 410+k;}
+ for(k=0;k<2;++k){game_reset(&g);physics_victim_start(&g,k+1,0);released=0;for(i=0;i<26;++i){released=physics_victim_tick(&g,k+1);}if(!released)return 412+k;
+  physics_body_tick(&g,k+1);physics_body_tick(&g,k+1);if(g.physics.body[k+1].phase!=BODY_FLIGHT || g.physics.body[k+1].fpg!=enemy_frames(k,EP_FRONT)[3].fpg)return 414+k;}
  return 0;
 }
+

@@ -2,6 +2,7 @@
 #include "bk3_data.h"
 #include "combat_data.h"
 #include "stage.h"
+#include "sfx.h"
 static const Actor *actor(const Game *g,int i){return i?&g->enemies[i-1]:&g->player;}
 int impact_overlap(const Game *g,int from,int to,int id){const Actor *a=actor(g,from);const signed char *box;float x,y,r[4];int z;
  if(from==to || id<=0 || id>=(from?(from%2?4:5):27))return 0;
@@ -13,6 +14,7 @@ int impact_overlap(const Game *g,int from,int to,int id){const Actor *a=actor(g,
  x=a->x*2+box[0];y=stage_foot_y(a->y)+z/65536.f+box[2];
  return !(r[1]<x || r[0]>x+(int)box[1] || r[3]<y || r[2]>y+(int)box[3]);
 }
+unsigned impact_sound(int encoded){int d=encoded&63;return d<3?0x18:d<5?0x26:d<7?0x21:0x32;}
 int impact_apply(Game *g,int from,int to,int encoded){int damage=encoded&63,freeze=2+(damage>>2),facing=actor(g,from)->facing;
  if(!damage || from==to || !(rules_flags(g,to)&128) || g->physics.body[to].inv || (!to && g->moves.invincible))return 0;
  if(freeze>8)freeze=8;
@@ -22,7 +24,7 @@ int impact_apply(Game *g,int from,int to,int encoded){int damage=encoded&63,free
  /* loc_25192 / SetHitFlag: enemy target 5, player target 10 source ticks. */
  g->physics.body[to].inv=to?5:10;
  if(from)g->impact.freeze[from]=freeze;else g->bk3.hitstop=freeze;
- g->impact.freeze[to]=0;g->impact.last_from[to]=from;g->impact.damage[to]=encoded;++g->impact.contacts[from];
+ g->impact.freeze[to]=0;g->impact.last_from[to]=from;g->impact.damage[to]=encoded;++g->impact.contacts[from];sfx_emit(impact_sound(encoded),g->combat.ticks,(int)(actor(g,to)->x*256/240));
  if(to && (g->rules.actor[to].status58&16) && g->physics.body[to].phase==BODY_FLIGHT){rules_end_hold(g);g->moves.grab=-1;g->combat.target=-1;}
  return 1;
 }
@@ -50,5 +52,8 @@ int impact_selftest(void){Game g;int i,hp;
  game_reset(&g);g.player.hp=1;impact_apply(&g,1,0,1);if(g.player.hp || g.physics.body[0].phase!=BODY_FLIGHT)return 718;
  game_reset(&g);g.enemies[0].x=48;g.enemies[0].y=100;g.player.facing=-1;if(!impact_overlap(&g,0,1,5))return 719;
  game_reset(&g);if(impact_overlap(&g,0,1,27) || impact_overlap(&g,1,0,4))return 720;
+ if(impact_sound(2)!=0x18 || impact_sound(3)!=0x26 || impact_sound(5)!=0x21 || impact_sound(7)!=0x32 || impact_sound(0xc2)!=0x18)return 721;
+ game_reset(&g);impact_apply(&g,0,1,0xff);if(g.enemies[0].hp || g.physics.body[1].freeze!=8 || g.physics.body[1].phase!=BODY_FLIGHT)return 722;
+ game_reset(&g);if(impact_apply(&g,0,1,0xc0) || g.enemies[0].hp!=40 || g.impact.contacts[0])return 723;
  return 0;
 }

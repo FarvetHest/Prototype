@@ -11,9 +11,13 @@
 #include "sprites.h"
 #include "stage.h"
 #include "music.h"
+#include "sfx.h"
 #include "ui.h"
+#include "flow.h"
+#include "held.h"
+#include "level.h"
 
-PSP_MODULE_INFO("SoRR PSP Lite", 0, 0, 12);
+PSP_MODULE_INFO("SoRR PSP Lite", 0, 0, 19);
 PSP_MAIN_THREAD_ATTR(PSP_THREAD_ATTR_USER);
 PSP_MAIN_THREAD_STACK_SIZE_KB(128);
 PSP_HEAP_SIZE_KB(4096);
@@ -22,6 +26,7 @@ PSP_HEAP_SIZE_KB(4096);
 #define WHITE RGB(224,224,208)
 static unsigned int __attribute__((aligned(16))) commands[65536];
 static volatile int running = 1;
+Flow flow;
 Game game; /* Kept as a symbol for emulator inspection. */
 unsigned int frame_count, logic_count, dropped_ticks;
 unsigned int presented_buffer = 0x04000000u;
@@ -101,16 +106,23 @@ static void render(void) {
     sceGuStart(GU_DIRECT,commands); sceGuClear(GU_COLOR_BUFFER_BIT);
     vertices = (Vertex *)sceGuGetMemory(MAX_VERTICES * sizeof(Vertex)); vertex_count = batch_start = 0;
     stage_draw();
+    ui_begin();ui_food();ui_end();
     for(i=1;i<5;++i) { int k=order[i]; j=i; while(j && actors[order[j-1]]->y>actors[k]->y) {order[j]=order[j-1]; --j;} order[j]=k; }
-    for(i=0;i<5;++i) rect((int)actors[i]->x-7,stage_foot_y(actors[i]->y)/2-1,14,2,RGB(24,24,32));
+    for(i=0;i<5;++i) if(!i || !level.enabled || (level.slots&(1<<(i-1))))rect((int)actors[i]->x-7,stage_foot_y(actors[i]->y)/2-1,14,2,RGB(24,24,32));
     flush_rects();
     sprites_begin();
-    for(i=0;i<5;++i) { j=order[i]; sprites_draw(actors[j],j); }
+    for(i=0;i<5;++i) { j=order[i];if(!j || !level.enabled || (level.slots&(1<<(j-1))))sprites_draw(actors[j],j); }
+    if(flow.state==FLOW_TITLE || flow.state>=FLOW_CONTINUE) {
+        rect(40,44,160,56,RGB(8,12,24));flush_rects();
+    }
     ui_begin();ui_draw(&game,selftest_result);
     if(frame_count<save_notice_until) ui_text(340,8,save_status>0?"CSV SAVED":"CSV ERROR");
     if(music_stats.status<0)ui_text(320,26,"MUSIC ERROR");
     else if(music_muted)ui_text(328,26,"MUSIC OFF");
     ui_end();
+    if(level.enabled && level.go && flow.state==FLOW_PLAY && !game.paused && ((level.timer/15)&1)==0){
+        rect(207,43,14,4,RGB(255,224,32));for(i=0;i<7;++i)rect(219+i,38+i,1,14-i*2,RGB(255,224,32));
+    }
     if(show_perf) {
         rect(0,123,240,13,RGB(0,0,0));
         snprintf(line,sizeof(line),"FPS %.1f LOG %.1f",hud.fps,hud.logic_hz);text(3,124,line,WHITE);
@@ -124,7 +136,7 @@ static void save_profile(void) {
     unsigned i; int failed=0;
     FILE *f = fopen("lite-profile.csv","w");
     if (!f) {save_status=-1; return;}
-    if (fprintf(f,"# SoRR PSP Lite v0.11; selftest=%d; cpu_mhz=%d; samples=%u; capacity=900; music_status=%d; music_error=%d; rate=%u; loops=%u\n", selftest_result,scePowerGetCpuClockFrequencyInt(),sample_count,music_stats.status,music_stats.error,music_stats.rate,music_stats.loops)<0) failed=1;
+    if (fprintf(f,"# SoRR PSP Lite v0.16; selftest=%d; cpu_mhz=%d; samples=%u; capacity=900; music_status=%d; music_error=%d; rate=%u; loops=%u\n", selftest_result,scePowerGetCpuClockFrequencyInt(),sample_count,music_stats.status,music_stats.error,music_stats.rate,music_stats.loops)<0) failed=1;
     if (fprintf(f,"sample,fps,logic_hz,logic_ms,render_sync_ms,dropped_ticks_total,music_blocks,music_late,music_decode_max_ms\n")<0) failed=1;
     for(i=0;i<sample_count;++i) {
         Sample *s=&samples[i];
@@ -132,6 +144,17 @@ static void save_profile(void) {
     }
     if(fclose(f)) failed=1;
     save_status=failed?-1:1;
+}
+static void apply_flow_request(void) {
+    if(flow.request==FLOW_RESET_NEW) {
+        game_reset(&game);level_start(&level,&game);sprites_reset(&game);ui_reset(&game);
+        music_restart();sfx_reset();show_perf=0;
+    } else if(flow.request==FLOW_RESET_LIFE) {
+        game_respawn(&game);sprites_reset(&game);ui_reset(&game);
+        ui_score=flow.score;sfx_reset();
+    }
+    if(flow.request)held_reset();
+    flow.request=FLOW_RESET_NONE;
 }
 int main(void) {
     SceCtrlData pad; unsigned previous=0, pending=0, last_vblank;
@@ -141,7 +164,7 @@ int main(void) {
     if(th>=0) sceKernelStartThread(th,0,0);
     scePowerSetClockFrequency(333,333,166);
     sceCtrlSetSamplingCycle(0); sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
-    selftest_result=game_selftest(); if(!selftest_result)selftest_result=sprites_selftest(); game_reset(&game); init_gu(); sprites_init(&game); stage_init(); ui_init(&game); music_start();
+    selftest_result=game_selftest(); if(!selftest_result)selftest_result=sprites_selftest(); if(!selftest_result)selftest_result=flow_selftest(); if(!selftest_result)selftest_result=held_selftest(); if(!selftest_result)selftest_result=level_selftest(); if(!selftest_result)selftest_result=level_boss_selftest(); flow_init(&flow); game_reset(&game); init_gu(); sprites_init(&game); stage_init(); ui_init(&game); music_start();sfx_start();
     prev=sceKernelGetSystemTimeWide()-TICK_US; window=prev; last_vblank=sceDisplayGetVcount();
     while(running) {
         uint64_t now=sceKernelGetSystemTimeWide(), delta=now-prev, a,b;
@@ -152,15 +175,25 @@ int main(void) {
         accum+=delta;
         memset(&pad,0,sizeof(pad)); pad.Lx=pad.Ly=128; sceCtrlPeekBufferPositive(&pad,1);
         edges=pad.Buttons & ~previous; previous=pad.Buttons;
-        if(edges & PSP_CTRL_START) {game.paused=!game.paused; pending=0;}
-        if((pad.Buttons & (PSP_CTRL_LTRIGGER|PSP_CTRL_RTRIGGER))==(PSP_CTRL_LTRIGGER|PSP_CTRL_RTRIGGER) &&
-            (edges & (PSP_CTRL_LTRIGGER|PSP_CTRL_RTRIGGER))) {game_reset(&game); sprites_reset(&game); ui_reset(&game); music_restart(); pending=0;}
-        if(edges & PSP_CTRL_CIRCLE)show_perf=!show_perf;
-        music_pause(game.paused);
-        if((edges & PSP_CTRL_TRIANGLE) && (pad.Buttons & PSP_CTRL_LTRIGGER))music_toggle_mute();
-        if(!game.paused) {
-            pending |= edges & (PSP_CTRL_SQUARE|PSP_CTRL_CROSS);
-            if(!(pad.Buttons & PSP_CTRL_LTRIGGER))pending |= edges & PSP_CTRL_TRIANGLE;
+        {
+            int menu=flow.state==FLOW_TITLE || flow.state>=FLOW_CONTINUE;
+            if(menu) {
+                flow_button(&flow,(edges&(PSP_CTRL_START|PSP_CTRL_CROSS))!=0,(edges&PSP_CTRL_CIRCLE)!=0);
+                pending=0;apply_flow_request();
+            } else if(flow.state==FLOW_PLAY && (edges&PSP_CTRL_START)) {
+                game.paused=!game.paused;pending=0;held_reset();
+            }
+            if((pad.Buttons&(PSP_CTRL_LTRIGGER|PSP_CTRL_RTRIGGER))==(PSP_CTRL_LTRIGGER|PSP_CTRL_RTRIGGER) &&
+               (edges&(PSP_CTRL_LTRIGGER|PSP_CTRL_RTRIGGER))) {
+                flow_new(&flow);apply_flow_request();pending=0;menu=1;
+            }
+            if(!menu && flow.state==FLOW_PLAY && (edges&PSP_CTRL_CIRCLE))show_perf=!show_perf;
+            music_pause(game.paused);sfx_pause(game.paused);
+            if((edges&PSP_CTRL_TRIANGLE) && (pad.Buttons&PSP_CTRL_LTRIGGER))music_toggle_mute();
+            if(!menu && flow.state==FLOW_PLAY && !game.paused) {
+                pending|=edges&(PSP_CTRL_SQUARE|PSP_CTRL_CROSS);
+                if(!(pad.Buttons&PSP_CTRL_LTRIGGER))pending|=edges&PSP_CTRL_TRIANGLE;
+            }
         }
         in.x=(pad.Lx<96 || pad.Lx>160)?((int)pad.Lx-128)/128.0f:0;
         in.y=(pad.Ly<96 || pad.Ly>160)?((int)pad.Ly-128)/128.0f:0;
@@ -169,7 +202,14 @@ int main(void) {
         a=sceKernelGetSystemTimeWide();
         while(accum>=TICK_US && steps<3) {
             in.attack=(pending & PSP_CTRL_SQUARE)?((pad.Buttons&PSP_CTRL_RTRIGGER)?2:1):0; in.jump=(pending & PSP_CTRL_CROSS)!=0; in.special=(pending & PSP_CTRL_TRIANGLE)!=0; pending=0;
-            if(!selftest_result) { game_step(&game,in); sprites_step(&game); ui_step(&game); }
+            if(!selftest_result) {
+                if(flow.state==FLOW_PLAY) { in.attack=held_tick(&game,(pad.Buttons&PSP_CTRL_SQUARE)!=0,in.attack,(pad.Buttons&PSP_CTRL_RTRIGGER)!=0);game_step(&game,in);ui_step(&game);
+                    {unsigned gen=level.generation;level_step(&level,&game);
+                     if(level.generation!=gen){unsigned score=ui_score;ui_reset(&game);ui_score=score;sprites_reset(&game);}}
+                    sprites_step(&game);ui_health_sync(&game); }
+                if(flow.state!=FLOW_PLAY)held_reset();
+                flow_tick(&flow,&game,ui_score);apply_flow_request();
+            }
             accum-=TICK_US; ++steps; ++logic_count; ++nl;
         }
         b=sceKernelGetSystemTimeWide(); logic_us+=b-a;
@@ -194,5 +234,5 @@ int main(void) {
             last_vblank=sceDisplayGetVcount();
         }
     }
-    save_profile(); music_stop(); sceGuTerm(); sceKernelExitGame(); return 0;
+    save_profile();sfx_stop(); music_stop(); sceGuTerm(); sceKernelExitGame(); return 0;
 }

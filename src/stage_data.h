@@ -1,0 +1,2 @@
+#define STAGE_PAGES 6
+#define STAGE_BYTES 1572864
