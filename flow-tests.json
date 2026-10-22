@@ -1,0 +1,38 @@
+{
+  "checks": {
+    "selftest": true,
+    "title_freezes_battle": true,
+    "cross_starts_without_jump": true,
+    "death_consumes_once": true,
+    "death_does_not_repeat": true,
+    "respawn_restores_player": true,
+    "respawn_preserves_enemy_damage_score": true,
+    "last_life_offers_continue": true,
+    "continue_freezes_battle": true,
+    "continue_consumes_one_credit": true,
+    "continue_preserves_progress": true,
+    "cancel_continue_gameover": true,
+    "gameover_returns_title": true,
+    "new_run_resets_progress": true,
+    "continue_timeout_gameover": true,
+    "no_credits_gameover": true,
+    "all_enemies_dead_clear": true,
+    "clear_freezes_battle": true,
+    "clear_returns_title": true,
+    "pause_retained": true,
+    "resume_retained": true
+  },
+  "flow": [
+    1,
+    3,
+    2,
+    0,
+    52,
+    0,
+    0,
+    9400,
+    72
+  ],
+  "eboot_sha256": "29efdd5aba25832a7ec5d5ee37dc74da568cfbb7df6ac97ecf742d72bb6845ea",
+  "note": "Local debugger fixtures exercise lifecycle transitions; not a physical PSP test. Continue timeout shortened through fixture, normal duration checked as 300 ticks."
+}

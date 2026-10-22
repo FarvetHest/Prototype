@@ -1,0 +1,32 @@
+{
+  "checks": {
+    "selftest": true,
+    "sfx_channel_running": true,
+    "whiff_is_silent": true,
+    "contact_enqueues_and_plays": true,
+    "sfx_output_nonzero_and_bounded": true,
+    "sfx_pan_matches_left_target": true,
+    "sfx_pauses_with_game": true,
+    "early_ground_press_is_not_buffered": true,
+    "front_grab_attack_priority": true,
+    "back_grab_vault_priority": true,
+    "ai_tracks_unhittable_player_without_attacking": true,
+    "multi_target_contact_coalesces_audio": true,
+    "sfx_no_errors_drops_or_clipping": true
+  },
+  "sfx_stats": [
+    1,
+    0,
+    50,
+    50,
+    0,
+    3,
+    0,
+    0,
+    14686,
+    360,
+    11008,
+    24
+  ],
+  "eboot_sha256": "29efdd5aba25832a7ec5d5ee37dc74da568cfbb7df6ac97ecf742d72bb6845ea"
+}

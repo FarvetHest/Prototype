@@ -1,0 +1,78 @@
+{
+  "checks": {
+    "selftest": true,
+    "first_wave_starts": true,
+    "camera_locked_during_fight": true,
+    "level_pauses": true,
+    "rendered_source_pixels_0": true,
+    "rendered_source_pixels_511": true,
+    "rendered_source_pixels_1023": true,
+    "rendered_source_pixels_1535": true,
+    "rendered_source_pixels_2047": true,
+    "rendered_source_pixels_2372": true,
+    "background_at_most_two_batches": true,
+    "all_RAM_pages_uploaded": true,
+    "wave_0_locked": true,
+    "wave_0_GO_and_no_early_victory": true,
+    "wave_1_spawn_preserves_score_HP": true,
+    "wave_1_locked": true,
+    "death_offers_continue": true,
+    "continue_keeps_wave_camera_damage": true,
+    "wave_1_GO_and_no_early_victory": true,
+    "wave_2_spawn_preserves_score_HP": true,
+    "wave_2_locked": true,
+    "wave_2_GO_and_no_early_victory": true,
+    "wave_3_spawn_preserves_score_HP": true,
+    "wave_3_locked": true,
+    "wave_3_GO_and_no_early_victory": true,
+    "wave_4_spawn_preserves_score_HP": true,
+    "wave_4_locked": true,
+    "last_wave_spawns_boss_before_exit": true,
+    "last_wave_score_preserved_at_boss_spawn": true,
+    "boss_continue_preserves_HP_camera": true,
+    "boss_damage_score": true,
+    "boss_defeat_score": true,
+    "boss_defeat_unlocks_GO": true,
+    "five_waves_and_exit_clear": true,
+    "new_run_resets_level": true,
+    "source_approach_Donovan": true,
+    "source_approach_DonovanLow": true,
+    "source_approach_Garcia": true,
+    "no_missing_frames": true
+  },
+  "level_trace": [
+    {
+      "wave": 0,
+      "camera": 0.0,
+      "score": 1600,
+      "clears": 1
+    },
+    {
+      "wave": 1,
+      "camera": 260.0,
+      "score": 3200,
+      "clears": 2
+    },
+    {
+      "wave": 2,
+      "camera": 532.75,
+      "score": 4800,
+      "clears": 3
+    },
+    {
+      "wave": 3,
+      "camera": 802.75,
+      "score": 6400,
+      "clears": 4
+    },
+    {
+      "wave": 4,
+      "camera": 1186.0,
+      "score": 8000,
+      "clears": 5
+    }
+  ],
+  "max_background_batches": 2,
+  "eboot_sha256": "29efdd5aba25832a7ec5d5ee37dc74da568cfbb7df6ac97ecf742d72bb6845ea",
+  "note": "Movement and wave gates use real input; HP/deaths are debugger fixtures to traverse the full level quickly. Framebuffer pixels compared with the source background at page boundaries. Not physical PSP performance."
+}

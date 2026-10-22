@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "food_4_exact_source_pixels": true,
+    "food_18_exact_source_pixels": true,
+    "no_extra_HUD_VRAM": true,
+    "sprites.t8_unchanged": true,
+    "stage.rgb565_unchanged": true,
+    "music_unchanged": true,
+    "HUD_embedded_in_final_ELF": true
+  },
+  "eboot_sha256": "29efdd5aba25832a7ec5d5ee37dc74da568cfbb7df6ac97ecf742d72bb6845ea",
+  "hud_sha256": "89153198632b34e4cae6b231ecdffc32e7142dfee689c5013b6f4758e44a262c"
+}
