@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00011':
+        if (status.get('game')or{}).get('id')!='SORL00016':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -51,6 +51,7 @@ def button(name,t=0.18):
     p.send(**{name:True});time.sleep(t);p.send(**{name:False});time.sleep(0.1)
 def reset():
     p.send(ltrigger=True,rtrigger=True);time.sleep(0.15);p.send(ltrigger=False,rtrigger=False);time.sleep(0.12)
+    p.req('memory.write_u32',address=p.symbols['level'],value=0)
 def frames():return list(struct.unpack('<5I',p.read(p.symbols['actor_frames'],20)))
 def moves():return list(struct.unpack('<34i',p.read(p.symbols['game']+192,136)))
 
@@ -69,7 +70,7 @@ def screenshot(path):
         def chunk(k,d): return struct.pack('>I',len(d))+k+d+struct.pack('>I',zlib.crc32(k+d))
         path.write_bytes(b'\x89PNG\r\n\x1a\n'+chunk(b'IHDR',struct.pack('>2I5B',480,272,8,2,0,0,0))+chunk(b'IDAT',zlib.compress(b''.join(rows)))+chunk(b'IEND',b''))
     finally:p.req('cpu.resume')
-def arrange(hp,player_hp=100,attack=0,x=82.0,one=False):
+def arrange(hp,player_hp=100,attack=0,x=82.0,one=False,freeze_one=False):
     p.req('cpu.stepping')
     a=p.symbols['game']
     def put(off,fmt,*v):p.req('memory.write',address=a+off,base64=base64.b64encode(struct.pack(fmt,*v)).decode())
@@ -88,6 +89,7 @@ def arrange(hp,player_hp=100,attack=0,x=82.0,one=False):
         for j in range(5):struct.pack_into('<12i',rules,j*48,6 if not j else 14 if j%2 else 16,128,0,0,0,0,8,0,-1,-1,0,1)
         for j in range(4):struct.pack_into('<10i',rules,240+j*40,0x1a if attack else 2,0,-1,0,0,0,0,0,0,0)
         put(1084,'<404s',rules);put(1488,'<176s',bytes(176))
+        if freeze_one:put(1492,'<i',10000)
         raw=bytearray(136);struct.pack_into('<i',raw,52,100);struct.pack_into('<i',raw,64,-1)
         p.req('memory.write',address=a+192,base64=base64.b64encode(raw).decode())
     finally:p.req('cpu.resume')
@@ -133,11 +135,11 @@ try:
     reset();a=state();checks['restart']=a['player'][2]==100 and all(e[2]==40 for e in a['enemies'])
     checks['hud_reset']=p.u32('ui_score')==0 and p.u32('ui_player_hp')==100 and p.u32('ui_timer')==99 and p.u32('show_perf')==0
     hud_manifest=json.loads((project/'assets/hud-manifest.json').read_text())
-    checks['hud_upload']=hashlib.sha256(p.read(0x04188000,256*256*4)).hexdigest()==hud_manifest['texture_sha256']
+    checks['hud_upload']=hashlib.sha256(p.read(0x04148000,256*256*4)).hexdigest()==hud_manifest['texture_sha256']
     manifest=json.loads((project/'assets/manifest.json').read_text())
     checks['atlas_upload']=hashlib.sha256(p.read(0x04088000,512*512*3)).hexdigest()==manifest['atlas_sha256']
     stage=json.loads((project/'assets/stage-manifest.json').read_text())
-    checks['stage_upload']=hashlib.sha256(p.read(0x04148000,512*256*2)).hexdigest()==stage['texture_sha256'] and p.u32('stage_draw_count')==1
+    checks['stage_RAM_source']=hashlib.sha256(p.read(p.symbols['stage_texture'],512*256*2)).hexdigest()==stage['first_page_sha256'] and p.u32('stage_draw_count')==1
     checks['music_source']=hashlib.sha256((project/'build/music.wav').read_bytes()).hexdigest()==json.loads((project/'assets/music-manifest.json').read_text())['wav_sha256']
     audio_start=music();time.sleep(0.3);audio_next=music()
     checks['music_streaming']=audio_next[0]==1 and audio_next[1]==0 and audio_next[2]>audio_start[2] and audio_next[7]==44100
@@ -253,7 +255,7 @@ try:
         write(512+64,0);write(512+68,10000)
         write(1084+4,160);write(1084+36,1);write(1084+48+4,144);write(1084+48+32,0);write(1084+240,14 if back else 12)
         p.req('cpu.resume');time.sleep(.06)
-    reset();arrange(40,x=70.,one=True);p.send(right=True);time.sleep(.06);p.send(right=False)
+    reset();arrange(40,x=70.,one=True,freeze_one=True);p.send(right=True);time.sleep(.12);p.send(right=False)
     checks['automatic_grab']=moves()[16]==0
     checks['grab_repositions_player_not_victim']=abs(state()['enemies'][0][0]-70.)<.01 and state()['player'][0]<60
     screenshot(artifacts/'lite-grab.png')
@@ -277,7 +279,7 @@ try:
     screenshot(artifacts/'lite-backthrow.png');p.send(square=False);time.sleep(.65)
     checks['back_throw_damage']=state()['enemies'][0][2]==86 and moves()[16]==-1
     hold();before=state()['player'][0];p.send(cross=True);time.sleep(.13)
-    checks['vault_animation']=frames()[0] in (150,151,152)
+    checks['vault_animation']=frames()[0] in range(900,905)
     screenshot(artifacts/'lite-vault.png');p.send(cross=False);time.sleep(.6)
     checks['vault_retains_grab']=moves()[16]==0 and state()['player'][0]>before+15 and state()['player'][3]==-1
     hold();p.send(left=True);time.sleep(.5);p.send(left=False)

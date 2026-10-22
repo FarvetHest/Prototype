@@ -13,15 +13,15 @@
   "visible_crop": [
     0,
     0,
-    480,
+    2852,
     240
   ],
   "screen_position": [
     0,
     32
   ],
-  "texture_bytes": 262144,
-  "texture_sha256": "1a726f0ac20f59805b14508013bb5ba38cf56118c1da194134dcc93b3c7540d4",
+  "texture_bytes": 1572864,
+  "texture_sha256": "92892ae9d1161c503109f31afc8b9ec731dc115e21594452dd8e902a9e461345",
   "swizzle_roundtrip_verified": true,
   "music_source": "1.ogg",
   "music_title": "Go Straight (SoRR remix)",
@@ -30,5 +30,16 @@
   "music_rate": 44100,
   "music_channels": 2,
   "music_pcm_frames": 8599534,
-  "music_seconds": 195.0007709750567
+  "music_seconds": 195.0007709750567,
+  "pages": 6,
+  "first_page_sha256": "1a726f0ac20f59805b14508013bb5ba38cf56118c1da194134dcc93b3c7540d4",
+  "page_sha256": [
+    "1a726f0ac20f59805b14508013bb5ba38cf56118c1da194134dcc93b3c7540d4",
+    "f73c080b2721c19849e99cdb9394453b587ce91277121ddd5ae41869d1933e1d",
+    "b8074078235c1b2b665f581a64c7274d103a0eaea537ec516f0d24e73930b1fc",
+    "b900a897d627173d194c75171578dd3e8d0103ed39d796348e663abca6f5f5fa",
+    "129dbf2273212acbfc8e396c48fc9f3022fbf61dde9232ebfe17526e8c05bcd2",
+    "754bfd4c4ec4702ccdf4b9bcdd1400e3157e89eafbf077d2e58c9cdee413ef31"
+  ],
+  "storage": "six static RAM pages; no VRAM background copy"
 }

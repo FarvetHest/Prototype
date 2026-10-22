@@ -3,3 +3,6 @@ Extracted from gsaurus/sor-disassemblies commit4dd719f3ed5c24c86deee616b56cea885
 See PORTING-NOTES.md and assets/enemy-native.json for pinned source hash.
 SoRR colors/other assets retain their respective original authorship.
 The port authors claim no ownership of those game assets. No complete ROM is included.
+
+Impact audio: local SoRR sor1_hit.wav, original authorship retained.
+Prepared PCM provenance and transformations: assets/sfx-manifest.json.

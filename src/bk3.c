@@ -8,7 +8,7 @@ static float bound(float x,float low,float high){return x<low?low:x>high?high:x;
 static const Bk3Frame *frames(int script,int *count){
 #define SCRIPT(id,name) case id:*count=(int)(sizeof(bk3_##name)/sizeof(bk3_##name[0]));return bk3_##name;
  switch(script){SCRIPT(BK_IDLE,idle) SCRIPT(BK_WALK,walk) SCRIPT(BK_RUN,run) SCRIPT(BK_JUMP,jump)
- SCRIPT(BK_PUNCH1,punch1) SCRIPT(BK_PUNCH2,punch2) SCRIPT(BK_KICK,kick) SCRIPT(BK_BLITZ,blitz) SCRIPT(BK_AIR1,air1) SCRIPT(BK_AIR2,air2) SCRIPT(BK_BACKHAND,backhand) SCRIPT(BK_DOUBLEKICK,doublekick)}
+ SCRIPT(BK_PUNCH1,punch1) SCRIPT(BK_PUNCH2,punch2) SCRIPT(BK_KICK,kick) SCRIPT(BK_BLITZ,blitz) SCRIPT(BK_AIR1,air1) SCRIPT(BK_AIR2,air2) SCRIPT(BK_BACKHAND,backhand) SCRIPT(BK_DOUBLEKICK,doublekick) SCRIPT(BK_TUCK,air3)}
 #undef SCRIPT
  *count=34;return bk3_idle;
 }
@@ -16,9 +16,10 @@ static void enter(Bk3 *b,int script){int count;const Bk3Frame *f=frames(script,&
  b->script=script;b->frame=0;b->timer=f[0].ticks;b->mask=0;
 }
 static void attack_start(Game *g){Bk3 *b=&g->bk3;
- int rear=b->queued==2;
+ int rear=b->queued==2,charged=b->queued==3;
  b->queued=0;b->mode=1;g->player.hit=0;
- if(rear){b->combo=b->next_combo=0;b->run=0;enter(b,BK_BACKHAND);g->moves.attack_kind=HIT_NORMAL;}
+ if(charged){b->combo=b->next_combo=0;b->combo_timeout=0;b->run=0;enter(b,BK_DOUBLEKICK);g->moves.attack_kind=HIT_NORMAL;}
+ else if(rear){b->combo=b->next_combo=0;b->run=0;enter(b,BK_BACKHAND);g->moves.attack_kind=HIT_NORMAL;}
  else if(b->run){b->combo=0;enter(b,BK_BLITZ);b->run=0;g->moves.attack_kind=HIT_BLITZ;}
  else{b->combo=b->next_combo+1;enter(b,b->next_combo<2?BK_PUNCH1:b->next_combo==2?BK_PUNCH2:b->combo_timeout>=16?BK_DOUBLEKICK:BK_KICK);
  b->combo_timeout=22;g->moves.attack_kind=HIT_NORMAL;}
@@ -47,7 +48,9 @@ void bk3_tick(Game *g,float x,float y,int attack,int jump){
  if(b->taptimer>0)--b->taptimer;
  if(dx && dx!=b->lastx){if(b->tapdir==dx && b->taptimer>0)b->run=dx;b->tapdir=dx;b->taptimer=BK3_DOUBLE_TAP;}
  b->lastx=dx;if(dx!=b->run)b->run=0;
- if(attack)b->queued=attack==2?2:1;
+ /* Obj_Combo does not retain new ground B edges until the move ends. */
+ if(b->mode!=2)b->queued=0;
+ if(attack && b->mode==0 && !b->hitstop)b->queued=attack==3?3:attack==2?2:1;
  if(b->hitstop){--b->hitstop;return;}
  if(!b->timer){
   f=frames(b->script,&n);++b->frame;b->mask=0;
@@ -70,15 +73,21 @@ void bk3_tick(Game *g,float x,float y,int attack,int jump){
  }else if(b->mode==1 && b->script==BK_BLITZ){
   n=10-b->frame;if(n<=9 && n>3)p->x=bound(p->x+p->facing*.75f,10,230);
  }
+ /* Preserve a 30Hz input edge through the short 60Hz takeoff phase. */
+ if(b->mode==2 && b->takeoff && attack)b->queued=attack;
  if(b->mode==2 && !started_jump){
   if(b->landing){if(--b->landing==0){b->mode=0;b->air_attack=0;enter(b,BK_IDLE);}}
-  else if(b->takeoff){--b->takeoff;if(dx)p->facing=dx;}
+  else if(b->takeoff){--b->takeoff;if(dx)p->facing=dx;if(dx)b->air_attack=-1;}
   else{
    b->z+=b->vz;b->vz+=BK3_GRAVITY_FP;
    if(b->z>=0 && b->vz>=0){b->z=0;b->airvx=0;b->landing=1;b->queued=0;enter(b,BK_JUMP);b->frame=2;b->timer=1;}
    else{
-    if((attack || b->queued) && !b->air_attack){b->air_attack=1;b->queued=0;g->moves.attack_kind=HIT_AIR;enter(b,b->airvx?BK_AIR2:BK_AIR1);}
+    if((attack || b->queued) && b->air_attack<=0){
+     int moving=b->air_attack<0 || dx || b->airvx;
+     b->air_attack=1;b->queued=0;g->moves.attack_kind=HIT_AIR;enter(b,dy>0?BK_TUCK:moving?BK_AIR2:BK_AIR1);
+    }
     if(b->script!=BK_AIR1){
+     if(dx && !b->air_attack)b->air_attack=-1;
      /* Obj_Jumping loc_98E4..9958: 1/4 pixel acceleration, ±2 pixels cap. */
      air_step=b->airvx;
      if(dx>0){air_step+=BK3_AIR_ACCEL_FP;if(air_step<BK3_AIR_LIMIT_FP)b->airvx=air_step;}
@@ -90,10 +99,10 @@ void bk3_tick(Game *g,float x,float y,int attack,int jump){
   }
  }
  f=frames(b->script,&n);f+=b->frame;b->fpg=f->fpg;b->damage=f->damage;b->collision=f->collision;
- if(b->mode==1 || (b->mode==2 && b->air_attack))collide(g,f);
+ if(b->mode==1 || (b->mode==2 && (b->air_attack>0 || b->script==BK_TUCK)))collide(g,f);
  if(b->timer>0)--b->timer;
  g->motion.z[0]=-b->z/65536.0f;g->motion.vz[0]=-b->vz/65536.0f;g->motion.jump_x=b->airvx/65536.0f;
- p->jump=b->mode==2?1:0;p->attack=b->mode==1 || (b->mode==2 && b->air_attack)?1:0;p->cooldown=p->attack;
+ p->jump=b->mode==2?1:0;p->attack=b->mode==1 || (b->mode==2 && (b->air_attack>0 || b->script==BK_TUCK))?1:0;p->cooldown=p->attack;
  g->moves.run_dir=b->mode==0?b->run:0;g->moves.combo=b->combo;g->moves.queued=b->queued;
 }
 
@@ -138,5 +147,16 @@ int bk3_selftest(void){
  quiet(&g);bk3_tick(&g,0,0,1,0);for(i=0;i<3;++i){bk3_tick(&g,0,0,0,0);}if(g.bk3.combo_timeout!=22)return 231;
  quiet(&g);bk3_tick(&g,0,0,1,0);g.bk3.hitstop=5;bk3_tick(&g,0,0,0,0);if(g.bk3.combo_timeout!=22)return 232;
  quiet(&g);g.bk3.active=1;g.bk3.next_combo=2;g.bk3.combo_timeout=1;bk3_tick(&g,0,0,0,0);if(g.bk3.next_combo || g.bk3.combo_timeout)return 233;
+ quiet(&g);bk3_tick(&g,0,0,1,0);bk3_tick(&g,0,0,1,0);for(i=0;i<12;++i){bk3_tick(&g,0,0,0,0);}if(g.bk3.mode || g.bk3.combo!=1 || g.bk3.queued)return 234;
+ quiet(&g);bk3_tick(&g,0,0,1,0);g.bk3.hitstop=3;bk3_tick(&g,0,0,1,0);if(g.bk3.queued)return 235;
+ quiet(&g);bk3_tick(&g,0,0,3,0);if(g.bk3.script!=BK_DOUBLEKICK || g.bk3.combo || g.bk3.next_combo)return 236;
+ for(i=0;i<40;++i){bk3_tick(&g,0,0,0,0);}if(g.bk3.mode || g.bk3.next_combo)return 237;
+ quiet(&g);bk3_tick(&g,1,0,0,1);for(i=0;i<5;++i){bk3_tick(&g,1,0,0,0);}if(g.bk3.script!=BK_JUMP || g.player.attack)return 238;
+ bk3_tick(&g,1,0,1,0);if(g.bk3.script!=BK_AIR2)return 239;
+ quiet(&g);bk3_tick(&g,0,0,0,1);for(i=0;i<5;++i){bk3_tick(&g,0,0,0,0);}bk3_tick(&g,1,0,1,0);if(g.bk3.script!=BK_AIR2)return 240;
+ quiet(&g);bk3_tick(&g,0,0,0,1);for(i=0;i<5;++i){bk3_tick(&g,0,0,0,0);}bk3_tick(&g,0,0,1,0);if(g.bk3.script!=BK_AIR1)return 241;
+ quiet(&g);bk3_tick(&g,-1,0,1,1);for(i=0;i<5;++i){bk3_tick(&g,-1,0,0,0);}if(g.bk3.script!=BK_AIR2 || g.player.facing!=-1)return 242;
+ quiet(&g);bk3_tick(&g,0,0,0,1);for(i=0;i<5;++i){bk3_tick(&g,0,0,0,0);}bk3_tick(&g,0,1,1,0);if(g.bk3.script!=BK_TUCK || g.bk3.fpg!=21 || g.bk3.collision!=4 || g.bk3.damage!=4)return 243;
+ quiet(&g);bk3_tick(&g,0,0,0,1);bk3_tick(&g,0,1,1,0);for(i=0;i<5;++i){bk3_tick(&g,0,1,0,0);}if(g.bk3.script!=BK_TUCK)return 244;
  return 0;
 }

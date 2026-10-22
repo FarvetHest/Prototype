@@ -6,7 +6,7 @@ ROOT=Path(__file__).resolve().parents[1]
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--data',type=Path,required=True);args=ap.parse_args()
     choose={'barra':[24],'barra_amarilla':[24],'barra_azul':[24],'sorr':[176,250],
-            'galsia':[300],'donovan':[300],'general':[10],
+            'galsia':[300],'donovan':[300],'general':[10],'item':[4,18],
             'fuente':list(range(48,58))+list(range(97,123))+[33,58,63]+list(range(248,258))}
     atlas=bytearray(256*256*4);entries=[];sources=[];x=y=1;row=0
     for name,ids in choose.items():
@@ -43,3 +43,4 @@ def main():
     (dest/'hud-manifest.json').write_text(json.dumps({'sources':sources,'frames':entries,'texture_bytes':len(swizzled),'texture_sha256':hashlib.sha256(swizzled).hexdigest(),'format':'256x256 GU_PSM_8888 swizzled; original 6-bit palette expanded to 8-bit; index 0 transparent','swizzle_roundtrip_verified':True},indent=2))
     print('Prepared',len(entries),'original HUD images in',len(swizzled),'bytes')
 if __name__=='__main__':main()
+

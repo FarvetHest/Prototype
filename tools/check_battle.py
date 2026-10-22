@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00011':
+        if (status.get('game')or{}).get('id')!='SORL00016':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -51,6 +51,7 @@ def button(name,t=0.18):
     p.send(**{name:True});time.sleep(t);p.send(**{name:False});time.sleep(0.1)
 def reset():
     p.send(ltrigger=True,rtrigger=True);time.sleep(0.15);p.send(ltrigger=False,rtrigger=False);time.sleep(0.12)
+    p.req('memory.write_u32',address=p.symbols['level'],value=0)
 def frames():return list(struct.unpack('<5I',p.read(p.symbols['actor_frames'],20)))
 def moves():return list(struct.unpack('<34i',p.read(p.symbols['game']+192,136)))
 

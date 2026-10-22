@@ -23,6 +23,7 @@ typedef struct Game { Actor player, enemies[ENEMIES]; unsigned ticks; int paused
 typedef struct { float x, y; int attack, jump, special; } Input;
 void game_hit_enemy(Game *g,int i,int damage,int down);
 void game_reset(Game *g);
+void game_respawn(Game *g);
 void game_step(Game *g, Input in);
 int game_selftest(void);
 #endif

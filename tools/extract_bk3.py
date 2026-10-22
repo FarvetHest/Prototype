@@ -19,7 +19,7 @@ def script(name):
   row=raw[i*7:i*7+7];assert ''.join(x[0]for x in row)=='wlbbwww'
   out.append(dict(ticks=num(row[0][1]),mapping=row[1][1],collision=num(row[2][1]),damage=num(row[3][1]),art=[num(v)for k,v in row[4:]]))
  return dict(source_label=name,line=labels[name]+1,frames=out)
-names={'idle':'Standing','walk':'Walking','run':'Run','jump':'Jumping1','punch1':'Punch1','punch2':'Punch2','kick':'Kick1','blitz':'GrandUpper','air1':'Flykick1','air2':'Flykick2','special1':'Supermove1','special2':'Supermove2','frontgrab':'FrontGrab','backgrab':'BackGrab','headbutt':'Headbutt','knee':'KneeJab','jumpknee':'JumpingKneeJab','frontthrow':'FrontHoldThrow','backthrow':'BackHoldThrow','vault':'JumpOver','hit':'Hit1','knockout':'KnockedOut','lying':'LyingOnGround','getup':'GetUp','rolldown':'RollDown','rollup':'RollUp','backhand':'BackHand','doublekick':'DoubleKick'}
+names={'idle':'Standing','walk':'Walking','run':'Run','jump':'Jumping1','punch1':'Punch1','punch2':'Punch2','kick':'Kick1','blitz':'GrandUpper','air1':'Flykick1','air2':'Flykick2','air3':'Flykick3','special1':'Supermove1','special2':'Supermove2','frontgrab':'FrontGrab','backgrab':'BackGrab','headbutt':'Headbutt','knee':'KneeJab','jumpknee':'JumpingKneeJab','frontthrow':'FrontHoldThrow','backthrow':'BackHoldThrow','vault':'JumpOver','hit':'Hit1','knockout':'KnockedOut','lying':'LyingOnGround','getup':'GetUp','rolldown':'RollDown','rollup':'RollUp','backhand':'BackHand','doublekick':'DoubleKick'}
 scripts={k:script('DMA_Axel_'+v)for k,v in names.items()}
 # Explicit visual adapter: ROM mapping addresses are NOT FPG IDs.
 mapping={}
@@ -29,9 +29,9 @@ def bind(key,ids):
   old=mapping.setdefault(row['mapping'],id);assert old==id,(row,old,id)
 bind('doublekick',[83,84,85,84,86,83]);bind('backhand',[14,15,16,17,15]);bind('idle',[1,2,3,4]*8+[32,33]);bind('walk',list(range(5,11)));bind('run',list(range(168,174)))
 bind('jump',[60,12,13]);bind('punch1',[1,80]);bind('punch2',[1,81,82,81]);bind('kick',[83,84,85,83])
-bind('blitz',[60,61,62,61,62,63,64,65,66,67]);bind('air1',[18,19,20,19,18,13]);bind('air2',[22,23])
+bind('blitz',[60,61,62,61,62,63,64,65,66,67]);bind('air1',[18,19,20,19,18,13]);bind('air2',[22,23]);bind('air3',[21])
 bind('special1',list(range(24,32)));bind('special2',list(range(34,44))+list(range(34,43))+[44,45,46,53])
-bind('frontgrab',[68]);bind('backgrab',[79]);bind('headbutt',[69,70,71]);bind('knee',[72]);bind('jumpknee',[72,100,73,100]);bind('frontthrow',[153,154,155,156,154]);bind('backthrow',[153,154,157,158,159,45,46,53]);bind('vault',[150,151,152,151,150]);bind('hit',[148,148,148,148]);bind('knockout',[49]);bind('lying',[50]);bind('getup',[51,50,51,53]);bind('rolldown',[60,99,98,53]);bind('rollup',[53,98,99,60])
+bind('frontgrab',[68]);bind('backgrab',[79]);bind('headbutt',[69,70,71]);bind('knee',[72]);bind('jumpknee',[72,100,73,100]);bind('frontthrow',[153,154,155,156,154]);bind('backthrow',[153,154,157,158,159,45,46,53]);bind('vault',[900,901,902,903,904]);bind('hit',[148,148,148,148]);bind('knockout',[49]);bind('lying',[50]);bind('getup',[51,50,51,53]);bind('rolldown',[60,99,98,53]);bind('rollup',[53,98,99,60])
 for v in scripts.values():
  for row in v['frames']:row['fpg']=mapping[row['mapping']]
 boxes=[num(v)for k,v in tokens_at('byte_4C4F0',27*8)];assert len(boxes)==216

@@ -1,0 +1,11 @@
+{
+  "source": "sor1_hit.wav",
+  "source_sha256": "210d7d111992e58e68cd2709ee103113c2357312b7993c34f5e953585fed659e",
+  "rate": 44100,
+  "channels": 1,
+  "frames": 7019,
+  "pcm_sha256": "24297f4b437fabf846a48e21e00093a79e86b116a87f2fb56b7456e9adc35858",
+  "peak": 14000,
+  "processing": "peak headroom14000,32-sample boundary fade; no resampling",
+  "mapping": "BK3 damage thresholds select sound IDs18/26/21/32 hex; single SoRR impact timbre at four gains; floor346 hex"
+}

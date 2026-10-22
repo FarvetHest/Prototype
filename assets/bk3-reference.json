@@ -416,42 +416,6 @@
           ],
           "fpg": 33
         }
-      ],
-      "hurt_ids": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
       ]
     },
     "walk": {
@@ -530,14 +494,6 @@
           ],
           "fpg": 10
         }
-      ],
-      "hurt_ids": [
-        2,
-        2,
-        2,
-        2,
-        2,
-        2
       ]
     },
     "run": {
@@ -616,14 +572,6 @@
           ],
           "fpg": 173
         }
-      ],
-      "hurt_ids": [
-        19,
-        19,
-        19,
-        19,
-        19,
-        19
       ]
     },
     "jump": {
@@ -666,11 +614,6 @@
           ],
           "fpg": 13
         }
-      ],
-      "hurt_ids": [
-        3,
-        4,
-        5
       ]
     },
     "punch1": {
@@ -701,10 +644,6 @@
           ],
           "fpg": 80
         }
-      ],
-      "hurt_ids": [
-        1,
-        27
       ]
     },
     "punch2": {
@@ -759,12 +698,6 @@
           ],
           "fpg": 81
         }
-      ],
-      "hurt_ids": [
-        1,
-        27,
-        27,
-        27
       ]
     },
     "kick": {
@@ -819,12 +752,6 @@
           ],
           "fpg": 83
         }
-      ],
-      "hurt_ids": [
-        2,
-        2,
-        2,
-        2
       ]
     },
     "blitz": {
@@ -951,18 +878,6 @@
           ],
           "fpg": 67
         }
-      ],
-      "hurt_ids": [
-        3,
-        43,
-        43,
-        43,
-        43,
-        3,
-        44,
-        45,
-        45,
-        45
       ]
     },
     "air1": {
@@ -1041,14 +956,6 @@
           ],
           "fpg": 13
         }
-      ],
-      "hurt_ids": [
-        21,
-        22,
-        23,
-        22,
-        21,
-        5
       ]
     },
     "air2": {
@@ -1079,10 +986,24 @@
           ],
           "fpg": 23
         }
-      ],
-      "hurt_ids": [
-        24,
-        25
+      ]
+    },
+    "air3": {
+      "source_label": "DMA_Axel_Flykick3",
+      "line": 122697,
+      "frames": [
+        {
+          "ticks": 99,
+          "mapping": "word_117218",
+          "collision": 4,
+          "damage": 4,
+          "art": [
+            38160,
+            38563,
+            38658
+          ],
+          "fpg": 21
+        }
       ]
     },
     "special1": {
@@ -1185,16 +1106,6 @@
           ],
           "fpg": 31
         }
-      ],
-      "hurt_ids": [
-        31,
-        32,
-        33,
-        34,
-        35,
-        36,
-        36,
-        36
       ]
     },
     "special2": {
@@ -1477,31 +1388,6 @@
           ],
           "fpg": 53
         }
-      ],
-      "hurt_ids": [
-        37,
-        38,
-        9,
-        9,
-        9,
-        9,
-        38,
-        39,
-        9,
-        7,
-        37,
-        38,
-        9,
-        9,
-        9,
-        9,
-        38,
-        39,
-        9,
-        40,
-        62,
-        41,
-        42
       ]
     },
     "frontgrab": {
@@ -1520,9 +1406,6 @@
           ],
           "fpg": 68
         }
-      ],
-      "hurt_ids": [
-        6
       ]
     },
     "backgrab": {
@@ -1541,9 +1424,6 @@
           ],
           "fpg": 79
         }
-      ],
-      "hurt_ids": [
-        7
       ]
     },
     "headbutt": {
@@ -1586,11 +1466,6 @@
           ],
           "fpg": 71
         }
-      ],
-      "hurt_ids": [
-        29,
-        9,
-        30
       ]
     },
     "knee": {
@@ -1609,9 +1484,6 @@
           ],
           "fpg": 72
         }
-      ],
-      "hurt_ids": [
-        28
       ]
     },
     "jumpknee": {
@@ -1666,12 +1538,6 @@
           ],
           "fpg": 100
         }
-      ],
-      "hurt_ids": [
-        28,
-        19,
-        19,
-        19
       ]
     },
     "frontthrow": {
@@ -1738,13 +1604,6 @@
           ],
           "fpg": 154
         }
-      ],
-      "hurt_ids": [
-        0,
-        0,
-        0,
-        0,
-        0
       ]
     },
     "backthrow": {
@@ -1847,16 +1706,6 @@
           ],
           "fpg": 53
         }
-      ],
-      "hurt_ids": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
       ]
     },
     "vault": {
@@ -1873,7 +1722,7 @@
             38520,
             38659
           ],
-          "fpg": 150
+          "fpg": 900
         },
         {
           "ticks": 6,
@@ -1885,7 +1734,7 @@
             38525,
             38659
           ],
-          "fpg": 151
+          "fpg": 901
         },
         {
           "ticks": 8,
@@ -1897,7 +1746,7 @@
             38523,
             38659
           ],
-          "fpg": 152
+          "fpg": 902
         },
         {
           "ticks": 6,
@@ -1909,7 +1758,7 @@
             38525,
             38659
           ],
-          "fpg": 151
+          "fpg": 903
         },
         {
           "ticks": 4,
@@ -1921,15 +1770,8 @@
             38520,
             38659
           ],
-          "fpg": 150
+          "fpg": 904
         }
-      ],
-      "hurt_ids": [
-        0,
-        0,
-        0,
-        0,
-        0
       ]
     },
     "hit": {
@@ -1984,12 +1826,6 @@
           ],
           "fpg": 148
         }
-      ],
-      "hurt_ids": [
-        11,
-        11,
-        11,
-        11
       ]
     },
     "knockout": {
@@ -2008,9 +1844,6 @@
           ],
           "fpg": 49
         }
-      ],
-      "hurt_ids": [
-        12
       ]
     },
     "lying": {
@@ -2029,9 +1862,6 @@
           ],
           "fpg": 50
         }
-      ],
-      "hurt_ids": [
-        13
       ]
     },
     "getup": {
@@ -2086,12 +1916,6 @@
           ],
           "fpg": 53
         }
-      ],
-      "hurt_ids": [
-        14,
-        13,
-        14,
-        15
       ]
     },
     "rolldown": {
@@ -2146,12 +1970,6 @@
           ],
           "fpg": 53
         }
-      ],
-      "hurt_ids": [
-        3,
-        20,
-        20,
-        15
       ]
     },
     "rollup": {
@@ -2206,12 +2024,6 @@
           ],
           "fpg": 60
         }
-      ],
-      "hurt_ids": [
-        15,
-        20,
-        20,
-        3
       ]
     },
     "backhand": {
@@ -2278,13 +2090,6 @@
           ],
           "fpg": 15
         }
-      ],
-      "hurt_ids": [
-        2,
-        7,
-        34,
-        34,
-        7
       ]
     },
     "doublekick": {
@@ -2363,14 +2168,6 @@
           ],
           "fpg": 83
         }
-      ],
-      "hurt_ids": [
-        2,
-        2,
-        2,
-        2,
-        2,
-        2
       ]
     }
   },
@@ -3189,397 +2986,5 @@
   "back_release": [
     0,
     131086
-  ],
-  "body_scripts": {
-    "garcia_front": {
-      "label": "word_202FD6",
-      "frames": [
-        {
-          "ticks": 16,
-          "fpg": 7,
-          "mapping": "word_2033A6",
-          "hurt": 2
-        },
-        {
-          "ticks": 4,
-          "fpg": 8,
-          "mapping": "word_2033C6",
-          "hurt": 2
-        },
-        {
-          "ticks": 6,
-          "fpg": 8,
-          "mapping": "word_203680",
-          "hurt": 2
-        },
-        {
-          "ticks": 20,
-          "fpg": 9,
-          "mapping": "word_2036A0",
-          "hurt": 2
-        },
-        {
-          "ticks": 99,
-          "fpg": 9,
-          "mapping": "word_2036A0",
-          "hurt": 2
-        }
-      ]
-    },
-    "garcia_back": {
-      "label": "word_203000",
-      "frames": [
-        {
-          "ticks": 16,
-          "fpg": 7,
-          "mapping": "word_2033A6",
-          "hurt": 2
-        },
-        {
-          "ticks": 4,
-          "fpg": 8,
-          "mapping": "word_2033C6",
-          "hurt": 2
-        },
-        {
-          "ticks": 6,
-          "fpg": 9,
-          "mapping": "word_20347C",
-          "hurt": 0
-        },
-        {
-          "ticks": 3,
-          "fpg": 8,
-          "mapping": "word_2033C6",
-          "hurt": 2
-        },
-        {
-          "ticks": 99,
-          "fpg": 9,
-          "mapping": "word_20347C",
-          "hurt": 0
-        }
-      ]
-    },
-    "donovan_front": {
-      "label": "word_203914",
-      "frames": [
-        {
-          "ticks": 16,
-          "fpg": 7,
-          "mapping": "word_203CB2",
-          "hurt": 2
-        },
-        {
-          "ticks": 4,
-          "fpg": 8,
-          "mapping": "word_203CD2",
-          "hurt": 2
-        },
-        {
-          "ticks": 6,
-          "fpg": 8,
-          "mapping": "word_203FEA",
-          "hurt": 2
-        },
-        {
-          "ticks": 20,
-          "fpg": 9,
-          "mapping": "word_20400A",
-          "hurt": 2
-        },
-        {
-          "ticks": 99,
-          "fpg": 9,
-          "mapping": "word_20400A",
-          "hurt": 2
-        }
-      ]
-    },
-    "donovan_back": {
-      "label": "word_20393E",
-      "frames": [
-        {
-          "ticks": 16,
-          "fpg": 7,
-          "mapping": "word_203CB2",
-          "hurt": 2
-        },
-        {
-          "ticks": 4,
-          "fpg": 8,
-          "mapping": "word_203CD2",
-          "hurt": 2
-        },
-        {
-          "ticks": 6,
-          "fpg": 9,
-          "mapping": "word_203D82",
-          "hurt": 0
-        },
-        {
-          "ticks": 3,
-          "fpg": 8,
-          "mapping": "word_203CD2",
-          "hurt": 2
-        },
-        {
-          "ticks": 99,
-          "fpg": 9,
-          "mapping": "word_203D82",
-          "hurt": 0
-        }
-      ]
-    },
-    "garcia_hurt": {
-      "label": "word_202EE6",
-      "frames": [
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_2033F0",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203414",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_2033F0",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203414",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_2033F0",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203414",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_2033F0",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203414",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_2033F0",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203414",
-          "hurt": 4
-        }
-      ]
-    },
-    "donovan_hurt": {
-      "label": "word_203836",
-      "frames": [
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203CFC",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203D20",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203CFC",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203D20",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203CFC",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203D20",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203CFC",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203D20",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203CFC",
-          "hurt": 4
-        },
-        {
-          "ticks": 3,
-          "fpg": 7,
-          "mapping": "word_203D20",
-          "hurt": 4
-        }
-      ]
-    },
-    "garcia_floor": {
-      "label": "word_202F4A",
-      "frames": [
-        {
-          "ticks": 20,
-          "fpg": 9,
-          "mapping": "word_20347C",
-          "hurt": 0
-        }
-      ]
-    },
-    "donovan_floor": {
-      "label": "word_20389A",
-      "frames": [
-        {
-          "ticks": 20,
-          "fpg": 9,
-          "mapping": "word_203D82",
-          "hurt": 0
-        }
-      ]
-    },
-    "garcia_getup": {
-      "label": "word_202F54",
-      "frames": [
-        {
-          "ticks": 6,
-          "fpg": 9,
-          "mapping": "word_20347C",
-          "hurt": 0
-        },
-        {
-          "ticks": 6,
-          "fpg": 9,
-          "mapping": "word_203496",
-          "hurt": 0
-        },
-        {
-          "ticks": 6,
-          "fpg": 9,
-          "mapping": "word_20347C",
-          "hurt": 0
-        },
-        {
-          "ticks": 8,
-          "fpg": 9,
-          "mapping": "word_203496",
-          "hurt": 0
-        },
-        {
-          "ticks": 10,
-          "fpg": 12,
-          "mapping": "word_203438",
-          "hurt": 0
-        },
-        {
-          "ticks": 10,
-          "fpg": 1,
-          "mapping": "word_20324E",
-          "hurt": 1
-        }
-      ]
-    },
-    "donovan_getup": {
-      "label": "word_2038A4",
-      "frames": [
-        {
-          "ticks": 4,
-          "fpg": 9,
-          "mapping": "word_203D82",
-          "hurt": 0
-        },
-        {
-          "ticks": 4,
-          "fpg": 9,
-          "mapping": "word_203D9C",
-          "hurt": 0
-        },
-        {
-          "ticks": 4,
-          "fpg": 9,
-          "mapping": "word_203D82",
-          "hurt": 0
-        },
-        {
-          "ticks": 6,
-          "fpg": 9,
-          "mapping": "word_203D9C",
-          "hurt": 0
-        },
-        {
-          "ticks": 8,
-          "fpg": 12,
-          "mapping": "word_203D44",
-          "hurt": 0
-        },
-        {
-          "ticks": 10,
-          "fpg": 1,
-          "mapping": "word_203B76",
-          "hurt": 1
-        }
-      ]
-    }
-  },
-  "special_init_words": [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    65532,
-    0,
-    0,
-    0,
-    65528,
-    0,
-    65532,
-    0
   ]
 }

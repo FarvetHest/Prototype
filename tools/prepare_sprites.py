@@ -36,6 +36,9 @@ def main():
     atlas=bytearray(512*1536);entries=[];palettes=[];sources=[];pending=[]
     for family,(name,ids) in enumerate(SETS.items()):
         ids=list(dict.fromkeys(ids));path=args.data/(name+'.fpg');palette,frames=decode(path)
+        if name=='bk3_axel' and (dest/'vault-native.json').exists():
+            vault=json.loads((dest/'vault-native.json').read_text())
+            frames.update({int(k):dict(v,pixels=bytes.fromhex(v['pixels'])) for k,v in vault['frames'].items()})
         native=json.loads((dest/'enemy-native.json').read_text())
         if name in native:
             data=native[name];palette=[tuple(c)for c in data['palette']]+[(0,0,0,0)]*240

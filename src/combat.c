@@ -108,16 +108,18 @@ void combat_tick(Game *g,float x,float y,int attack,int jump,int special){Combat
   else {g->moves.tap_y=dy;g->moves.tap_y_tick=c->ticks;}
  }
  g->moves.last_y=dy;
- if(special && !(c->action==CB_HOLD && c->back && (g->rules.actor[c->target+1].status5a&1)) && !g->moves.special && !g->moves.roll && !p->jump && g->physics.body[0].phase<=BODY_HURT)special_start(g,c->action==CB_HOLD?0:dx);
+ if(special && c->action!=CB_HOLD && !g->moves.special && !g->moves.roll && !p->jump && g->physics.body[0].phase<=BODY_HURT)special_start(g,c->action==CB_HOLD?0:dx);
  if(c->action==CB_HOLD){
   if(c->back && c->target>=0 && (g->rules.actor[c->target+1].status5a&1)){charge_tick(g);for(i=0;i<4;++i)source_ai_tick(g,i);return;}
   g->rules.actor[0].hold_timer=(g->rules.actor[0].hold_timer-1)&65535;c->hold=g->rules.actor[0].hold_timer;
   if(!rules_hold_valid(g) || p->stun || !c->hold){release(g);c->action=CB_NONE;}
   else {
-   if(dx==-p->facing){if(++c->escape>=20 && !attack){p->x=bound(p->x-p->facing*(c->back?8:4),10,230);release(g);c->action=CB_NONE;}}else c->escape=0;
+   if(dx==-p->facing && !(c->back && jump)){if(++c->escape>=20 && !(c->back && jump)){p->x=bound(p->x-p->facing*(c->back?8:4),10,230);release(g);c->action=CB_NONE;}}else if(!(c->back && jump))c->escape=0;
    if(c->action==CB_HOLD){
-    if(jump){c->vault_x=(int)(p->x*65536);action_start(g,CB_VAULT);}
+    if(jump && c->back){c->vault_x=(int)(p->x*65536);action_start(g,CB_VAULT);}
     else if(attack){if(c->back)action_start(g,CB_BACKTHROW);else if(dx==-p->facing)action_start(g,CB_FRONTTHROW);else if(!dx)action_start(g,CB_HEAD);else action_start(g,++c->hits>=3?CB_JUMPKNEE:CB_KNEE);}
+    else if(jump){c->vault_x=(int)(p->x*65536);action_start(g,CB_VAULT);}
+    else if(special){special_start(g,0);}
     else {hold_anchor(g);g->bk3.active=1;g->bk3.fpg=c->back?79:68;g->bk3.z=0;p->attack=0;}
    }
   }
@@ -168,5 +170,8 @@ int combat_selftest(void){Game g;int i,j,hp,peak=0;unsigned seed;
  release(&g);g.combat.target=0;rules_begin_hold(&g,0);if(g.rules.actor[0].hold_timer!=65535)return 324;
  game_reset(&g);g.enemies[0].x=64;g.enemies[0].y=103;combat_tick(&g,0,1,0,0,0);if(g.moves.grab!=0)return 325;
  game_reset(&g);g.enemies[0].x=64;g.enemies[0].y=100;physics_hit(&g,1,1,0,1);if(!rules_can_grab(&g,0,1,1))return 326;
+ game_reset(&g);g.combat.target=0;g.combat.action=CB_HOLD;rules_begin_hold(&g,0);combat_tick(&g,1,0,1,1,1);if(g.combat.action!=CB_KNEE)return 327;
+ game_reset(&g);g.combat.target=0;g.combat.action=CB_HOLD;g.combat.back=1;rules_begin_hold(&g,0);combat_tick(&g,0,0,1,1,1);if(g.combat.action!=CB_VAULT)return 328;
+ game_reset(&g);g.combat.target=0;g.combat.action=CB_HOLD;rules_begin_hold(&g,0);g.combat.escape=19;combat_tick(&g,-1,0,1,0,0);if(g.combat.action!=CB_NONE || g.moves.grab!=-1)return 329;
  return 0;
 }

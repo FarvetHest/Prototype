@@ -99,6 +99,9 @@ static const Bk3Frame bk3_air2[] = {
 {6,22,0,0},
 {40,23,3,134},
 };
+static const Bk3Frame bk3_air3[] = {
+{99,21,4,4},
+};
 static const Bk3Frame bk3_special1[] = {
 {4,24,0,0},
 {4,25,11,136},
@@ -172,11 +175,11 @@ static const Bk3Frame bk3_backthrow[] = {
 {15,53,0,0},
 };
 static const Bk3Frame bk3_vault[] = {
-{4,150,0,0},
-{6,151,0,0},
-{8,152,0,0},
-{6,151,0,0},
-{4,150,0,0},
+{4,900,0,0},
+{6,901,0,0},
+{8,902,0,0},
+{6,903,0,0},
+{4,904,0,0},
 };
 static const Bk3Frame bk3_hit[] = {
 {3,148,0,0},

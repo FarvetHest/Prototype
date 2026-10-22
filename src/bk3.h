@@ -7,7 +7,7 @@ typedef struct {
  unsigned mask,ticks;
  int fpg,damage,collision,enemy_inv[4];
 } Bk3;
-enum { BK_IDLE,BK_WALK,BK_RUN,BK_JUMP,BK_PUNCH1,BK_PUNCH2,BK_KICK,BK_BLITZ,BK_AIR1,BK_AIR2,BK_BACKHAND,BK_DOUBLEKICK };
+enum { BK_IDLE,BK_WALK,BK_RUN,BK_JUMP,BK_PUNCH1,BK_PUNCH2,BK_KICK,BK_BLITZ,BK_AIR1,BK_AIR2,BK_BACKHAND,BK_DOUBLEKICK,BK_TUCK };
 struct Game;
 void bk3_tick(struct Game *g,float x,float y,int attack,int jump);
 void bk3_suspend(struct Game *g);

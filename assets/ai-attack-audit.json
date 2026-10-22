@@ -1,0 +1,18 @@
+{
+  "source_file": "Bare Knuckle 3 (J) [!].asm",
+  "source_sha256": "ab4fcf0be4c9b5bac1f60f1d863c2cb6b781c5fb157dad72574c9755534409c3",
+  "source_commit": "4dd719f3ed5c24c86deee616b56cea885e3113d7",
+  "rechecked": [
+    "Obj_GarciaDonovanMove",
+    "loc_2696E",
+    "loc_269A4",
+    "loc_269F0",
+    "loc_26A5E",
+    "loc_26A96",
+    "loc_26B74",
+    "loc_26BAE"
+  ],
+  "existing": "CE8 first jab within50px/depth7, CE9 follow-up within40px/depth7, Garcia two jabs, Donovan RNG uppercut/kick finish, level5 anti-air choice, source timers/boxes/damage and eight-step facing",
+  "fixed": "Approach CE1..4 now routes through the same unarmed jab/anti-air selection as CE7; previously forced CE8 even for level5+ Donovan facing an airborne target",
+  "scope": "Only unarmed Garcia/Donovan. Armed5B branches, bosses and extra enemy families remain unported."
+}

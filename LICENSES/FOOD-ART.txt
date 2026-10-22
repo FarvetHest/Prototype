@@ -1,0 +1,1 @@
+Food: original SoRR item.fpg frames4 and18. Source SHA256: assets/hud-manifest.json. Original authorship retained. Captain uses existing Donovan geometry with a derived red palette.

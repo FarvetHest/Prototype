@@ -1,0 +1,21 @@
+{
+  "sources": {
+    "BK3": {
+      "file": "Bare Knuckle 3 (J) [!].asm",
+      "sha256": "ab4fcf0be4c9b5bac1f60f1d863c2cb6b781c5fb157dad72574c9755534409c3",
+      "first_line": 12911,
+      "last_line": 12940,
+      "branch": "New B edge; held Down bit9 selects animation50 / Flykick3; otherwise motion history selects4C/4E"
+    },
+    "SOR3_US": {
+      "file": "Streets of Rage 3 (U) [!].asm",
+      "sha256": "1daf2540255d03719800deac3075db49cb97217103191d98bb4127038fedb231",
+      "first_line": 11133,
+      "last_line": 11165,
+      "branch": "New B edge; held Down bit9 selects animation50 / Flykick3; otherwise motion history selects4C/4E"
+    }
+  },
+  "vault_source": "DMA_Axel_JumpOver: five distinct mappings, original pivots and tile flips",
+  "throw_release": "Enemy_ForwardThrow/Enemy_BackwardThrow change ObjMode to A without replacing the current animation; preserve sequence through flight",
+  "input_adapter": "Input remains30Hz; B edge held through the four60Hz takeoff steps to prevent loss between internal updates"
+}
