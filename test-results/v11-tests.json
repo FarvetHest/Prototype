@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "selftest": true,
+    "combo_fast_finisher": true,
+    "combo_slow_finisher": true,
+    "combo_expires_in_standing": true,
+    "garcia_standing_uses_four_source_poses": true,
+    "garcia_walking_uses_source_cycle": true,
+    "held_hit_uses_distinct_hit2_pose": true,
+    "no_missing_native_sprite": true
+  },
+  "eboot_sha256": "7cd131326185d2c333feec5fa91c3c0ee9d42648cedfd5e0283cdec88c3515cd"
+}
