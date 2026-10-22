@@ -121,7 +121,13 @@ static void render(void) {
     else if(music_muted)ui_text(328,26,"MUSIC OFF");
     ui_end();
     if(level.enabled && level.go && flow.state==FLOW_PLAY && !game.paused && ((level.timer/15)&1)==0){
-        rect(207,43,14,4,RGB(255,224,32));for(i=0;i<7;++i)rect(219+i,38+i,1,14-i*2,RGB(255,224,32));
+        int bob=level_go_bob(&level); /* arrow slides sideways so "go on" reads as motion, not just a blink */
+        rect(207+bob,43,14,4,RGB(255,224,32));for(i=0;i<7;++i)rect(219+i+bob,38+i,1,14-i*2,RGB(255,224,32));
+    }
+    /* Blinds transition (no alpha blending needed): fade-in at the start of a run, fade-out at the exit. */
+    if(flow.state==FLOW_PLAY && level_fade(&level)>0){
+        int y,bar=level_fade(&level);
+        for(y=0;y<136;y+=8)rect(0,y,240,bar,RGB(0,0,0));
     }
     if(show_perf) {
         rect(0,123,240,13,RGB(0,0,0));
@@ -164,7 +170,7 @@ int main(void) {
     if(th>=0) sceKernelStartThread(th,0,0);
     scePowerSetClockFrequency(333,333,166);
     sceCtrlSetSamplingCycle(0); sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
-    selftest_result=game_selftest(); if(!selftest_result)selftest_result=sprites_selftest(); if(!selftest_result)selftest_result=flow_selftest(); if(!selftest_result)selftest_result=held_selftest(); if(!selftest_result)selftest_result=level_selftest(); if(!selftest_result)selftest_result=level_boss_selftest(); flow_init(&flow); game_reset(&game); init_gu(); sprites_init(&game); stage_init(); ui_init(&game); music_start();sfx_start();
+    selftest_result=game_selftest(); if(!selftest_result)selftest_result=sprites_selftest(); if(!selftest_result)selftest_result=flow_selftest(); if(!selftest_result)selftest_result=held_selftest(); if(!selftest_result)selftest_result=level_selftest(); if(!selftest_result)selftest_result=level_boss_selftest(); if(!selftest_result)selftest_result=level_entry_selftest(); flow_init(&flow); game_reset(&game); init_gu(); sprites_init(&game); stage_init(); ui_init(&game); music_start();sfx_start();
     prev=sceKernelGetSystemTimeWide()-TICK_US; window=prev; last_vblank=sceDisplayGetVcount();
     while(running) {
         uint64_t now=sceKernelGetSystemTimeWide(), delta=now-prev, a,b;

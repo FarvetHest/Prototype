@@ -110,7 +110,12 @@ void ui_draw(const Game *g,int error) {
         else {snprintf(score,sizeof(score),"WAVE %d OF %d",level.wave+1,LEVEL_WAVES);ui_text(320,8,score);}
         if(level.heal_notice && flow.state==FLOW_PLAY){snprintf(score,sizeof(score),"HP %d",level.heal_amount);ui_text(208,62,score);}
         if(level.boss==1 && level.boss_phase==BOSS_WINDUP && !g->paused && flow.state==FLOW_PLAY)ui_text(208,80,"WATCH");
-        if(level.go && flow.state==FLOW_PLAY && !g->paused && ((level.timer/15)&1)==0)ui_text(382,80,"GO");}
+        if(level.go && flow.state==FLOW_PLAY && !g->paused && ((level.timer/15)&1)==0)ui_text(382+level_go_bob(&level)*2,80,"GO");
+        /* Wave / boss banner: steady first, then flickers out over its last half second. */
+        if(level.banner>0 && flow.state==FLOW_PLAY && !g->paused && (level.banner>15 || (level.banner&4))){
+            if(level.boss==1)ui_text(212,96,"WARNING");
+            else {snprintf(score,sizeof(score),"WAVE %d",level.wave+1);ui_text(218,96,score);}
+        }}
     image(HUD_SORR,176,8,8,-1);image(HUD_SORR,250,26,8,-1);
     snprintf(score,sizeof(score),"%07u",value);ui_text(80,8,score);
     bar(25,16,ui_player_hp,100);

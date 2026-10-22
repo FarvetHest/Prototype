@@ -73,6 +73,8 @@ static void boss_step(Game *g,int i){EnemyBrain *b=&g->combat.enemy[i];Actor *e=
 }
 static void source_ai_step(Game *g,int i){EnemyBrain *b=&g->combat.enemy[i];SourceAI *a=&g->rules.ai[i];Actor *e=&g->enemies[i];const unsigned char *p=profile(b);float x,y,d;int direction,s;
  if(e->cooldown>0)--e->cooldown;
+ /* Walking in from off-screen: untouchable, outside the arena clamp, no decisions yet. */
+ if(level_entering(g,i))return;
  if(level_is_boss(i) && (g->combat.target==i || g->physics.body[i+1].phase || e->stun)){
   level.boss_phase=BOSS_RECOVER;level.boss_timer=30;e->attack=0;
  }
