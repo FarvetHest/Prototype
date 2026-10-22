@@ -1,0 +1,3585 @@
+{
+  "source_sha256": "ab4fcf0be4c9b5bac1f60f1d863c2cb6b781c5fb157dad72574c9755534409c3",
+  "source_repository": "https://github.com/gsaurus/sor-disassemblies",
+  "source_commit": "4dd719f3ed5c24c86deee616b56cea885e3113d7",
+  "source_file": "Bare Knuckle 3 (J) [!].asm",
+  "scripts": {
+    "idle": {
+      "source_label": "DMA_Axel_Standing",
+      "line": 122397,
+      "frames": [
+        {
+          "ticks": 9,
+          "mapping": "word_116A10",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38528,
+            38658
+          ],
+          "fpg": 1
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A30",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38530,
+            38658
+          ],
+          "fpg": 2
+        },
+        {
+          "ticks": 14,
+          "mapping": "word_116A64",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38532,
+            38658
+          ],
+          "fpg": 3
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A92",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38224,
+            38535,
+            38658
+          ],
+          "fpg": 4
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A10",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38528,
+            38658
+          ],
+          "fpg": 1
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A30",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38530,
+            38658
+          ],
+          "fpg": 2
+        },
+        {
+          "ticks": 14,
+          "mapping": "word_116A64",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38532,
+            38658
+          ],
+          "fpg": 3
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A92",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38224,
+            38535,
+            38658
+          ],
+          "fpg": 4
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A10",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38528,
+            38658
+          ],
+          "fpg": 1
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A30",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38530,
+            38658
+          ],
+          "fpg": 2
+        },
+        {
+          "ticks": 14,
+          "mapping": "word_116A64",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38532,
+            38658
+          ],
+          "fpg": 3
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A92",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38224,
+            38535,
+            38658
+          ],
+          "fpg": 4
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A10",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38528,
+            38658
+          ],
+          "fpg": 1
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A30",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38530,
+            38658
+          ],
+          "fpg": 2
+        },
+        {
+          "ticks": 14,
+          "mapping": "word_116A64",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38532,
+            38658
+          ],
+          "fpg": 3
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A92",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38224,
+            38535,
+            38658
+          ],
+          "fpg": 4
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A10",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38528,
+            38658
+          ],
+          "fpg": 1
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A30",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38530,
+            38658
+          ],
+          "fpg": 2
+        },
+        {
+          "ticks": 14,
+          "mapping": "word_116A64",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38532,
+            38658
+          ],
+          "fpg": 3
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A92",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38224,
+            38535,
+            38658
+          ],
+          "fpg": 4
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A10",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38528,
+            38658
+          ],
+          "fpg": 1
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A30",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38530,
+            38658
+          ],
+          "fpg": 2
+        },
+        {
+          "ticks": 14,
+          "mapping": "word_116A64",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38532,
+            38658
+          ],
+          "fpg": 3
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A92",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38224,
+            38535,
+            38658
+          ],
+          "fpg": 4
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A10",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38528,
+            38658
+          ],
+          "fpg": 1
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A30",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38530,
+            38658
+          ],
+          "fpg": 2
+        },
+        {
+          "ticks": 14,
+          "mapping": "word_116A64",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38532,
+            38658
+          ],
+          "fpg": 3
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A92",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38224,
+            38535,
+            38658
+          ],
+          "fpg": 4
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A10",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38528,
+            38658
+          ],
+          "fpg": 1
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A30",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38530,
+            38658
+          ],
+          "fpg": 2
+        },
+        {
+          "ticks": 14,
+          "mapping": "word_116A64",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38532,
+            38658
+          ],
+          "fpg": 3
+        },
+        {
+          "ticks": 9,
+          "mapping": "word_116A92",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38224,
+            38535,
+            38658
+          ],
+          "fpg": 4
+        },
+        {
+          "ticks": 18,
+          "mapping": "word_116ABC",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38336,
+            38537,
+            38658
+          ],
+          "fpg": 32
+        },
+        {
+          "ticks": 18,
+          "mapping": "word_116AE6",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38176,
+            38540,
+            38658
+          ],
+          "fpg": 33
+        }
+      ],
+      "hurt_ids": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "walk": {
+      "source_label": "DMA_Axel_Walking",
+      "line": 122631,
+      "frames": [
+        {
+          "ticks": 8,
+          "mapping": "word_116B10",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38542,
+            38658
+          ],
+          "fpg": 5
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_116B44",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38256,
+            38544,
+            38658
+          ],
+          "fpg": 6
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_116B6E",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38304,
+            38546,
+            38658
+          ],
+          "fpg": 7
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_116BA2",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38208,
+            38549,
+            38658
+          ],
+          "fpg": 8
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_116BCC",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38256,
+            38551,
+            38658
+          ],
+          "fpg": 9
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_116BF6",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38320,
+            38553,
+            38658
+          ],
+          "fpg": 10
+        }
+      ],
+      "hurt_ids": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    "run": {
+      "source_label": "DMA_Axel_Run",
+      "line": 123383,
+      "frames": [
+        {
+          "ticks": 6,
+          "mapping": "word_116FBA",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38368,
+            38442,
+            38659
+          ],
+          "fpg": 168
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_116FF2",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38444,
+            38659
+          ],
+          "fpg": 169
+        },
+        {
+          "ticks": 7,
+          "mapping": "word_117034",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38256,
+            38448,
+            38659
+          ],
+          "fpg": 170
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_117072",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38320,
+            38451,
+            38659
+          ],
+          "fpg": 171
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_1170A0",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38304,
+            38453,
+            38659
+          ],
+          "fpg": 172
+        },
+        {
+          "ticks": 7,
+          "mapping": "word_1170E2",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38457,
+            38659
+          ],
+          "fpg": 173
+        }
+      ],
+      "hurt_ids": [
+        19,
+        19,
+        19,
+        19,
+        19,
+        19
+      ]
+    },
+    "jump": {
+      "source_label": "DMA_Axel_Jumping1",
+      "line": 122669,
+      "frames": [
+        {
+          "ticks": 4,
+          "mapping": "word_116C20",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38192,
+            38556,
+            38658
+          ],
+          "fpg": 60
+        },
+        {
+          "ticks": 25,
+          "mapping": "word_116C44",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38240,
+            38558,
+            38658
+          ],
+          "fpg": 12
+        },
+        {
+          "ticks": 40,
+          "mapping": "word_116C68",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38368,
+            38560,
+            38658
+          ],
+          "fpg": 13
+        }
+      ],
+      "hurt_ids": [
+        3,
+        4,
+        5
+      ]
+    },
+    "punch1": {
+      "source_label": "DMA_Axel_Punch1",
+      "line": 122759,
+      "frames": [
+        {
+          "ticks": 1,
+          "mapping": "word_116A10",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38528,
+            38658
+          ],
+          "fpg": 1
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_11723C",
+          "collision": 5,
+          "damage": 2,
+          "art": [
+            38320,
+            38578,
+            38658
+          ],
+          "fpg": 80
+        }
+      ],
+      "hurt_ids": [
+        1,
+        27
+      ]
+    },
+    "punch2": {
+      "source_label": "DMA_Axel_Punch2",
+      "line": 122773,
+      "frames": [
+        {
+          "ticks": 1,
+          "mapping": "word_116A10",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38528,
+            38658
+          ],
+          "fpg": 1
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_117266",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38581,
+            38658
+          ],
+          "fpg": 81
+        },
+        {
+          "ticks": 7,
+          "mapping": "word_117280",
+          "collision": 6,
+          "damage": 6,
+          "art": [
+            38144,
+            38584,
+            38658
+          ],
+          "fpg": 82
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_117266",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38581,
+            38658
+          ],
+          "fpg": 81
+        }
+      ],
+      "hurt_ids": [
+        1,
+        27,
+        27,
+        27
+      ]
+    },
+    "kick": {
+      "source_label": "DMA_Axel_Kick1",
+      "line": 122799,
+      "frames": [
+        {
+          "ticks": 4,
+          "mapping": "word_1172A4",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38256,
+            38586,
+            38658
+          ],
+          "fpg": 83
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1172D2",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38176,
+            38589,
+            38658
+          ],
+          "fpg": 84
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_1172FC",
+          "collision": 7,
+          "damage": 132,
+          "art": [
+            38256,
+            38591,
+            38658
+          ],
+          "fpg": 85
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1172A4",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38256,
+            38586,
+            38658
+          ],
+          "fpg": 83
+        }
+      ],
+      "hurt_ids": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    "blitz": {
+      "source_label": "DMA_Axel_GrandUpper",
+      "line": 123320,
+      "frames": [
+        {
+          "ticks": 4,
+          "mapping": "word_116C20",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38192,
+            38556,
+            38658
+          ],
+          "fpg": 60
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_11780C",
+          "collision": 20,
+          "damage": 1,
+          "art": [
+            38224,
+            38422,
+            38659
+          ],
+          "fpg": 61
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_11783A",
+          "collision": 20,
+          "damage": 2,
+          "art": [
+            38384,
+            38424,
+            38659
+          ],
+          "fpg": 62
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_11780C",
+          "collision": 20,
+          "damage": 2,
+          "art": [
+            38224,
+            38422,
+            38659
+          ],
+          "fpg": 61
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_11783A",
+          "collision": 20,
+          "damage": 2,
+          "art": [
+            38384,
+            38424,
+            38659
+          ],
+          "fpg": 62
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_117864",
+          "collision": 21,
+          "damage": 2,
+          "art": [
+            38304,
+            38427,
+            38659
+          ],
+          "fpg": 63
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1178A6",
+          "collision": 22,
+          "damage": 130,
+          "art": [
+            38240,
+            38431,
+            38659
+          ],
+          "fpg": 64
+        },
+        {
+          "ticks": 5,
+          "mapping": "word_1178DE",
+          "collision": 23,
+          "damage": 132,
+          "art": [
+            38240,
+            38435,
+            38659
+          ],
+          "fpg": 65
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_117926",
+          "collision": 23,
+          "damage": 134,
+          "art": [
+            38176,
+            38439,
+            38659
+          ],
+          "fpg": 66
+        },
+        {
+          "ticks": 23,
+          "mapping": "word_11796E",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38652,
+            38658
+          ],
+          "fpg": 67
+        }
+      ],
+      "hurt_ids": [
+        3,
+        43,
+        43,
+        43,
+        43,
+        3,
+        44,
+        45,
+        45,
+        45
+      ]
+    },
+    "air1": {
+      "source_label": "DMA_Axel_Flykick1",
+      "line": 122720,
+      "frames": [
+        {
+          "ticks": 1,
+          "mapping": "word_117146",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38160,
+            38571,
+            38658
+          ],
+          "fpg": 18
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_117174",
+          "collision": 1,
+          "damage": 4,
+          "art": [
+            38256,
+            38573,
+            38658
+          ],
+          "fpg": 19
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_117198",
+          "collision": 2,
+          "damage": 132,
+          "art": [
+            38336,
+            38575,
+            38658
+          ],
+          "fpg": 20
+        },
+        {
+          "ticks": 10,
+          "mapping": "word_117174",
+          "collision": 1,
+          "damage": 134,
+          "art": [
+            38256,
+            38573,
+            38658
+          ],
+          "fpg": 19
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_117146",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38160,
+            38571,
+            38658
+          ],
+          "fpg": 18
+        },
+        {
+          "ticks": 99,
+          "mapping": "word_116C68",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38368,
+            38560,
+            38658
+          ],
+          "fpg": 13
+        }
+      ],
+      "hurt_ids": [
+        21,
+        22,
+        23,
+        22,
+        21,
+        5
+      ]
+    },
+    "air2": {
+      "source_label": "DMA_Axel_Flykick2",
+      "line": 122705,
+      "frames": [
+        {
+          "ticks": 6,
+          "mapping": "word_1171BC",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38240,
+            38565,
+            38658
+          ],
+          "fpg": 22
+        },
+        {
+          "ticks": 40,
+          "mapping": "word_1171EA",
+          "collision": 3,
+          "damage": 134,
+          "art": [
+            38192,
+            38568,
+            38658
+          ],
+          "fpg": 23
+        }
+      ],
+      "hurt_ids": [
+        24,
+        25
+      ]
+    },
+    "special1": {
+      "source_label": "DMA_Axel_Supermove1",
+      "line": 123130,
+      "frames": [
+        {
+          "ticks": 4,
+          "mapping": "word_11740E",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38352,
+            38609,
+            38658
+          ],
+          "fpg": 24
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_11743C",
+          "collision": 11,
+          "damage": 136,
+          "art": [
+            38240,
+            38612,
+            38658
+          ],
+          "fpg": 25
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_11747A",
+          "collision": 12,
+          "damage": 136,
+          "art": [
+            38192,
+            38616,
+            38658
+          ],
+          "fpg": 26
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1174BC",
+          "collision": 13,
+          "damage": 136,
+          "art": [
+            38256,
+            38620,
+            38658
+          ],
+          "fpg": 27
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1174FE",
+          "collision": 14,
+          "damage": 136,
+          "art": [
+            38240,
+            38624,
+            38658
+          ],
+          "fpg": 28
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_117540",
+          "collision": 15,
+          "damage": 136,
+          "art": [
+            38352,
+            38628,
+            38658
+          ],
+          "fpg": 29
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_117574",
+          "collision": 15,
+          "damage": 136,
+          "art": [
+            38256,
+            38632,
+            38658
+          ],
+          "fpg": 30
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1175B2",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38635,
+            38658
+          ],
+          "fpg": 31
+        }
+      ],
+      "hurt_ids": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        36,
+        36
+      ]
+    },
+    "special2": {
+      "source_label": "DMA_Axel_Supermove2",
+      "line": 123180,
+      "frames": [
+        {
+          "ticks": 4,
+          "mapping": "word_1175E6",
+          "collision": 16,
+          "damage": 2,
+          "art": [
+            38160,
+            38639,
+            38658
+          ],
+          "fpg": 34
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_117610",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38320,
+            38641,
+            38658
+          ],
+          "fpg": 35
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_11763E",
+          "collision": 17,
+          "damage": 2,
+          "art": [
+            38144,
+            38644,
+            38658
+          ],
+          "fpg": 36
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_11765E",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38646,
+            38658
+          ],
+          "fpg": 37
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_11767E",
+          "collision": 18,
+          "damage": 2,
+          "art": [
+            38288,
+            38649,
+            38658
+          ],
+          "fpg": 38
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1176AC",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38400,
+            38659
+          ],
+          "fpg": 39
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1176D0",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38402,
+            38659
+          ],
+          "fpg": 40
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1176FA",
+          "collision": 19,
+          "damage": 2,
+          "art": [
+            38336,
+            38404,
+            38659
+          ],
+          "fpg": 41
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_11771E",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38256,
+            38407,
+            38659
+          ],
+          "fpg": 42
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_117742",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38224,
+            38410,
+            38659
+          ],
+          "fpg": 43
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1175E6",
+          "collision": 16,
+          "damage": 2,
+          "art": [
+            38160,
+            38639,
+            38658
+          ],
+          "fpg": 34
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_117610",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38320,
+            38641,
+            38658
+          ],
+          "fpg": 35
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_11763E",
+          "collision": 17,
+          "damage": 3,
+          "art": [
+            38144,
+            38644,
+            38658
+          ],
+          "fpg": 36
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_11765E",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38646,
+            38658
+          ],
+          "fpg": 37
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_11767E",
+          "collision": 18,
+          "damage": 3,
+          "art": [
+            38288,
+            38649,
+            38658
+          ],
+          "fpg": 38
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1176AC",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38400,
+            38659
+          ],
+          "fpg": 39
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1176D0",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38402,
+            38659
+          ],
+          "fpg": 40
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1176FA",
+          "collision": 19,
+          "damage": 132,
+          "art": [
+            38336,
+            38404,
+            38659
+          ],
+          "fpg": 41
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_11771E",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38256,
+            38407,
+            38659
+          ],
+          "fpg": 42
+        },
+        {
+          "ticks": 20,
+          "mapping": "word_117770",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38240,
+            38413,
+            38659
+          ],
+          "fpg": 44
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_11779A",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38415,
+            38659
+          ],
+          "fpg": 45
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_1177BE",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38288,
+            38417,
+            38659
+          ],
+          "fpg": 46
+        },
+        {
+          "ticks": 10,
+          "mapping": "word_1177E2",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38352,
+            38419,
+            38659
+          ],
+          "fpg": 53
+        }
+      ],
+      "hurt_ids": [
+        37,
+        38,
+        9,
+        9,
+        9,
+        9,
+        38,
+        39,
+        9,
+        7,
+        37,
+        38,
+        9,
+        9,
+        9,
+        9,
+        38,
+        39,
+        9,
+        40,
+        62,
+        41,
+        42
+      ]
+    },
+    "frontgrab": {
+      "source_label": "DMA_Axel_FrontGrab",
+      "line": 123421,
+      "frames": [
+        {
+          "ticks": 40,
+          "mapping": "word_116D40",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38240,
+            38460,
+            38659
+          ],
+          "fpg": 68
+        }
+      ],
+      "hurt_ids": [
+        6
+      ]
+    },
+    "backgrab": {
+      "source_label": "DMA_Axel_BackGrab",
+      "line": 123429,
+      "frames": [
+        {
+          "ticks": 40,
+          "mapping": "word_116D6E",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38463,
+            38659
+          ],
+          "fpg": 79
+        }
+      ],
+      "hurt_ids": [
+        7
+      ]
+    },
+    "headbutt": {
+      "source_label": "DMA_Axel_Headbutt",
+      "line": 123437,
+      "frames": [
+        {
+          "ticks": 4,
+          "mapping": "word_11738C",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38176,
+            38465,
+            38659
+          ],
+          "fpg": 69
+        },
+        {
+          "ticks": 10,
+          "mapping": "word_1173B0",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38160,
+            38468,
+            38659
+          ],
+          "fpg": 70
+        },
+        {
+          "ticks": 14,
+          "mapping": "word_1173E4",
+          "collision": 10,
+          "damage": 136,
+          "art": [
+            38288,
+            38471,
+            38659
+          ],
+          "fpg": 71
+        }
+      ],
+      "hurt_ids": [
+        29,
+        9,
+        30
+      ]
+    },
+    "knee": {
+      "source_label": "DMA_Axel_KneeJab",
+      "line": 123457,
+      "frames": [
+        {
+          "ticks": 12,
+          "mapping": "word_11735E",
+          "collision": 9,
+          "damage": 2,
+          "art": [
+            38320,
+            38474,
+            38659
+          ],
+          "fpg": 72
+        }
+      ],
+      "hurt_ids": [
+        28
+      ]
+    },
+    "jumpknee": {
+      "source_label": "DMA_Axel_JumpingKneeJab",
+      "line": 123465,
+      "frames": [
+        {
+          "ticks": 6,
+          "mapping": "word_11735E",
+          "collision": 9,
+          "damage": 4,
+          "art": [
+            38320,
+            38474,
+            38659
+          ],
+          "fpg": 72
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_117A5C",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38477,
+            38659
+          ],
+          "fpg": 100
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_117A90",
+          "collision": 26,
+          "damage": 132,
+          "art": [
+            38272,
+            38479,
+            38659
+          ],
+          "fpg": 73
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_117A5C",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38477,
+            38659
+          ],
+          "fpg": 100
+        }
+      ],
+      "hurt_ids": [
+        28,
+        19,
+        19,
+        19
+      ]
+    },
+    "frontthrow": {
+      "source_label": "DMA_Axel_FrontHoldThrow",
+      "line": 123491,
+      "frames": [
+        {
+          "ticks": 16,
+          "mapping": "word_118144",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38482,
+            38659
+          ],
+          "fpg": 153
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_118168",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38192,
+            38484,
+            38659
+          ],
+          "fpg": 154
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_11818C",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38224,
+            38486,
+            38659
+          ],
+          "fpg": 155
+        },
+        {
+          "ticks": 20,
+          "mapping": "word_1181C0",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38336,
+            38488,
+            38659
+          ],
+          "fpg": 156
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_118168",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38192,
+            38484,
+            38659
+          ],
+          "fpg": 154
+        }
+      ],
+      "hurt_ids": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "backthrow": {
+      "source_label": "DMA_Axel_BackHoldThrow",
+      "line": 123523,
+      "frames": [
+        {
+          "ticks": 16,
+          "mapping": "word_118144",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38482,
+            38659
+          ],
+          "fpg": 153
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_118168",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38192,
+            38484,
+            38659
+          ],
+          "fpg": 154
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_1181DA",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38160,
+            38491,
+            38659
+          ],
+          "fpg": 157
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_118208",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38176,
+            38494,
+            38659
+          ],
+          "fpg": 158
+        },
+        {
+          "ticks": 16,
+          "mapping": "word_118236",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38144,
+            38497,
+            38659
+          ],
+          "fpg": 159
+        },
+        {
+          "ticks": 10,
+          "mapping": "word_118260",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38272,
+            38415,
+            38659
+          ],
+          "fpg": 45
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_118284",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38288,
+            38417,
+            38659
+          ],
+          "fpg": 46
+        },
+        {
+          "ticks": 15,
+          "mapping": "word_1182A8",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38352,
+            38419,
+            38659
+          ],
+          "fpg": 53
+        }
+      ],
+      "hurt_ids": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "vault": {
+      "source_label": "DMA_Axel_JumpOver",
+      "line": 123573,
+      "frames": [
+        {
+          "ticks": 4,
+          "mapping": "word_116C8C",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38520,
+            38659
+          ],
+          "fpg": 150
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_116CCC",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38304,
+            38525,
+            38659
+          ],
+          "fpg": 151
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_116D20",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38176,
+            38523,
+            38659
+          ],
+          "fpg": 152
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_116CF6",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38304,
+            38525,
+            38659
+          ],
+          "fpg": 151
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_116CAC",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38384,
+            38520,
+            38659
+          ],
+          "fpg": 150
+        }
+      ],
+      "hurt_ids": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "hit": {
+      "source_label": "DMA_Axel_Hit1",
+      "line": 123605,
+      "frames": [
+        {
+          "ticks": 3,
+          "mapping": "word_116E36",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38368,
+            38499,
+            38659
+          ],
+          "fpg": 148
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_116E60",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38368,
+            38499,
+            38659
+          ],
+          "fpg": 148
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_116E36",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38368,
+            38499,
+            38659
+          ],
+          "fpg": 148
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_116E60",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38368,
+            38499,
+            38659
+          ],
+          "fpg": 148
+        }
+      ],
+      "hurt_ids": [
+        11,
+        11,
+        11,
+        11
+      ]
+    },
+    "knockout": {
+      "source_label": "DMA_Axel_KnockedOut",
+      "line": 123657,
+      "frames": [
+        {
+          "ticks": 12,
+          "mapping": "word_116E8A",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38352,
+            38504,
+            38659
+          ],
+          "fpg": 49
+        }
+      ],
+      "hurt_ids": [
+        12
+      ]
+    },
+    "lying": {
+      "source_label": "DMA_Axel_LyingOnGround",
+      "line": 123665,
+      "frames": [
+        {
+          "ticks": 40,
+          "mapping": "word_116EAE",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38240,
+            38507,
+            38659
+          ],
+          "fpg": 50
+        }
+      ],
+      "hurt_ids": [
+        13
+      ]
+    },
+    "getup": {
+      "source_label": "DMA_Axel_GetUp",
+      "line": 123673,
+      "frames": [
+        {
+          "ticks": 8,
+          "mapping": "word_116EC8",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38256,
+            38509,
+            38659
+          ],
+          "fpg": 51
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_116EAE",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38240,
+            38507,
+            38659
+          ],
+          "fpg": 50
+        },
+        {
+          "ticks": 10,
+          "mapping": "word_116EC8",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38256,
+            38509,
+            38659
+          ],
+          "fpg": 51
+        },
+        {
+          "ticks": 10,
+          "mapping": "word_116EE8",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38224,
+            38511,
+            38659
+          ],
+          "fpg": 53
+        }
+      ],
+      "hurt_ids": [
+        14,
+        13,
+        14,
+        15
+      ]
+    },
+    "rolldown": {
+      "source_label": "DMA_Axel_RollDown",
+      "line": 124609,
+      "frames": [
+        {
+          "ticks": 5,
+          "mapping": "word_116C20",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38192,
+            38556,
+            38658
+          ],
+          "fpg": 60
+        },
+        {
+          "ticks": 5,
+          "mapping": "word_11711A",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38304,
+            38554,
+            38659
+          ],
+          "fpg": 99
+        },
+        {
+          "ticks": 5,
+          "mapping": "word_117130",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38304,
+            38554,
+            38659
+          ],
+          "fpg": 98
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_116EE8",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38224,
+            38511,
+            38659
+          ],
+          "fpg": 53
+        }
+      ],
+      "hurt_ids": [
+        3,
+        20,
+        20,
+        15
+      ]
+    },
+    "rollup": {
+      "source_label": "DMA_Axel_RollUp",
+      "line": 124635,
+      "frames": [
+        {
+          "ticks": 8,
+          "mapping": "word_116EE8",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38224,
+            38511,
+            38659
+          ],
+          "fpg": 53
+        },
+        {
+          "ticks": 5,
+          "mapping": "word_117130",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38304,
+            38554,
+            38659
+          ],
+          "fpg": 98
+        },
+        {
+          "ticks": 5,
+          "mapping": "word_11711A",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38304,
+            38554,
+            38659
+          ],
+          "fpg": 99
+        },
+        {
+          "ticks": 5,
+          "mapping": "word_116C20",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38192,
+            38556,
+            38658
+          ],
+          "fpg": 60
+        }
+      ],
+      "hurt_ids": [
+        15,
+        20,
+        20,
+        3
+      ]
+    },
+    "backhand": {
+      "source_label": "DMA_Axel_BackHand",
+      "line": 123098,
+      "frames": [
+        {
+          "ticks": 4,
+          "mapping": "word_1179B0",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38176,
+            38597,
+            38658
+          ],
+          "fpg": 14
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1179D0",
+          "collision": 24,
+          "damage": 66,
+          "art": [
+            38304,
+            38599,
+            38658
+          ],
+          "fpg": 15
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_1179FA",
+          "collision": 25,
+          "damage": 196,
+          "art": [
+            38384,
+            38602,
+            38658
+          ],
+          "fpg": 16
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_117A2E",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38320,
+            38606,
+            38658
+          ],
+          "fpg": 17
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_1179D0",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38304,
+            38599,
+            38658
+          ],
+          "fpg": 15
+        }
+      ],
+      "hurt_ids": [
+        2,
+        7,
+        34,
+        34,
+        7
+      ]
+    },
+    "doublekick": {
+      "source_label": "DMA_Axel_DoubleKick",
+      "line": 122825,
+      "frames": [
+        {
+          "ticks": 4,
+          "mapping": "word_1172A4",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38256,
+            38586,
+            38658
+          ],
+          "fpg": 83
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1172D2",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38176,
+            38589,
+            38658
+          ],
+          "fpg": 84
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1172FC",
+          "collision": 7,
+          "damage": 3,
+          "art": [
+            38256,
+            38591,
+            38658
+          ],
+          "fpg": 85
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1172D2",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38176,
+            38589,
+            38658
+          ],
+          "fpg": 84
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_11732A",
+          "collision": 8,
+          "damage": 131,
+          "art": [
+            38272,
+            38594,
+            38658
+          ],
+          "fpg": 86
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_1172A4",
+          "collision": 0,
+          "damage": 0,
+          "art": [
+            38256,
+            38586,
+            38658
+          ],
+          "fpg": 83
+        }
+      ],
+      "hurt_ids": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    }
+  },
+  "walk_words": [
+    384,
+    384,
+    384,
+    320,
+    384,
+    416,
+    448
+  ],
+  "run_words": [
+    512,
+    384,
+    384,
+    320,
+    384,
+    416,
+    448
+  ],
+  "jump_longs": [
+    4294639616,
+    4294639616,
+    4294639616,
+    4294656000,
+    4294639616,
+    4294639616,
+    4294639616
+  ],
+  "attack_boxes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    216,
+    32,
+    204,
+    16,
+    8,
+    32,
+    204,
+    16,
+    200,
+    32,
+    160,
+    64,
+    24,
+    32,
+    160,
+    64,
+    200,
+    32,
+    204,
+    56,
+    24,
+    32,
+    204,
+    56,
+    240,
+    32,
+    216,
+    32,
+    240,
+    32,
+    216,
+    32,
+    208,
+    48,
+    188,
+    16,
+    0,
+    48,
+    188,
+    16,
+    192,
+    64,
+    188,
+    16,
+    0,
+    64,
+    188,
+    16,
+    192,
+    64,
+    200,
+    24,
+    0,
+    64,
+    200,
+    24,
+    192,
+    64,
+    184,
+    48,
+    0,
+    64,
+    184,
+    48,
+    205,
+    32,
+    200,
+    28,
+    19,
+    32,
+    200,
+    28,
+    212,
+    32,
+    184,
+    24,
+    12,
+    32,
+    184,
+    24,
+    184,
+    56,
+    184,
+    40,
+    16,
+    56,
+    184,
+    40,
+    212,
+    72,
+    152,
+    48,
+    228,
+    72,
+    152,
+    48,
+    0,
+    56,
+    152,
+    48,
+    200,
+    56,
+    152,
+    48,
+    208,
+    88,
+    192,
+    48,
+    216,
+    88,
+    192,
+    48,
+    172,
+    72,
+    212,
+    28,
+    12,
+    72,
+    212,
+    28,
+    208,
+    48,
+    196,
+    16,
+    0,
+    48,
+    196,
+    16,
+    208,
+    48,
+    188,
+    28,
+    0,
+    48,
+    188,
+    28,
+    208,
+    48,
+    184,
+    40,
+    0,
+    48,
+    184,
+    40,
+    208,
+    48,
+    196,
+    28,
+    0,
+    48,
+    196,
+    28,
+    208,
+    48,
+    232,
+    24,
+    0,
+    48,
+    232,
+    24,
+    208,
+    48,
+    196,
+    36,
+    0,
+    48,
+    196,
+    36,
+    200,
+    48,
+    176,
+    48,
+    8,
+    48,
+    176,
+    48,
+    232,
+    24,
+    144,
+    56,
+    0,
+    24,
+    144,
+    56,
+    0,
+    44,
+    184,
+    28,
+    212,
+    44,
+    184,
+    28,
+    24,
+    48,
+    184,
+    28,
+    184,
+    48,
+    184,
+    28,
+    213,
+    37,
+    200,
+    32,
+    6,
+    37,
+    200,
+    32
+  ],
+  "mapping_note": "FPG adapter selected visually; ROM timers, collision IDs and damage are extracted. Mapping checked against reconstructed ROM sprite silhouettes; see axel-rom-match.json. Some frames differ or have ambiguous matches.",
+  "scope": "Axel movement, jumps, grabs, throws, specials; selected unarmed Garcia/Donovan behavior. Remaining adaptations documented in PORTING-NOTES.md.",
+  "enemy_scripts": {
+    "garcia_jab": {
+      "source_label": "word_203158",
+      "line": 195200,
+      "frames": [
+        {
+          "ticks": 2,
+          "mapping": "word_2035DA",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 18
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203604",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 17
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_203642",
+          "collision": 1,
+          "damage": 1,
+          "fpg": 4
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203604",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 17
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_2035DA",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 18
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_20324E",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1
+        }
+      ]
+    },
+    "donovan_jab": {
+      "source_label": "word_203A96",
+      "line": 196348,
+      "frames": [
+        {
+          "ticks": 2,
+          "mapping": "word_203B76",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203F44",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 5
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203F6E",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 5
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_203FAC",
+          "collision": 1,
+          "damage": 1,
+          "fpg": 4
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203F6E",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 5
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203F44",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 5
+        }
+      ]
+    },
+    "donovan_uppercut": {
+      "source_label": "word_203AC8",
+      "line": 196380,
+      "frames": [
+        {
+          "ticks": 2,
+          "mapping": "word_203B76",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203E64",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 13
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203E9C",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 14
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203EC6",
+          "collision": 3,
+          "damage": 136,
+          "fpg": 6
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203EC6",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 6
+        },
+        {
+          "ticks": 20,
+          "mapping": "word_203EF0",
+          "collision": 4,
+          "damage": 136,
+          "fpg": 13
+        }
+      ]
+    },
+    "donovan_kick": {
+      "source_label": "word_203AFA",
+      "line": 196412,
+      "frames": [
+        {
+          "ticks": 2,
+          "mapping": "word_203B76",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203DBC",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 10
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_203DDC",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 11
+        },
+        {
+          "ticks": 5,
+          "mapping": "word_203DFC",
+          "collision": 2,
+          "damage": 132,
+          "fpg": 23
+        },
+        {
+          "ticks": 18,
+          "mapping": "word_203E30",
+          "collision": 0,
+          "damage": 0,
+          "fpg": 12
+        }
+      ]
+    }
+  },
+  "ai_profiles": [
+    5,
+    20,
+    35,
+    10,
+    99,
+    0,
+    40,
+    50,
+    40,
+    40,
+    4,
+    4,
+    50,
+    6,
+    4,
+    70,
+    10,
+    30,
+    60,
+    4,
+    50,
+    90,
+    4,
+    6,
+    40,
+    30,
+    3,
+    1,
+    40,
+    30,
+    0,
+    0,
+    5,
+    20,
+    35,
+    10,
+    99,
+    0,
+    40,
+    50,
+    40,
+    40,
+    6,
+    6,
+    50,
+    8,
+    4,
+    70,
+    20,
+    30,
+    50,
+    4,
+    45,
+    90,
+    6,
+    8,
+    40,
+    30,
+    4,
+    2,
+    30,
+    30,
+    0,
+    0,
+    5,
+    20,
+    35,
+    10,
+    99,
+    0,
+    40,
+    50,
+    40,
+    40,
+    8,
+    8,
+    50,
+    10,
+    8,
+    80,
+    20,
+    30,
+    30,
+    8,
+    40,
+    90,
+    12,
+    10,
+    20,
+    30,
+    4,
+    4,
+    17,
+    20,
+    0,
+    0,
+    5,
+    15,
+    40,
+    10,
+    99,
+    0,
+    40,
+    40,
+    30,
+    40,
+    10,
+    7,
+    50,
+    11,
+    8,
+    80,
+    20,
+    30,
+    30,
+    8,
+    40,
+    90,
+    12,
+    10,
+    20,
+    30,
+    6,
+    4,
+    14,
+    15,
+    0,
+    0,
+    5,
+    15,
+    40,
+    20,
+    99,
+    0,
+    30,
+    40,
+    20,
+    40,
+    12,
+    6,
+    60,
+    12,
+    9,
+    80,
+    20,
+    30,
+    30,
+    8,
+    35,
+    90,
+    14,
+    15,
+    20,
+    30,
+    7,
+    4,
+    12,
+    10,
+    0,
+    0,
+    5,
+    10,
+    50,
+    30,
+    99,
+    0,
+    30,
+    30,
+    20,
+    30,
+    14,
+    5,
+    60,
+    14,
+    10,
+    80,
+    20,
+    30,
+    30,
+    8,
+    35,
+    90,
+    14,
+    15,
+    20,
+    30,
+    8,
+    4,
+    10,
+    8,
+    0,
+    0,
+    3,
+    5,
+    50,
+    20,
+    99,
+    0,
+    30,
+    30,
+    20,
+    30,
+    16,
+    8,
+    60,
+    16,
+    10,
+    80,
+    20,
+    30,
+    20,
+    12,
+    20,
+    90,
+    18,
+    20,
+    20,
+    30,
+    8,
+    6,
+    8,
+    6,
+    0,
+    0,
+    3,
+    5,
+    50,
+    20,
+    99,
+    0,
+    30,
+    30,
+    20,
+    30,
+    18,
+    8,
+    60,
+    18,
+    10,
+    80,
+    20,
+    30,
+    20,
+    12,
+    20,
+    90,
+    18,
+    20,
+    20,
+    30,
+    8,
+    6,
+    6,
+    4,
+    0,
+    0,
+    3,
+    5,
+    60,
+    10,
+    99,
+    0,
+    30,
+    20,
+    20,
+    30,
+    20,
+    8,
+    60,
+    20,
+    10,
+    80,
+    20,
+    30,
+    20,
+    12,
+    15,
+    90,
+    22,
+    25,
+    20,
+    30,
+    8,
+    6,
+    4,
+    4,
+    0,
+    0,
+    3,
+    5,
+    60,
+    10,
+    99,
+    0,
+    30,
+    20,
+    20,
+    30,
+    22,
+    8,
+    60,
+    22,
+    10,
+    80,
+    20,
+    30,
+    20,
+    12,
+    15,
+    90,
+    24,
+    25,
+    20,
+    30,
+    8,
+    10,
+    2,
+    2,
+    0,
+    0,
+    3,
+    5,
+    60,
+    10,
+    99,
+    0,
+    30,
+    20,
+    20,
+    30,
+    32,
+    8,
+    60,
+    32,
+    10,
+    80,
+    20,
+    30,
+    20,
+    14,
+    15,
+    90,
+    32,
+    30,
+    20,
+    30,
+    8,
+    10,
+    1,
+    1,
+    0,
+    0
+  ],
+  "front_offsets": [
+    4,
+    0,
+    0,
+    47336,
+    50403,
+    57592,
+    59392
+  ],
+  "back_offsets": [
+    2,
+    0,
+    10240,
+    14576,
+    6324,
+    4336,
+    0
+  ],
+  "front_release": [
+    65534,
+    16384,
+    65532,
+    12
+  ],
+  "back_release": [
+    0,
+    131086
+  ],
+  "body_scripts": {
+    "garcia_front": {
+      "label": "word_202FD6",
+      "frames": [
+        {
+          "ticks": 16,
+          "fpg": 7,
+          "mapping": "word_2033A6",
+          "hurt": 2
+        },
+        {
+          "ticks": 4,
+          "fpg": 8,
+          "mapping": "word_2033C6",
+          "hurt": 2
+        },
+        {
+          "ticks": 6,
+          "fpg": 8,
+          "mapping": "word_203680",
+          "hurt": 2
+        },
+        {
+          "ticks": 20,
+          "fpg": 9,
+          "mapping": "word_2036A0",
+          "hurt": 2
+        },
+        {
+          "ticks": 99,
+          "fpg": 9,
+          "mapping": "word_2036A0",
+          "hurt": 2
+        }
+      ]
+    },
+    "garcia_back": {
+      "label": "word_203000",
+      "frames": [
+        {
+          "ticks": 16,
+          "fpg": 7,
+          "mapping": "word_2033A6",
+          "hurt": 2
+        },
+        {
+          "ticks": 4,
+          "fpg": 8,
+          "mapping": "word_2033C6",
+          "hurt": 2
+        },
+        {
+          "ticks": 6,
+          "fpg": 9,
+          "mapping": "word_20347C",
+          "hurt": 0
+        },
+        {
+          "ticks": 3,
+          "fpg": 8,
+          "mapping": "word_2033C6",
+          "hurt": 2
+        },
+        {
+          "ticks": 99,
+          "fpg": 9,
+          "mapping": "word_20347C",
+          "hurt": 0
+        }
+      ]
+    },
+    "donovan_front": {
+      "label": "word_203914",
+      "frames": [
+        {
+          "ticks": 16,
+          "fpg": 7,
+          "mapping": "word_203CB2",
+          "hurt": 2
+        },
+        {
+          "ticks": 4,
+          "fpg": 8,
+          "mapping": "word_203CD2",
+          "hurt": 2
+        },
+        {
+          "ticks": 6,
+          "fpg": 8,
+          "mapping": "word_203FEA",
+          "hurt": 2
+        },
+        {
+          "ticks": 20,
+          "fpg": 9,
+          "mapping": "word_20400A",
+          "hurt": 2
+        },
+        {
+          "ticks": 99,
+          "fpg": 9,
+          "mapping": "word_20400A",
+          "hurt": 2
+        }
+      ]
+    },
+    "donovan_back": {
+      "label": "word_20393E",
+      "frames": [
+        {
+          "ticks": 16,
+          "fpg": 7,
+          "mapping": "word_203CB2",
+          "hurt": 2
+        },
+        {
+          "ticks": 4,
+          "fpg": 8,
+          "mapping": "word_203CD2",
+          "hurt": 2
+        },
+        {
+          "ticks": 6,
+          "fpg": 9,
+          "mapping": "word_203D82",
+          "hurt": 0
+        },
+        {
+          "ticks": 3,
+          "fpg": 8,
+          "mapping": "word_203CD2",
+          "hurt": 2
+        },
+        {
+          "ticks": 99,
+          "fpg": 9,
+          "mapping": "word_203D82",
+          "hurt": 0
+        }
+      ]
+    },
+    "garcia_hurt": {
+      "label": "word_202EE6",
+      "frames": [
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_2033F0",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203414",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_2033F0",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203414",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_2033F0",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203414",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_2033F0",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203414",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_2033F0",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203414",
+          "hurt": 4
+        }
+      ]
+    },
+    "donovan_hurt": {
+      "label": "word_203836",
+      "frames": [
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203CFC",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203D20",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203CFC",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203D20",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203CFC",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203D20",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203CFC",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203D20",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203CFC",
+          "hurt": 4
+        },
+        {
+          "ticks": 3,
+          "fpg": 7,
+          "mapping": "word_203D20",
+          "hurt": 4
+        }
+      ]
+    },
+    "garcia_floor": {
+      "label": "word_202F4A",
+      "frames": [
+        {
+          "ticks": 20,
+          "fpg": 9,
+          "mapping": "word_20347C",
+          "hurt": 0
+        }
+      ]
+    },
+    "donovan_floor": {
+      "label": "word_20389A",
+      "frames": [
+        {
+          "ticks": 20,
+          "fpg": 9,
+          "mapping": "word_203D82",
+          "hurt": 0
+        }
+      ]
+    },
+    "garcia_getup": {
+      "label": "word_202F54",
+      "frames": [
+        {
+          "ticks": 6,
+          "fpg": 9,
+          "mapping": "word_20347C",
+          "hurt": 0
+        },
+        {
+          "ticks": 6,
+          "fpg": 9,
+          "mapping": "word_203496",
+          "hurt": 0
+        },
+        {
+          "ticks": 6,
+          "fpg": 9,
+          "mapping": "word_20347C",
+          "hurt": 0
+        },
+        {
+          "ticks": 8,
+          "fpg": 9,
+          "mapping": "word_203496",
+          "hurt": 0
+        },
+        {
+          "ticks": 10,
+          "fpg": 12,
+          "mapping": "word_203438",
+          "hurt": 0
+        },
+        {
+          "ticks": 10,
+          "fpg": 1,
+          "mapping": "word_20324E",
+          "hurt": 1
+        }
+      ]
+    },
+    "donovan_getup": {
+      "label": "word_2038A4",
+      "frames": [
+        {
+          "ticks": 4,
+          "fpg": 9,
+          "mapping": "word_203D82",
+          "hurt": 0
+        },
+        {
+          "ticks": 4,
+          "fpg": 9,
+          "mapping": "word_203D9C",
+          "hurt": 0
+        },
+        {
+          "ticks": 4,
+          "fpg": 9,
+          "mapping": "word_203D82",
+          "hurt": 0
+        },
+        {
+          "ticks": 6,
+          "fpg": 9,
+          "mapping": "word_203D9C",
+          "hurt": 0
+        },
+        {
+          "ticks": 8,
+          "fpg": 12,
+          "mapping": "word_203D44",
+          "hurt": 0
+        },
+        {
+          "ticks": 10,
+          "fpg": 1,
+          "mapping": "word_203B76",
+          "hurt": 1
+        }
+      ]
+    }
+  },
+  "special_init_words": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    65532,
+    0,
+    0,
+    0,
+    65528,
+    0,
+    65532,
+    0
+  ]
+}

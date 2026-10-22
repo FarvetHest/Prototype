@@ -1,0 +1,94 @@
+{
+  "eboot_bytes": 1576918,
+  "eboot_sha256": "7cd131326185d2c333feec5fa91c3c0ee9d42648cedfd5e0283cdec88c3515cd",
+  "wav_bytes": 34398180,
+  "wav_sha256": "50ed1dfb17757abf21fcac5d65fad8cec2515c7717a91bd29aeca55b0217fc4d",
+  "sfo": {
+    "MEMSIZE": 0,
+    "DISC_ID": "SORL00011",
+    "BOOTABLE": 1,
+    "CATEGORY": "MG",
+    "DISC_VERSION": "1.00",
+    "PARENTAL_LEVEL": 1,
+    "PSP_SYSTEM_VER": "1.00",
+    "REGION": 32768,
+    "TITLE": "SoRR PSP Lite v0.11"
+  },
+  "vram_bytes": 1867776,
+  "sprite_frames": 139,
+  "integration_checks": 103,
+  "controller_checks": 33,
+  "combat_checks": 25,
+  "physics_checks": 9,
+  "grab_rules_checks": 16,
+  "source_ai_checks": 26,
+  "legacy_selector_checks": 9,
+  "impact_checks": 20,
+  "enemy_animation_checks": 8,
+  "hardware_tested": false,
+  "original_physics_ported": "partial BK3 Axel controller and combat, selected unarmed Garcia/Donovan AI",
+  "full_reference_pcm_verified": true,
+  "profile_intervals": 74,
+  "last_30_intervals": {
+    "fps": {
+      "min": 29.97,
+      "median": 29.97,
+      "max": 29.97
+    },
+    "logic_hz": {
+      "min": 29.97,
+      "median": 29.97,
+      "max": 30.969
+    },
+    "logic_ms": {
+      "min": 0.0133,
+      "median": 0.01355,
+      "max": 0.0182
+    },
+    "render_sync_ms": {
+      "min": 0.0588,
+      "median": 0.06405,
+      "max": 0.0648
+    },
+    "music_decode_max_ms": {
+      "min": 1.499,
+      "median": 1.499,
+      "max": 1.499
+    }
+  },
+  "source_hashes": {
+    "src/ai.c": "d64069c8946ff1fd33ce4a43f5b989f69787a8f52ad893729626cb2993c5350a",
+    "src/bk3.c": "cff02201311026b93043c0dda3d8ad0146554f6f85c14b178adfd47c18188d7e",
+    "src/bk3.h": "b4bc1c098e8c8d590a3a4f4c0baa2146f52b26ba5fb6c520b47f42fe34865a7a",
+    "src/bk3_data.h": "147cf87787d98a62e9e8d410d58cdcafefa13b9cb19c5b4e49d5750edb6d3e13",
+    "src/combat.c": "48bb7ea8244271da1d4965773385a9c912e0a8b2149b1e6fc3364dd2c508f24b",
+    "src/combat.h": "faf3855e3215930b1c856d802a9fe989395980235f89355233ebbc6db81c542b",
+    "src/combat_data.h": "0fa3e5281e4f5d73975066c89bf67cddff6bcb3bf916ba5c04c958eb29555988",
+    "src/enemy.c": "bce7347e9f946dd44906be71f2907ff71c9417edb4411ab022437eee1c036612",
+    "src/enemy.h": "dceba0197dd62ce6eaa3eed95093302ee5817bfdc6bacde802510b13cbda74b5",
+    "src/enemy_data.h": "c2838851114c74ef6285a4445437e709ed153949877151dc116114df0a5c9441",
+    "src/game.c": "a2a3dddebe8a1aec9d41adc4fcdb58accce52f34347959e5ae9fdde8f012bd36",
+    "src/game.h": "eb5af325c5c449798eb7cd732d4254d8ba214bc0fbab8dfe005a935f1ec4ae89",
+    "src/hud_data.h": "f47b808fbf5a976fcaa86f2f95e84ea9216fe5e0ae9c733e4368284257e1ae6d",
+    "src/hud_texture.S": "0435d86ea93b9434bc71963323e6fab33ea8921cab33cef9769a635eb1fa5eb1",
+    "src/impact.c": "8971bda45228fcc087ada711b26462162d03e0e8fd1415fa0119073582bfbd12",
+    "src/impact.h": "d11a8fae624d3363e973f401d5f8894d50664763029b897c5d377c02925b410a",
+    "src/main.c": "5e1bc92b2c5bc3b9df78e274abce132268edb84a832f87b5350e69e1356d1953",
+    "src/music.c": "2e3e15305c7ac1cbaa76476bd36df0bf812d06929e0f55f952bf432610fa5933",
+    "src/music.h": "737293213612a8c4a62f76be2a46a83040dfe8ae33234752d1961f3c476b6ef6",
+    "src/physics.c": "d4c61106a5da6a057d344b4a42afd0ff4eef006ebea9f7d971213710ad920b60",
+    "src/physics.h": "52f1c572320f28686609432a6dde618d5071fcbd40a50443107526297092453e",
+    "src/physics_data.h": "b16b64f357d2c29b184458a25a484ddd4de0b62432dc272e40d0fedd09f9c964",
+    "src/rules.c": "c337507f18d0f3ba7a7623029de3527378a0aa3cbf4a809fa9016a1f119206b5",
+    "src/rules.h": "56e3069f3a74a23cda3ab4da580a7ede6a34f635b4948af9ee71c1b741864b35",
+    "src/sprites.c": "7233449d3ec2f3e1a4a5819e542f7e99d87605bc9da9a716f8d514f15f685daf",
+    "src/sprites.h": "34543e84e608722030dc2cd26ad29b15e8061fd2014f1a06f84f9f9c95cf1d4f",
+    "src/sprite_atlas.S": "f8b95291d9a769d84279775585742cee94cca555c65844dbbadb4dea85a05139",
+    "src/sprite_data.h": "12de53447005b2d2de6d374db87fc7c865f69e472757afa4a6b17095fca49c9d",
+    "src/stage.c": "78e3a23ccfca7ababf1f984e7b3a84845dfb2cd00c4fdf0d3a433247d7766e6a",
+    "src/stage.h": "71f1ea3737681390b8d496424023978612a09e79c920e12e4e56ccabaae077ed",
+    "src/stage_texture.S": "c7a1946ddc9f2ea594daa2cbbf0df17a23445740ee2cf0113ef98b9745c5331b",
+    "src/ui.c": "ae1d88b75b463e821e4e34e9d64b07db51a1996e812da2f442505758f563f53a",
+    "src/ui.h": "36a039606d372a46a7868d1b5f782a60c3d9bbf6957cdc58867453cdcacfd05c"
+  }
+}

@@ -1,0 +1,1435 @@
+{
+  "garcia": {
+    "idle": {
+      "label": "word_202E3C",
+      "frames": [
+        {
+          "ticks": 8,
+          "mapping": "word_20324E",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1000,
+          "flip": 0,
+          "iou": 0.787945205479452,
+          "sorr_fpg": 50
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_203286",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1001,
+          "flip": 0,
+          "iou": 0.8099219620958752,
+          "sorr_fpg": 50
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_2032BE",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1002,
+          "flip": 0,
+          "iou": 0.8254237288135593,
+          "sorr_fpg": 50
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_203286",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1001,
+          "flip": 0,
+          "iou": 0.8099219620958752,
+          "sorr_fpg": 50
+        }
+      ]
+    },
+    "walk": {
+      "label": "word_202E5E",
+      "frames": [
+        {
+          "ticks": 8,
+          "mapping": "word_20324E",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1000,
+          "flip": 0,
+          "iou": 0.787945205479452,
+          "sorr_fpg": 50
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_2032F6",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1003,
+          "flip": 0,
+          "iou": 0.8443670150987224,
+          "sorr_fpg": 2
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_203320",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1004,
+          "flip": 0,
+          "iou": 0.83736120182887,
+          "sorr_fpg": 3
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_2032F6",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1003,
+          "flip": 0,
+          "iou": 0.8443670150987224,
+          "sorr_fpg": 2
+        }
+      ]
+    },
+    "held": {
+      "label": "word_202E8A",
+      "frames": [
+        {
+          "ticks": 99,
+          "mapping": "word_20334A",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1005,
+          "flip": 0,
+          "iou": 0.696969696969697,
+          "sorr_fpg": 58
+        }
+      ]
+    },
+    "hurt2": {
+      "label": "word_202E94",
+      "frames": [
+        {
+          "ticks": 3,
+          "mapping": "word_20334A",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1005,
+          "flip": 0,
+          "iou": 0.696969696969697,
+          "sorr_fpg": 58
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203378",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1006,
+          "flip": 0,
+          "iou": 0.696969696969697,
+          "sorr_fpg": 58
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_20334A",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1005,
+          "flip": 0,
+          "iou": 0.696969696969697,
+          "sorr_fpg": 58
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203378",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1006,
+          "flip": 0,
+          "iou": 0.696969696969697,
+          "sorr_fpg": 58
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_20334A",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1005,
+          "flip": 0,
+          "iou": 0.696969696969697,
+          "sorr_fpg": 58
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203378",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1006,
+          "flip": 0,
+          "iou": 0.696969696969697,
+          "sorr_fpg": 58
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_20334A",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1005,
+          "flip": 0,
+          "iou": 0.696969696969697,
+          "sorr_fpg": 58
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203378",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1006,
+          "flip": 0,
+          "iou": 0.696969696969697,
+          "sorr_fpg": 58
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_20334A",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1005,
+          "flip": 0,
+          "iou": 0.696969696969697,
+          "sorr_fpg": 58
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203378",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1006,
+          "flip": 0,
+          "iou": 0.696969696969697,
+          "sorr_fpg": 58
+        }
+      ]
+    },
+    "hurt": {
+      "label": "word_202EE6",
+      "frames": [
+        {
+          "ticks": 3,
+          "mapping": "word_2033F0",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1009,
+          "flip": 0,
+          "iou": 0.8459595959595959,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203414",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1010,
+          "flip": 0,
+          "iou": 0.8459595959595959,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_2033F0",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1009,
+          "flip": 0,
+          "iou": 0.8459595959595959,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203414",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1010,
+          "flip": 0,
+          "iou": 0.8459595959595959,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_2033F0",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1009,
+          "flip": 0,
+          "iou": 0.8459595959595959,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203414",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1010,
+          "flip": 0,
+          "iou": 0.8459595959595959,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_2033F0",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1009,
+          "flip": 0,
+          "iou": 0.8459595959595959,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203414",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1010,
+          "flip": 0,
+          "iou": 0.8459595959595959,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_2033F0",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1009,
+          "flip": 0,
+          "iou": 0.8459595959595959,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203414",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1010,
+          "flip": 0,
+          "iou": 0.8459595959595959,
+          "sorr_fpg": 57
+        }
+      ]
+    },
+    "flight": {
+      "label": "word_202F38",
+      "frames": [
+        {
+          "ticks": 4,
+          "mapping": "word_2033F0",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1009,
+          "flip": 0,
+          "iou": 0.8459595959595959,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 99,
+          "mapping": "word_203458",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1012,
+          "flip": 0,
+          "iou": 0.9795769511305616,
+          "sorr_fpg": 8
+        }
+      ]
+    },
+    "floor": {
+      "label": "word_202F4A",
+      "frames": [
+        {
+          "ticks": 20,
+          "mapping": "word_20347C",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1013,
+          "flip": 0,
+          "iou": 0.8385269121813032,
+          "sorr_fpg": 9
+        }
+      ]
+    },
+    "getup": {
+      "label": "word_202F54",
+      "frames": [
+        {
+          "ticks": 6,
+          "mapping": "word_20347C",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1013,
+          "flip": 0,
+          "iou": 0.8385269121813032,
+          "sorr_fpg": 9
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_203496",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1014,
+          "flip": 0,
+          "iou": 0.7758620689655172,
+          "sorr_fpg": 10
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_20347C",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1013,
+          "flip": 0,
+          "iou": 0.8385269121813032,
+          "sorr_fpg": 9
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_203496",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1014,
+          "flip": 0,
+          "iou": 0.7758620689655172,
+          "sorr_fpg": 10
+        },
+        {
+          "ticks": 10,
+          "mapping": "word_203438",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1011,
+          "flip": 0,
+          "iou": 0.8664468260511129,
+          "sorr_fpg": 11
+        },
+        {
+          "ticks": 10,
+          "mapping": "word_20324E",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1000,
+          "flip": 0,
+          "iou": 0.787945205479452,
+          "sorr_fpg": 50
+        }
+      ]
+    },
+    "front": {
+      "label": "word_202FD6",
+      "frames": [
+        {
+          "ticks": 16,
+          "mapping": "word_2033A6",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1007,
+          "flip": 0,
+          "iou": 0.7205408886027045,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_2033C6",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1008,
+          "flip": 0,
+          "iou": 0.8512020792722547,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_203680",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1018,
+          "flip": 0,
+          "iou": 0.640615748963884,
+          "sorr_fpg": 100
+        },
+        {
+          "ticks": 20,
+          "mapping": "word_2036A0",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1019,
+          "flip": 0,
+          "iou": 0.6608450704225353,
+          "sorr_fpg": 100
+        },
+        {
+          "ticks": 99,
+          "mapping": "word_2036A0",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1019,
+          "flip": 0,
+          "iou": 0.6608450704225353,
+          "sorr_fpg": 100
+        }
+      ]
+    },
+    "back": {
+      "label": "word_203000",
+      "frames": [
+        {
+          "ticks": 16,
+          "mapping": "word_2033A6",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1007,
+          "flip": 0,
+          "iou": 0.7205408886027045,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_2033C6",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1008,
+          "flip": 0,
+          "iou": 0.8512020792722547,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_20347C",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1013,
+          "flip": 0,
+          "iou": 0.8385269121813032,
+          "sorr_fpg": 9
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_2033C6",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1008,
+          "flip": 0,
+          "iou": 0.8512020792722547,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 99,
+          "mapping": "word_20347C",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1013,
+          "flip": 0,
+          "iou": 0.8385269121813032,
+          "sorr_fpg": 9
+        }
+      ]
+    },
+    "jab": {
+      "label": "word_203158",
+      "frames": [
+        {
+          "ticks": 2,
+          "mapping": "word_2035DA",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1015,
+          "flip": 0,
+          "iou": 0.8443670150987224,
+          "sorr_fpg": 2
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203604",
+          "hurt": 8,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1016,
+          "flip": 0,
+          "iou": 0.805379746835443,
+          "sorr_fpg": 4
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_203642",
+          "hurt": 8,
+          "collision": 1,
+          "damage": 1,
+          "fpg": 1017,
+          "flip": 0,
+          "iou": 0.6926108374384237,
+          "sorr_fpg": 4
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203604",
+          "hurt": 8,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1016,
+          "flip": 0,
+          "iou": 0.805379746835443,
+          "sorr_fpg": 4
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_2035DA",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1015,
+          "flip": 0,
+          "iou": 0.8443670150987224,
+          "sorr_fpg": 2
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_20324E",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1000,
+          "flip": 0,
+          "iou": 0.787945205479452,
+          "sorr_fpg": 50
+        }
+      ]
+    }
+  },
+  "donovan": {
+    "idle": {
+      "label": "word_203796",
+      "frames": [
+        {
+          "ticks": 8,
+          "mapping": "word_203B76",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1000,
+          "flip": 0,
+          "iou": 0.820947922761849,
+          "sorr_fpg": 2
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_203BA0",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1001,
+          "flip": 0,
+          "iou": 0.839572192513369,
+          "sorr_fpg": 2
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_203BCA",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1002,
+          "flip": 0,
+          "iou": 0.8498498498498499,
+          "sorr_fpg": 2
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_203BA0",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1001,
+          "flip": 0,
+          "iou": 0.839572192513369,
+          "sorr_fpg": 2
+        }
+      ]
+    },
+    "walk": {
+      "label": "word_2037B8",
+      "frames": [
+        {
+          "ticks": 6,
+          "mapping": "word_203B76",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1000,
+          "flip": 0,
+          "iou": 0.820947922761849,
+          "sorr_fpg": 2
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_203BF4",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1003,
+          "flip": 0,
+          "iou": 0.7698237885462555,
+          "sorr_fpg": 50
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_203B76",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1000,
+          "flip": 0,
+          "iou": 0.820947922761849,
+          "sorr_fpg": 2
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_203C2C",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1004,
+          "flip": 0,
+          "iou": 0.8114700065919578,
+          "sorr_fpg": 3
+        }
+      ]
+    },
+    "held": {
+      "label": "word_2037DA",
+      "frames": [
+        {
+          "ticks": 99,
+          "mapping": "word_203C56",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1005,
+          "flip": 0,
+          "iou": 0.6830631637786473,
+          "sorr_fpg": 102
+        }
+      ]
+    },
+    "hurt2": {
+      "label": "word_2037E4",
+      "frames": [
+        {
+          "ticks": 3,
+          "mapping": "word_203C56",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1005,
+          "flip": 0,
+          "iou": 0.6830631637786473,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203C84",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1006,
+          "flip": 0,
+          "iou": 0.6830631637786473,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203C56",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1005,
+          "flip": 0,
+          "iou": 0.6830631637786473,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203C84",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1006,
+          "flip": 0,
+          "iou": 0.6830631637786473,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203C56",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1005,
+          "flip": 0,
+          "iou": 0.6830631637786473,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203C84",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1006,
+          "flip": 0,
+          "iou": 0.6830631637786473,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203C56",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1005,
+          "flip": 0,
+          "iou": 0.6830631637786473,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203C84",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1006,
+          "flip": 0,
+          "iou": 0.6830631637786473,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203C56",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1005,
+          "flip": 0,
+          "iou": 0.6830631637786473,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203C84",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1006,
+          "flip": 0,
+          "iou": 0.6830631637786473,
+          "sorr_fpg": 102
+        }
+      ]
+    },
+    "hurt": {
+      "label": "word_203836",
+      "frames": [
+        {
+          "ticks": 3,
+          "mapping": "word_203CFC",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1009,
+          "flip": 0,
+          "iou": 0.8410123296560675,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203D20",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1010,
+          "flip": 0,
+          "iou": 0.8410123296560675,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203CFC",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1009,
+          "flip": 0,
+          "iou": 0.8410123296560675,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203D20",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1010,
+          "flip": 0,
+          "iou": 0.8410123296560675,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203CFC",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1009,
+          "flip": 0,
+          "iou": 0.8410123296560675,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203D20",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1010,
+          "flip": 0,
+          "iou": 0.8410123296560675,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203CFC",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1009,
+          "flip": 0,
+          "iou": 0.8410123296560675,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203D20",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1010,
+          "flip": 0,
+          "iou": 0.8410123296560675,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203CFC",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1009,
+          "flip": 0,
+          "iou": 0.8410123296560675,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203D20",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1010,
+          "flip": 0,
+          "iou": 0.8410123296560675,
+          "sorr_fpg": 57
+        }
+      ]
+    },
+    "flight": {
+      "label": "word_203888",
+      "frames": [
+        {
+          "ticks": 4,
+          "mapping": "word_203CFC",
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1009,
+          "flip": 0,
+          "iou": 0.8410123296560675,
+          "sorr_fpg": 57
+        },
+        {
+          "ticks": 99,
+          "mapping": "word_203D5E",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1012,
+          "flip": 0,
+          "iou": 0.9781626506024096,
+          "sorr_fpg": 8
+        }
+      ]
+    },
+    "floor": {
+      "label": "word_20389A",
+      "frames": [
+        {
+          "ticks": 20,
+          "mapping": "word_203D82",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1013,
+          "flip": 0,
+          "iou": 0.8576675849403123,
+          "sorr_fpg": 109
+        }
+      ]
+    },
+    "getup": {
+      "label": "word_2038A4",
+      "frames": [
+        {
+          "ticks": 4,
+          "mapping": "word_203D82",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1013,
+          "flip": 0,
+          "iou": 0.8576675849403123,
+          "sorr_fpg": 109
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_203D9C",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1014,
+          "flip": 0,
+          "iou": 0.8587570621468926,
+          "sorr_fpg": 10
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_203D82",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1013,
+          "flip": 0,
+          "iou": 0.8576675849403123,
+          "sorr_fpg": 109
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_203D9C",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1014,
+          "flip": 0,
+          "iou": 0.8587570621468926,
+          "sorr_fpg": 10
+        },
+        {
+          "ticks": 8,
+          "mapping": "word_203D44",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1011,
+          "flip": 0,
+          "iou": 0.9414455626715462,
+          "sorr_fpg": 11
+        },
+        {
+          "ticks": 10,
+          "mapping": "word_203B76",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1000,
+          "flip": 0,
+          "iou": 0.820947922761849,
+          "sorr_fpg": 2
+        }
+      ]
+    },
+    "front": {
+      "label": "word_203914",
+      "frames": [
+        {
+          "ticks": 16,
+          "mapping": "word_203CB2",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1007,
+          "flip": 0,
+          "iou": 0.6929824561403509,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_203CD2",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1008,
+          "flip": 0,
+          "iou": 0.7350633675316838,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_203FEA",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1026,
+          "flip": 0,
+          "iou": 0.6247745039085989,
+          "sorr_fpg": 100
+        },
+        {
+          "ticks": 20,
+          "mapping": "word_20400A",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1027,
+          "flip": 0,
+          "iou": 0.687206572769953,
+          "sorr_fpg": 100
+        },
+        {
+          "ticks": 99,
+          "mapping": "word_20400A",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1027,
+          "flip": 0,
+          "iou": 0.687206572769953,
+          "sorr_fpg": 100
+        }
+      ]
+    },
+    "back": {
+      "label": "word_20393E",
+      "frames": [
+        {
+          "ticks": 16,
+          "mapping": "word_203CB2",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1007,
+          "flip": 0,
+          "iou": 0.6929824561403509,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_203CD2",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1008,
+          "flip": 0,
+          "iou": 0.7350633675316838,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 6,
+          "mapping": "word_203D82",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1013,
+          "flip": 0,
+          "iou": 0.8576675849403123,
+          "sorr_fpg": 109
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203CD2",
+          "hurt": 2,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1008,
+          "flip": 0,
+          "iou": 0.7350633675316838,
+          "sorr_fpg": 102
+        },
+        {
+          "ticks": 99,
+          "mapping": "word_203D82",
+          "hurt": 0,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1013,
+          "flip": 0,
+          "iou": 0.8576675849403123,
+          "sorr_fpg": 109
+        }
+      ]
+    },
+    "jab": {
+      "label": "word_203A96",
+      "frames": [
+        {
+          "ticks": 2,
+          "mapping": "word_203B76",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1000,
+          "flip": 0,
+          "iou": 0.820947922761849,
+          "sorr_fpg": 2
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203F44",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1023,
+          "flip": 0,
+          "iou": 0.7865748709122203,
+          "sorr_fpg": 2
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203F6E",
+          "hurt": 11,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1024,
+          "flip": 0,
+          "iou": 0.7236438075742068,
+          "sorr_fpg": 4
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_203FAC",
+          "hurt": 11,
+          "collision": 1,
+          "damage": 1,
+          "fpg": 1025,
+          "flip": 0,
+          "iou": 0.6841579210394803,
+          "sorr_fpg": 4
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203F6E",
+          "hurt": 11,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1024,
+          "flip": 0,
+          "iou": 0.7236438075742068,
+          "sorr_fpg": 4
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203F44",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1023,
+          "flip": 0,
+          "iou": 0.7865748709122203,
+          "sorr_fpg": 2
+        }
+      ]
+    },
+    "uppercut": {
+      "label": "word_203AC8",
+      "frames": [
+        {
+          "ticks": 2,
+          "mapping": "word_203B76",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1000,
+          "flip": 0,
+          "iou": 0.820947922761849,
+          "sorr_fpg": 2
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203E64",
+          "hurt": 8,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1019,
+          "flip": 0,
+          "iou": 0.7123681687440077,
+          "sorr_fpg": 5
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203E9C",
+          "hurt": 9,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1020,
+          "flip": 0,
+          "iou": 0.873581847649919,
+          "sorr_fpg": 5
+        },
+        {
+          "ticks": 2,
+          "mapping": "word_203EC6",
+          "hurt": 9,
+          "collision": 3,
+          "damage": 136,
+          "fpg": 1021,
+          "flip": 0,
+          "iou": 0.8072747014115093,
+          "sorr_fpg": 6
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203EC6",
+          "hurt": 9,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1021,
+          "flip": 0,
+          "iou": 0.8072747014115093,
+          "sorr_fpg": 6
+        },
+        {
+          "ticks": 20,
+          "mapping": "word_203EF0",
+          "hurt": 10,
+          "collision": 4,
+          "damage": 136,
+          "fpg": 1022,
+          "flip": 0,
+          "iou": 0.8520958083832335,
+          "sorr_fpg": 6
+        }
+      ]
+    },
+    "kick": {
+      "label": "word_203AFA",
+      "frames": [
+        {
+          "ticks": 2,
+          "mapping": "word_203B76",
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1000,
+          "flip": 0,
+          "iou": 0.820947922761849,
+          "sorr_fpg": 2
+        },
+        {
+          "ticks": 3,
+          "mapping": "word_203DBC",
+          "hurt": 5,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1015,
+          "flip": 0,
+          "iou": 0.8067954696868754,
+          "sorr_fpg": 13
+        },
+        {
+          "ticks": 4,
+          "mapping": "word_203DDC",
+          "hurt": 6,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1016,
+          "flip": 0,
+          "iou": 0.5560723514211886,
+          "sorr_fpg": 23
+        },
+        {
+          "ticks": 5,
+          "mapping": "word_203DFC",
+          "hurt": 7,
+          "collision": 2,
+          "damage": 132,
+          "fpg": 1017,
+          "flip": 0,
+          "iou": 0.7915407854984894,
+          "sorr_fpg": 14
+        },
+        {
+          "ticks": 18,
+          "mapping": "word_203E30",
+          "hurt": 7,
+          "collision": 0,
+          "damage": 0,
+          "fpg": 1018,
+          "flip": 0,
+          "iou": 0.7544589774078478,
+          "sorr_fpg": 14
+        }
+      ]
+    }
+  }
+}

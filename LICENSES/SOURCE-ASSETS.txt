@@ -1,0 +1,5 @@
+Enemy sprite tile data and mappings: SEGA, original Bare Knuckle 3.
+Extracted from gsaurus/sor-disassemblies commit4dd719f3ed5c24c86deee616b56cea885e3113d7.
+See PORTING-NOTES.md and assets/enemy-native.json for pinned source hash.
+SoRR colors/other assets retain their respective original authorship.
+The port authors claim no ownership of those game assets. No complete ROM is included.

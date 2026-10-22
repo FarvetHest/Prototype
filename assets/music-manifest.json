@@ -1,0 +1,10 @@
+{
+  "source_sha256": "e8a175e43eae52a5bd5d14bfea01584c10b312f7cdc81a0cd00d35ae8762709a",
+  "wav_sha256": "50ed1dfb17757abf21fcac5d65fad8cec2515c7717a91bd29aeca55b0217fc4d",
+  "pcm_sha256": "548d6debecb2e612d537fdf12fa9e5fffc8f0ef13912c75eee1ce9684f0abca0",
+  "rate": 44100,
+  "channels": 2,
+  "sample_bits": 16,
+  "frames": 8599534,
+  "decoder": "libsndfile via soundfile; no resampling, no gain"
+}

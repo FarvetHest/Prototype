@@ -1,0 +1,34 @@
+{
+  "stage_file": "stage1g.fpg",
+  "stage_sha256": "c062b6773955f58853e0fbe48ceab01cfad11c57b64756b3e17685a53ec87cca",
+  "map_id": 1,
+  "source_dimensions": [
+    2852,
+    240
+  ],
+  "texture_dimensions": [
+    512,
+    256
+  ],
+  "visible_crop": [
+    0,
+    0,
+    480,
+    240
+  ],
+  "screen_position": [
+    0,
+    32
+  ],
+  "texture_bytes": 262144,
+  "texture_sha256": "1a726f0ac20f59805b14508013bb5ba38cf56118c1da194134dcc93b3c7540d4",
+  "swizzle_roundtrip_verified": true,
+  "music_source": "1.ogg",
+  "music_title": "Go Straight (SoRR remix)",
+  "music_sha256": "e8a175e43eae52a5bd5d14bfea01584c10b312f7cdc81a0cd00d35ae8762709a",
+  "music_bytes": 3317953,
+  "music_rate": 44100,
+  "music_channels": 2,
+  "music_pcm_frames": 8599534,
+  "music_seconds": 195.0007709750567
+}

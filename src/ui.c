@@ -1,0 +1,114 @@
+#include <pspkernel.h>
+#include <pspge.h>
+#include <pspgu.h>
+#include <stdio.h>
+#include <string.h>
+#include "ui.h"
+#include "hud_data.h"
+#define MAX_UI_VERTICES 1024
+typedef struct { short u,v,x,y,z; } UiVertex;
+static UiVertex *vertices;
+static unsigned count,target_age;
+static int old_hp[4],old_player;
+static void *texture;
+unsigned ui_score,ui_timer,ui_player_hp,ui_enemy_hp,ui_draw_count;
+int ui_target=-1;
+static const HudFrame *find(int set,int id) {
+    unsigned i;for(i=0;i<HUD_FRAME_COUNT;++i) if(hud_frames[i].set==set && hud_frames[i].id==id) return &hud_frames[i];
+    return 0;
+}
+static void image(int set,int id,int x,int y,int clip) {
+    const HudFrame *f=find(set,id);int sx,width;
+    if(!f) return;
+    width=clip>=0 && clip<f->w?clip:f->w;
+    for(sx=0;sx<width;sx+=32) {
+        int end=sx+32;if(end>width)end=width;
+        if(count+2>MAX_UI_VERTICES)return;
+        vertices[count++]=(UiVertex){f->u+sx,f->v,x+sx,y,0};
+        vertices[count++]=(UiVertex){f->u+end,f->v+f->h,x+end,y+f->h,0};
+    }
+}
+void ui_text(int x,int y,const char *s) {
+    for(;*s;++s) {
+        int code=(unsigned char)*s;
+        if(code==' '){x+=4;continue;}
+        if(code>='A' && code<='Z')code+='a'-'A';
+        image(HUD_FUENTE,code,x,y,-1);x+=8;
+    }
+}
+void ui_reset(const Game *g) {
+    int i;ui_score=0;ui_timer=99;ui_target=-1;target_age=0;
+    ui_player_hp=(unsigned)g->player.hp;ui_enemy_hp=0;old_player=g->player.hp;
+    for(i=0;i<4;++i)old_hp[i]=g->enemies[i].hp;
+}
+void ui_init(const Game *g) {
+    texture=(unsigned char *)sceGeEdramGetAddr()+1605632;
+    memcpy((void *)((unsigned)texture|0x40000000u),hud_texture,256*256*4);
+    sceKernelDcacheWritebackAll();ui_reset(g);
+}
+void ui_step(const Game *g) {
+    int i;
+    if(g->paused)return;
+    for(i=0;i<4;++i) {
+        int hp=g->enemies[i].hp;
+        if(hp<old_hp[i]) {
+            ui_score+=(unsigned)((old_hp[i]-hp)*5);
+            if(old_hp[i]>0 && hp<=0)ui_score+=200;
+            ui_target=i;target_age=90;
+        }
+        old_hp[i]=hp;
+    }
+    if(g->player.hp<old_player && g->player.hp>0) {
+        float best=1000000;int closest=-1;
+        for(i=0;i<4;++i)if(g->enemies[i].hp>0) {
+            float dx=g->enemies[i].x-g->player.x,dy=g->enemies[i].y-g->player.y;
+            float distance=dx*dx+dy*dy;if(distance<best){best=distance;closest=i;}
+        }
+        if(closest>=0){ui_target=closest;target_age=90;}
+    }
+    old_player=g->player.hp;
+    if(target_age)--target_age;
+    if(ui_target>=0 && g->enemies[ui_target].hp<=0 && !target_age)ui_target=-1;
+    ui_player_hp=(unsigned)(g->player.hp>0?g->player.hp:0);
+    ui_enemy_hp=ui_target>=0?(unsigned)(g->enemies[ui_target].hp>0?g->enemies[ui_target].hp:0):0;
+    ui_timer=g->ticks/30>=99?0:99-g->ticks/30;
+}
+void ui_begin(void) {
+    count=0;vertices=(UiVertex *)sceGuGetMemory(MAX_UI_VERTICES*sizeof(UiVertex));
+    sceGuEnable(GU_TEXTURE_2D);sceGuEnable(GU_ALPHA_TEST);sceGuDisable(GU_BLEND);
+    sceGuAlphaFunc(GU_GREATER,0,0xff);
+    sceGuTexMode(GU_PSM_8888,0,0,GU_TRUE);sceGuTexImage(0,256,256,256,texture);
+    sceGuTexFunc(GU_TFX_REPLACE,GU_TCC_RGBA);sceGuTexFilter(GU_NEAREST,GU_NEAREST);
+    sceGuTexWrap(GU_CLAMP,GU_CLAMP);
+}
+static void bar(int x,int y,unsigned hp,unsigned max) {
+    if(hp>max)hp=max;
+    image(HUD_BARRA,24,x,y,-1);
+    if(hp)image(HUD_BARRA_AMARILLA,24,x+1,y+1,(int)(104*hp/max));
+}
+void ui_draw(const Game *g,int error) {
+    char score[16];unsigned value=ui_score>9999999?9999999:ui_score;
+    image(HUD_SORR,176,8,8,-1);image(HUD_SORR,250,26,8,-1);
+    snprintf(score,sizeof(score),"%07u",value);ui_text(80,8,score);
+    bar(25,16,ui_player_hp,100);
+    if(g->player.hp>0)image(HUD_GENERAL,10,138,16,-1);else ui_text(138,16,"X0");
+    if(ui_target>=0) {
+        int galsia=(ui_target%2)==0;
+        image(galsia?HUD_GALSIA:HUD_DONOVAN,300,9,28,-1);
+        ui_text(26,27,galsia?"GALSIA":"DONOVAN");bar(25,35,ui_enemy_hp,40);
+    }
+    image(HUD_BARRA,24,25,47,-1);
+    if(g->moves.charge)image(HUD_BARRA_AZUL,24,26,48,104*g->moves.charge/100);
+    ui_text(138,47,g->moves.charge==100?"OK":"SP");
+    ui_text(224,7,"TIME");
+    image(HUD_FUENTE,248+(int)ui_timer/10,224,17,-1);
+    image(HUD_FUENTE,248+(int)ui_timer%10,240,17,-1);
+    if(error)ui_text(180,112,"SELFTEST ERROR");
+    else if(g->paused) {ui_text(220,112,"PAUSE");ui_text(178,130,"START TO RESUME");}
+    else if(g->won) {ui_text(196,112,"ARENA CLEAR");ui_text(190,130,"L R RESTART");}
+    else if(g->player.hp<=0) {ui_text(204,112,ui_timer?"GAME OVER":"TIME OVER");ui_text(190,130,"L R RESTART");}
+}
+void ui_end(void) {
+    if(count)sceGuDrawArray(GU_SPRITES,GU_TEXTURE_16BIT|GU_VERTEX_16BIT|GU_TRANSFORM_2D,count,0,vertices);
+    ui_draw_count=1;
+}

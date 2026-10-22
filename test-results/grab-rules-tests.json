@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "selftest": true,
+    "back_grab_lock_blocks_buttons_and_timer": true,
+    "lost_held_flag_releases_pair": true,
+    "direction_grab_special_is_neutral": true,
+    "hold_timer_one_expires": true,
+    "zero_timer_wraps_16_bits": true,
+    "vertical_only_approach_grabs": true
+  },
+  "eboot_sha256": "7cd131326185d2c333feec5fa91c3c0ee9d42648cedfd5e0283cdec88c3515cd"
+}
