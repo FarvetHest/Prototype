@@ -1,5 +1,5 @@
 TARGET = sorr-lite
-OBJS = src/main.o src/game.o src/bk3.o src/combat.o src/enemy.o src/impact.o src/rules.o src/ai.o src/physics.o src/sprites.o src/sprite_atlas.o src/stage.o src/stage_texture.o src/music.o src/ui.o src/hud_texture.o
+OBJS = src/main.o src/level.o src/held.o src/flow.o src/game.o src/bk3.o src/combat.o src/sfx.o src/enemy.o src/impact.o src/rules.o src/ai.o src/physics.o src/sprites.o src/sprite_atlas.o src/stage.o src/stage_texture.o src/music.o src/ui.o src/hud_texture.o
 INCDIR = src
 CFLAGS = -O2 -G0 -std=gnu99 -Wall -Wextra -Werror -ffunction-sections -fdata-sections
 CXXFLAGS = $(CFLAGS)
@@ -9,8 +9,8 @@ PSP_LARGE_MEMORY = 0
 LIBS = -lpspaudio -lpspgu -lpsppower -lm
 LDFLAGS = -Wl,--gc-sections
 EXTRA_TARGETS = EBOOT.PBP
-PSP_EBOOT_TITLE = SoRR PSP Lite v0.11
-SFOFLAGS = -s DISC_ID=SORL00011
+PSP_EBOOT_TITLE = SoRR PSP Lite v0.16
+SFOFLAGS = -s DISC_ID=SORL00016
 PSPSDK := $(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
 
@@ -44,3 +44,13 @@ $(OBJS): src/impact.h
 
 $(OBJS): src/enemy.h
 src/enemy.o: src/enemy_data.h
+
+src/sfx.o: src/sfx.h src/sfx_data.h
+
+src/main.o src/flow.o src/ui.o: src/flow.h
+
+src/main.o src/held.o: src/held.h
+
+src/main.o src/ui.o src/level.o src/stage.o: src/level.h
+
+src/ai.o src/sprites.o: src/level.h
