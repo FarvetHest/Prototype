@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00016':
+        if (status.get('game')or{}).get('id')!='SORL00018':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -52,6 +52,10 @@ def button(name,t=0.18):
 def reset():
     p.send(ltrigger=True,rtrigger=True);time.sleep(0.15);p.send(ltrigger=False,rtrigger=False);time.sleep(0.12)
     p.req('memory.write_u32',address=p.symbols['level'],value=0)
+    p.req('memory.write',address=p.symbols['level']+132,base64=base64.b64encode(bytes(96)).decode())
+    # The stream opens with two actors; isolated legacy combat scenarios need four.
+    for i in range(4):
+        p.req('memory.write',address=p.symbols['game']+36*(i+1),base64=base64.b64encode(struct.pack('<2f7i',144.+i*23.,79.+i*12.,40,-1,20+i*9,0,0,0,0)).decode())
 def frames():return list(struct.unpack('<5I',p.read(p.symbols['actor_frames'],20)))
 def moves():return list(struct.unpack('<34i',p.read(p.symbols['game']+192,136)))
 
@@ -92,16 +96,28 @@ def arrange(hp,player_hp=100,attack=0,x=82.0,one=False):
         raw=bytearray(136);struct.pack_into('<i',raw,52,100);struct.pack_into('<i',raw,64,-1)
         p.req('memory.write',address=a+192,base64=base64.b64encode(raw).decode())
     finally:p.req('cpu.resume')
+def render_snapshot():
+ # Debugger reads while running can observe stage_draw_count just after its reset.
+ # Stop the CPU and require a fully submitted two-page background before sampling.
+ value={}
+ for attempt in range(20):
+  p.req('cpu.stepping')
+  try:value=dict(actors=p.u32('sprite_draw_count'),batches=p.u32('stage_draw_count'),slices=p.u32('stage_slice_count'))
+  finally:p.req('cpu.resume')
+  if value['batches']==2 and value['slices']==16:return value
+  time.sleep(.02)
+ return value
 try:
- p.send(ltrigger=True,rtrigger=True);time.sleep(.12);p.send(ltrigger=False,rtrigger=False);time.sleep(.12)
- p.req('cpu.stepping')
+ reset();arrange(40,x=220.);p.req('cpu.stepping')
  try:
   def wr(address,n):p.req('memory.write_u32',address=address,value=n)
-  wr(p.symbols['sample_count'],0);wr(p.symbols['level']+4,4)
-  p.req('memory.write',address=p.symbols['level']+24,base64=base64.b64encode(struct.pack('<f',1186.)).decode())
-  wr(p.symbols['game']+824,10000)
-  for i in range(4):wr(p.symbols['game']+36*(i+1)+8,240 if i==1 else 0)
-  p.req('memory.write',address=p.symbols['level']+32,base64=base64.b64encode(struct.pack('<2I7i',2,5,1,0,0,0,0,0,0)).decode())
+  wr(p.symbols['sample_count'],0);wr(p.symbols['game']+824,10000)
+  p.req('memory.write',address=p.symbols['level'],base64=base64.b64encode(struct.pack('<6ifIiI',1,4,1,0,0,0,1186.,1,2,0)).decode())
+  for i in range(4):
+   hp=240 if i==1 else 0
+   p.req('memory.write',address=p.symbols['game']+36*(i+1),base64=base64.b64encode(struct.pack('<2f7i',150.+i*23.,82.+i*12.,hp,-1,0,0,0,0,0)).decode())
+   wr(p.symbols['game']+592+i*56,7);wr(p.symbols['game']+576+i*56,7)
+  p.req('memory.write',address=p.symbols['level']+40,base64=base64.b64encode(struct.pack('<7i',1,0,0,0,0,0,0)).decode())
   p.req('memory.write',address=p.symbols['level']+68,base64=base64.b64encode(b''.join(struct.pack('<2f2i',1186.+x,112.,int(i==2),1)for i,x in enumerate([90.,120.,150.]))).decode())
  finally:p.req('cpu.resume')
  before=p.u32('dropped_ticks');time.sleep(35);button('select',.04)
@@ -109,7 +125,8 @@ try:
  shutil.copy2(project/'build/lite-profile.csv',artifacts/'boss-battle-profile.csv')
  rows=list(csv.DictReader((artifacts/'boss-battle-profile.csv').read_text().splitlines()[1:]))[-30:]
  fps=[float(v['fps'])for v in rows]
- checks['boss_two_RAM_batches']=p.u32('sprite_draw_count')==2 and p.u32('stage_draw_count')==2
+ render_stats=render_snapshot()
+ checks['boss_two_RAM_batches']=render_stats['actors']==2 and render_stats['batches']==2
  checks['boss_attacks_and_rushes']=all(v>0 for v in struct.unpack('<2i',p.read(p.symbols['level']+60,8)))
  checks['food_remains_available']=all(struct.unpack('<i',p.read(p.symbols['level']+80+i*16,4))[0]==1 for i in range(3))
  checks['fps_target_met']=len(fps)==30 and min(fps)>=29 and statistics.median(fps)>=29.5
@@ -118,7 +135,7 @@ try:
  checks['level_remains_locked']=struct.unpack('<i',p.read(p.symbols['level']+8,4))[0]==1
  checks['no_missing_frames']=p.u32('missing_sprite_frames')==0
  screenshot(artifacts/'boss-battle-profile.png')
- result=dict(checks=checks,seconds=35,last_30_fps=dict(min=min(fps),median=statistics.median(fps),max=max(fps)),eboot_sha256=hashlib.sha256((project/'build/EBOOT.PBP').read_bytes()).hexdigest(),note='PPSSPP software-renderer stress fixture: final background position, active captain and three visible food sprites, player invulnerability to sustain combat. Not hardware performance.')
+ result=dict(checks=checks,render_snapshot=render_stats,seconds=35,last_30_fps=dict(min=min(fps),median=statistics.median(fps),max=max(fps)),eboot_sha256=hashlib.sha256((project/'build/EBOOT.PBP').read_bytes()).hexdigest(),note='PPSSPP software-renderer stress fixture: final background position, active captain and three visible food sprites, player invulnerability to sustain combat. Not hardware performance.')
  (artifacts/'boss-performance.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2));assert all(checks.values())
 finally:p.close()
 

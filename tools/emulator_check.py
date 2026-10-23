@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00016':
+        if (status.get('game')or{}).get('id')!='SORL00018':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -52,6 +52,10 @@ def button(name,t=0.18):
 def reset():
     p.send(ltrigger=True,rtrigger=True);time.sleep(0.15);p.send(ltrigger=False,rtrigger=False);time.sleep(0.12)
     p.req('memory.write_u32',address=p.symbols['level'],value=0)
+    p.req('memory.write',address=p.symbols['level']+132,base64=base64.b64encode(bytes(96)).decode())
+    # The stream opens with two actors; isolated legacy combat scenarios need four.
+    for i in range(4):
+        p.req('memory.write',address=p.symbols['game']+36*(i+1),base64=base64.b64encode(struct.pack('<2f7i',144.+i*23.,79.+i*12.,40,-1,20+i*9,0,0,0,0)).decode())
 def frames():return list(struct.unpack('<5I',p.read(p.symbols['actor_frames'],20)))
 def moves():return list(struct.unpack('<34i',p.read(p.symbols['game']+192,136)))
 

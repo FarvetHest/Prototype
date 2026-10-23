@@ -49,6 +49,7 @@ void ui_init(const Game *g) {
     memcpy((void *)((unsigned)texture|0x40000000u),hud_texture,256*256*4);
     sceKernelDcacheWritebackAll();ui_reset(g);
 }
+void ui_spawn_enemies(const Game *g,unsigned mask){int i;for(i=0;i<4;++i)if(mask&(1u<<i)){old_hp[i]=g->enemies[i].hp;if(ui_target==i){ui_target=-1;target_age=0;}}}
 void ui_step(const Game *g) {
     int i;
     if(g->paused)return;
@@ -99,7 +100,7 @@ static void bar(int x,int y,unsigned hp,unsigned max) {
 void ui_draw(const Game *g,int error) {
     char score[32];unsigned value=ui_score>9999999?9999999:ui_score;
     if(flow.state==FLOW_TITLE) {
-        ui_text(152,98,"SORR PSP LITE");ui_text(216,118,"V0.16");
+        ui_text(152,98,"SORR PSP LITE");ui_text(216,118,"V0.18");
         ui_text(158,140,"START OR CROSS");
         snprintf(score,sizeof(score),"BEST %07u",flow.best>9999999?9999999:flow.best);ui_text(160,164,score);
         if(error)ui_text(180,190,"SELFTEST ERROR");
@@ -107,14 +108,14 @@ void ui_draw(const Game *g,int error) {
     }
     if(level.enabled){
         if(level.boss==1)ui_text(340,8,"BOSS");
-        else {snprintf(score,sizeof(score),"WAVE %d OF %d",level.wave+1,LEVEL_WAVES);ui_text(320,8,score);}
+        else ui_text(340,8,"STREET");
         if(level.heal_notice && flow.state==FLOW_PLAY){snprintf(score,sizeof(score),"HP %d",level.heal_amount);ui_text(208,62,score);}
         if(level.boss==1 && level.boss_phase==BOSS_WINDUP && !g->paused && flow.state==FLOW_PLAY)ui_text(208,80,"WATCH");
         if(level.go && flow.state==FLOW_PLAY && !g->paused && ((level.timer/15)&1)==0)ui_text(382+level_go_bob(&level)*2,80,"GO");
         /* Wave / boss banner: steady first, then flickers out over its last half second. */
         if(level.banner>0 && flow.state==FLOW_PLAY && !g->paused && (level.banner>15 || (level.banner&4))){
             if(level.boss==1)ui_text(212,96,"WARNING");
-            else {snprintf(score,sizeof(score),"WAVE %d",level.wave+1);ui_text(218,96,score);}
+            else ui_text(214,96,"STAGE 1");
         }}
     image(HUD_SORR,176,8,8,-1);image(HUD_SORR,250,26,8,-1);
     snprintf(score,sizeof(score),"%07u",value);ui_text(80,8,score);

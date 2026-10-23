@@ -1,0 +1,154 @@
+{
+  "source": "Bare Knuckle 3 (J) [!].asm",
+  "source_sha256": "ab4fcf0be4c9b5bac1f60f1d863c2cb6b781c5fb157dad72574c9755534409c3",
+  "routines": [
+    "LoadEnemyObj",
+    "Chk_Area",
+    "GetNextEnemyGroup",
+    "sub_499C6"
+  ],
+  "scope": "BK3 position/delay/count/slot queue principle; authored Lite encounter coordinates, not original stage script",
+  "units": "half of screen pixels",
+  "cues": [
+    {
+      "camera": 0,
+      "y": 88,
+      "family": 0,
+      "ai": 1,
+      "side": 1
+    },
+    {
+      "camera": 0,
+      "y": 114,
+      "family": 1,
+      "ai": 1,
+      "side": 1
+    },
+    {
+      "camera": 64,
+      "y": 100,
+      "family": 0,
+      "ai": 1,
+      "side": 1
+    },
+    {
+      "camera": 128,
+      "y": 122,
+      "family": 1,
+      "ai": 1,
+      "side": -1
+    },
+    {
+      "camera": 192,
+      "y": 84,
+      "family": 0,
+      "ai": 2,
+      "side": 1
+    },
+    {
+      "camera": 256,
+      "y": 112,
+      "family": 1,
+      "ai": 2,
+      "side": 1
+    },
+    {
+      "camera": 320,
+      "y": 96,
+      "family": 0,
+      "ai": 2,
+      "side": -1
+    },
+    {
+      "camera": 384,
+      "y": 122,
+      "family": 1,
+      "ai": 2,
+      "side": 1
+    },
+    {
+      "camera": 448,
+      "y": 82,
+      "family": 0,
+      "ai": 4,
+      "side": 1
+    },
+    {
+      "camera": 512,
+      "y": 108,
+      "family": 1,
+      "ai": 4,
+      "side": 1
+    },
+    {
+      "camera": 576,
+      "y": 120,
+      "family": 0,
+      "ai": 4,
+      "side": 1
+    },
+    {
+      "camera": 640,
+      "y": 90,
+      "family": 1,
+      "ai": 4,
+      "side": -1
+    },
+    {
+      "camera": 704,
+      "y": 102,
+      "family": 0,
+      "ai": 5,
+      "side": 1
+    },
+    {
+      "camera": 768,
+      "y": 124,
+      "family": 1,
+      "ai": 5,
+      "side": 1
+    },
+    {
+      "camera": 832,
+      "y": 80,
+      "family": 0,
+      "ai": 5,
+      "side": -1
+    },
+    {
+      "camera": 896,
+      "y": 112,
+      "family": 1,
+      "ai": 5,
+      "side": 1
+    },
+    {
+      "camera": 960,
+      "y": 96,
+      "family": 0,
+      "ai": 7,
+      "side": 1
+    },
+    {
+      "camera": 1024,
+      "y": 122,
+      "family": 1,
+      "ai": 7,
+      "side": -1
+    },
+    {
+      "camera": 1088,
+      "y": 84,
+      "family": 0,
+      "ai": 7,
+      "side": 1
+    },
+    {
+      "camera": 1152,
+      "y": 108,
+      "family": 1,
+      "ai": 7,
+      "side": 1
+    }
+  ]
+}

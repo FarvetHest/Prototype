@@ -99,7 +99,8 @@
         901,
         902,
         903,
-        904
+        904,
+        910
       ]
     },
     {
@@ -2217,6 +2218,22 @@
       "y": 1450
     },
     {
+      "family": 0,
+      "name": "bk3_axel",
+      "id": 910,
+      "w": 43,
+      "h": 53,
+      "px": 24,
+      "py": 53,
+      "source_w": 43,
+      "source_h": 53,
+      "crop_left": 0,
+      "crop_top": 0,
+      "title": "BK3 DMA_Axel_ItemPickUp / word_116EE8",
+      "x": 466,
+      "y": 302
+    },
+    {
       "family": 1,
       "name": "galsia",
       "id": 1014,
@@ -2357,8 +2374,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203438",
-      "x": 466,
-      "y": 302
+      "x": 108,
+      "y": 1397
     },
     {
       "family": 2,
@@ -2405,8 +2422,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203D82",
-      "x": 108,
-      "y": 1397
+      "x": 78,
+      "y": 1106
     },
     {
       "family": 0,
@@ -2442,7 +2459,7 @@
     }
   ],
   "atlas_bytes": 786432,
-  "atlas_sha256": "1461d2106ca7d39fbbfa87edab9a900b1681287393d3478164169b085a94e48f",
+  "atlas_sha256": "7192ade4c394b746a9dd76a26309956c77eb669bac053942691e2710876057d2",
   "swizzle_roundtrip_verified": true,
   "format": "three 512x512 swizzled GU_PSM_T8 pages; global v selects page; per-family RGBA8888 palettes; enemy SoRR colors calibrated onto BK3 indices; index 0 transparent"
 }

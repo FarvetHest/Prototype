@@ -37,6 +37,10 @@ void sprites_reset(const Game *g) {
         actor_lift[i]=0;animation[i]=(Animation){a->x,a->y,0}; actor_frames[i]=i?enemy_frames(i-1,EP_IDLE)[0].fpg:1; actor_states[i]=ANIM_IDLE;
     }
 }
+void sprites_spawn_enemies(const Game *g,unsigned mask){int i;for(i=0;i<4;++i)if(mask&(1u<<i)){
+ const Actor *a=&g->enemies[i];animation[i+1]=(Animation){a->x,a->y,0};actor_lift[i+1]=0;
+ actor_states[i+1]=ANIM_IDLE;actor_frames[i+1]=enemy_frames(i,EP_IDLE)[0].fpg;
+}}
 void sprites_init(const Game *g) {
     /* One fixed atlas upload. Total reserved VRAM: 1343488 of 2097152 bytes. */
     texture_vram=(unsigned char *)sceGeEdramGetAddr()+TEXTURE_VRAM_OFFSET;
@@ -94,6 +98,7 @@ void sprites_step(const Game *g) {
         if(!i && g->bk3.active && a->hp>0 && !a->stun)frame=g->bk3.fpg;
         if(i)frame=g->pose[i-1].fpg?g->pose[i-1].fpg:enemy_frames(i-1,a->hp<=0?EP_FLOOR:EP_IDLE)[0].fpg;
         if(g->physics.body[i].phase){frame=g->physics.body[i].fpg;actor_states[i]=g->physics.body[i].phase==BODY_HURT?ANIM_HURT:ANIM_DOWN;}
+        if(!i && level.enabled && level.pickup_timer && !g->physics.body[0].phase && a->hp>0){frame=910;actor_states[i]=ANIM_GRAB;}
         actor_frames[i]=frame;actor_lift[i]=g->motion.z[i];
         v->x=a->x;v->y=a->y;
     }

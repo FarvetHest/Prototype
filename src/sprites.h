@@ -7,6 +7,7 @@ extern unsigned sprite_draw_count, sprite_slice_count;
 int sprites_selftest(void);
 void sprites_init(const Game *g);
 void sprites_reset(const Game *g);
+void sprites_spawn_enemies(const Game *g,unsigned mask);
 void sprites_step(const Game *g);
 void sprites_begin(void);
 void sprites_end(void);

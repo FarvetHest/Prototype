@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "selftest": true,
+    "offscreen_staggered_start": true,
+    "intro_banner_active": true,
+    "intro_draws_black_blinds": true,
+    "pause_freezes_entry_and_fade": true,
+    "entrances_finish": true,
+    "entrance_mask_changes": true,
+    "walking_animation_visible": true,
+    "entrance_invulnerability": true,
+    "intro_and_banner_finish": true,
+    "boss_entrance_is_solo": true,
+    "boss_warning_banner": true,
+    "boss_entrance_finishes": true,
+    "boss_clear_GO": true,
+    "GO_arrow_moves_sideways": true,
+    "exit_waits_for_fade": true,
+    "outro_still_pending": true,
+    "outro_cannot_be_cancelled": true,
+    "no_missing_frames": true
+  },
+  "entrance_masks": [
+    2,
+    3
+  ],
+  "arrow_positions": [
+    414,
+    422
+  ],
+  "eboot_sha256": "1c4d355b62cc14070aa443cc4ded7dc627763bef19e05ab7d9503b4245142877",
+  "note": "Real entry/pose/GUI/fade timers and framebuffer. HP fixtures accelerate the final-wave/boss clear; no claim of hardware performance."
+}

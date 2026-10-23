@@ -1,0 +1,7 @@
+*.o
+*.pyc
+__pycache__/
+music.wav
+build/music.wav
+lite-profile.csv
+build/lite-profile.csv

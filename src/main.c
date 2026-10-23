@@ -17,7 +17,7 @@
 #include "held.h"
 #include "level.h"
 
-PSP_MODULE_INFO("SoRR PSP Lite", 0, 0, 19);
+PSP_MODULE_INFO("SoRR PSP Lite", 0, 0, 21);
 PSP_MAIN_THREAD_ATTR(PSP_THREAD_ATTR_USER);
 PSP_MAIN_THREAD_STACK_SIZE_KB(128);
 PSP_HEAP_SIZE_KB(4096);
@@ -142,7 +142,7 @@ static void save_profile(void) {
     unsigned i; int failed=0;
     FILE *f = fopen("lite-profile.csv","w");
     if (!f) {save_status=-1; return;}
-    if (fprintf(f,"# SoRR PSP Lite v0.16; selftest=%d; cpu_mhz=%d; samples=%u; capacity=900; music_status=%d; music_error=%d; rate=%u; loops=%u\n", selftest_result,scePowerGetCpuClockFrequencyInt(),sample_count,music_stats.status,music_stats.error,music_stats.rate,music_stats.loops)<0) failed=1;
+    if (fprintf(f,"# SoRR PSP Lite v0.18; selftest=%d; cpu_mhz=%d; samples=%u; capacity=900; music_status=%d; music_error=%d; rate=%u; loops=%u\n", selftest_result,scePowerGetCpuClockFrequencyInt(),sample_count,music_stats.status,music_stats.error,music_stats.rate,music_stats.loops)<0) failed=1;
     if (fprintf(f,"sample,fps,logic_hz,logic_ms,render_sync_ms,dropped_ticks_total,music_blocks,music_late,music_decode_max_ms\n")<0) failed=1;
     for(i=0;i<sample_count;++i) {
         Sample *s=&samples[i];
@@ -156,7 +156,7 @@ static void apply_flow_request(void) {
         game_reset(&game);level_start(&level,&game);sprites_reset(&game);ui_reset(&game);
         music_restart();sfx_reset();show_perf=0;
     } else if(flow.request==FLOW_RESET_LIFE) {
-        game_respawn(&game);sprites_reset(&game);ui_reset(&game);
+        game_respawn(&game);level_cancel_pickup(&level);sprites_reset(&game);ui_reset(&game);
         ui_score=flow.score;sfx_reset();
     }
     if(flow.request)held_reset();
@@ -209,9 +209,11 @@ int main(void) {
         while(accum>=TICK_US && steps<3) {
             in.attack=(pending & PSP_CTRL_SQUARE)?((pad.Buttons&PSP_CTRL_RTRIGGER)?2:1):0; in.jump=(pending & PSP_CTRL_CROSS)!=0; in.special=(pending & PSP_CTRL_TRIANGLE)!=0; pending=0;
             if(!selftest_result) {
-                if(flow.state==FLOW_PLAY) { in.attack=held_tick(&game,(pad.Buttons&PSP_CTRL_SQUARE)!=0,in.attack,(pad.Buttons&PSP_CTRL_RTRIGGER)!=0);game_step(&game,in);ui_step(&game);
-                    {unsigned gen=level.generation;level_step(&level,&game);
-                     if(level.generation!=gen){unsigned score=ui_score;ui_reset(&game);ui_score=score;sprites_reset(&game);}}
+                if(flow.state==FLOW_PLAY) { if(level_pickup_button(&level,&game,in.attack,in.jump,in.special)){held_reset();in=(Input){0};}
+                    else in.attack=held_tick(&game,(pad.Buttons&PSP_CTRL_SQUARE)!=0,in.attack,(pad.Buttons&PSP_CTRL_RTRIGGER)!=0);
+                    game_step(&game,in);ui_step(&game);
+                    level_step(&level,&game);
+                    if(level.spawn_mask){ui_spawn_enemies(&game,level.spawn_mask);sprites_spawn_enemies(&game,level.spawn_mask);level.spawn_mask=0;}
                     sprites_step(&game);ui_health_sync(&game); }
                 if(flow.state!=FLOW_PLAY)held_reset();
                 flow_tick(&flow,&game,ui_score);apply_flow_request();

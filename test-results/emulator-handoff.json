@@ -1,8 +1,30 @@
 {
-  "version": "v0.11",
-  "pid": 26788,
-  "window_style": "Normal",
+  "game": {
+    "event": "game.status",
+    "ticket": "game.status",
+    "game": {
+      "id": "SORL00018",
+      "version": "1.00",
+      "title": "SoRR PSP Lite v0.18"
+    },
+    "paused": false
+  },
+  "selftest": 0,
+  "flow": [
+    0,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "ticks": 0,
+  "frames": 3,
   "controls_restored": true,
   "controls_sha256": "8b45c8bdb0e88eb7daff9ad8de45e4de61e3188cc316e39ceaa17bb3e0bf5031",
-  "eboot_sha256": "7cd131326185d2c333feec5fa91c3c0ee9d42648cedfd5e0283cdec88c3515cd"
+  "eboot_sha256": "1c4d355b62cc14070aa443cc4ded7dc627763bef19e05ab7d9503b4245142877",
+  "visible_window_requested": true
 }

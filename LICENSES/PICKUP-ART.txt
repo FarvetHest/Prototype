@@ -1,0 +1,1 @@
+Pickup pose: SEGA Bare Knuckle 3 ArtUnc_Axel / word_116EE8. Source hash and timing: assets/pickup-native.json. Palette fitted to existing local SoRR Axel colors; original authorship retained.

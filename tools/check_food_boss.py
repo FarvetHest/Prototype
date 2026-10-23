@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00016':
+        if (status.get('game')or{}).get('id')!='SORL00018':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -52,6 +52,10 @@ def button(name,t=0.18):
 def reset():
     p.send(ltrigger=True,rtrigger=True);time.sleep(0.15);p.send(ltrigger=False,rtrigger=False);time.sleep(0.12)
     p.req('memory.write_u32',address=p.symbols['level'],value=0)
+    p.req('memory.write',address=p.symbols['level']+132,base64=base64.b64encode(bytes(96)).decode())
+    # The stream opens with two actors; isolated legacy combat scenarios need four.
+    for i in range(4):
+        p.req('memory.write',address=p.symbols['game']+36*(i+1),base64=base64.b64encode(struct.pack('<2f7i',144.+i*23.,79.+i*12.,40,-1,20+i*9,0,0,0,0)).decode())
 def frames():return list(struct.unpack('<5I',p.read(p.symbols['actor_frames'],20)))
 def moves():return list(struct.unpack('<34i',p.read(p.symbols['game']+192,136)))
 
@@ -131,27 +135,37 @@ def fixture(isboss=False,hp=50):
   wr(8,hp);wr(824,10000)
   p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<2f',120.,112.)).decode())
   wl(0,'<6ifIiI',1,1,0,1,0,0,260.,2,0,1)
-  wl(40,'<7i',0,0,0,0,0,0,0);wl(68,'<2f2i',380.,112.,0,1);wl(116,'<4I',1,0,0,0)
+  wl(40,'<7i',0,0,0,0,0,0,0);wl(68,'<2f2i',380.,112.,0,1);wl(116,'<4I',1,0,0,0);wl(132,'<96s',bytes(96))
  finally:p.req('cpu.resume')
  time.sleep(.12)
 try:
  checks['selftest']=p.u32('selftest_result')==0
- fixture();checks['apple_heals_25']=state()['player'][2]==75 and food()[0][3]==0 and p.u32('ui_player_hp')==75
+ fixture();checks['touch_does_not_pick']=state()['player'][2]==50 and food()[0][3]==1
+ p.send(square=True,right=True);time.sleep(.045);p.send(square=False,right=False)
+ checks['square_starts_pickup_pose']=frames()[0]==910 and state()['player'][6]==0 and struct.unpack('<i',p.read(p.symbols['level']+180,4))[0]>0
+ checks['pickup_locks_walk']=abs(state()['player'][0]-120)<.01
+ screenshot(artifacts/'pickup-animation.png');time.sleep(.25)
+ checks['apple_heals_25']=state()['player'][2]==75 and food()[0][3]==0 and p.u32('ui_player_hp')==75
+ checks['pickup_returns_idle']=frames()[0]!=910 and state()['player'][6]==0
  time.sleep(.2);checks['food_consumed_once']=state()['player'][2]==75
- fixture(hp=90);checks['apple_caps_100']=state()['player'][2]==100
- fixture(hp=100);checks['full_HP_keeps_food']=food()[0][3]==1
- p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<f',92.)).decode());time.sleep(.1);screenshot(artifacts/'food-apple.png');apple_pixels=food_pixels(4);checks['rendered_apple_matches_source']=apple_pixels['matched']==apple_pixels['total'];p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<f',120.)).decode())
- # Paused placement cannot pick food; jumping cannot pick; landing can.
- button('start',.04);wr(8,40);before=food();time.sleep(.1);checks['pause_preserves_food_HP']=food()==before and state()['player'][2]==40
- button('start',.04);time.sleep(.1);checks['resume_collects_food']=state()['player'][2]==65 and food()[0][3]==0
- fixture(hp=100);button('cross',.04);wr(8,40);time.sleep(.08);checks['airborne_cannot_pick']=state()['player'][7]>0 and state()['player'][2]==40 and food()[0][3]==1
- time.sleep(1.);checks['landing_can_pick']=state()['player'][2]==65 and food()[0][3]==0
- fixture(hp=100);p.req('cpu.stepping');wl(68,'<2f2i',380.,112.,1,1);wr(8,30);p.req('cpu.resume');time.sleep(.1)
+ fixture(hp=90);button('square',.04);time.sleep(.15);checks['apple_caps_100']=state()['player'][2]==100
+ fixture(hp=100);button('square',.04);time.sleep(.2);checks['full_HP_keeps_food']=food()[0][3]==1 and struct.unpack('<i',p.read(p.symbols['level']+180,4))[0]==0
+ p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<f',92.)).decode());time.sleep(.1);screenshot(artifacts/'food-apple.png');apple_pixels=food_pixels(4);checks['rendered_apple_matches_source']=apple_pixels['matched']==apple_pixels['total']
+ fixture();p.send(square=True);time.sleep(.04);p.send(square=False);p.send(start=True);time.sleep(.04);p.send(start=False);before=struct.unpack('<i',p.read(p.symbols['level']+180,4))[0];hp=state()['player'][2];time.sleep(.15)
+ checks['pause_freezes_pickup']=before>0 and struct.unpack('<i',p.read(p.symbols['level']+180,4))[0]==before and state()['player'][2]==hp
+ button('start',.04);time.sleep(.2);checks['resume_finishes_pickup']=state()['player'][2]==75 and food()[0][3]==0
+ fixture(hp=100);button('cross',.04);wr(8,40);p.send(square=True);time.sleep(.06);p.send(square=False)
+ checks['airborne_attack_cannot_pick']=state()['player'][7]>0 and state()['player'][2]==40 and food()[0][3]==1
+ time.sleep(1.3);checks['landing_alone_does_not_pick']=state()['player'][2]==40 and food()[0][3]==1
+ button('square',.04);time.sleep(.2);checks['new_square_after_landing_picks']=state()['player'][2]==65 and food()[0][3]==0
+ fixture(hp=100);p.req('cpu.stepping');wl(68,'<2f2i',380.,112.,1,1);wr(8,30);p.req('cpu.resume');button('square',.04);time.sleep(.2)
  checks['chicken_heals_60']=state()['player'][2]==90 and food()[0][3]==0
- fixture(hp=100);p.req('cpu.stepping');wl(68,'<2f2i',380.,112.,1,1);p.req('cpu.resume');time.sleep(.1);p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<f',92.)).decode());time.sleep(.1);screenshot(artifacts/'food-chicken.png');chicken_pixels=food_pixels(18);checks['rendered_chicken_matches_source']=chicken_pixels['matched']==chicken_pixels['total'];p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<f',120.)).decode())
- # Death and continue preserve taken/spawn masks, never duplicate pickups.
- wr(8,40);time.sleep(.1);# Read the pickup mask preserved by continue below.
- mask=struct.unpack('<I',p.read(p.symbols['level']+120,4))[0]
+ fixture(hp=100);p.req('cpu.stepping');wl(68,'<2f2i',380.,112.,1,1);p.req('cpu.resume');p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<f',92.)).decode());time.sleep(.1);screenshot(artifacts/'food-chicken.png');chicken_pixels=food_pixels(18);checks['rendered_chicken_matches_source']=chicken_pixels['matched']==chicken_pixels['total']
+ fixture();p.send(square=True);time.sleep(.8);p.send(square=False);time.sleep(.12)
+ checks['pickup_hold_release_has_no_charged_kick']=state()['player'][2]==75 and state()['player'][6]==0 and frames()[0]!=910 and struct.unpack('<2i',p.read(p.symbols['held_attack'],8))==(0,0)
+ fixture();p.send(rtrigger=True);button('square',.04);p.send(rtrigger=False);time.sleep(.15);checks['rear_attack_does_not_pick']=state()['player'][2]==50 and food()[0][3]==1
+ fixture();p.send(square=True);time.sleep(.04);p.send(square=False);wr(20,10);time.sleep(.3);checks['hurt_cancels_before_commit']=state()['player'][2]==50 and food()[0][3]==1 and struct.unpack('<i',p.read(p.symbols['level']+180,4))[0]==0
+ fixture();button('square',.04);time.sleep(.2);mask=struct.unpack('<I',p.read(p.symbols['level']+120,4))[0]
  p.req('cpu.stepping');wr(8,0);wr(800,0);p.req('memory.write_u32',address=p.symbols['flow']+4,value=1);p.req('cpu.resume');time.sleep(.15);button('start',.04)
  checks['continue_does_not_respawn_food']=struct.unpack('<I',p.read(p.symbols['level']+120,4))[0]==mask and food()[0][3]==0
  native_reset();checks['new_game_clears_food']=struct.unpack('<2I',p.read(p.symbols['level']+116,8))==(0,0) and not any(f[3]for f in food())

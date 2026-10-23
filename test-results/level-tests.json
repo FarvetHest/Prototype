@@ -1,0 +1,251 @@
+{
+  "checks": {
+    "selftest": true,
+    "starts_with_two_not_four": true,
+    "initial_entries_finish": true,
+    "reinforcement_before_full_clear": true,
+    "reinforcement_preserves_live_grab": true,
+    "reused_slot_damage_scores": true,
+    "midpoint_gate_holds_live_enemies": true,
+    "unlock_does_not_teleport": true,
+    "unlock_preserves_player_world_X": true,
+    "unlock_spawns_next_encounter_immediately": true,
+    "source_pixels_0": true,
+    "source_pixels_511": true,
+    "source_pixels_1023": true,
+    "source_pixels_1535": true,
+    "source_pixels_2047": true,
+    "source_pixels_2372": true,
+    "at_most_two_background_batches": true,
+    "all_20_cues_reach_boss": true,
+    "camera_moves_during_fights": true,
+    "camera_speed_bounded_entire_route": true,
+    "never_more_than_four_slots": true,
+    "short_gaps_between_encounters": true,
+    "score_8000_before_boss": true,
+    "boss_entry_finishes": true,
+    "continue_preserves_stream_boss": true,
+    "boss_defeat_scores_9400": true,
+    "exit_fade_and_stage_clear": true,
+    "new_run_resets_queue": true,
+    "no_missing_frames": true
+  },
+  "release_trace": [
+    [
+      13,
+      512.0,
+      220.0,
+      0.0
+    ],
+    [
+      14,
+      515.0,
+      217.0,
+      3.0
+    ],
+    [
+      15,
+      518.0,
+      214.0,
+      3.0
+    ],
+    [
+      16,
+      521.0,
+      211.0,
+      3.0
+    ],
+    [
+      17,
+      524.0,
+      208.0,
+      3.0
+    ],
+    [
+      18,
+      527.0,
+      205.0,
+      3.0
+    ],
+    [
+      19,
+      530.0,
+      202.0,
+      3.0
+    ],
+    [
+      20,
+      533.0,
+      199.0,
+      3.0
+    ],
+    [
+      21,
+      536.0,
+      196.0,
+      3.0
+    ],
+    [
+      23,
+      542.0,
+      190.0,
+      3.0
+    ],
+    [
+      24,
+      545.0,
+      187.0,
+      3.0
+    ],
+    [
+      25,
+      548.0,
+      184.0,
+      3.0
+    ],
+    [
+      26,
+      551.0,
+      181.0,
+      3.0
+    ],
+    [
+      27,
+      554.0,
+      178.0,
+      3.0
+    ],
+    [
+      28,
+      557.0,
+      175.0,
+      3.0
+    ],
+    [
+      29,
+      560.0,
+      172.0,
+      3.0
+    ]
+  ],
+  "cue_trace": [
+    {
+      "cue": 2,
+      "camera": 0.0,
+      "score": 0,
+      "live": 2
+    },
+    {
+      "cue": 3,
+      "camera": 0.0,
+      "score": 400,
+      "live": 2
+    },
+    {
+      "cue": 4,
+      "camera": 64.75,
+      "score": 1200,
+      "live": 1
+    },
+    {
+      "cue": 5,
+      "camera": 129.75,
+      "score": 1600,
+      "live": 1
+    },
+    {
+      "cue": 6,
+      "camera": 192.25,
+      "score": 2000,
+      "live": 1
+    },
+    {
+      "cue": 7,
+      "camera": 256.0,
+      "score": 2400,
+      "live": 1
+    },
+    {
+      "cue": 8,
+      "camera": 322.25,
+      "score": 2800,
+      "live": 1
+    },
+    {
+      "cue": 9,
+      "camera": 384.75,
+      "score": 3200,
+      "live": 1
+    },
+    {
+      "cue": 10,
+      "camera": 448.5,
+      "score": 3600,
+      "live": 1
+    },
+    {
+      "cue": 11,
+      "camera": 514.75,
+      "score": 4000,
+      "live": 1
+    },
+    {
+      "cue": 12,
+      "camera": 576.0,
+      "score": 4400,
+      "live": 1
+    },
+    {
+      "cue": 13,
+      "camera": 641.0,
+      "score": 4800,
+      "live": 1
+    },
+    {
+      "cue": 14,
+      "camera": 706.0,
+      "score": 5200,
+      "live": 1
+    },
+    {
+      "cue": 15,
+      "camera": 768.5,
+      "score": 5600,
+      "live": 1
+    },
+    {
+      "cue": 16,
+      "camera": 832.25,
+      "score": 6000,
+      "live": 1
+    },
+    {
+      "cue": 17,
+      "camera": 896.0,
+      "score": 6400,
+      "live": 1
+    },
+    {
+      "cue": 18,
+      "camera": 961.0,
+      "score": 6800,
+      "live": 1
+    },
+    {
+      "cue": 19,
+      "camera": 1024.75,
+      "score": 7200,
+      "live": 1
+    },
+    {
+      "cue": 20,
+      "camera": 1088.5,
+      "score": 7600,
+      "live": 1
+    }
+  ],
+  "max_slots": 2,
+  "max_empty_walk_pixels": 162.5,
+  "eboot_sha256": "1c4d355b62cc14070aa443cc4ded7dc627763bef19e05ab7d9503b4245142877",
+  "note": "Camera/world conservation and stream traversal use real Right input; debugger kills arrived enemies to accelerate progression and fixtures arrange a held survivor/midpoint release. Distances use half-pixel world units. Not hardware timing."
+}

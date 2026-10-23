@@ -1,0 +1,17 @@
+[
+  {
+    "name": "SoRR-PSP-Lite-v0.18-PSP.zip",
+    "bytes": 34013809,
+    "sha256": "fca5ee09df1feecc9f72b3401aad0f1d5ca6aee16bb0b0981a7defed2f5234a4"
+  },
+  {
+    "name": "SoRR-PSP-Lite-v0.18-source.zip",
+    "bytes": 41017489,
+    "sha256": "a8fa5711b99bc9c061b534fedb18f68504d486b91089346decb6edb29b8f019d"
+  },
+  {
+    "name": "SoRR-PSP-Lite-v0.18-update.zip",
+    "bytes": 403320,
+    "sha256": "89199c21ad7ef95deffac998c9e9c9220d40d7c52818c501bfe847b696ad3c9f"
+  }
+]

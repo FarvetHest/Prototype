@@ -15,7 +15,7 @@
     "hud_reset": true,
     "hud_upload": true,
     "atlas_upload": true,
-    "stage_upload": true,
+    "stage_RAM_source": true,
     "music_source": true,
     "music_streaming": true,
     "idle_animation": true,
@@ -423,11 +423,11 @@
       0
     ]
   ],
-  "eboot_sha256": "7cd131326185d2c333feec5fa91c3c0ee9d42648cedfd5e0283cdec88c3515cd",
-  "profile_intervals": 74,
-  "soak_seconds": 35,
+  "eboot_sha256": "1c4d355b62cc14070aa443cc4ded7dc627763bef19e05ab7d9503b4245142877",
+  "profile_intervals": 404,
+  "soak_seconds": 10,
   "idle_frames_seen": [
-    2,
+    3,
     1,
     2,
     2,
@@ -438,7 +438,7 @@
   ],
   "walk_frames_seen": [
     5,
-    6,
+    5,
     6,
     7,
     7
@@ -447,29 +447,18 @@
     "player": [
       64.0,
       100.0,
-      96,
+      100,
       1,
       0,
-      1,
+      0,
       0,
       0,
       0
     ],
     "enemies": [
       [
-        88.84375,
-        98.73686218261719,
-        40,
-        -1,
-        0,
-        0,
-        1,
-        0,
-        0
-      ],
-      [
-        88.5625,
-        98.89474487304688,
+        130.59375,
+        97.8322525024414,
         40,
         -1,
         0,
@@ -479,19 +468,30 @@
         0
       ],
       [
-        88.78125,
-        101.4375,
+        103.1875,
+        113.61509704589844,
         40,
         -1,
         0,
         0,
-        1,
+        0,
         0,
         0
       ],
       [
-        125.5625,
-        107.76318359375,
+        120.25,
+        104.97368621826172,
+        40,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        150.0,
+        103.15788269042969,
         40,
         -1,
         0,
@@ -501,22 +501,22 @@
         0
       ]
     ],
-    "ticks": 104,
+    "ticks": 75,
     "paused": 0,
     "won": 0
   },
   "music_stats": [
     1,
     0,
-    1604,
-    3219456,
+    8721,
+    17690624,
     1,
-    1499,
+    1791,
     0,
     44100,
     8599534,
-    35,
-    32,
+    55,
+    83,
     7
   ],
   "mechanics": [
@@ -555,11 +555,11 @@
     0,
     0
   ],
-  "decoded_pcm_rms": 11052.501974739083,
+  "decoded_pcm_rms": 11216.870269022464,
   "sprite_draws": 5,
-  "sprite_slices": 12,
-  "frames": 2232,
-  "logic_count": 2233,
+  "sprite_slices": 10,
+  "frames": 12136,
+  "logic_count": 12147,
   "dropped_ticks": 0,
   "note": "Emulator checks only. Combat edge cases use debugger-arranged actor positions/HP. EOF loop check seeks near the end via the audio worker, then lets the PCM stream wrap normally. Controller traces compare source equations/tables, not execution of the ROM. Screenshots read the completed presented VRAM buffer; use PPSSPP software renderer."
 }

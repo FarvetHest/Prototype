@@ -2,6 +2,9 @@
 #define LITE_LEVEL_H
 struct Game;
 #define LEVEL_WAVES 5
+#define LEVEL_CUES 20
+#define LEVEL_CAMERA_STEP 3.0f
+#define LEVEL_MID_GATE 512
 #define LEVEL_WIDTH 2852
 #define LEVEL_CAMERA_MAX ((LEVEL_WIDTH-480)/2)
 #define LEVEL_BOSS_SLOT 1
@@ -19,6 +22,10 @@ typedef struct {
  /* Added in the level-flow rework. Appended last so debugger tools that read the
     leading fields by offset (tools/check_level.py reads the first 40 bytes) keep working. */
  unsigned entering;float entry_x[4];int entry_delay[4];int intro,outro,banner;
+ int pickup_timer,pickup_item;
+ /* Stream state appended after the v0.17 ABI. Cue records are not full-screen waves. */
+ int cue,gate,spawn_wait,spawned,retired,overlap;
+ unsigned spawn_mask;float camera_step;int stream,go_timer;
 } Level;
 extern Level level;
 void level_start(Level *l,struct Game *g);
@@ -27,6 +34,9 @@ int level_selftest(void);
 int level_boss_selftest(void);
 int level_is_boss(int i);
 void level_food_step(Level *l,struct Game *g);
+int level_pickup_button(Level *l,struct Game *g,int attack,int jump,int special);
+int level_pickup_active(struct Game *g);
+void level_cancel_pickup(Level *l);
 int level_entry_selftest(void);
 /* Called by the enemy AI every 60 Hz step; non-zero while the enemy is still walking in. */
 int level_entering(struct Game *g,int i);

@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/FarvetHest/Prototype",
+  "branch": "level-polish",
+  "commit": "d4b31e4010bc5f814fcb7f3966a864d4d30cabc5",
+  "base": "v0.16",
+  "additional_changes": "Square pickup with exact BK3 pose, adapted test fixtures, v0.17 packaging"
+}

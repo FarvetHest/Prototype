@@ -1,0 +1,16 @@
+{
+  "checks": {
+    "all_143_existing_poses_unchanged": true,
+    "native_pickup_exact_pixels_and_pivot": true,
+    "same_atlas_capacity": true,
+    "143_frames": true,
+    "stage.rgb565_unchanged": true,
+    "hud.rgba_unchanged": true,
+    "music_unchanged": true,
+    "final_atlas_embedded": true
+  },
+  "eboot_sha256": "1c4d355b62cc14070aa443cc4ded7dc627763bef19e05ab7d9503b4245142877",
+  "atlas_sha256": "7192ade4c394b746a9dd76a26309956c77eb669bac053942691e2710876057d2",
+  "native_pickup_frame": 910,
+  "old_poses": 143
+}

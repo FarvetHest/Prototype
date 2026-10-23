@@ -9,8 +9,8 @@ PSP_LARGE_MEMORY = 0
 LIBS = -lpspaudio -lpspgu -lpsppower -lm
 LDFLAGS = -Wl,--gc-sections
 EXTRA_TARGETS = EBOOT.PBP
-PSP_EBOOT_TITLE = SoRR PSP Lite v0.16
-SFOFLAGS = -s DISC_ID=SORL00016
+PSP_EBOOT_TITLE = SoRR PSP Lite v0.18
+SFOFLAGS = -s DISC_ID=SORL00018
 PSPSDK := $(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
 
@@ -54,3 +54,5 @@ src/main.o src/held.o: src/held.h
 src/main.o src/ui.o src/level.o src/stage.o: src/level.h
 
 src/ai.o src/sprites.o: src/level.h
+
+src/combat.o: src/level.h

@@ -6,6 +6,7 @@ extern int ui_target;
 void ui_init(const Game *g);
 void ui_reset(const Game *g);
 void ui_step(const Game *g);
+void ui_spawn_enemies(const Game *g,unsigned mask);
 void ui_begin(void);
 void ui_health_sync(const Game *g);
 void ui_text(int x,int y,const char *text);

@@ -1,0 +1,23 @@
+{
+  "checks": {
+    "four_enemies_two_RAM_batches": true,
+    "fps_target_met": true,
+    "no_new_drops": true,
+    "music_ok": true,
+    "level_remains_locked": true,
+    "no_missing_frames": true
+  },
+  "render_snapshot": {
+    "actors": 5,
+    "batches": 2,
+    "slices": 16
+  },
+  "seconds": 35,
+  "last_30_fps": {
+    "min": 29.97,
+    "median": 29.97,
+    "max": 29.97
+  },
+  "eboot_sha256": "1c4d355b62cc14070aa443cc4ded7dc627763bef19e05ab7d9503b4245142877",
+  "note": "PPSSPP software-renderer stress fixture: final background position, four live enemies at source AI level7, player invulnerability to sustain combat. Not hardware performance."
+}

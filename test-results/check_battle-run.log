@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "selftest": true,
+    "backhand_rear": true,
+    "backhand_front": true,
+    "backhand_rear_mirrored": true,
+    "defensive_special_cancels_hurt": true,
+    "enemy_hit_breaks_player_hold": true,
+    "held_hurt_reaction_recovers": true
+  },
+  "eboot_sha256": "1c4d355b62cc14070aa443cc4ded7dc627763bef19e05ab7d9503b4245142877"
+}
