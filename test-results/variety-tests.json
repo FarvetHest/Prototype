@@ -1,0 +1,178 @@
+{
+  "checks": {
+    "selftest": true,
+    "electra_native_render": true,
+    "electra_close_attack_decision": true,
+    "electra_jab_source_frames": true,
+    "electra_jab_source_damage": true,
+    "electra_uppercut_source_frames": true,
+    "electra_uppercut_source_damage": true,
+    "electra_kick_source_frames": true,
+    "electra_kick_source_damage": true,
+    "electra_throw_somersault_0": true,
+    "electra_throw_lands_0": true,
+    "electra_throw_releases_0": true,
+    "electra_throw_somersault_1": true,
+    "electra_throw_lands_1": true,
+    "electra_throw_releases_1": true,
+    "zack_native_render": true,
+    "zack_close_attack_decision": true,
+    "zack_jab_source_frames": true,
+    "zack_jab_source_damage": true,
+    "zack_uppercut_source_frames": true,
+    "zack_uppercut_source_damage": true,
+    "zack_kick_source_frames": true,
+    "zack_kick_source_damage": true,
+    "zack_throw_somersault_0": true,
+    "zack_throw_lands_0": true,
+    "zack_throw_releases_0": true,
+    "zack_throw_somersault_1": true,
+    "zack_throw_lands_1": true,
+    "zack_throw_releases_1": true,
+    "fourth_RAM_page_native_pixels": true,
+    "no_missing_frames": true
+  },
+  "samples": [
+    {
+      "name": "electra",
+      "kind": "pixels",
+      "id": 1000,
+      "matched": 1296,
+      "total": 1296,
+      "page": 2
+    },
+    {
+      "name": "electra",
+      "kind": "jab",
+      "observed": [
+        1008,
+        1009,
+        1010
+      ]
+    },
+    {
+      "name": "electra",
+      "kind": "uppercut",
+      "observed": [
+        1008
+      ]
+    },
+    {
+      "name": "electra",
+      "kind": "kick",
+      "observed": [
+        1020,
+        1021,
+        1026
+      ]
+    },
+    {
+      "name": "electra",
+      "kind": "frontthrow",
+      "poses": [
+        1004,
+        1005,
+        1027,
+        1028,
+        1033,
+        1034
+      ],
+      "phases": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "name": "electra",
+      "kind": "backthrow",
+      "poses": [
+        1004,
+        1005,
+        1006,
+        1028
+      ],
+      "phases": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "name": "zack",
+      "kind": "pixels",
+      "id": 1001,
+      "matched": 1587,
+      "total": 1587,
+      "page": 2
+    },
+    {
+      "name": "zack",
+      "kind": "jab",
+      "observed": [
+        1003,
+        1014
+      ]
+    },
+    {
+      "name": "zack",
+      "kind": "uppercut",
+      "observed": [
+        1004,
+        1023
+      ]
+    },
+    {
+      "name": "zack",
+      "kind": "kick",
+      "observed": [
+        1017,
+        1018
+      ]
+    },
+    {
+      "name": "zack",
+      "kind": "frontthrow",
+      "poses": [
+        1005,
+        1006,
+        1008,
+        1010,
+        1020,
+        1021
+      ],
+      "phases": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "name": "zack",
+      "kind": "backthrow",
+      "poses": [
+        1005,
+        1006,
+        1008,
+        1010,
+        1013
+      ],
+      "phases": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "name": "RAM atlas",
+      "id": 1024,
+      "matched": 1460,
+      "total": 1460,
+      "page": 3
+    }
+  ],
+  "eboot_sha256": "2b1f9e181e45b07aca687416c5cee13155705deb9126c26f0d11a395e2ec2876",
+  "note": "Native MIPS selftests cover every attack frame timer. Debugger fixtures select types/actions and first active source collision rectangle; actual MIPS tick, collision, damage, GU framebuffer and CLUT run in PPSSPP. Throw tests arrange valid holds, then use real Square input and observe source somersault poses, release and landing. Backthrow can pass its short flight phase between two 30-Hz observations."
+}

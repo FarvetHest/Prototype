@@ -1,0 +1,57 @@
+{
+  "checks": {
+    "selftest": true,
+    "touch_does_not_pick": true,
+    "square_starts_pickup_pose": true,
+    "pickup_locks_walk": true,
+    "apple_heals_25": true,
+    "pickup_returns_idle": true,
+    "food_consumed_once": true,
+    "apple_caps_100": true,
+    "full_HP_keeps_food": true,
+    "rendered_apple_matches_source": true,
+    "pause_freezes_pickup": true,
+    "resume_finishes_pickup": true,
+    "airborne_attack_cannot_pick": true,
+    "landing_alone_does_not_pick": true,
+    "new_square_after_landing_picks": true,
+    "chicken_heals_60": true,
+    "rendered_chicken_matches_source": true,
+    "pickup_hold_release_has_no_charged_kick": true,
+    "rear_attack_does_not_pick": true,
+    "hurt_cancels_before_commit": true,
+    "continue_does_not_respawn_food": true,
+    "new_game_clears_food": true,
+    "boss_telegraph_dash_recover": true,
+    "boss_kick_animation": true,
+    "boss_attacks_damage_player": true,
+    "boss_cannot_clear_while_alive": true,
+    "boss_takes_normal_damage": true,
+    "boss_windup_interruptible": true,
+    "boss_can_be_grabbed": true,
+    "boss_throw_started": true,
+    "boss_throw_lands_with_damage": true,
+    "no_missing_frames": true
+  },
+  "apple_pixels": {
+    "matched": 182,
+    "total": 182
+  },
+  "chicken_pixels": {
+    "matched": 319,
+    "total": 319
+  },
+  "phases": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "attack_modes": [
+    2,
+    26,
+    48
+  ],
+  "eboot_sha256": "2b1f9e181e45b07aca687416c5cee13155705deb9126c26f0d11a395e2ec2876",
+  "note": "Real pickup, jump and attack input; debugger fixtures position actors/food and force continue. Native selftests separately cover boss rage, anti-air and death gating."
+}

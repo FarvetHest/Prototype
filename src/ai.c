@@ -32,7 +32,7 @@ static void decide(Game *g,int i,float x,float y){EnemyBrain *b=&g->combat.enemy
  roll=rnd(g,100);for(s=0;s<4;++s){roll-=p[s];if(roll<0)break;}select_state(g,i,s);
 }
 static void start_attack(Game *g,int i,int upper){EnemyBrain *b=&g->combat.enemy[i];SourceAI *a=&g->rules.ai[i];a->mode=upper==2?0x30:upper?0x1c:0x1a;b->upper=upper;b->frame=0;b->anim_timer=0;b->mask=0;g->enemies[i].attack=1;}
-static void animate(Game *g,int i){EnemyBrain *b=&g->combat.enemy[i];SourceAI *a=&g->rules.ai[i];int kind=!(i&1)?EP_JAB:b->upper==2?EP_KICK:b->upper?EP_UPPER:EP_JAB;const EnemyFrame *f=enemy_frames(i,kind);int n=enemy_count(i,kind);
+static void animate(Game *g,int i){EnemyBrain *b=&g->combat.enemy[i];SourceAI *a=&g->rules.ai[i];int kind=!(i&1)?EP_JAB:b->upper==2?EP_KICK:b->upper?EP_UPPER:EP_JAB;const EnemyFrame *f=enemy_frames(g,i,kind);int n=enemy_count(g,i,kind);
  if(!b->anim_timer){if(b->frame>=n){a->mode=2;g->enemies[i].attack=0;b->fpg=1;return;}b->anim_timer=f[b->frame].ticks;b->mask=0;}
  b->fpg=f[b->frame].fpg;g->pose[i].kind=kind;g->pose[i].fpg=b->fpg;g->pose[i].hurt=f[b->frame].hurt;combat_enemy_attack_frame(g,i,f[b->frame].collision,f[b->frame].damage);if(!--b->anim_timer){if(++b->frame>=n){a->mode=2;g->enemies[i].attack=0;b->fpg=1;}}
 }
@@ -87,6 +87,7 @@ static void source_ai_step(Game *g,int i){EnemyBrain *b=&g->combat.enemy[i];Sour
  if(g->physics.body[i+1].inv)--g->physics.body[i+1].inv;
  if(e->hp<=0){b->fpg=9;return;}if(e->stun){--e->stun;b->fpg=7;return;}
  if(g->impact.freeze[i+1]>0){--g->impact.freeze[i+1];return;}
+ if(enemy_type(g,i)>=EN_ELECTRA){variety_tick(g,i);return;}
  if(attack_mode(a->mode)){animate(g,i);return;}
  if(level_is_boss(i)){e->attack=0;boss_step(g,i);return;}
  if(a->mode==0x2e){a->mode=2;b->fpg=1;return;}
@@ -131,7 +132,7 @@ static void source_ai_step(Game *g,int i){EnemyBrain *b=&g->combat.enemy[i];Sour
 void source_ai_tick(Game *g,int i){float x=g->enemies[i].x,y=g->enemies[i].y;int frozen=g->impact.freeze[i+1]>0;
  source_ai_step(g,i);
  if(g->physics.body[i+1].phase || frozen)return;
- if(attack_mode(g->rules.ai[i].mode))return;
+ if(attack_mode(g->rules.ai[i].mode) || (enemy_type(g,i)>=EN_ELECTRA && g->extra[i].action))return;
  enemy_pose_tick(g,i,g->combat.target==i?EP_HELD:g->enemies[i].hp<=0?EP_FLOOR:g->enemies[i].stun?EP_HURT:(x!=g->enemies[i].x || y!=g->enemies[i].y)?EP_WALK:EP_IDLE);
  g->combat.enemy[i].fpg=g->pose[i].fpg;
 }

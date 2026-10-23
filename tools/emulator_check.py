@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00018':
+        if (status.get('game')or{}).get('id')!='SORL00019':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -141,7 +141,7 @@ try:
     hud_manifest=json.loads((project/'assets/hud-manifest.json').read_text())
     checks['hud_upload']=hashlib.sha256(p.read(0x04148000,256*256*4)).hexdigest()==hud_manifest['texture_sha256']
     manifest=json.loads((project/'assets/manifest.json').read_text())
-    checks['atlas_upload']=hashlib.sha256(p.read(0x04088000,512*512*3)).hexdigest()==manifest['atlas_sha256']
+    checks['atlas_upload']=p.read(0x04088000,512*512*3)==(project/'assets/sprites.t8').read_bytes()[:512*512*3] and p.read(p.symbols['sprite_atlas']+512*512*3,512*512)==(project/'assets/sprites.t8').read_bytes()[512*512*3:]
     stage=json.loads((project/'assets/stage-manifest.json').read_text())
     checks['stage_RAM_source']=hashlib.sha256(p.read(p.symbols['stage_texture'],512*256*2)).hexdigest()==stage['first_page_sha256'] and p.u32('stage_draw_count')==1
     checks['music_source']=hashlib.sha256((project/'build/music.wav').read_bytes()).hexdigest()==json.loads((project/'assets/music-manifest.json').read_text())['wav_sha256']

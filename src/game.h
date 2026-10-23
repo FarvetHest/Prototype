@@ -19,7 +19,7 @@ typedef struct {
 } Mechanics;
 typedef struct { float z[5],vz[5],vx[5],jump_x,jump_y; } Motion;
 
-typedef struct Game { Actor player, enemies[ENEMIES]; unsigned ticks; int paused, won; Mechanics moves; Motion motion; Bk3 bk3; Combat combat; Physics physics; Rules rules; Impact impact; EnemyPose pose[4]; } Game;
+typedef struct Game { Actor player, enemies[ENEMIES]; unsigned ticks; int paused, won; Mechanics moves; Motion motion; Bk3 bk3; Combat combat; Physics physics; Rules rules; Impact impact; EnemyPose pose[4]; EnemyExtra extra[4]; } Game;
 typedef struct { float x, y; int attack, jump, special; } Input;
 void game_hit_enemy(Game *g,int i,int damage,int down);
 void game_reset(Game *g);

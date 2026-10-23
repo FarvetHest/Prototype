@@ -31,8 +31,8 @@
     0,
     0,
     9400,
-    81
+    79
   ],
-  "eboot_sha256": "1c4d355b62cc14070aa443cc4ded7dc627763bef19e05ab7d9503b4245142877",
+  "eboot_sha256": "2b1f9e181e45b07aca687416c5cee13155705deb9126c26f0d11a395e2ec2876",
   "note": "Local debugger fixtures exercise lifecycle transitions; not a physical PSP test. Continue timeout shortened through fixture, normal duration checked as 300 ticks."
 }

@@ -5,11 +5,11 @@
 #include "sfx.h"
 static const Actor *actor(const Game *g,int i){return i?&g->enemies[i-1]:&g->player;}
 int impact_overlap(const Game *g,int from,int to,int id){const Actor *a=actor(g,from);const signed char *box;float x,y,r[4];int z;
- if(from==to || id<=0 || id>=(from?(from%2?4:5):27))return 0;
+ if(from==to || id<=0 || (!from && id>=27))return 0;
  if(!(rules_flags(g,to)&128) || g->physics.body[to].inv || !rules_depth_overlap(g,from,to) || a->x<0 || a->x>240)return 0;
  if(!to && g->moves.invincible)return 0;
  if(!physics_rect(g,to,r))return 0;
- box=(from?(from%2?garcia_boxes[id]:donovan_boxes[id]):bk3_attack_boxes[id])+(a->facing>0?4:0);
+ box=from?enemy_box(g,from-1,id,0):bk3_attack_boxes[id];if(!box)return 0;box+=a->facing>0?4:0;
  z=from?-(int)(g->motion.z[from]*65536):g->bk3.z;
  x=a->x*2+box[0];y=stage_foot_y(a->y)+z/65536.f+box[2];
  return !(r[1]<x || r[0]>x+(int)box[1] || r[3]<y || r[2]>y+(int)box[3]);

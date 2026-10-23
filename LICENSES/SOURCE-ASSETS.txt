@@ -6,3 +6,5 @@ The port authors claim no ownership of those game assets. No complete ROM is inc
 
 Impact audio: local SoRR sor1_hit.wav, original authorship retained.
 Prepared PCM provenance and transformations: assets/sfx-manifest.json.
+
+v0.19 adds native Electra/Zack sprite geometry (ArtNem_Electra, ArtNem_GoldieZack) and Pal_MainPal CRAM from the pinned BK3 disassembly. Rights remain with the original rights holders. No new ownership or license is asserted.

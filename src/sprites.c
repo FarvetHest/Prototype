@@ -13,6 +13,7 @@ typedef struct { short u,v; unsigned color; short x,y,z,pad; } SpriteVertex;
 typedef struct { float x,y; unsigned phase; } Animation;
 static Animation animation[5];
 static float actor_lift[5];
+static int actor_family[5];
 static void *texture_vram;
 unsigned actor_frames[5],actor_states[5];
 unsigned sprite_draw_count,sprite_slice_count,missing_sprite_frames,missing_sprite_family,missing_sprite_id;
@@ -24,7 +25,7 @@ static const unsigned __attribute__((aligned(16))) captain_palette[256]={
 };
 
 static const Actor *get_actor(const Game *g,int i) { return i ? &g->enemies[i-1] : &g->player; }
-static int family(int i) { return i==0 ? 0 : (i%2 ? 1 : 2); }
+static int family(int i) { return actor_family[i]; }
 static const SpriteFrame *find_frame(int set,unsigned id) {
     unsigned i;
     for(i=0;i<SPRITE_FRAME_COUNT;++i) if(sprite_frames[i].family==set && sprite_frames[i].id==(int)id) return &sprite_frames[i];
@@ -34,12 +35,12 @@ void sprites_reset(const Game *g) {
     int i;
     for(i=0;i<5;++i) {
         const Actor *a=get_actor(g,i);
-        actor_lift[i]=0;animation[i]=(Animation){a->x,a->y,0}; actor_frames[i]=i?enemy_frames(i-1,EP_IDLE)[0].fpg:1; actor_states[i]=ANIM_IDLE;
+        actor_family[i]=i?enemy_type(g,i-1)+1:0;actor_lift[i]=0;animation[i]=(Animation){a->x,a->y,0}; actor_frames[i]=i?enemy_frames(g,i-1,EP_IDLE)[0].fpg:1; actor_states[i]=ANIM_IDLE;
     }
 }
 void sprites_spawn_enemies(const Game *g,unsigned mask){int i;for(i=0;i<4;++i)if(mask&(1u<<i)){
- const Actor *a=&g->enemies[i];animation[i+1]=(Animation){a->x,a->y,0};actor_lift[i+1]=0;
- actor_states[i+1]=ANIM_IDLE;actor_frames[i+1]=enemy_frames(i,EP_IDLE)[0].fpg;
+ actor_family[i+1]=enemy_type(g,i)+1;const Actor *a=&g->enemies[i];animation[i+1]=(Animation){a->x,a->y,0};actor_lift[i+1]=0;
+ actor_states[i+1]=ANIM_IDLE;actor_frames[i+1]=enemy_frames(g,i,EP_IDLE)[0].fpg;
 }}
 void sprites_init(const Game *g) {
     /* One fixed atlas upload. Total reserved VRAM: 1343488 of 2097152 bytes. */
@@ -52,7 +53,7 @@ void sprites_step(const Game *g) {
     int i;
     if(g->paused) return;
     for(i=0;i<5;++i) {
-        const Actor *a=get_actor(g,i); Animation *v=&animation[i];
+        actor_family[i]=i?enemy_type(g,i-1)+1:0;const Actor *a=get_actor(g,i); Animation *v=&animation[i];
         unsigned state=ANIM_IDLE, frame=1, set=family(i);
         int moved=(a->x!=v->x || a->y!=v->y),finished=(g->won || g->player.hp<=0);
         if(a->hp<=0 || (i && g->moves.down[i-1])) state=ANIM_DOWN;
@@ -96,7 +97,7 @@ void sprites_step(const Game *g) {
             else frame=1+(v->phase/8)%3;
         }
         if(!i && g->bk3.active && a->hp>0 && !a->stun)frame=g->bk3.fpg;
-        if(i)frame=g->pose[i-1].fpg?g->pose[i-1].fpg:enemy_frames(i-1,a->hp<=0?EP_FLOOR:EP_IDLE)[0].fpg;
+        if(i)frame=g->pose[i-1].fpg?g->pose[i-1].fpg:enemy_frames(g,i-1,a->hp<=0?EP_FLOOR:EP_IDLE)[0].fpg;
         if(g->physics.body[i].phase){frame=g->physics.body[i].fpg;actor_states[i]=g->physics.body[i].phase==BODY_HURT?ANIM_HURT:ANIM_DOWN;}
         if(!i && level.enabled && level.pickup_timer && !g->physics.body[0].phase && a->hp>0){frame=910;actor_states[i]=ANIM_GRAB;}
         actor_frames[i]=frame;actor_lift[i]=g->motion.z[i];
@@ -123,7 +124,7 @@ void sprites_draw(const Actor *a,int index) {
     /* FPG control point 0 is retained, including during mirrored attacks. */
     left=x-(flip ? f->w-f->px : f->px);
     /* Source pose/palette retained during hurt; no synthetic red tint. */
-    sceGuTexImage(0,512,512,512,(unsigned char *)texture_vram+(f->v/512)*512*512);
+    sceGuTexImage(0,512,512,512,(f->v/512<3?(const unsigned char *)texture_vram:sprite_atlas)+(f->v/512)*512*512);
     sceGuClutLoad(32,index && level_is_boss(index-1)?captain_palette:sprite_palettes[set]);
     v=(SpriteVertex *)sceGuGetMemory(count*2*sizeof(SpriteVertex));
     for(slice=0;slice<count;++slice) {
@@ -138,6 +139,17 @@ void sprites_draw(const Actor *a,int index) {
     ++frame_draws;frame_slices+=count;
 }
 void sprites_end(void) { sprite_draw_count=frame_draws;sprite_slice_count=frame_slices; }
+void sprites_portrait(int type,unsigned frame){
+ const SpriteFrame *f=find_frame(type+1,frame);SpriteVertex *v;int u=f->u+f->px-12,w=24,h=f->h<24?f->h:24;
+ if(u<f->u)u=f->u;
+ if(u+w>f->u+f->w)w=f->u+f->w-u;
+ sceGuEnable(GU_TEXTURE_2D);sceGuTexMode(GU_PSM_T8,0,0,GU_TRUE);
+ sceGuTexImage(0,512,512,512,(f->v/512<3?(const unsigned char *)texture_vram:sprite_atlas)+(f->v/512)*512*512);
+ sceGuClutMode(GU_PSM_8888,0,255,0);sceGuClutLoad(32,sprite_palettes[type+1]);
+ sceGuTexFunc(GU_TFX_MODULATE,GU_TCC_RGBA);sceGuTexFilter(GU_NEAREST,GU_NEAREST);
+ v=(SpriteVertex *)sceGuGetMemory(2*sizeof(*v));v[0]=(SpriteVertex){u,f->v%512,0xffffffffu,300,28,0,0};v[1]=(SpriteVertex){u+w,f->v%512+h,0xffffffffu,300+w,28+h,0,0};
+ sceGuDrawArray(GU_SPRITES,GU_TEXTURE_16BIT|GU_COLOR_8888|GU_VERTEX_16BIT|GU_TRANSFORM_2D,2,0,v);
+}
 
 /* Validate complete, non-looping attack sequences on the same selector as rendering. */
 int sprites_selftest(void){

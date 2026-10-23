@@ -423,8 +423,8 @@
       0
     ]
   ],
-  "eboot_sha256": "1c4d355b62cc14070aa443cc4ded7dc627763bef19e05ab7d9503b4245142877",
-  "profile_intervals": 404,
+  "eboot_sha256": "2b1f9e181e45b07aca687416c5cee13155705deb9126c26f0d11a395e2ec2876",
+  "profile_intervals": 122,
   "soak_seconds": 10,
   "idle_frames_seen": [
     3,
@@ -438,7 +438,7 @@
   ],
   "walk_frames_seen": [
     5,
-    5,
+    6,
     6,
     7,
     7
@@ -457,8 +457,8 @@
     ],
     "enemies": [
       [
-        130.59375,
-        97.8322525024414,
+        130.375,
+        96.6809310913086,
         40,
         -1,
         0,
@@ -468,8 +468,8 @@
         0
       ],
       [
-        103.1875,
-        113.61509704589844,
+        102.6875,
+        112.29930114746094,
         40,
         -1,
         0,
@@ -479,8 +479,8 @@
         0
       ],
       [
-        120.25,
-        104.97368621826172,
+        121.1875,
+        107.44078826904297,
         40,
         -1,
         0,
@@ -490,7 +490,7 @@
         0
       ],
       [
-        150.0,
+        148.5,
         103.15788269042969,
         40,
         -1,
@@ -501,22 +501,22 @@
         0
       ]
     ],
-    "ticks": 75,
+    "ticks": 76,
     "paused": 0,
     "won": 0
   },
   "music_stats": [
     1,
     0,
-    8721,
-    17690624,
+    2647,
+    5265408,
     1,
-    1791,
+    1499,
     0,
     44100,
     8599534,
-    55,
-    83,
+    53,
+    76,
     7
   ],
   "mechanics": [
@@ -558,8 +558,8 @@
   "decoded_pcm_rms": 11216.870269022464,
   "sprite_draws": 5,
   "sprite_slices": 10,
-  "frames": 12136,
-  "logic_count": 12147,
+  "frames": 3684,
+  "logic_count": 3686,
   "dropped_ticks": 0,
   "note": "Emulator checks only. Combat edge cases use debugger-arranged actor positions/HP. EOF loop check seeks near the end via the audio worker, then lets the PCM stream wrap normally. Controller traces compare source equations/tables, not execution of the ROM. Screenshots read the completed presented VRAM buffer; use PPSSPP software renderer."
 }

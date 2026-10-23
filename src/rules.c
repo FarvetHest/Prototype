@@ -22,6 +22,7 @@ int rules_can_grab(const Game *g,int a,int b,int moving){const ActorRules *r=&g-
  return x>=box[0] && x<=box[1];
 }
 void rules_begin_hold(Game *g,int target){ActorRules *p=&g->rules.actor[0],*e=&g->rules.actor[target+1];
+ g->extra[target].action=0;g->extra[target].z=g->extra[target].vz=g->extra[target].vx=0;
  p->status58|=32;e->status58|=16;p->held=target+1;e->gripper=0;
  g->physics.body[target+1].phase=0;g->physics.body[target+1].freeze=0;g->enemies[target].stun=0;
  g->rules.ai[target].mode=g->combat.back?14:12;

@@ -43,14 +43,14 @@ void level_food_step(Level *l,Game *g){int i,hp;
    Coordinates and encounters below are authored for the Lite 2852-pixel background. */
 typedef struct {short trigger,y;unsigned char family,ai; signed char side;} Cue;
 static const Cue cues[LEVEL_CUES]={
- {0,88,0,1,1},{0,114,1,1,1},{64,100,0,1,1},{128,122,1,1,-1},
- {192,84,0,2,1},{256,112,1,2,1},{320,96,0,2,-1},{384,122,1,2,1},
- {448,82,0,4,1},{512,108,1,4,1},{576,120,0,4,1},{640,90,1,4,-1},
- {704,102,0,5,1},{768,124,1,5,1},{832,80,0,5,-1},{896,112,1,5,1},
- {960,96,0,7,1},{1024,122,1,7,-1},{1088,84,0,7,1},{1152,108,1,7,1}
+ {0,88,0,1,1},{0,114,1,1,1},{64,100,0,1,1},{128,122,3,1,-1},
+ {192,84,2,2,1},{256,112,1,2,1},{320,96,0,2,-1},{384,122,3,2,1},
+ {448,82,2,4,1},{512,108,1,4,1},{576,120,0,4,1},{640,90,3,4,-1},
+ {704,102,2,5,1},{768,124,1,5,1},{832,80,0,5,-1},{896,112,3,5,1},
+ {960,96,2,7,1},{1024,122,1,7,-1},{1088,84,0,7,1},{1152,108,3,7,1}
 };
 static int busy(const Level *l,const Game *g){int i,n=0;for(i=0;i<4;++i)if((l->slots&(1<<i)) && (g->enemies[i].hp>0 || g->physics.body[i+1].phase || g->combat.enemy[i].z<0 || g->combat.target==i))++n;return n;}
-static int free_slot(const Level *l,int family){int i;for(i=family;i<4;i+=2)if(!(l->slots&(1<<i)))return i;return -1;}
+static int free_slot(const Level *l,int family){int i;for(i=family&1;i<4;i+=2)if(!(l->slots&(1<<i)))return i;return -1;}
 static void enter_from_edge(Level *l,Game *g,int i,int side,int delay){
  g->enemies[i].x=side<0?-10:250;g->enemies[i].facing=side<0?1:-1;
  l->entry_x[i]=side<0?12:228;l->entry_delay[i]=delay;l->entering|=1u<<i;
@@ -64,7 +64,7 @@ int level_entering(Game *g,int i){Level *l=&level;Actor *e=&g->enemies[i];float 
  if(dx<=1 && dx>=-1){e->x=l->entry_x[i];l->entering&=~(1u<<i);return 1;}
  e->x+=dx>0?1:-1;e->facing=dx>0?1:-1;return 1;
 }
-static void spawn_slot(Level *l,Game *g,int i,int hp,int ai,int y,int side,int delay){Game fresh;int j;
+static void spawn_slot(Level *l,Game *g,int i,int hp,int ai,int y,int side,int delay,int type){Game fresh;int j;
  game_reset(&fresh);g->enemies[i]=fresh.enemies[i];g->enemies[i].hp=hp;g->enemies[i].y=y;
  g->combat.enemy[i]=fresh.combat.enemy[i];g->combat.enemy[i].level=ai;g->combat.enemy[i].state=7;g->combat.enemy[i].timer=0;
  g->physics.body[i+1]=fresh.physics.body[i+1];g->physics.body[i+1].inv=2;
@@ -72,7 +72,7 @@ static void spawn_slot(Level *l,Game *g,int i,int hp,int ai,int y,int side,int d
  g->moves.down[i]=g->moves.thrown[i]=0;g->moves.throw_hit[i]=0;
  g->bk3.enemy_inv[i]=0;g->bk3.mask&=~(1u<<i);
  for(j=0;j<4;++j)g->moves.throw_hit[j]&=~(1u<<i);
- g->rules.actor[i+1]=fresh.rules.actor[i+1];g->rules.ai[i]=fresh.rules.ai[i];g->pose[i]=fresh.pose[i];
+ g->rules.actor[i+1]=fresh.rules.actor[i+1];g->rules.ai[i]=fresh.rules.ai[i];g->pose[i]=fresh.pose[i];enemy_set_type(g,i,type);
  g->impact.freeze[i+1]=0;g->impact.last_from[i+1]=-1;
  enter_from_edge(l,g,i,side,delay);l->slots|=1<<i;l->spawn_mask|=1u<<i;
 }
@@ -82,14 +82,14 @@ static void feed(Level *l,Game *g){int end=l->gate?LEVEL_CUES:10,n,i;
  while(l->cue<end){const Cue *c=&cues[l->cue];n=busy(l,g);
   if(c->trigger>l->camera && !(n<2 && c->trigger<=l->camera+64))return;
   i=free_slot(l,c->family);if(i<0)return;
-  spawn_slot(l,g,i,40,c->ai,c->y,c->side,l->cue<2?30+l->cue*12:0);
+  spawn_slot(l,g,i,40,c->ai,c->y,c->side,l->cue<2?30+l->cue*12:0,c->family);
   if(n>0)++l->overlap;
   ++l->cue;++l->spawned;l->wave=(l->cue-1)/4;
   if(l->cue>=2){l->spawn_wait=8;return;}
  }
 }
 static void spawn_boss(Level *l,Game *g){
- spawn_slot(l,g,LEVEL_BOSS_SLOT,LEVEL_BOSS_HP,10,100,1,12);
+ spawn_slot(l,g,LEVEL_BOSS_SLOT,LEVEL_BOSS_HP,10,100,1,12,EN_DONOVAN);
  l->boss=1;l->boss_phase=BOSS_APPROACH;l->boss_timer=30;l->locked=1;l->go=0;l->banner=LEVEL_BANNER;
  g->ticks=0;g->won=0;++l->generation;food_spawn(l,2);
 }

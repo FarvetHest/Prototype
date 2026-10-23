@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00018':
+        if (status.get('game')or{}).get('id')!='SORL00019':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -125,7 +125,15 @@ try:
  native_reset();v=ext();checks['selftest']=p.u32('selftest_result')==0
  checks['offscreen_staggered_start']=v[0]==3 and all(e[0]>240 for e in state()['enemies'][:2]) and v[5]<v[6]
  checks['intro_banner_active']=v[9]>0 and v[11]>0
- raw=p.read(p.u32('presented_buffer'),512*272*2);checks['intro_draws_black_blinds']=raw[96*1024:96*1024+960]==bytes(960)
+ black=False
+ for attempt in range(10):
+  p.req('cpu.stepping')
+  try:
+   raw=p.read(p.u32('presented_buffer'),512*272*2);black=raw[96*1024:96*1024+960]==bytes(960)
+  finally:p.req('cpu.resume')
+  if black:break
+  time.sleep(.01)
+ checks['intro_draws_black_blinds']=black
  screenshot(artifacts/'level-intro.png')
  button('start',.04);v=ext();time.sleep(.12);checks['pause_freezes_entry_and_fade']=ext()==v
  button('start',.04);wr(824,10000);seen=set();walking=False;invulnerable=True;deadline=time.monotonic()+7

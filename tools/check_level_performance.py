@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00018':
+        if (status.get('game')or{}).get('id')!='SORL00019':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -115,6 +115,7 @@ try:
   p.req('memory.write',address=p.symbols['level'],base64=base64.b64encode(struct.pack('<6ifIiI',1,4,1,0,0,0,1186.,1,15,0)).decode())
   for i in range(4):
    hp=40
+   p.req('memory.write',address=p.symbols['game']+1664+i*32,base64=base64.b64encode(struct.pack('<8i',2+i%2,0,0,0,0,0,0,0)).decode())
    p.req('memory.write',address=p.symbols['game']+36*(i+1),base64=base64.b64encode(struct.pack('<2f7i',150.+i*23.,82.+i*12.,hp,-1,0,0,0,0,0)).decode())
    wr(p.symbols['game']+592+i*56,7);wr(p.symbols['game']+576+i*56,7)
 
@@ -132,7 +133,7 @@ try:
  checks['level_remains_locked']=struct.unpack('<i',p.read(p.symbols['level']+8,4))[0]==1
  checks['no_missing_frames']=p.u32('missing_sprite_frames')==0
  screenshot(artifacts/'level-battle-profile.png')
- result=dict(checks=checks,render_snapshot=render_stats,seconds=35,last_30_fps=dict(min=min(fps),median=statistics.median(fps),max=max(fps)),eboot_sha256=hashlib.sha256((project/'build/EBOOT.PBP').read_bytes()).hexdigest(),note='PPSSPP software-renderer stress fixture: final background position, four live enemies at source AI level7, player invulnerability to sustain combat. Not hardware performance.')
+ result=dict(checks=checks,render_snapshot=render_stats,seconds=35,last_30_fps=dict(min=min(fps),median=statistics.median(fps),max=max(fps)),eboot_sha256=hashlib.sha256((project/'build/EBOOT.PBP').read_bytes()).hexdigest(),note='PPSSPP software-renderer stress fixture: final background position, two Electra and two Zack at source AI level7 (clamped to6 for Electra), including RAM atlas access, player invulnerability to sustain combat. Not hardware performance.')
  (artifacts/'level-performance.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2));assert all(checks.values())
 finally:p.close()
 

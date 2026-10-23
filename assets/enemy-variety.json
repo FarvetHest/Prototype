@@ -1,0 +1,2481 @@
+{
+  "source_sha256": "ab4fcf0be4c9b5bac1f60f1d863c2cb6b781c5fb157dad72574c9755534409c3",
+  "types": {
+    "electra": {
+      "scripts": {
+        "idle": {
+          "label": "word_21082E",
+          "mode": 0,
+          "frames": [
+            {
+              "ticks": 6,
+              "mapping": "word_210CF8",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1000,
+              "iou": 0.5977620730270907,
+              "sorr_fpg": 91
+            }
+          ]
+        },
+        "walk": {
+          "label": "word_210838",
+          "mode": 2,
+          "frames": [
+            {
+              "ticks": 10,
+              "mapping": "word_210D22",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1001,
+              "iou": 0.6059894304169113,
+              "sorr_fpg": 91
+            },
+            {
+              "ticks": 10,
+              "mapping": "word_210D50",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1002,
+              "iou": 0.6100829610721124,
+              "sorr_fpg": 1
+            },
+            {
+              "ticks": 10,
+              "mapping": "word_210D7E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1003,
+              "iou": 0.603290676416819,
+              "sorr_fpg": 2
+            },
+            {
+              "ticks": 10,
+              "mapping": "word_210D50",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1002,
+              "iou": 0.6100829610721124,
+              "sorr_fpg": 1
+            }
+          ]
+        },
+        "held": {
+          "label": "word_21086E",
+          "mode": 12,
+          "frames": [
+            {
+              "ticks": 99,
+              "mapping": "word_2115D8",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1027,
+              "iou": 0.5879718490083173,
+              "sorr_fpg": 102
+            }
+          ]
+        },
+        "hurt2": {
+          "label": "word_210878",
+          "mode": 16,
+          "frames": [
+            {
+              "ticks": 2,
+              "mapping": "word_2115FC",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1028,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211630",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1029,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_2115FC",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1028,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211630",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1029,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_2115FC",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1028,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211630",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1029,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_2115FC",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1028,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211630",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1029,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_2115FC",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1028,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211630",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1029,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            }
+          ]
+        },
+        "hurt": {
+          "label": "word_2108CA",
+          "mode": 18,
+          "frames": [
+            {
+              "ticks": 2,
+              "mapping": "word_211664",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1030,
+              "iou": 0.4728381374722838,
+              "sorr_fpg": 27
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211692",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1031,
+              "iou": 0.4728381374722838,
+              "sorr_fpg": 27
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211664",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1030,
+              "iou": 0.4728381374722838,
+              "sorr_fpg": 27
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211692",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1031,
+              "iou": 0.4728381374722838,
+              "sorr_fpg": 27
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211664",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1030,
+              "iou": 0.4728381374722838,
+              "sorr_fpg": 27
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211692",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1031,
+              "iou": 0.4728381374722838,
+              "sorr_fpg": 27
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211664",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1030,
+              "iou": 0.4728381374722838,
+              "sorr_fpg": 27
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211692",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1031,
+              "iou": 0.4728381374722838,
+              "sorr_fpg": 27
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211664",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1030,
+              "iou": 0.4728381374722838,
+              "sorr_fpg": 27
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211692",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1031,
+              "iou": 0.4728381374722838,
+              "sorr_fpg": 27
+            }
+          ]
+        },
+        "flight": {
+          "label": "word_21091C",
+          "mode": 20,
+          "frames": [
+            {
+              "ticks": 99,
+              "mapping": "word_2116C0",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1032,
+              "iou": 0.624221844934918,
+              "sorr_fpg": 297
+            }
+          ]
+        },
+        "floor": {
+          "label": "word_210926",
+          "mode": 22,
+          "frames": [
+            {
+              "ticks": 99,
+              "mapping": "word_210DAC",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1004,
+              "iou": 0.7544426494345718,
+              "sorr_fpg": 9
+            }
+          ]
+        },
+        "getup": {
+          "label": "word_210930",
+          "mode": 24,
+          "frames": [
+            {
+              "ticks": 8,
+              "mapping": "word_210DAC",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1004,
+              "iou": 0.7544426494345718,
+              "sorr_fpg": 9
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_210DCC",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1005,
+              "iou": 0.7346182357301705,
+              "sorr_fpg": 10
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_210DAC",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1004,
+              "iou": 0.7544426494345718,
+              "sorr_fpg": 9
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_210DCC",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1005,
+              "iou": 0.7346182357301705,
+              "sorr_fpg": 10
+            },
+            {
+              "ticks": 20,
+              "mapping": "word_210DF0",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1006,
+              "iou": 0.7005473025801408,
+              "sorr_fpg": 11
+            }
+          ]
+        },
+        "front": {
+          "label": "word_2109A6",
+          "mode": 36,
+          "frames": [
+            {
+              "ticks": 16,
+              "mapping": "word_2115D8",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1027,
+              "iou": 0.5879718490083173,
+              "sorr_fpg": 102
+            },
+            {
+              "ticks": 4,
+              "mapping": "word_2115FC",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1028,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 6,
+              "mapping": "word_2116F8",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1033,
+              "iou": 0.42773722627737226,
+              "sorr_fpg": 298
+            },
+            {
+              "ticks": 20,
+              "mapping": "word_211730",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1034,
+              "iou": 0.38352427714129844,
+              "sorr_fpg": 1
+            },
+            {
+              "ticks": 99,
+              "mapping": "word_211730",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1034,
+              "iou": 0.38352427714129844,
+              "sorr_fpg": 1
+            }
+          ]
+        },
+        "back": {
+          "label": "word_2109D0",
+          "mode": 38,
+          "frames": [
+            {
+              "ticks": 16,
+              "mapping": "word_2115FC",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1028,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 4,
+              "mapping": "word_2115FC",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1028,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 6,
+              "mapping": "word_210DAC",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1004,
+              "iou": 0.7544426494345718,
+              "sorr_fpg": 9
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_2115FC",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1028,
+              "iou": 0.5246872942725477,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 99,
+              "mapping": "word_210DAC",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1004,
+              "iou": 0.7544426494345718,
+              "sorr_fpg": 9
+            }
+          ]
+        },
+        "jab": {
+          "label": "word_210B08",
+          "mode": 72,
+          "frames": [
+            {
+              "ticks": 4,
+              "mapping": "word_210E9C",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1008,
+              "iou": 0.37867824409068984,
+              "sorr_fpg": 115
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_210EF2",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1009,
+              "iou": 0.342815105443845,
+              "sorr_fpg": 112
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_210F4E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1010,
+              "iou": 0.46053997923156803,
+              "sorr_fpg": 2
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_210FAA",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1011,
+              "iou": 0.5927750410509032,
+              "sorr_fpg": 84
+            },
+            {
+              "ticks": 1,
+              "mapping": "word_210FFC",
+              "hurt": 5,
+              "collision": 2,
+              "damage": 2,
+              "fpg": 1012,
+              "iou": 0.18495297805642633,
+              "sorr_fpg": 116
+            },
+            {
+              "ticks": 1,
+              "mapping": "word_211062",
+              "hurt": 5,
+              "collision": 2,
+              "damage": 2,
+              "fpg": 1013,
+              "iou": 0.3138780804150454,
+              "sorr_fpg": 143
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_21122E",
+              "hurt": 5,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1017,
+              "iou": 0.45054945054945056,
+              "sorr_fpg": 110
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_211298",
+              "hurt": 5,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1018,
+              "iou": 0.43348365276211953,
+              "sorr_fpg": 11
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_211302",
+              "hurt": 5,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1019,
+              "iou": 0.4305711086226204,
+              "sorr_fpg": 11
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_21136C",
+              "hurt": 5,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1020,
+              "iou": 0.45724907063197023,
+              "sorr_fpg": 109
+            }
+          ]
+        },
+        "uppercut": {
+          "label": "word_210B5A",
+          "mode": 74,
+          "frames": [
+            {
+              "ticks": 16,
+              "mapping": "word_210E9C",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1008,
+              "iou": 0.37867824409068984,
+              "sorr_fpg": 115
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_210EF2",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1009,
+              "iou": 0.342815105443845,
+              "sorr_fpg": 112
+            },
+            {
+              "ticks": 6,
+              "mapping": "word_210F4E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1010,
+              "iou": 0.46053997923156803,
+              "sorr_fpg": 2
+            },
+            {
+              "ticks": 4,
+              "mapping": "word_210FAA",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1011,
+              "iou": 0.5927750410509032,
+              "sorr_fpg": 84
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211124",
+              "hurt": 5,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1014,
+              "iou": 0.151743264659271,
+              "sorr_fpg": 36
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_21118A",
+              "hurt": 5,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1015,
+              "iou": 0.10353615801210576,
+              "sorr_fpg": 117
+            },
+            {
+              "ticks": 20,
+              "mapping": "word_2111F0",
+              "hurt": 5,
+              "collision": 1,
+              "damage": 133,
+              "fpg": 1016,
+              "iou": 0.7156511350059738,
+              "sorr_fpg": 115
+            },
+            {
+              "ticks": 6,
+              "mapping": "word_210CF8",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1000,
+              "iou": 0.5977620730270907,
+              "sorr_fpg": 91
+            }
+          ]
+        },
+        "kick": {
+          "label": "word_210B9C",
+          "mode": 76,
+          "frames": [
+            {
+              "ticks": 6,
+              "mapping": "word_21136C",
+              "hurt": 5,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1020,
+              "iou": 0.45724907063197023,
+              "sorr_fpg": 109
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_2113D6",
+              "hurt": 5,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1021,
+              "iou": 0.6046137339055794,
+              "sorr_fpg": 145
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211578",
+              "hurt": 1,
+              "collision": 2,
+              "damage": 2,
+              "fpg": 1026,
+              "iou": 0.5390199637023594,
+              "sorr_fpg": 119
+            },
+            {
+              "ticks": 1,
+              "mapping": "word_211436",
+              "hurt": 1,
+              "collision": 2,
+              "damage": 2,
+              "fpg": 1022,
+              "iou": 0.1817817014446228,
+              "sorr_fpg": 145
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_211482",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1023,
+              "iou": 0.35354002776492366,
+              "sorr_fpg": 25
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_2114D4",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1024,
+              "iou": 0.5258064516129032,
+              "sorr_fpg": 2
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_211526",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1025,
+              "iou": 0.5258064516129032,
+              "sorr_fpg": 2
+            },
+            {
+              "ticks": 10,
+              "mapping": "word_210CF8",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1000,
+              "iou": 0.5977620730270907,
+              "sorr_fpg": 91
+            }
+          ]
+        },
+        "jump": {
+          "label": "word_210864",
+          "mode": 4,
+          "frames": [
+            {
+              "ticks": 99,
+              "mapping": "word_210E58",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1007,
+              "iou": 0.6468788249694002,
+              "sorr_fpg": 1
+            }
+          ]
+        },
+        "guard": {
+          "label": "word_21085A",
+          "mode": 6,
+          "frames": [
+            {
+              "ticks": 20,
+              "mapping": "word_210DF0",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1006,
+              "iou": 0.7005473025801408,
+              "sorr_fpg": 11
+            }
+          ]
+        }
+      },
+      "hurt_boxes": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          246,
+          28,
+          176,
+          80,
+          238,
+          28,
+          176,
+          80
+        ],
+        [
+          232,
+          40,
+          184,
+          72,
+          240,
+          40,
+          184,
+          72
+        ],
+        [
+          232,
+          36,
+          204,
+          52,
+          244,
+          36,
+          204,
+          52
+        ],
+        [
+          236,
+          48,
+          190,
+          66,
+          228,
+          48,
+          190,
+          66
+        ],
+        [
+          232,
+          48,
+          192,
+          64,
+          232,
+          48,
+          192,
+          64
+        ],
+        [
+          232,
+          48,
+          192,
+          64,
+          232,
+          48,
+          192,
+          64
+        ]
+      ],
+      "attack_boxes": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          129,
+          80,
+          208,
+          8,
+          47,
+          80,
+          208,
+          8
+        ],
+        [
+          188,
+          64,
+          208,
+          16,
+          4,
+          64,
+          208,
+          16
+        ]
+      ],
+      "profile_label": "byte_2B0CC",
+      "profiles": [
+        [
+          25,
+          25,
+          20,
+          10,
+          99,
+          0,
+          50,
+          50,
+          20,
+          40,
+          4,
+          4,
+          60,
+          6,
+          4,
+          80,
+          20,
+          30,
+          60,
+          6,
+          40,
+          30,
+          6,
+          6,
+          10,
+          30,
+          6,
+          4,
+          20,
+          8,
+          20,
+          0
+        ],
+        [
+          25,
+          15,
+          20,
+          20,
+          99,
+          0,
+          50,
+          40,
+          20,
+          40,
+          5,
+          6,
+          60,
+          8,
+          6,
+          90,
+          20,
+          30,
+          60,
+          8,
+          40,
+          40,
+          8,
+          8,
+          10,
+          30,
+          8,
+          6,
+          35,
+          20,
+          30,
+          0
+        ],
+        [
+          25,
+          5,
+          20,
+          10,
+          99,
+          0,
+          40,
+          40,
+          20,
+          40,
+          6,
+          8,
+          60,
+          12,
+          8,
+          100,
+          50,
+          30,
+          60,
+          12,
+          50,
+          30,
+          10,
+          16,
+          10,
+          30,
+          16,
+          4,
+          50,
+          50,
+          40,
+          0
+        ],
+        [
+          15,
+          5,
+          20,
+          20,
+          99,
+          0,
+          30,
+          40,
+          20,
+          40,
+          12,
+          8,
+          60,
+          14,
+          12,
+          110,
+          40,
+          30,
+          60,
+          13,
+          50,
+          40,
+          12,
+          17,
+          10,
+          30,
+          16,
+          4,
+          60,
+          60,
+          50,
+          0
+        ],
+        [
+          10,
+          5,
+          10,
+          20,
+          99,
+          0,
+          30,
+          40,
+          20,
+          40,
+          14,
+          8,
+          60,
+          16,
+          12,
+          120,
+          30,
+          30,
+          50,
+          13,
+          50,
+          40,
+          14,
+          18,
+          10,
+          30,
+          16,
+          4,
+          70,
+          70,
+          60,
+          0
+        ],
+        [
+          5,
+          5,
+          10,
+          20,
+          99,
+          0,
+          20,
+          40,
+          20,
+          40,
+          16,
+          10,
+          50,
+          18,
+          14,
+          130,
+          20,
+          30,
+          40,
+          14,
+          60,
+          30,
+          16,
+          20,
+          10,
+          30,
+          16,
+          4,
+          80,
+          80,
+          70,
+          0
+        ],
+        [
+          5,
+          5,
+          5,
+          10,
+          99,
+          0,
+          20,
+          30,
+          20,
+          40,
+          18,
+          14,
+          40,
+          24,
+          16,
+          140,
+          10,
+          20,
+          30,
+          15,
+          60,
+          40,
+          18,
+          22,
+          20,
+          20,
+          16,
+          4,
+          90,
+          90,
+          80,
+          0
+        ]
+      ],
+      "art_bytes": 26752
+    },
+    "zack": {
+      "scripts": {
+        "idle": {
+          "label": "word_22293E",
+          "mode": 0,
+          "frames": [
+            {
+              "ticks": 8,
+              "mapping": "word_222D9E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1003,
+              "iou": 0.45356976201586563,
+              "sorr_fpg": 102
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_222D36",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1001,
+              "iou": 0.4565523720056365,
+              "sorr_fpg": 102
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_222D6A",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1002,
+              "iou": 0.4615027829313544,
+              "sorr_fpg": 34
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_222D36",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1001,
+              "iou": 0.4565523720056365,
+              "sorr_fpg": 102
+            }
+          ]
+        },
+        "walk": {
+          "label": "word_222960",
+          "mode": 2,
+          "frames": [
+            {
+              "ticks": 8,
+              "mapping": "word_222D12",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1000,
+              "iou": 0.5370370370370371,
+              "sorr_fpg": 33
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_222D9E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1003,
+              "iou": 0.45356976201586563,
+              "sorr_fpg": 102
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_222D12",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1000,
+              "iou": 0.5370370370370371,
+              "sorr_fpg": 33
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_222DD2",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1004,
+              "iou": 0.5285472018089316,
+              "sorr_fpg": 33
+            }
+          ]
+        },
+        "held": {
+          "label": "word_222A40",
+          "mode": 12,
+          "frames": [
+            {
+              "ticks": 8,
+              "mapping": "word_222E7E",
+              "hurt": 3,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1010,
+              "iou": 0.6134453781512605,
+              "sorr_fpg": 102
+            }
+          ]
+        },
+        "hurt2": {
+          "label": "word_22299C",
+          "mode": 16,
+          "frames": [
+            {
+              "ticks": 3,
+              "mapping": "word_222E4A",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1008,
+              "iou": 0.5822328931572629,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222E64",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1009,
+              "iou": 0.5822328931572629,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222E4A",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1008,
+              "iou": 0.5822328931572629,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222E64",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1009,
+              "iou": 0.5822328931572629,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222E4A",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1008,
+              "iou": 0.5822328931572629,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222E64",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1009,
+              "iou": 0.5822328931572629,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222E4A",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1008,
+              "iou": 0.5822328931572629,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222E64",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1009,
+              "iou": 0.5822328931572629,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222E4A",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1008,
+              "iou": 0.5822328931572629,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222E64",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1009,
+              "iou": 0.5822328931572629,
+              "sorr_fpg": 58
+            }
+          ]
+        },
+        "hurt": {
+          "label": "word_2229EE",
+          "mode": 18,
+          "frames": [
+            {
+              "ticks": 3,
+              "mapping": "word_222E9E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1011,
+              "iou": 0.5848855774348057,
+              "sorr_fpg": 57
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222EBE",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1012,
+              "iou": 0.5848855774348057,
+              "sorr_fpg": 57
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222E9E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1011,
+              "iou": 0.5848855774348057,
+              "sorr_fpg": 57
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222EBE",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1012,
+              "iou": 0.5848855774348057,
+              "sorr_fpg": 57
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222E9E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1011,
+              "iou": 0.5848855774348057,
+              "sorr_fpg": 57
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222EBE",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1012,
+              "iou": 0.5848855774348057,
+              "sorr_fpg": 57
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222E9E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1011,
+              "iou": 0.5848855774348057,
+              "sorr_fpg": 57
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222EBE",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1012,
+              "iou": 0.5848855774348057,
+              "sorr_fpg": 57
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222E9E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1011,
+              "iou": 0.5848855774348057,
+              "sorr_fpg": 57
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222EBE",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1012,
+              "iou": 0.5848855774348057,
+              "sorr_fpg": 57
+            }
+          ]
+        },
+        "flight": {
+          "label": "word_222A4A",
+          "mode": 20,
+          "frames": [
+            {
+              "ticks": 12,
+              "mapping": "word_222EDE",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1013,
+              "iou": 0.4752808988764045,
+              "sorr_fpg": 296
+            }
+          ]
+        },
+        "floor": {
+          "label": "word_222A54",
+          "mode": 22,
+          "frames": [
+            {
+              "ticks": 8,
+              "mapping": "word_222DF6",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1005,
+              "iou": 0.5082319255547602,
+              "sorr_fpg": 9
+            }
+          ]
+        },
+        "getup": {
+          "label": "word_222A5E",
+          "mode": 24,
+          "frames": [
+            {
+              "ticks": 8,
+              "mapping": "word_222DF6",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1005,
+              "iou": 0.5082319255547602,
+              "sorr_fpg": 9
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_222E10",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1006,
+              "iou": 0.4437726723095526,
+              "sorr_fpg": 10
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_222DF6",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1005,
+              "iou": 0.5082319255547602,
+              "sorr_fpg": 9
+            },
+            {
+              "ticks": 30,
+              "mapping": "word_222E10",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1006,
+              "iou": 0.4437726723095526,
+              "sorr_fpg": 10
+            },
+            {
+              "ticks": 20,
+              "mapping": "word_222E30",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1007,
+              "iou": 0.624,
+              "sorr_fpg": 11
+            },
+            {
+              "ticks": 10,
+              "mapping": "word_222D9E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1003,
+              "iou": 0.45356976201586563,
+              "sorr_fpg": 102
+            }
+          ]
+        },
+        "front": {
+          "label": "word_222AAC",
+          "mode": 36,
+          "frames": [
+            {
+              "ticks": 16,
+              "mapping": "word_222E7E",
+              "hurt": 3,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1010,
+              "iou": 0.6134453781512605,
+              "sorr_fpg": 102
+            },
+            {
+              "ticks": 4,
+              "mapping": "word_222E4A",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1008,
+              "iou": 0.5822328931572629,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 6,
+              "mapping": "word_223066",
+              "hurt": 4,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1021,
+              "iou": 0.48734873487348734,
+              "sorr_fpg": 100
+            },
+            {
+              "ticks": 20,
+              "mapping": "word_22304C",
+              "hurt": 4,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1020,
+              "iou": 0.5200239091452481,
+              "sorr_fpg": 100
+            },
+            {
+              "ticks": 99,
+              "mapping": "word_22304C",
+              "hurt": 4,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1020,
+              "iou": 0.5200239091452481,
+              "sorr_fpg": 100
+            }
+          ]
+        },
+        "back": {
+          "label": "word_222AD6",
+          "mode": 38,
+          "frames": [
+            {
+              "ticks": 16,
+              "mapping": "word_222E7E",
+              "hurt": 3,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1010,
+              "iou": 0.6134453781512605,
+              "sorr_fpg": 102
+            },
+            {
+              "ticks": 4,
+              "mapping": "word_222E4A",
+              "hurt": 2,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1008,
+              "iou": 0.5822328931572629,
+              "sorr_fpg": 58
+            },
+            {
+              "ticks": 6,
+              "mapping": "word_222DF6",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1005,
+              "iou": 0.5082319255547602,
+              "sorr_fpg": 9
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222EDE",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1013,
+              "iou": 0.4752808988764045,
+              "sorr_fpg": 296
+            },
+            {
+              "ticks": 99,
+              "mapping": "word_222DF6",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1005,
+              "iou": 0.5082319255547602,
+              "sorr_fpg": 9
+            }
+          ]
+        },
+        "jab": {
+          "label": "word_222C94",
+          "mode": 72,
+          "frames": [
+            {
+              "ticks": 2,
+              "mapping": "word_222D9E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1003,
+              "iou": 0.45356976201586563,
+              "sorr_fpg": 102
+            },
+            {
+              "ticks": 4,
+              "mapping": "word_222F0C",
+              "hurt": 1,
+              "collision": 1,
+              "damage": 2,
+              "fpg": 1014,
+              "iou": 0.43299908842297175,
+              "sorr_fpg": 32
+            },
+            {
+              "ticks": 2,
+              "mapping": "word_222D9E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1003,
+              "iou": 0.45356976201586563,
+              "sorr_fpg": 102
+            }
+          ]
+        },
+        "uppercut": {
+          "label": "word_222CD0",
+          "mode": 74,
+          "frames": [
+            {
+              "ticks": 6,
+              "mapping": "word_222DD2",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1004,
+              "iou": 0.5285472018089316,
+              "sorr_fpg": 33
+            },
+            {
+              "ticks": 5,
+              "mapping": "word_2230D8",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1023,
+              "iou": 0.5505050505050505,
+              "sorr_fpg": 34
+            },
+            {
+              "ticks": 4,
+              "mapping": "word_2230B4",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1022,
+              "iou": 0.5370370370370371,
+              "sorr_fpg": 33
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222F44",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1015,
+              "iou": 0.45235892691951896,
+              "sorr_fpg": 32
+            },
+            {
+              "ticks": 10,
+              "mapping": "word_222F7C",
+              "hurt": 1,
+              "collision": 3,
+              "damage": 132,
+              "fpg": 1016,
+              "iou": 0.4399633363886343,
+              "sorr_fpg": 32
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_222F44",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1015,
+              "iou": 0.45235892691951896,
+              "sorr_fpg": 32
+            },
+            {
+              "ticks": 3,
+              "mapping": "word_2230B4",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1022,
+              "iou": 0.5370370370370371,
+              "sorr_fpg": 33
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_2230FC",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1024,
+              "iou": 0.5379554655870445,
+              "sorr_fpg": 34
+            }
+          ]
+        },
+        "kick": {
+          "label": "word_222C42",
+          "mode": 76,
+          "frames": [
+            {
+              "ticks": 8,
+              "mapping": "word_222FB4",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1017,
+              "iou": 0.6111397627643115,
+              "sorr_fpg": 50
+            },
+            {
+              "ticks": 6,
+              "mapping": "word_223002",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1018,
+              "iou": 0.5335892514395394,
+              "sorr_fpg": 40
+            },
+            {
+              "ticks": 10,
+              "mapping": "word_22302C",
+              "hurt": 1,
+              "collision": 2,
+              "damage": 2,
+              "fpg": 1019,
+              "iou": 0.6245847176079734,
+              "sorr_fpg": 102
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_222FB4",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1017,
+              "iou": 0.6111397627643115,
+              "sorr_fpg": 50
+            },
+            {
+              "ticks": 6,
+              "mapping": "word_223002",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1018,
+              "iou": 0.5335892514395394,
+              "sorr_fpg": 40
+            },
+            {
+              "ticks": 10,
+              "mapping": "word_22302C",
+              "hurt": 1,
+              "collision": 2,
+              "damage": 2,
+              "fpg": 1019,
+              "iou": 0.6245847176079734,
+              "sorr_fpg": 102
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_222FB4",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1017,
+              "iou": 0.6111397627643115,
+              "sorr_fpg": 50
+            },
+            {
+              "ticks": 6,
+              "mapping": "word_223002",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1018,
+              "iou": 0.5335892514395394,
+              "sorr_fpg": 40
+            },
+            {
+              "ticks": 10,
+              "mapping": "word_22302C",
+              "hurt": 1,
+              "collision": 2,
+              "damage": 132,
+              "fpg": 1019,
+              "iou": 0.6245847176079734,
+              "sorr_fpg": 102
+            },
+            {
+              "ticks": 18,
+              "mapping": "word_222FB4",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1017,
+              "iou": 0.6111397627643115,
+              "sorr_fpg": 50
+            }
+          ]
+        },
+        "jump": {
+          "label": "word_222982",
+          "mode": 4,
+          "frames": [
+            {
+              "ticks": 7,
+              "mapping": "word_222D12",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1000,
+              "iou": 0.5370370370370371,
+              "sorr_fpg": 33
+            },
+            {
+              "ticks": 7,
+              "mapping": "word_222D9E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1003,
+              "iou": 0.45356976201586563,
+              "sorr_fpg": 102
+            },
+            {
+              "ticks": 7,
+              "mapping": "word_222DD2",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1004,
+              "iou": 0.5285472018089316,
+              "sorr_fpg": 33
+            }
+          ]
+        },
+        "guard": {
+          "label": "word_222CAE",
+          "mode": 6,
+          "frames": [
+            {
+              "ticks": 8,
+              "mapping": "word_222D9E",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1003,
+              "iou": 0.45356976201586563,
+              "sorr_fpg": 102
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_222E7E",
+              "hurt": 3,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1010,
+              "iou": 0.6134453781512605,
+              "sorr_fpg": 102
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_222E30",
+              "hurt": 0,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1007,
+              "iou": 0.624,
+              "sorr_fpg": 11
+            },
+            {
+              "ticks": 8,
+              "mapping": "word_222FB4",
+              "hurt": 1,
+              "collision": 0,
+              "damage": 0,
+              "fpg": 1017,
+              "iou": 0.6111397627643115,
+              "sorr_fpg": 50
+            }
+          ]
+        }
+      },
+      "hurt_boxes": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          248,
+          16,
+          176,
+          80,
+          248,
+          16,
+          176,
+          80
+        ],
+        [
+          244,
+          24,
+          192,
+          64,
+          244,
+          24,
+          192,
+          64
+        ],
+        [
+          244,
+          24,
+          192,
+          64,
+          244,
+          24,
+          192,
+          64
+        ],
+        [
+          244,
+          24,
+          192,
+          64,
+          244,
+          24,
+          192,
+          64
+        ],
+        [
+          248,
+          48,
+          192,
+          64,
+          216,
+          48,
+          192,
+          64
+        ]
+      ],
+      "attack_boxes": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          212,
+          40,
+          188,
+          24,
+          4,
+          40,
+          188,
+          24
+        ],
+        [
+          228,
+          28,
+          184,
+          24,
+          0,
+          28,
+          184,
+          24
+        ],
+        [
+          204,
+          40,
+          188,
+          24,
+          12,
+          40,
+          188,
+          24
+        ]
+      ],
+      "profile_label": "byte_2C0F6",
+      "profiles": [
+        [
+          30,
+          5,
+          25,
+          20,
+          30,
+          5,
+          50,
+          60,
+          50,
+          40,
+          4,
+          4,
+          50,
+          6,
+          3,
+          60,
+          20,
+          50,
+          60,
+          4,
+          30,
+          20,
+          5,
+          16,
+          30,
+          30,
+          6,
+          2,
+          64,
+          48,
+          30,
+          10
+        ],
+        [
+          30,
+          5,
+          25,
+          20,
+          30,
+          10,
+          40,
+          60,
+          40,
+          40,
+          6,
+          5,
+          60,
+          10,
+          3,
+          70,
+          20,
+          50,
+          60,
+          6,
+          30,
+          30,
+          10,
+          15,
+          30,
+          30,
+          7,
+          2,
+          53,
+          48,
+          20,
+          15
+        ],
+        [
+          30,
+          5,
+          25,
+          15,
+          30,
+          10,
+          30,
+          60,
+          30,
+          40,
+          8,
+          8,
+          70,
+          16,
+          8,
+          70,
+          50,
+          40,
+          60,
+          7,
+          40,
+          40,
+          15,
+          14,
+          30,
+          30,
+          14,
+          4,
+          23,
+          32,
+          10,
+          15
+        ],
+        [
+          30,
+          5,
+          30,
+          15,
+          30,
+          15,
+          30,
+          60,
+          30,
+          40,
+          9,
+          8,
+          70,
+          17,
+          8,
+          70,
+          50,
+          40,
+          60,
+          8,
+          40,
+          50,
+          18,
+          13,
+          30,
+          30,
+          14,
+          4,
+          20,
+          21,
+          9,
+          20
+        ],
+        [
+          25,
+          5,
+          30,
+          15,
+          30,
+          15,
+          30,
+          40,
+          30,
+          30,
+          10,
+          8,
+          70,
+          18,
+          8,
+          80,
+          40,
+          40,
+          50,
+          10,
+          40,
+          60,
+          20,
+          12,
+          30,
+          30,
+          16,
+          4,
+          18,
+          16,
+          8,
+          20
+        ],
+        [
+          25,
+          5,
+          35,
+          15,
+          30,
+          20,
+          30,
+          40,
+          30,
+          30,
+          11,
+          8,
+          70,
+          19,
+          8,
+          80,
+          30,
+          40,
+          50,
+          11,
+          50,
+          70,
+          20,
+          11,
+          30,
+          30,
+          16,
+          4,
+          16,
+          8,
+          7,
+          25
+        ],
+        [
+          25,
+          5,
+          35,
+          10,
+          30,
+          20,
+          30,
+          30,
+          20,
+          30,
+          12,
+          8,
+          60,
+          20,
+          8,
+          88,
+          40,
+          30,
+          40,
+          12,
+          50,
+          80,
+          25,
+          10,
+          40,
+          20,
+          18,
+          4,
+          8,
+          6,
+          6,
+          25
+        ],
+        [
+          20,
+          5,
+          40,
+          10,
+          20,
+          30,
+          30,
+          30,
+          20,
+          30,
+          13,
+          8,
+          60,
+          21,
+          8,
+          88,
+          30,
+          30,
+          40,
+          13,
+          50,
+          90,
+          25,
+          9,
+          40,
+          20,
+          20,
+          4,
+          6,
+          4,
+          5,
+          30
+        ],
+        [
+          20,
+          5,
+          40,
+          10,
+          20,
+          30,
+          30,
+          30,
+          20,
+          30,
+          14,
+          8,
+          60,
+          22,
+          8,
+          88,
+          40,
+          30,
+          40,
+          14,
+          60,
+          90,
+          30,
+          8,
+          40,
+          20,
+          20,
+          4,
+          4,
+          4,
+          4,
+          30
+        ],
+        [
+          20,
+          5,
+          45,
+          10,
+          20,
+          40,
+          30,
+          30,
+          20,
+          30,
+          15,
+          8,
+          60,
+          23,
+          8,
+          88,
+          20,
+          30,
+          40,
+          15,
+          60,
+          90,
+          30,
+          7,
+          40,
+          20,
+          20,
+          4,
+          2,
+          2,
+          3,
+          40
+        ],
+        [
+          20,
+          5,
+          45,
+          10,
+          20,
+          60,
+          30,
+          30,
+          20,
+          30,
+          22,
+          8,
+          60,
+          28,
+          8,
+          99,
+          50,
+          30,
+          40,
+          30,
+          90,
+          90,
+          35,
+          6,
+          40,
+          20,
+          20,
+          4,
+          1,
+          1,
+          2,
+          50
+        ]
+      ],
+      "art_bytes": 27072
+    }
+  }
+}

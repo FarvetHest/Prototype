@@ -120,12 +120,6 @@
       557.0,
       175.0,
       3.0
-    ],
-    [
-      29,
-      560.0,
-      172.0,
-      3.0
     ]
   ],
   "cue_trace": [
@@ -143,13 +137,13 @@
     },
     {
       "cue": 4,
-      "camera": 64.75,
+      "camera": 66.0,
       "score": 1200,
       "live": 1
     },
     {
       "cue": 5,
-      "camera": 129.75,
+      "camera": 128.5,
       "score": 1600,
       "live": 1
     },
@@ -167,13 +161,13 @@
     },
     {
       "cue": 8,
-      "camera": 322.25,
+      "camera": 321.0,
       "score": 2800,
       "live": 1
     },
     {
       "cue": 9,
-      "camera": 384.75,
+      "camera": 386.0,
       "score": 3200,
       "live": 1
     },
@@ -185,7 +179,7 @@
     },
     {
       "cue": 11,
-      "camera": 514.75,
+      "camera": 513.5,
       "score": 4000,
       "live": 1
     },
@@ -203,13 +197,13 @@
     },
     {
       "cue": 14,
-      "camera": 706.0,
+      "camera": 704.75,
       "score": 5200,
       "live": 1
     },
     {
       "cue": 15,
-      "camera": 768.5,
+      "camera": 769.75,
       "score": 5600,
       "live": 1
     },
@@ -245,7 +239,7 @@
     }
   ],
   "max_slots": 2,
-  "max_empty_walk_pixels": 162.5,
-  "eboot_sha256": "1c4d355b62cc14070aa443cc4ded7dc627763bef19e05ab7d9503b4245142877",
+  "max_empty_walk_pixels": 165.0,
+  "eboot_sha256": "2b1f9e181e45b07aca687416c5cee13155705deb9126c26f0d11a395e2ec2876",
   "note": "Camera/world conservation and stream traversal use real Right input; debugger kills arrived enemies to accelerate progression and fixtures arrange a held survivor/midpoint release. Distances use half-pixel world units. Not hardware timing."
 }

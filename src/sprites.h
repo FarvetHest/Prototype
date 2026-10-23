@@ -11,5 +11,6 @@ void sprites_spawn_enemies(const Game *g,unsigned mask);
 void sprites_step(const Game *g);
 void sprites_begin(void);
 void sprites_end(void);
+void sprites_portrait(int type,unsigned frame);
 void sprites_draw(const Actor *actor, int index);
 #endif

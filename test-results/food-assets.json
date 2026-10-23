@@ -1,16 +1,22 @@
 {
   "checks": {
-    "all_143_existing_poses_unchanged": true,
-    "native_pickup_exact_pixels_and_pivot": true,
-    "same_atlas_capacity": true,
-    "143_frames": true,
+    "all_143_previous_poses_pixels_pivots_unchanged": true,
+    "electra_all_native_pixels_pivots": true,
+    "electra_original_CRAM": true,
+    "zack_all_native_pixels_pivots": true,
+    "zack_original_CRAM": true,
+    "203_frames_four_pages": true,
+    "no_frame_crosses_a_page": true,
     "stage.rgb565_unchanged": true,
     "hud.rgba_unchanged": true,
     "music_unchanged": true,
-    "final_atlas_embedded": true
+    "full_atlas_embedded": true,
+    "three_VRAM_one_RAM_page": true
   },
-  "eboot_sha256": "1c4d355b62cc14070aa443cc4ded7dc627763bef19e05ab7d9503b4245142877",
-  "atlas_sha256": "7192ade4c394b746a9dd76a26309956c77eb669bac053942691e2710876057d2",
-  "native_pickup_frame": 910,
-  "old_poses": 143
+  "eboot_sha256": "2b1f9e181e45b07aca687416c5cee13155705deb9126c26f0d11a395e2ec2876",
+  "atlas_sha256": "7dc277b8c4396fb54db708074b975ef3c1026168ed868dcec31546a94b90fcaa",
+  "old_poses": 143,
+  "new_poses": 60,
+  "vram_resident_atlas_bytes": 786432,
+  "extra_RAM_atlas_bytes": 262144
 }
