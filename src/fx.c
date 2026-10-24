@@ -62,7 +62,7 @@ int fx_selftest(void){Game g;int i,pos[16],view[16],seen=0;
  /* A second trigger while shaking does not restart the counter. */
  game_reset(&g);fx_shake(&g);fx_tick(&g);fx_tick(&g);fx_tick(&g);fx_shake(&g);if(g.fx.shake_n!=3)return 1604;
  /* Presented offset keeps the jolt amplitude: two-step sampling never collapses to a constant. */
- game_reset(&g);fx_shake(&g);for(i=0;i<14;i+=2){fx_tick(&g);fx_tick(&g);if(g.fx.shake_view>=0)seen|=1<<g.fx.shake_view;}
+ game_reset(&g);seen=0;fx_shake(&g);for(i=0;i<14;i+=2){fx_tick(&g);fx_tick(&g);if(g.fx.shake_view>=0)seen|=1<<g.fx.shake_view;}
  if(seen!=(1|16))return 1605;
  /* Light spark $303 = 4 frames of the 2x2 star; heavy $703 = 2 partial + 2 big (24x24) frames. */
  game_reset(&g);fx_note_attack_top(64+5);fx_spark(&g,0,1);
@@ -74,6 +74,15 @@ int fx_selftest(void){Game g;int i,pos[16],view[16],seen=0;
  /* Landing dust $1509: 10 frames, smoke frames 0,0,0,0,0,0,1,1,2,2 from rows 10,10,9,9,8,8,7,7,6,6. */
  game_reset(&g);fx_dust(&g,1);
  {static const int want[10]={3,3,3,3,3,3,4,4,5,5};int k;for(k=0;k<10;++k){if(!g.fx.slot[1].active || frame_of((g.fx.slot[1].idx&0xfe)>>1)!=want[k])return 1611;fx_tick(&g);}if(g.fx.slot[1].active)return 1612;}
+ /* Shake belongs to thrown victims only; every knockdown makes one dust cloud (first contact), none on the bounce. */
+ game_reset(&g);physics_hit(&g,1,4,1,1);g.physics.body[1].freeze=0;
+ for(i=0;i<140;++i){physics_body_tick(&g,1);}
+ if(g.fx.shake_on || g.fx.shake_n)return 1614;
+ game_reset(&g);physics_victim_start(&g,1,0);for(i=0;i<40;++i)if(physics_victim_tick(&g,1))break;
+ for(i=0;i<140;++i){physics_body_tick(&g,1);if(g.fx.shake_on)seen|=256;}
+ if(!(seen&256))return 1615;
+ game_reset(&g);physics_hit(&g,1,4,1,1);g.physics.body[1].freeze=0;
+ {int dust_starts=0,was=0;for(i=0;i<140;++i){physics_body_tick(&g,1);if(g.fx.slot[1].active && !was)++dust_starts;was=g.fx.slot[1].active;}if(dust_starts!=1)return 1616;}
  /* Flipped sparks mirror their pixels and keep the same left edge. */
  game_reset(&g);g.enemies[0].x=100;fx_note_attack_top(70);fx_spark(&g,0,1);
  {FxSpan a[300],b[300];int na=fx_spans(&g,a,300),nb;g.fx.slot[0].flip=1;nb=fx_spans(&g,b,300);if(na!=nb || na<=0)return 1613;}

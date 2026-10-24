@@ -57,7 +57,7 @@ int physics_rect(const Game *g,int index,float r[4]){const Actor *a=index?&g->en
  else if(index){id=g->pose[index-1].fpg?g->pose[index-1].hurt:enemy_frames(g,index-1,EP_IDLE)[0].hurt;}
  else if(!index && g->bk3.active){unsigned j;for(j=0;j<sizeof(axel_hurt_ids)/sizeof(axel_hurt_ids[0]);++j)if(axel_hurt_ids[j][0]==g->bk3.fpg){id=axel_hurt_ids[j][1];break;}}
  if(!id)return 0;
- if(!index && player_character==PLAYER_MAX){int height=g->bk3.script==BK_TUCK?56:82;
+ if(!index && player_character==PLAYER_MAX){int height=g->bk3.script==BK_TUCK?56:88; /* SoR2 Data_PlayerHitBox, Max: $10 half-width, $58 height */
   r[0]=a->x*2-16;r[1]=a->x*2+16;r[3]=stage_foot_y(a->y)-g->motion.z[0];r[2]=r[3]-height;return 1;
  }
  box=index?enemy_box(g,index-1,id,1):axel_hurt[id];if(!box)return 0;box+=a->facing>0?4:0;
@@ -65,8 +65,11 @@ int physics_rect(const Game *g,int index,float r[4]){const Actor *a=index?&g->en
 }
 static void floor_impact(Game *g,int i){Body *b=&g->physics.body[i];Actor *a=actor(g,i);
  sfx_emit(0x346,g->combat.ticks,(int)(a->x*256/240));
- /* loc_24380: ScreenShake=1 on the first floor impact; loc_243D8: landing dust on every ground contact. */
- fx_shake(g);fx_dust(g,i);
+ /* loc_24380 runs only for victims flagged by a grab throw (bit 7 of $6F, set in Obj_FrontGrab/BackGrab throws):
+    ScreenShake=1. Ordinary knockdowns go straight to loc_243D8. Dust ($1509) belongs to this first contact only;
+    the bounce landing (loc_24512) adds neither dust nor shake. */
+ if(b->back>=0)fx_shake(g);
+ fx_dust(g,i);
  /* loc_24380: throw damage is applied ONCE on the first ground impact. */
  if(b->pending){a->hp-=b->pending;if(a->hp<0)a->hp=0;if(i && a->hp<=0)death_begin(g,i-1);b->pending=0;}
  b->phase=BODY_BOUNCE;b->z=-1;b->vz=BK3_BOUNCE_VZ;b->vx=(b->vx/65536>>1)*65536;
@@ -96,7 +99,7 @@ void physics_body_tick(Game *g,int i){Body *b=&g->physics.body[i];Actor *a=actor
      }
     }
    }
-   if(b->z>=0 && b->vz>=0){if(b->phase==BODY_FLIGHT)floor_impact(g,i);else {b->z=0;fx_dust(g,i);}}
+   if(b->z>=0 && b->vz>=0){if(b->phase==BODY_FLIGHT)floor_impact(g,i);else b->z=0;}
   }
   if(b->phase==BODY_BOUNCE){dec(&b->timer);if(!b->timer && b->z>=0){
    b->z=0;b->vz=0;b->vx=0;if(a->hp<=0){b->phase=0;b->fpg=i?enemy_frames(g,i-1,EP_FLOOR)[0].fpg:50;}
