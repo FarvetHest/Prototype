@@ -1,11 +1,12 @@
 {
   "checks": {
-    "all_143_previous_poses_pixels_pivots_unchanged": true,
+    "all_203_previous_poses_pixels_pivots_unchanged": true,
     "electra_all_native_pixels_pivots": true,
     "electra_original_CRAM": true,
     "zack_all_native_pixels_pivots": true,
     "zack_original_CRAM": true,
-    "203_frames_four_pages": true,
+    "four_player_reaction_poses_exact": true,
+    "210_frames_four_pages": true,
     "no_frame_crosses_a_page": true,
     "stage.rgb565_unchanged": true,
     "hud.rgba_unchanged": true,
@@ -13,10 +14,10 @@
     "full_atlas_embedded": true,
     "three_VRAM_one_RAM_page": true
   },
-  "eboot_sha256": "2b1f9e181e45b07aca687416c5cee13155705deb9126c26f0d11a395e2ec2876",
-  "atlas_sha256": "7dc277b8c4396fb54db708074b975ef3c1026168ed868dcec31546a94b90fcaa",
-  "old_poses": 143,
-  "new_poses": 60,
+  "eboot_sha256": "44e68b3e632160d3b4c8456abb537a9ee1fbb7bc27210a2d667ca13f755721d9",
+  "atlas_sha256": "4943ff25863d5d3ec9764ec90fb2827600f66c25508f8e8542a51a7e9ef3e9e9",
+  "old_poses": 203,
+  "new_poses": 7,
   "vram_resident_atlas_bytes": 786432,
   "extra_RAM_atlas_bytes": 262144
 }

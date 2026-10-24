@@ -26,6 +26,7 @@ void physics_hit(Game *g,int i,int damage,int down,int facing){Body *b=&g->physi
  else {b->phase=BODY_HURT;b->timer=i?3:3;b->frame=0;b->hurt=4;}
  if(i){g->extra[i-1].action=0;g->extra[i-1].z=g->extra[i-1].vz=g->extra[i-1].vx=0;g->rules.ai[i-1].mode=2;g->combat.enemy[i-1].state=0;g->combat.enemy[i-1].anim_timer=0;}
  else {bk3_suspend(g);g->moves.special=0;g->moves.invincible=0;g->combat.action=CB_NONE;}
+ if(i && g->reaction.holder==i-1)reaction_release(g);
  sync_body(g,i);
 }
 void physics_victim_start(Game *g,int i,int back){Body *b=&g->physics.body[i];int n;const EnemyFrame *f=body_frames(g,i,BODY_VICTIM,back,&n);

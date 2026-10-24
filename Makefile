@@ -1,5 +1,5 @@
 TARGET = sorr-lite
-OBJS = src/main.o src/level.o src/held.o src/flow.o src/game.o src/bk3.o src/combat.o src/sfx.o src/enemy.o src/variety.o src/impact.o src/rules.o src/ai.o src/physics.o src/sprites.o src/sprite_atlas.o src/stage.o src/stage_texture.o src/music.o src/ui.o src/hud_texture.o
+OBJS = src/main.o src/level.o src/held.o src/flow.o src/game.o src/bk3.o src/combat.o src/sfx.o src/enemy.o src/variety.o src/reactions.o src/impact.o src/rules.o src/ai.o src/physics.o src/sprites.o src/sprite_atlas.o src/stage.o src/stage_texture.o src/music.o src/ui.o src/hud_texture.o
 INCDIR = src
 CFLAGS = -O2 -G0 -std=gnu99 -Wall -Wextra -Werror -ffunction-sections -fdata-sections
 CXXFLAGS = $(CFLAGS)
@@ -9,8 +9,8 @@ PSP_LARGE_MEMORY = 0
 LIBS = -lpspaudio -lpspgu -lpsppower -lm
 LDFLAGS = -Wl,--gc-sections
 EXTRA_TARGETS = EBOOT.PBP
-PSP_EBOOT_TITLE = SoRR PSP Lite v0.19
-SFOFLAGS = -s DISC_ID=SORL00019
+PSP_EBOOT_TITLE = SoRR PSP Lite v0.20
+SFOFLAGS = -s DISC_ID=SORL00020
 PSPSDK := $(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
 
@@ -58,3 +58,5 @@ src/ai.o src/sprites.o: src/level.h
 src/combat.o: src/level.h
 
 src/variety.o: src/variety_data.h src/bk3_data.h src/combat_data.h src/physics_data.h
+
+src/reactions.o src/variety.o: src/reaction_data.h

@@ -1,0 +1,3 @@
+# The pinned original must retain its exact bytes on Windows and Unix.
+original/vendor/BK3.asm -text
+original/source-index.json.gz binary

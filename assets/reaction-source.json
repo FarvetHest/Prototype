@@ -1,0 +1,100 @@
+{
+  "source_sha256": "ab4fcf0be4c9b5bac1f60f1d863c2cb6b781c5fb157dad72574c9755534409c3",
+  "scripts": {
+    "DMA_Axel_Electricuted": [
+      {
+        "ticks": 4,
+        "fpg": 920,
+        "mapping": "word_116F0C",
+        "art": [
+          38240,
+          38513,
+          38659
+        ]
+      },
+      {
+        "ticks": 4,
+        "fpg": 921,
+        "mapping": "word_116E8A",
+        "art": [
+          38352,
+          38504,
+          38659
+        ]
+      }
+    ],
+    "DMA_Axel_Headlock": [
+      {
+        "ticks": 12,
+        "fpg": 922,
+        "mapping": "word_116D92",
+        "art": [
+          38320,
+          38516,
+          38659
+        ]
+      }
+    ],
+    "DMA_Axel_PartnerBackGrab": [
+      {
+        "ticks": 12,
+        "fpg": 923,
+        "mapping": "word_116DAC",
+        "art": [
+          38384,
+          38518,
+          38659
+        ]
+      }
+    ],
+    "Blondie_guard": {
+      "label": "word_223450",
+      "frames": [
+        {
+          "ticks": 30,
+          "fpg": 1025,
+          "hurt": 4,
+          "collision": 0,
+          "damage": 0
+        }
+      ]
+    },
+    "Blondie_counter": {
+      "label": "word_2234B6",
+      "frames": [
+        {
+          "ticks": 30,
+          "fpg": 1026,
+          "hurt": 1,
+          "collision": 2,
+          "damage": 132
+        }
+      ]
+    },
+    "Zack_holder": {
+      "label": "word_222C2E",
+      "frames": [
+        {
+          "ticks": 20,
+          "fpg": 1017,
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0
+        }
+      ]
+    },
+    "Zack_backholder": {
+      "label": "word_222C38",
+      "frames": [
+        {
+          "ticks": 20,
+          "fpg": 1027,
+          "hurt": 1,
+          "collision": 0,
+          "damage": 0
+        }
+      ]
+    }
+  },
+  "scope": "Zack captures from sub_2C2E8/2C80E/2C8BA/2C91A; guard/counter deliberately adapted from Obj_Blondie sub_2BEEE/2C990, not native Obj_Zack behavior"
+}

@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/gsaurus/sor-disassemblies",
+  "commit": "4dd719f3ed5c24c86deee616b56cea885e3113d7",
+  "path": "Assemblies/Bare Knuckle 3 (J) [!].asm",
+  "sha256": "ab4fcf0be4c9b5bac1f60f1d863c2cb6b781c5fb157dad72574c9755534409c3",
+  "imported": "vendor/BK3.asm",
+  "bytes": 16985760,
+  "lines": 256167,
+  "labels": 19351,
+  "reference_lines": 34108,
+  "categories": {
+    "code_or_directive": 60971,
+    "data": 144880,
+    "empty_or_comment": 50055,
+    "equate": 261
+  }
+}

@@ -17,6 +17,7 @@ int impact_overlap(const Game *g,int from,int to,int id){const Actor *a=actor(g,
 unsigned impact_sound(int encoded){int d=encoded&63;return d<3?0x18:d<5?0x26:d<7?0x21:0x32;}
 int impact_apply(Game *g,int from,int to,int encoded){int damage=encoded&63,freeze=2+(damage>>2),facing=actor(g,from)->facing;
  if(!damage || from==to || !(rules_flags(g,to)&128) || g->physics.body[to].inv || (!to && g->moves.invincible))return 0;
+ if(reaction_block(g,from,to))return 1;
  if(freeze>8)freeze=8;
  if(encoded&64)facing=-facing;
  if(!to){rules_end_hold(g);g->moves.grab=-1;g->moves.grab_timer=0;g->combat.target=-1;g->combat.escape=0;g->combat.hold=0;g->combat.action=CB_NONE;}
@@ -25,6 +26,7 @@ int impact_apply(Game *g,int from,int to,int encoded){int damage=encoded&63,free
  g->physics.body[to].inv=to?5:10;
  if(from)g->impact.freeze[from]=freeze;else g->bk3.hitstop=freeze;
  g->impact.freeze[to]=0;g->impact.last_from[to]=from;g->impact.damage[to]=encoded;++g->impact.contacts[from];sfx_emit(impact_sound(encoded),g->combat.ticks,(int)(actor(g,to)->x*256/240));
+ reaction_hit(g,from,to,encoded);
  if(to && (g->rules.actor[to].status58&16) && g->physics.body[to].phase==BODY_FLIGHT){rules_end_hold(g);g->moves.grab=-1;g->combat.target=-1;}
  return 1;
 }

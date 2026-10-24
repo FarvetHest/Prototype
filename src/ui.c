@@ -102,7 +102,7 @@ static void bar(int x,int y,unsigned hp,unsigned max) {
 void ui_draw(const Game *g,int error) {
     char score[32];unsigned value=ui_score>9999999?9999999:ui_score;
     if(flow.state==FLOW_TITLE) {
-        ui_text(152,98,"SORR PSP LITE");ui_text(216,118,"V0.19");
+        ui_text(152,98,"SORR PSP LITE");ui_text(216,118,"V0.20");
         ui_text(158,140,"START OR CROSS");
         snprintf(score,sizeof(score),"BEST %07u",flow.best>9999999?9999999:flow.best);ui_text(160,164,score);
         if(error)ui_text(180,190,"SELFTEST ERROR");

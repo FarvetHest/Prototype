@@ -8,5 +8,5 @@
     "zero_timer_wraps_16_bits": true,
     "vertical_only_approach_grabs": true
   },
-  "eboot_sha256": "2b1f9e181e45b07aca687416c5cee13155705deb9126c26f0d11a395e2ec2876"
+  "eboot_sha256": "44e68b3e632160d3b4c8456abb537a9ee1fbb7bc27210a2d667ca13f755721d9"
 }

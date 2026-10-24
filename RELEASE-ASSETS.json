@@ -1,17 +1,17 @@
 [
   {
-    "name": "SoRR-PSP-Lite-v0.19-PSP.zip",
-    "bytes": 34071688,
-    "sha256": "3dacc9c821fa4647e4375699bb40addcdaa277e274a0323feedc5bddfee26dac"
+    "name": "SoRR-PSP-Lite-v0.20-PSP.zip",
+    "bytes": 34077836,
+    "sha256": "06774b0468a68d33f0f16ec6e33581652f10563d3afb2553bb24eec9a4c10d97"
   },
   {
-    "name": "SoRR-PSP-Lite-v0.19-source.zip",
-    "bytes": 41555416,
-    "sha256": "9f7111397c1dda9eade65eb39f8a45efa3a4ebe33e2af12c3b0ce7c42d4b69d0"
+    "name": "SoRR-PSP-Lite-v0.20-source.zip",
+    "bytes": 45338394,
+    "sha256": "200bfaef62576f828d946cb2d72af54d517d7c53cb47d5679b5c4cd3747424bd"
   },
   {
-    "name": "SoRR-PSP-Lite-v0.19-update.zip",
-    "bytes": 459663,
-    "sha256": "e20867c42c7f84cc5e16ecaea9db9fd288a82b60adfbdfe3a25fd50c08c6134a"
+    "name": "SoRR-PSP-Lite-v0.20-update.zip",
+    "bytes": 464895,
+    "sha256": "fbdcf9c621c5328ab204a9edb6b4f88d594a5029a9a90ad0616d134031002a68"
   }
 ]

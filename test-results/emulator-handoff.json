@@ -3,9 +3,9 @@
     "event": "game.status",
     "ticket": "game.status",
     "game": {
-      "id": "SORL00019",
+      "id": "SORL00020",
       "version": "1.00",
-      "title": "SoRR PSP Lite v0.19"
+      "title": "SoRR PSP Lite v0.20"
     },
     "paused": false
   },
@@ -22,9 +22,9 @@
     0
   ],
   "ticks": 0,
-  "frames": 5,
+  "frames": 247,
   "controls_restored": true,
   "controls_sha256": "8b45c8bdb0e88eb7daff9ad8de45e4de61e3188cc316e39ceaa17bb3e0bf5031",
-  "eboot_sha256": "2b1f9e181e45b07aca687416c5cee13155705deb9126c26f0d11a395e2ec2876",
+  "eboot_sha256": "44e68b3e632160d3b4c8456abb537a9ee1fbb7bc27210a2d667ca13f755721d9",
   "visible_window_requested": true
 }

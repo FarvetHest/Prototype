@@ -100,6 +100,8 @@ void sprites_step(const Game *g) {
         if(i)frame=g->pose[i-1].fpg?g->pose[i-1].fpg:enemy_frames(g,i-1,a->hp<=0?EP_FLOOR:EP_IDLE)[0].fpg;
         if(g->physics.body[i].phase){frame=g->physics.body[i].fpg;actor_states[i]=g->physics.body[i].phase==BODY_HURT?ANIM_HURT:ANIM_DOWN;}
         if(!i && level.enabled && level.pickup_timer && !g->physics.body[0].phase && a->hp>0){frame=910;actor_states[i]=ANIM_GRAB;}
+        if(!i && g->reaction.shock && g->physics.body[0].phase==BODY_FLIGHT)frame=920+g->reaction.shock_frame;
+        else if(!i && g->reaction.holder>=0)frame=g->reaction.side?923:922;
         actor_frames[i]=frame;actor_lift[i]=g->motion.z[i];
         v->x=a->x;v->y=a->y;
     }

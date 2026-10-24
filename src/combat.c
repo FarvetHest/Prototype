@@ -104,6 +104,7 @@ void combat_enemy_attack_frame(Game *g,int i,int collision,int damage){EnemyBrai
 void combat_tick(Game *g,float x,float y,int attack,int jump,int special){Combat *c=&g->combat;Actor *p=&g->player;int i,dx=dir(x),dy=dir(y);++c->ticks;
  dec(&g->moves.grab_cooldown);dec(&g->moves.invincible);if(g->physics.body[0].phase)physics_body_tick(g,0);else{dec(&g->physics.body[0].inv);dec(&p->stun);}
  g->motion.vx[0]=0;
+ if(reaction_player_tick(g,jump,special)){charge_tick(g);for(i=0;i<4;++i)source_ai_tick(g,i);return;}
  if(level_pickup_active(g)){charge_tick(g);for(i=0;i<4;++i)source_ai_tick(g,i);return;}
  if(!p->stun && !p->jump && !p->attack && c->action==CB_NONE && !g->moves.roll && dy && dy!=g->moves.last_y){
   if(g->moves.tap_y==dy && c->ticks-(unsigned)g->moves.tap_y_tick<=16){g->moves.roll_dir=dy;g->moves.tap_y=0;action_start(g,dy>0?CB_ROLL_DOWN:CB_ROLL_UP);}

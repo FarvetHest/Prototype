@@ -40,7 +40,7 @@ def main():
     common = ['-O2','-G0','-std=gnu99','-Wall','-Wextra','-Werror',
               '-ffunction-sections','-fdata-sections','-D_PSP_FW_VERSION=600',
               '-I'+(sdk/'psp/sdk/include').as_posix(),'-I'+(sdk/'psp/include').as_posix(),'-Isrc']
-    for name in ('main','level','held','flow','game','bk3','combat','rules','impact','enemy','variety','sfx','ai','physics','sprites','stage','music','ui'):
+    for name in ('main','level','held','flow','game','bk3','combat','rules','impact','enemy','variety','reactions','sfx','ai','physics','sprites','stage','music','ui'):
         run('psp-gcc', *common, '-c', 'src/'+name+'.c','-o',(out/(name+'.o')).as_posix())
     run('psp-gcc','-G0','-c','src/sprite_atlas.S','-o',(out/'sprite_atlas.o').as_posix())
     run('psp-gcc','-G0','-c','src/stage_texture.S','-o',(out/'stage_texture.o').as_posix())
@@ -50,7 +50,7 @@ def main():
         '-specs='+(sdk/'psp/sdk/lib/prxspecs').as_posix(),
         '-Wl,-q,-T'+(sdk/'psp/sdk/lib/linkfile.prx').as_posix(),
         '-Wl,-zmax-page-size=128','-Wl,--gc-sections','-Wl,-Map='+ (out/'sorr-lite.map').as_posix(),
-        '-o',elf.as_posix(),(out/'main.o').as_posix(),(out/'level.o').as_posix(),(out/'held.o').as_posix(),(out/'flow.o').as_posix(),(out/'game.o').as_posix(),(out/'bk3.o').as_posix(),(out/'combat.o').as_posix(),(out/'physics.o').as_posix(),(out/'rules.o').as_posix(),(out/'impact.o').as_posix(),(out/'enemy.o').as_posix(),(out/'variety.o').as_posix(),(out/'sfx.o').as_posix(),(out/'ai.o').as_posix(),
+        '-o',elf.as_posix(),(out/'main.o').as_posix(),(out/'level.o').as_posix(),(out/'held.o').as_posix(),(out/'flow.o').as_posix(),(out/'game.o').as_posix(),(out/'bk3.o').as_posix(),(out/'combat.o').as_posix(),(out/'physics.o').as_posix(),(out/'rules.o').as_posix(),(out/'impact.o').as_posix(),(out/'enemy.o').as_posix(),(out/'variety.o').as_posix(),(out/'reactions.o').as_posix(),(out/'sfx.o').as_posix(),(out/'ai.o').as_posix(),
         (out/'sprites.o').as_posix(),(out/'sprite_atlas.o').as_posix(),
         (out/'stage.o').as_posix(),(out/'music.o').as_posix(),(out/'stage_texture.o').as_posix(),
         (out/'ui.o').as_posix(),(out/'hud_texture.o').as_posix(),
@@ -58,7 +58,7 @@ def main():
         '-lpspge','-lpspctrl','-lm')
     run('psp-fixup-imports',elf)
     run('psp-prxgen',elf,out/'sorr-lite.prx')
-    run('mksfoex','-d','MEMSIZE=0','-s','DISC_ID=SORL00019','SoRR PSP Lite v0.19',out/'PARAM.SFO')
+    run('mksfoex','-d','MEMSIZE=0','-s','DISC_ID=SORL00020','SoRR PSP Lite v0.20',out/'PARAM.SFO')
     run('pack-pbp',out/'EBOOT.PBP',out/'PARAM.SFO',*(['NULL']*5),out/'sorr-lite.prx','NULL')
     run('psp-size',elf)
     pbp=out/'EBOOT.PBP'

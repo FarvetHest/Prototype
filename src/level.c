@@ -116,7 +116,7 @@ void level_step(Level *l,Game *g){int i,n,end;float delta,limit;
   l->go=0;if(++l->outro>LEVEL_OUTRO){l->finished=1;g->won=1;}return;
  }
  feed(l,g);
- if(g->physics.body[0].phase || g->combat.target>=0 || l->pickup_timer)return;
+ if(g->physics.body[0].phase || g->combat.target>=0 || g->reaction.holder>=0 || l->pickup_timer)return;
  limit=l->gate?LEVEL_CAMERA_MAX:LEVEL_MID_GATE;end=l->gate?LEVEL_CUES:10;
  /* A full family pool defers its record and holds the camera at that record. */
  if(l->cue<end && free_slot(l,cues[l->cue].family)<0 && cues[l->cue].trigger<limit){limit=cues[l->cue].trigger;if(limit<l->camera)limit=l->camera;}

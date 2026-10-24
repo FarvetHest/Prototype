@@ -133,7 +133,7 @@ void source_ai_tick(Game *g,int i){float x=g->enemies[i].x,y=g->enemies[i].y;int
  source_ai_step(g,i);
  if(g->physics.body[i+1].phase || frozen)return;
  if(attack_mode(g->rules.ai[i].mode) || (enemy_type(g,i)>=EN_ELECTRA && g->extra[i].action))return;
- enemy_pose_tick(g,i,g->combat.target==i?EP_HELD:g->enemies[i].hp<=0?EP_FLOOR:g->enemies[i].stun?EP_HURT:(x!=g->enemies[i].x || y!=g->enemies[i].y)?EP_WALK:EP_IDLE);
+ enemy_pose_tick(g,i,g->reaction.holder==i?16+g->reaction.side:g->combat.target==i?EP_HELD:g->enemies[i].hp<=0?EP_FLOOR:g->enemies[i].stun?EP_HURT:(x!=g->enemies[i].x || y!=g->enemies[i].y)?EP_WALK:EP_IDLE);
  g->combat.enemy[i].fpg=g->pose[i].fpg;
 }
 int source_ai_selftest(void){Game g;int i,s;unsigned seed;

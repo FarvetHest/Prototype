@@ -1,0 +1,45 @@
+{
+  "checks": {
+    "selftest": true,
+    "front_capture": true,
+    "capture_preserves_player_position": true,
+    "pause_freezes_hold": true,
+    "captured_knees_deal_damage": true,
+    "special_escapes_capture": true,
+    "holder_death_releases_player": true,
+    "back_capture": true,
+    "back_jump_escape": true,
+    "back_hold_expires": true,
+    "front_blocks_without_HP_loss": true,
+    "rear_bypasses_block": true,
+    "blocked_combo_counter": true,
+    "counter_deals_original_damage": true,
+    "pause_freezes_electric_reaction": true,
+    "electric_damage_5": true,
+    "both_native_electric_poses": true,
+    "electric_state_ends_at_landing": true,
+    "no_missing_frames": true
+  },
+  "trace": {
+    "paused": [
+      -1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    "electric_frames": [
+      920,
+      921
+    ]
+  },
+  "eboot_sha256": "44e68b3e632160d3b4c8456abb537a9ee1fbb7bc27210a2d667ca13f755721d9",
+  "note": "Debugger arranges type, position, guard and RNG; actual capture AI, Square/triangle/Cross, MIPS damage, held poses, shock, physics and pause run normally. Block/counter are explicitly adapted from Obj_Blondie for Zack."
+}

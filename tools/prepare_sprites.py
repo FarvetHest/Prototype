@@ -46,6 +46,9 @@ def main():
         if name=='bk3_axel' and (dest/'pickup-native.json').exists():
             pickup=json.loads((dest/'pickup-native.json').read_text())
             frames.update({int(k):dict(v,pixels=bytes.fromhex(v['pixels']))for k,v in pickup['frames'].items()});ids+=list(map(int,pickup['frames']))
+        if name=='bk3_axel' and (dest/'reaction-native.json').exists():
+            reactions=json.loads((dest/'reaction-native.json').read_text())
+            frames.update({int(k):dict(v,pixels=bytes.fromhex(v['pixels']))for k,v in reactions['frames'].items()});ids+=list(map(int,reactions['frames']))
         SETS[name]=ids;palettes.append(palette)
         sources.append({'file':(native[name]['source_art']+' + sprite mappings')if name in native else path.name,'sha256':native[name]['source_sha256']if name in native else hashlib.sha256(path.read_bytes()).hexdigest(),'color_source':path.name,'color_source_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'frame_ids':ids})
         for code in ids:

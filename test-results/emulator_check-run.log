@@ -423,7 +423,7 @@
       0
     ]
   ],
-  "eboot_sha256": "2b1f9e181e45b07aca687416c5cee13155705deb9126c26f0d11a395e2ec2876",
+  "eboot_sha256": "44e68b3e632160d3b4c8456abb537a9ee1fbb7bc27210a2d667ca13f755721d9",
   "profile_intervals": 122,
   "soak_seconds": 10,
   "idle_frames_seen": [
@@ -441,7 +441,7 @@
     6,
     6,
     7,
-    7
+    8
   ],
   "state": {
     "player": [
@@ -508,15 +508,15 @@
   "music_stats": [
     1,
     0,
-    2647,
-    5265408,
+    2648,
+    5269504,
     1,
-    1499,
+    1500,
     0,
     44100,
     8599534,
     53,
-    76,
+    75,
     7
   ],
   "mechanics": [
@@ -555,11 +555,11 @@
     0,
     0
   ],
-  "decoded_pcm_rms": 11216.870269022464,
+  "decoded_pcm_rms": 11052.501974739083,
   "sprite_draws": 5,
   "sprite_slices": 10,
-  "frames": 3684,
-  "logic_count": 3686,
+  "frames": 3685,
+  "logic_count": 3687,
   "dropped_ticks": 0,
   "note": "Emulator checks only. Combat edge cases use debugger-arranged actor positions/HP. EOF loop check seeks near the end via the audio worker, then lets the PCM stream wrap normally. Controller traces compare source equations/tables, not execution of the ROM. Screenshots read the completed presented VRAM buffer; use PPSSPP software renderer."
 }

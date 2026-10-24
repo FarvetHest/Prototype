@@ -167,7 +167,7 @@
     },
     {
       "cue": 9,
-      "camera": 386.0,
+      "camera": 384.75,
       "score": 3200,
       "live": 1
     },
@@ -209,13 +209,13 @@
     },
     {
       "cue": 16,
-      "camera": 832.25,
+      "camera": 833.5,
       "score": 6000,
       "live": 1
     },
     {
       "cue": 17,
-      "camera": 896.0,
+      "camera": 897.25,
       "score": 6400,
       "live": 1
     },
@@ -227,19 +227,19 @@
     },
     {
       "cue": 19,
-      "camera": 1024.75,
+      "camera": 1026.0,
       "score": 7200,
       "live": 1
     },
     {
       "cue": 20,
-      "camera": 1088.5,
+      "camera": 1089.75,
       "score": 7600,
       "live": 1
     }
   ],
   "max_slots": 2,
-  "max_empty_walk_pixels": 165.0,
-  "eboot_sha256": "2b1f9e181e45b07aca687416c5cee13155705deb9126c26f0d11a395e2ec2876",
+  "max_empty_walk_pixels": 167.5,
+  "eboot_sha256": "44e68b3e632160d3b4c8456abb537a9ee1fbb7bc27210a2d667ca13f755721d9",
   "note": "Camera/world conservation and stream traversal use real Right input; debugger kills arrived enemies to accelerate progression and fixtures arrange a held survivor/midpoint release. Distances use half-pixel world units. Not hardware timing."
 }

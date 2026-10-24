@@ -8,3 +8,5 @@ Impact audio: local SoRR sor1_hit.wav, original authorship retained.
 Prepared PCM provenance and transformations: assets/sfx-manifest.json.
 
 v0.19 adds native Electra/Zack sprite geometry (ArtNem_Electra, ArtNem_GoldieZack) and Pal_MainPal CRAM from the pinned BK3 disassembly. Rights remain with the original rights holders. No new ownership or license is asserted.
+
+v0.20 includes the complete pinned BK3 IDA listing from gsaurus/sor-disassemblies for source analysis. Original game code/data remain the property of their rights holders; inclusion does not assert a new license or ownership. Seven native reaction/hold poses are extracted from the same revision.

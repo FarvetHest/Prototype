@@ -6,6 +6,7 @@
 #include "physics_data.h"
 #include "bk3_data.h"
 #include "variety_data.h"
+#include "reaction_data.h"
 #include <string.h>
 static float ab(float x){return x<0?-x:x;}
 static float clamp(float x,float lo,float hi){return x<lo?lo:x>hi?hi:x;}
@@ -13,11 +14,14 @@ int enemy_type(const Game *g,int i){int t=g->extra[i].type;return t>=0 && t<=EN_
 void enemy_set_type(Game *g,int i,int type){memset(&g->extra[i],0,sizeof(g->extra[i]));g->extra[i].type=type;g->pose[i]=(EnemyPose){0};g->rules.actor[i+1].type=type==EN_ELECTRA?28:type==EN_ZACK?30:type?16:14;}
 const EnemyFrame *variety_sequence(int t,int k,int *n){
 #define S(kind,name) case kind:if(t==EN_ELECTRA){*n=sizeof(electra_##name)/sizeof(EnemyFrame);return electra_##name;}*n=sizeof(zack_##name)/sizeof(EnemyFrame);return zack_##name;
+ if(t==EN_ZACK && (k==16 || k==17)){*n=1;return k==16?defense_holder:defense_backholder;}
+ if(t==EN_ZACK && (k==14 || k==15)){*n=1;return k==14?defense_guard:defense_counter;}
  switch(k){S(EP_IDLE,idle) S(EP_WALK,walk) S(EP_HELD,held) S(EP_HURT2,hurt2) S(EP_HURT,hurt) S(EP_FLIGHT,flight) S(EP_FLOOR,floor) S(EP_GETUP,getup) S(EP_FRONT,front) S(EP_BACK,back) S(EP_JAB,jab) S(EP_UPPER,uppercut) S(EP_KICK,kick) S(13,jump) S(14,guard)}
 #undef S
  *n=1;return electra_idle;
 }
 const signed char *enemy_box(const Game *g,int i,int id,int hurt){int t=enemy_type(g,i);if(id<0)return 0;
+ if(t==EN_ZACK && g->extra[i].action>=14){if(hurt)return id<(int)(sizeof(counter_hurt)/8)?counter_hurt[id]:0;return id<(int)(sizeof(counter_boxes)/8)?counter_boxes[id]:0;}
 #define BOX(type,prefix) case type:if(hurt)return id<(int)(sizeof(prefix##_hurt_boxes)/8)?prefix##_hurt_boxes[id]:0;return id<(int)(sizeof(prefix##_boxes)/8)?prefix##_boxes[id]:0;
  if(t==EN_GALSIA){if(hurt)return id<9?garcia_hurt_boxes[id]:0;return id<4?garcia_boxes[id]:0;}
  if(t==EN_DONOVAN){if(hurt)return id<12?donovan_hurt_boxes[id]:0;return id<5?donovan_boxes[id]:0;}
@@ -36,7 +40,7 @@ static void decide(Game *g,int i,float x,float y){EnemyBrain *b=&g->combat.enemy
   /* loc_2B444: <32 retreat jump; aligned <80 mode48, <136 mode4A. */
   if(d<32 && random(g,100)<p[30]){begin(g,i,13);g->extra[i].vz=-360448;g->extra[i].vx=-(x>=0?1:-1)*131072;return;}
   if(ab(y)<=7 && (rules_flags(g,0)&128) && ab(x)<136){b->state=ab(x)<80?8:9;b->timer=0;return;}
- }else if(ab(y)<=7 && ab(x)<=60 && (rules_flags(g,0)&128)){
+ }else if(reaction_capture(g,i)){return;}else if(ab(y)<=7 && ab(x)<=60 && (rules_flags(g,0)&128)){
   /* loc_2C648 then loc_2C464: two jabs, then mode4A finisher. */
   b->state=8;b->timer=p[28]+random(g,p[28]);return;
  }
@@ -50,24 +54,26 @@ static void decide(Game *g,int i,float x,float y){EnemyBrain *b=&g->combat.enemy
  else{b->speed=p[22]+random(g,p[23]);b->timer=p[20]+random(g,p[21]);g->rules.ai[i].offset=random(g,2);}
 }
 static void animate(Game *g,int i){EnemyExtra *v=&g->extra[i];EnemyBrain *b=&g->combat.enemy[i];Actor *e=&g->enemies[i];const EnemyFrame *f;int n=enemy_count(g,i,v->action),action=v->action;
- f=enemy_frames(g,i,action);
+ f=enemy_frames(g,i,action);if(action==14 && v->wait>0){--v->wait;e->x=clamp(e->x+v->vx/131072.f,10,230);if(v->vx>0){v->vx-=32768;if(v->vx<0)v->vx=0;}else if(v->vx<0){v->vx+=32768;if(v->vx>0)v->vx=0;}}
  if(!v->timer){if(v->frame>=n){
+   if(action==14 && v->wait>0){v->frame=0;}else{
    if(enemy_type(g,i)==EN_ELECTRA && action==EP_JAB){begin(g,i,EP_KICK);return;}
    v->action=0;e->attack=0;g->rules.ai[i].mode=2;if(action==EP_KICK)b->state=7;return;
-  }v->timer=f[v->frame].ticks;b->mask=0;}
+  }}v->timer=f[v->frame].ticks;b->mask=0;}
  g->pose[i].kind=action;g->pose[i].fpg=f[v->frame].fpg;g->pose[i].hurt=f[v->frame].hurt;b->fpg=f[v->frame].fpg;
  if(action==13){
   /* Electra sub_2B48A: source vx=-2, vz=-5.5, gravity .25. */
   e->x=clamp(e->x+v->vx/131072.f,10,230);v->z+=v->vz;v->vz+=16384;
   if(v->z>=0){v->z=v->vz=v->vx=0;v->action=0;g->rules.ai[i].mode=2;b->state=7;e->jump=0;g->motion.z[i+1]=0;return;}
   e->jump=1;g->motion.z[i+1]=-v->z/65536.f;
- }else if(action>=EP_JAB && action<=EP_KICK)combat_enemy_attack_frame(g,i,f[v->frame].collision,f[v->frame].damage);
+ }else if(((action>=EP_JAB && action<=EP_KICK) || action==15))combat_enemy_attack_frame(g,i,f[v->frame].collision,f[v->frame].damage);
  if(!--v->timer && ++v->frame>=n && action==13)v->frame=n-1;
 }
 int variety_tick(Game *g,int i){EnemyExtra *v=&g->extra[i];EnemyBrain *b=&g->combat.enemy[i];SourceAI *a=&g->rules.ai[i];Actor *e=&g->enemies[i];const unsigned char *p=profile(g,i);float x=(int)(g->player.x*2)-(int)(e->x*2),y=(int)(g->player.y*.76f)-(int)(e->y*.76f),d=ab(x)+ab(y);int sx=x>0?1:-1,sy=y>2?1:y<-2?-1:0,s;
  /* A hit/hold is handled before this adapter. physics_hit cancels source mode. */
  if(v->action && a->mode==2){v->action=0;v->z=v->vz=v->vx=0;}
  if(v->action){animate(g,i);return 1;}
+ if(g->reaction.holder==i)return 1;
  a->active=(rules_flags(g,0)&128)!=0;a->target=a->active?0:-1;
  if(!(g->combat.ticks&7)){e->facing=sx;++a->face_ticks;}
  if(!a->active){e->attack=0;b->state=7;move(g,i,d>112?sx:-sx,0,12);return 1;}

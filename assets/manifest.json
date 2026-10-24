@@ -100,7 +100,11 @@
         902,
         903,
         904,
-        910
+        910,
+        920,
+        921,
+        922,
+        923
       ]
     },
     {
@@ -240,7 +244,10 @@
         1021,
         1022,
         1023,
-        1024
+        1024,
+        1025,
+        1026,
+        1027
       ]
     }
   ],
@@ -486,6 +493,22 @@
       "y": 203
     },
     {
+      "family": 4,
+      "name": "zack",
+      "id": 1026,
+      "w": 72,
+      "h": 78,
+      "px": 56,
+      "py": 77,
+      "source_w": 72,
+      "source_h": 78,
+      "crop_left": 0,
+      "crop_top": 0,
+      "title": "word_2236CC",
+      "x": 1,
+      "y": 257
+    },
+    {
       "family": 0,
       "name": "bk3_axel",
       "id": 66,
@@ -546,8 +569,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 1,
-      "y": 257
+      "x": 269,
+      "y": 212
     },
     {
       "family": 3,
@@ -562,8 +585,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2113D6",
-      "x": 256,
-      "y": 263
+      "x": 75,
+      "y": 266
     },
     {
       "family": 0,
@@ -578,7 +601,7 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 342,
+      "x": 344,
       "y": 282
     },
     {
@@ -595,7 +618,7 @@
       "crop_top": 0,
       "title": "FPGEDIT 2005",
       "x": 256,
-      "y": 329
+      "y": 288
     },
     {
       "family": 1,
@@ -610,8 +633,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203642",
-      "x": 76,
-      "y": 266
+      "x": 75,
+      "y": 332
     },
     {
       "family": 2,
@@ -627,7 +650,7 @@
       "crop_top": 0,
       "title": "word_203FAC",
       "x": 1,
-      "y": 333
+      "y": 337
     },
     {
       "family": 0,
@@ -643,7 +666,7 @@
       "crop_top": 0,
       "title": "FPGEDIT 2005",
       "x": 1,
-      "y": 409
+      "y": 413
     },
     {
       "family": 4,
@@ -659,7 +682,7 @@
       "crop_top": 0,
       "title": "word_222F0C",
       "x": 73,
-      "y": 409
+      "y": 413
     },
     {
       "family": 4,
@@ -675,7 +698,7 @@
       "crop_top": 0,
       "title": "word_222F7C",
       "x": 143,
-      "y": 399
+      "y": 408
     },
     {
       "family": 3,
@@ -690,7 +713,7 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_211298",
-      "x": 149,
+      "x": 148,
       "y": 333
     },
     {
@@ -723,7 +746,7 @@
       "crop_top": 0,
       "title": "word_2114D4",
       "x": 283,
-      "y": 399
+      "y": 393
     },
     {
       "family": 1,
@@ -888,6 +911,22 @@
     {
       "family": 0,
       "name": "bk3_axel",
+      "id": 920,
+      "w": 79,
+      "h": 61,
+      "px": 39,
+      "py": 61,
+      "source_w": 79,
+      "source_h": 61,
+      "crop_left": 0,
+      "crop_top": 0,
+      "title": "DMA_Axel_Electricuted / word_116F0C",
+      "x": 71,
+      "y": 951
+    },
+    {
+      "family": 0,
+      "name": "bk3_axel",
       "id": 901,
       "w": 62,
       "h": 77,
@@ -898,8 +937,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_116CCC",
-      "x": 79,
-      "y": 885
+      "x": 67,
+      "y": 664
     },
     {
       "family": 0,
@@ -915,7 +954,7 @@
       "crop_top": 0,
       "title": "word_116CF6",
       "x": 67,
-      "y": 664
+      "y": 743
     },
     {
       "family": 0,
@@ -946,8 +985,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 67,
-      "y": 743
+      "x": 83,
+      "y": 822
     },
     {
       "family": 0,
@@ -978,8 +1017,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 131,
-      "y": 740
+      "x": 137,
+      "y": 513
     },
     {
       "family": 0,
@@ -994,8 +1033,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 137,
-      "y": 513
+      "x": 131,
+      "y": 740
     },
     {
       "family": 0,
@@ -1010,8 +1049,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 143,
-      "y": 829
+      "x": 147,
+      "y": 820
     },
     {
       "family": 4,
@@ -1026,8 +1065,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_222EDE",
-      "x": 71,
-      "y": 964
+      "x": 137,
+      "y": 602
     },
     {
       "family": 3,
@@ -1042,8 +1081,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_210E9C",
-      "x": 185,
-      "y": 740
+      "x": 191,
+      "y": 513
     },
     {
       "family": 0,
@@ -1058,8 +1097,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 147,
-      "y": 914
+      "x": 152,
+      "y": 905
     },
     {
       "family": 0,
@@ -1074,8 +1113,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 193,
-      "y": 914
+      "x": 198,
+      "y": 905
     },
     {
       "family": 4,
@@ -1090,8 +1129,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_223002",
-      "x": 198,
-      "y": 822
+      "x": 191,
+      "y": 740
     },
     {
       "family": 0,
@@ -1106,8 +1145,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 137,
-      "y": 593
+      "x": 195,
+      "y": 663
     },
     {
       "family": 3,
@@ -1138,8 +1177,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_116C8C",
-      "x": 195,
-      "y": 649
+      "x": 202,
+      "y": 819
     },
     {
       "family": 0,
@@ -1154,8 +1193,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_116CAC",
-      "x": 241,
-      "y": 734
+      "x": 248,
+      "y": 719
     },
     {
       "family": 0,
@@ -1170,8 +1209,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 197,
-      "y": 513
+      "x": 253,
+      "y": 904
     },
     {
       "family": 0,
@@ -1186,8 +1225,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 248,
-      "y": 901
+      "x": 254,
+      "y": 804
     },
     {
       "family": 0,
@@ -1202,8 +1241,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 255,
-      "y": 819
+      "x": 247,
+      "y": 513
     },
     {
       "family": 0,
@@ -1218,8 +1257,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 303,
-      "y": 888
+      "x": 247,
+      "y": 582
     },
     {
       "family": 0,
@@ -1234,8 +1273,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 247,
-      "y": 589
+      "x": 300,
+      "y": 658
     },
     {
       "family": 0,
@@ -1250,8 +1289,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 293,
-      "y": 663
+      "x": 310,
+      "y": 513
     },
     {
       "family": 0,
@@ -1266,8 +1305,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 318,
-      "y": 742
+      "x": 309,
+      "y": 732
     },
     {
       "family": 0,
@@ -1282,8 +1321,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 305,
-      "y": 513
+      "x": 309,
+      "y": 818
     },
     {
       "family": 3,
@@ -1298,8 +1337,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_210EF2",
-      "x": 347,
-      "y": 594
+      "x": 311,
+      "y": 899
     },
     {
       "family": 3,
@@ -1314,7 +1353,7 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_210FAA",
-      "x": 397,
+      "x": 364,
       "y": 513
     },
     {
@@ -1330,7 +1369,7 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 443,
+      "x": 410,
       "y": 513
     },
     {
@@ -1346,8 +1385,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 443,
-      "y": 592
+      "x": 461,
+      "y": 513
     },
     {
       "family": 3,
@@ -1362,8 +1401,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_211526",
-      "x": 397,
-      "y": 671
+      "x": 410,
+      "y": 592
     },
     {
       "family": 0,
@@ -1378,8 +1417,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 318,
-      "y": 828
+      "x": 358,
+      "y": 674
     },
     {
       "family": 0,
@@ -1394,8 +1433,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 367,
-      "y": 753
+      "x": 459,
+      "y": 592
     },
     {
       "family": 3,
@@ -1410,8 +1449,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2116C0",
-      "x": 446,
-      "y": 671
+      "x": 459,
+      "y": 664
     },
     {
       "family": 3,
@@ -1426,8 +1465,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2116F8",
-      "x": 446,
-      "y": 744
+      "x": 358,
+      "y": 737
     },
     {
       "family": 0,
@@ -1442,8 +1481,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 421,
-      "y": 817
+      "x": 411,
+      "y": 734
     },
     {
       "family": 0,
@@ -1458,8 +1497,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 360,
-      "y": 888
+      "x": 459,
+      "y": 737
     },
     {
       "family": 3,
@@ -1474,8 +1513,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_21122E",
-      "x": 360,
-      "y": 959
+      "x": 304,
+      "y": 592
     },
     {
       "family": 0,
@@ -1490,8 +1529,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 418,
-      "y": 897
+      "x": 361,
+      "y": 810
     },
     {
       "family": 4,
@@ -1506,8 +1545,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_222FB4",
-      "x": 1,
-      "y": 1025
+      "x": 459,
+      "y": 808
     },
     {
       "family": 0,
@@ -1522,8 +1561,8 @@
       "crop_left": 2,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 469,
-      "y": 817
+      "x": 410,
+      "y": 814
     },
     {
       "family": 3,
@@ -1538,8 +1577,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_210F4E",
-      "x": 467,
-      "y": 905
+      "x": 361,
+      "y": 888
     },
     {
       "family": 0,
@@ -1554,8 +1593,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 1,
-      "y": 1106
+      "x": 453,
+      "y": 889
     },
     {
       "family": 4,
@@ -1571,7 +1610,7 @@
       "crop_top": 0,
       "title": "word_222D9E",
       "x": 1,
-      "y": 1189
+      "y": 1025
     },
     {
       "family": 1,
@@ -1586,8 +1625,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203458",
-      "x": 74,
-      "y": 342
+      "x": 1,
+      "y": 1104
     },
     {
       "family": 0,
@@ -1602,8 +1641,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 46,
-      "y": 1106
+      "x": 407,
+      "y": 902
     },
     {
       "family": 4,
@@ -1635,7 +1674,7 @@
       "crop_top": 0,
       "title": "word_203EC6",
       "x": 1,
-      "y": 1268
+      "y": 1169
     },
     {
       "family": 2,
@@ -1651,7 +1690,7 @@
       "crop_top": 0,
       "title": "word_203EF0",
       "x": 1,
-      "y": 1362
+      "y": 1263
     },
     {
       "family": 1,
@@ -1666,8 +1705,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_20324E",
-      "x": 255,
-      "y": 513
+      "x": 1,
+      "y": 1357
     },
     {
       "family": 2,
@@ -1683,7 +1722,7 @@
       "crop_top": 0,
       "title": "word_203BF4",
       "x": 1,
-      "y": 1456
+      "y": 1433
     },
     {
       "family": 0,
@@ -1699,7 +1738,7 @@
       "crop_top": 0,
       "title": "FPGEDIT 2005",
       "x": 40,
-      "y": 1268
+      "y": 1169
     },
     {
       "family": 0,
@@ -1714,8 +1753,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 48,
-      "y": 1186
+      "x": 40,
+      "y": 1250
     },
     {
       "family": 4,
@@ -1730,7 +1769,7 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_222D6A",
-      "x": 92,
+      "x": 85,
       "y": 1103
     },
     {
@@ -1762,8 +1801,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 40,
-      "y": 1349
+      "x": 85,
+      "y": 1180
     },
     {
       "family": 2,
@@ -1778,8 +1817,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203D5E",
-      "x": 85,
-      "y": 1263
+      "x": 132,
+      "y": 1100
     },
     {
       "family": 0,
@@ -1795,7 +1834,7 @@
       "crop_top": 0,
       "title": "FPGEDIT 2005",
       "x": 49,
-      "y": 1412
+      "y": 1327
     },
     {
       "family": 1,
@@ -1810,8 +1849,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2032BE",
-      "x": 95,
-      "y": 1180
+      "x": 143,
+      "y": 1025
     },
     {
       "family": 3,
@@ -1826,8 +1865,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_211664",
-      "x": 139,
-      "y": 1100
+      "x": 87,
+      "y": 1243
     },
     {
       "family": 3,
@@ -1842,8 +1881,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_211692",
-      "x": 143,
-      "y": 1025
+      "x": 49,
+      "y": 1414
     },
     {
       "family": 0,
@@ -1859,7 +1898,23 @@
       "crop_top": 0,
       "title": "FPGEDIT 2005",
       "x": 90,
-      "y": 1412
+      "y": 1317
+    },
+    {
+      "family": 0,
+      "name": "bk3_axel",
+      "id": 921,
+      "w": 66,
+      "h": 50,
+      "px": 35,
+      "py": 56,
+      "source_w": 66,
+      "source_h": 50,
+      "crop_left": 0,
+      "crop_top": 0,
+      "title": "DMA_Axel_Electricuted / word_116E8A",
+      "x": 135,
+      "y": 1243
     },
     {
       "family": 0,
@@ -1874,8 +1929,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 269,
-      "y": 212
+      "x": 49,
+      "y": 1488
     },
     {
       "family": 0,
@@ -1890,8 +1945,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 90,
-      "y": 1464
+      "x": 142,
+      "y": 1165
     },
     {
       "family": 0,
@@ -1907,7 +1962,7 @@
       "crop_top": 0,
       "title": "FPGEDIT 2005",
       "x": 97,
-      "y": 1328
+      "y": 1369
     },
     {
       "family": 0,
@@ -1922,8 +1977,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 140,
-      "y": 1254
+      "x": 120,
+      "y": 1450
     },
     {
       "family": 0,
@@ -1938,8 +1993,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 143,
-      "y": 1174
+      "x": 187,
+      "y": 1099
     },
     {
       "family": 0,
@@ -1955,7 +2010,7 @@
       "crop_top": 0,
       "title": "FPGEDIT 2005",
       "x": 158,
-      "y": 1332
+      "y": 1295
     },
     {
       "family": 0,
@@ -1970,8 +2025,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 83,
-      "y": 829
+      "x": 140,
+      "y": 1378
     },
     {
       "family": 4,
@@ -1986,8 +2041,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_222E9E",
-      "x": 184,
-      "y": 1238
+      "x": 199,
+      "y": 1295
     },
     {
       "family": 4,
@@ -2002,8 +2057,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_222EBE",
-      "x": 161,
-      "y": 1415
+      "x": 203,
+      "y": 1214
     },
     {
       "family": 4,
@@ -2018,8 +2073,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_22302C",
-      "x": 187,
-      "y": 1099
+      "x": 191,
+      "y": 1025
     },
     {
       "family": 1,
@@ -2034,8 +2089,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2033F0",
-      "x": 191,
-      "y": 1025
+      "x": 362,
+      "y": 601
     },
     {
       "family": 1,
@@ -2050,8 +2105,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203414",
-      "x": 199,
-      "y": 1318
+      "x": 236,
+      "y": 1025
     },
     {
       "family": 2,
@@ -2066,8 +2121,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203E30",
-      "x": 226,
-      "y": 1173
+      "x": 164,
+      "y": 1434
     },
     {
       "family": 2,
@@ -2082,8 +2137,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203DDC",
-      "x": 239,
-      "y": 1025
+      "x": 240,
+      "y": 1094
     },
     {
       "family": 0,
@@ -2098,8 +2153,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 203,
-      "y": 1387
+      "x": 212,
+      "y": 1375
     },
     {
       "family": 2,
@@ -2114,8 +2169,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203DFC",
-      "x": 226,
-      "y": 1242
+      "x": 212,
+      "y": 1462
     },
     {
       "family": 0,
@@ -2131,7 +2186,7 @@
       "crop_top": 0,
       "title": "FPGEDIT 2005",
       "x": 241,
-      "y": 1387
+      "y": 1294
     },
     {
       "family": 3,
@@ -2146,8 +2201,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2115D8",
-      "x": 247,
-      "y": 1312
+      "x": 250,
+      "y": 1362
     },
     {
       "family": 0,
@@ -2162,8 +2217,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 203,
-      "y": 1474
+      "x": 259,
+      "y": 1436
     },
     {
       "family": 0,
@@ -2178,8 +2233,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 263,
-      "y": 1455
+      "x": 245,
+      "y": 1177
     },
     {
       "family": 0,
@@ -2194,8 +2249,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 356,
-      "y": 513
+      "x": 280,
+      "y": 1094
     },
     {
       "family": 0,
@@ -2210,8 +2265,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 274,
-      "y": 1108
+      "x": 289,
+      "y": 1249
     },
     {
       "family": 3,
@@ -2226,8 +2281,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_210CF8",
-      "x": 279,
-      "y": 1025
+      "x": 294,
+      "y": 1330
     },
     {
       "family": 3,
@@ -2242,8 +2297,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_210D22",
-      "x": 274,
-      "y": 1189
+      "x": 319,
+      "y": 1411
     },
     {
       "family": 3,
@@ -2258,8 +2313,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_210D50",
-      "x": 291,
-      "y": 1270
+      "x": 359,
+      "y": 1025
     },
     {
       "family": 3,
@@ -2274,8 +2329,24 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_210D7E",
-      "x": 291,
-      "y": 1351
+      "x": 321,
+      "y": 1106
+    },
+    {
+      "family": 4,
+      "name": "zack",
+      "id": 1027,
+      "w": 38,
+      "h": 79,
+      "px": 23,
+      "py": 78,
+      "source_w": 38,
+      "source_h": 79,
+      "crop_left": 0,
+      "crop_top": 0,
+      "title": "word_222FD8",
+      "x": 329,
+      "y": 1187
     },
     {
       "family": 2,
@@ -2290,8 +2361,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203F44",
-      "x": 308,
-      "y": 1432
+      "x": 361,
+      "y": 1106
     },
     {
       "family": 3,
@@ -2306,8 +2377,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2115FC",
-      "x": 314,
-      "y": 1106
+      "x": 399,
+      "y": 1025
     },
     {
       "family": 3,
@@ -2322,7 +2393,7 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_211630",
-      "x": 319,
+      "x": 443,
       "y": 1025
     },
     {
@@ -2338,8 +2409,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_211730",
-      "x": 314,
-      "y": 1179
+      "x": 403,
+      "y": 1098
     },
     {
       "family": 0,
@@ -2354,8 +2425,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 331,
-      "y": 1252
+      "x": 447,
+      "y": 1098
     },
     {
       "family": 0,
@@ -2370,8 +2441,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 331,
-      "y": 1347
+      "x": 403,
+      "y": 1171
     },
     {
       "family": 0,
@@ -2386,8 +2457,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 350,
-      "y": 1427
+      "x": 443,
+      "y": 1193
     },
     {
       "family": 0,
@@ -2402,8 +2473,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 358,
-      "y": 1098
+      "x": 369,
+      "y": 1251
     },
     {
       "family": 2,
@@ -2418,8 +2489,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203CFC",
-      "x": 397,
-      "y": 601
+      "x": 284,
+      "y": 1025
     },
     {
       "family": 2,
@@ -2434,8 +2505,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203D20",
-      "x": 247,
-      "y": 663
+      "x": 334,
+      "y": 1333
     },
     {
       "family": 1,
@@ -2450,8 +2521,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2032F6",
-      "x": 397,
-      "y": 1025
+      "x": 359,
+      "y": 1402
     },
     {
       "family": 1,
@@ -2466,8 +2537,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203320",
-      "x": 438,
-      "y": 1025
+      "x": 408,
+      "y": 1273
     },
     {
       "family": 1,
@@ -2482,8 +2553,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2035DA",
-      "x": 397,
-      "y": 1102
+      "x": 449,
+      "y": 1273
     },
     {
       "family": 2,
@@ -2498,8 +2569,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203B76",
-      "x": 438,
-      "y": 1102
+      "x": 400,
+      "y": 1350
     },
     {
       "family": 2,
@@ -2514,8 +2585,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203C2C",
-      "x": 397,
-      "y": 1179
+      "x": 441,
+      "y": 1350
     },
     {
       "family": 4,
@@ -2530,8 +2601,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_222DD2",
-      "x": 365,
-      "y": 1256
+      "x": 400,
+      "y": 1427
     },
     {
       "family": 4,
@@ -2546,8 +2617,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2230D8",
-      "x": 371,
-      "y": 1337
+      "x": 439,
+      "y": 1427
     },
     {
       "family": 4,
@@ -2562,8 +2633,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_222D12",
-      "x": 404,
-      "y": 1256
+      "x": 1,
+      "y": 1537
     },
     {
       "family": 4,
@@ -2578,8 +2649,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2230B4",
-      "x": 443,
-      "y": 1179
+      "x": 1,
+      "y": 1617
     },
     {
       "family": 2,
@@ -2594,8 +2665,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203BA0",
-      "x": 443,
-      "y": 1259
+      "x": 1,
+      "y": 1697
     },
     {
       "family": 2,
@@ -2610,8 +2681,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203BCA",
-      "x": 443,
-      "y": 1335
+      "x": 40,
+      "y": 1537
     },
     {
       "family": 0,
@@ -2626,8 +2697,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 390,
-      "y": 1418
+      "x": 40,
+      "y": 1612
     },
     {
       "family": 0,
@@ -2642,8 +2713,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 428,
-      "y": 1410
+      "x": 1,
+      "y": 1773
     },
     {
       "family": 2,
@@ -2658,8 +2729,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203DBC",
-      "x": 469,
-      "y": 1410
+      "x": 1,
+      "y": 1847
     },
     {
       "family": 0,
@@ -2674,8 +2745,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 347,
-      "y": 676
+      "x": 1,
+      "y": 1931
     },
     {
       "family": 1,
@@ -2690,8 +2761,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2033C6",
-      "x": 1,
-      "y": 1537
+      "x": 37,
+      "y": 1847
     },
     {
       "family": 1,
@@ -2706,8 +2777,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2036A0",
-      "x": 1,
-      "y": 1602
+      "x": 47,
+      "y": 1912
     },
     {
       "family": 4,
@@ -2722,8 +2793,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2230FC",
-      "x": 1,
-      "y": 1667
+      "x": 42,
+      "y": 1693
     },
     {
       "family": 0,
@@ -2738,8 +2809,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 1,
-      "y": 1748
+      "x": 78,
+      "y": 1612
     },
     {
       "family": 0,
@@ -2754,8 +2825,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 38,
-      "y": 1667
+      "x": 81,
+      "y": 1537
     },
     {
       "family": 3,
@@ -2770,8 +2841,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_210DCC",
-      "x": 418,
-      "y": 987
+      "x": 212,
+      "y": 475
     },
     {
       "family": 1,
@@ -2787,7 +2858,7 @@
       "crop_top": 0,
       "title": "word_20334A",
       "x": 47,
-      "y": 1537
+      "y": 1977
     },
     {
       "family": 1,
@@ -2802,8 +2873,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203378",
-      "x": 47,
-      "y": 1602
+      "x": 92,
+      "y": 1977
     },
     {
       "family": 2,
@@ -2818,8 +2889,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203C56",
-      "x": 1,
-      "y": 1824
+      "x": 42,
+      "y": 1774
     },
     {
       "family": 2,
@@ -2834,8 +2905,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203C84",
-      "x": 40,
-      "y": 1741
+      "x": 83,
+      "y": 1839
     },
     {
       "family": 0,
@@ -2850,8 +2921,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 1,
-      "y": 1889
+      "x": 79,
+      "y": 1688
     },
     {
       "family": 0,
@@ -2866,8 +2937,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 1,
-      "y": 1968
+      "x": 116,
+      "y": 1688
     },
     {
       "family": 0,
@@ -2882,8 +2953,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_116D20",
-      "x": 482,
-      "y": 1025
+      "x": 483,
+      "y": 1098
     },
     {
       "family": 3,
@@ -2898,8 +2969,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_210E58",
-      "x": 38,
-      "y": 1889
+      "x": 478,
+      "y": 1427
     },
     {
       "family": 0,
@@ -2914,8 +2985,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 78,
-      "y": 1667
+      "x": 87,
+      "y": 1767
     },
     {
       "family": 1,
@@ -2930,8 +3001,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_2033A6",
-      "x": 305,
-      "y": 594
+      "x": 93,
+      "y": 1904
     },
     {
       "family": 1,
@@ -2946,8 +3017,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203680",
-      "x": 38,
-      "y": 1973
+      "x": 128,
+      "y": 1830
     },
     {
       "family": 0,
@@ -2962,8 +3033,24 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 46,
-      "y": 1806
+      "x": 117,
+      "y": 1611
+    },
+    {
+      "family": 0,
+      "name": "bk3_axel",
+      "id": 922,
+      "w": 40,
+      "h": 63,
+      "px": 20,
+      "py": 64,
+      "source_w": 40,
+      "source_h": 63,
+      "crop_left": 0,
+      "crop_top": 0,
+      "title": "DMA_Axel_Headlock / word_116D92",
+      "x": 121,
+      "y": 1537
     },
     {
       "family": 2,
@@ -2978,8 +3065,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203CD2",
-      "x": 232,
-      "y": 1108
+      "x": 135,
+      "y": 1897
     },
     {
       "family": 2,
@@ -2994,8 +3081,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_20400A",
-      "x": 85,
-      "y": 1730
+      "x": 137,
+      "y": 1962
     },
     {
       "family": 2,
@@ -3010,8 +3097,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203CB2",
-      "x": 72,
-      "y": 1876
+      "x": 153,
+      "y": 1681
     },
     {
       "family": 2,
@@ -3026,8 +3113,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203FEA",
-      "x": 86,
-      "y": 1795
+      "x": 157,
+      "y": 1602
     },
     {
       "family": 4,
@@ -3042,8 +3129,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_222E7E",
-      "x": 80,
-      "y": 1943
+      "x": 153,
+      "y": 1748
     },
     {
       "family": 4,
@@ -3058,8 +3145,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_223066",
-      "x": 112,
-      "y": 1862
+      "x": 170,
+      "y": 1815
     },
     {
       "family": 0,
@@ -3074,8 +3161,24 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 126,
-      "y": 1795
+      "x": 163,
+      "y": 1537
+    },
+    {
+      "family": 4,
+      "name": "zack",
+      "id": 1025,
+      "w": 34,
+      "h": 72,
+      "px": 22,
+      "py": 69,
+      "source_w": 34,
+      "source_h": 72,
+      "crop_left": 0,
+      "crop_top": 0,
+      "title": "word_2236F6",
+      "x": 177,
+      "y": 1882
     },
     {
       "family": 0,
@@ -3090,8 +3193,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 428,
-      "y": 1494
+      "x": 79,
+      "y": 900
     },
     {
       "family": 0,
@@ -3106,8 +3209,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 143,
-      "y": 481
+      "x": 230,
+      "y": 358
     },
     {
       "family": 0,
@@ -3122,8 +3225,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 120,
-      "y": 1929
+      "x": 179,
+      "y": 1956
     },
     {
       "family": 0,
@@ -3138,8 +3241,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "BK3 DMA_Axel_ItemPickUp / word_116EE8",
-      "x": 120,
-      "y": 1992
+      "x": 361,
+      "y": 970
     },
     {
       "family": 1,
@@ -3154,8 +3257,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203496",
-      "x": 348,
-      "y": 470
+      "x": 198,
+      "y": 987
     },
     {
       "family": 4,
@@ -3170,8 +3273,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_222E4A",
-      "x": 303,
-      "y": 964
+      "x": 193,
+      "y": 1669
     },
     {
       "family": 4,
@@ -3186,8 +3289,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_222E64",
-      "x": 152,
-      "y": 1857
+      "x": 197,
+      "y": 1599
     },
     {
       "family": 4,
@@ -3202,8 +3305,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_22304C",
-      "x": 160,
-      "y": 1915
+      "x": 206,
+      "y": 1537
     },
     {
       "family": 4,
@@ -3218,8 +3321,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_222E10",
-      "x": 420,
-      "y": 470
+      "x": 294,
+      "y": 475
     },
     {
       "family": 0,
@@ -3234,8 +3337,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 482,
-      "y": 1122
+      "x": 193,
+      "y": 1727
     },
     {
       "family": 2,
@@ -3250,8 +3353,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203D9C",
-      "x": 165,
-      "y": 1973
+      "x": 406,
+      "y": 982
     },
     {
       "family": 0,
@@ -3266,8 +3369,24 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 165,
-      "y": 2006
+      "x": 368,
+      "y": 470
+    },
+    {
+      "family": 0,
+      "name": "bk3_axel",
+      "id": 923,
+      "w": 27,
+      "h": 79,
+      "px": 15,
+      "py": 80,
+      "source_w": 27,
+      "source_h": 79,
+      "crop_left": 0,
+      "crop_top": 0,
+      "title": "DMA_Axel_PartnerBackGrab / word_116DAC",
+      "x": 330,
+      "y": 1025
     },
     {
       "family": 3,
@@ -3282,8 +3401,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_210DF0",
-      "x": 248,
-      "y": 981
+      "x": 438,
+      "y": 470
     },
     {
       "family": 0,
@@ -3298,8 +3417,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 484,
-      "y": 1203
+      "x": 213,
+      "y": 1808
     },
     {
       "family": 0,
@@ -3314,8 +3433,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 484,
-      "y": 1284
+      "x": 223,
+      "y": 1727
     },
     {
       "family": 0,
@@ -3330,8 +3449,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 92,
-      "y": 1537
+      "x": 239,
+      "y": 1595
     },
     {
       "family": 0,
@@ -3346,8 +3465,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPGEDIT 2005",
-      "x": 119,
-      "y": 1537
+      "x": 219,
+      "y": 1889
     },
     {
       "family": 4,
@@ -3362,8 +3481,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_222E30",
-      "x": 92,
-      "y": 1619
+      "x": 259,
+      "y": 1490
     },
     {
       "family": 1,
@@ -3378,8 +3497,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203438",
-      "x": 123,
-      "y": 1666
+      "x": 1,
+      "y": 1996
     },
     {
       "family": 3,
@@ -3394,8 +3513,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_210DAC",
-      "x": 49,
-      "y": 1513
+      "x": 137,
+      "y": 2027
     },
     {
       "family": 2,
@@ -3410,8 +3529,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203D44",
-      "x": 134,
-      "y": 1618
+      "x": 270,
+      "y": 980
     },
     {
       "family": 1,
@@ -3426,8 +3545,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_20347C",
-      "x": 1,
-      "y": 488
+      "x": 301,
+      "y": 1511
     },
     {
       "family": 2,
@@ -3442,8 +3561,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_203D82",
-      "x": 308,
-      "y": 1509
+      "x": 382,
+      "y": 1511
     },
     {
       "family": 4,
@@ -3458,8 +3577,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "word_222DF6",
-      "x": 230,
-      "y": 481
+      "x": 235,
+      "y": 1677
     },
     {
       "family": 0,
@@ -3474,8 +3593,8 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 161,
-      "y": 1495
+      "x": 245,
+      "y": 1249
     },
     {
       "family": 0,
@@ -3490,12 +3609,12 @@
       "crop_left": 0,
       "crop_top": 0,
       "title": "FPG EDIT",
-      "x": 235,
-      "y": 2006
+      "x": 311,
+      "y": 981
     }
   ],
   "atlas_bytes": 1048576,
-  "atlas_sha256": "7dc277b8c4396fb54db708074b975ef3c1026168ed868dcec31546a94b90fcaa",
+  "atlas_sha256": "4943ff25863d5d3ec9764ec90fb2827600f66c25508f8e8542a51a7e9ef3e9e9",
   "swizzle_roundtrip_verified": true,
   "format": "four 512x512 swizzled GU_PSM_T8 pages, first three in VRAM and fourth in RAM; global v selects page; per-family RGBA8888 palettes; old enemies SoRR colors; Electra/Zack Pal_MainPal source CRAM; index 0 transparent"
 }
