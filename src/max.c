@@ -66,14 +66,14 @@ static void throw_tick(Game *g){MaxCombat *m=&g->max;int i=g->combat.target,rem,
  if(!m->throw_timer){++m->throw_frame;m->throw_timer=m->throw_kind==2?99:m->throw_kind==1?back_ticks[m->throw_frame]:front_ticks[m->throw_frame];}
  rem=(m->throw_kind==2?2:5)-m->throw_frame-(m->throw_timer==1);idx=rem*4;
  offsets=m->throw_kind==1?max_word_D640:m->throw_kind==2?max_word_D266:max_word_D276;
- /* Original tables select the victim's orientation, not the thrower's. */
- {int o=g->enemies[i].facing>0?0:1;b->z=(offsets[idx+2+o]+(m->throw_kind==2?m->z/65536:0))*65536;
+ /* SoR2 Obj_Partner*GrabThrow indexes the tables by the VICTIM's orientation bit ($E&1); bit 1 = facing right (SpriteOrientation), so column 1 is used when facing right. */
+ {int o=g->enemies[i].facing>0?1:0;b->z=(offsets[idx+2+o]+(m->throw_kind==2?m->z/65536:0))*65536;
   g->enemies[i].x=bound(m->throw_origin/131072.f+offsets[idx+o]/2.f,10,230);}
  victim_pose(g,i,m->throw_kind==1?EP_BACK:EP_FRONT,m->throw_kind==2?2:m->throw_frame);
  --m->throw_timer;
  if(rem==1){
   b->phase=BODY_FLIGHT;b->pending=m->throw_kind==1?62:m->throw_kind==2?40:34;b->vz=m->throw_kind==2?-131072:0;
-  b->vx=side*(m->throw_kind==0?-2:2)*65536;b->back=m->throw_kind==1;b->frame=m->throw_frame;b->timer=1;b->freeze=0;
+  b->vx=side*(m->throw_kind==2?2:-2)*65536; /* front and back throws carry the victim on behind Max, like the last table row */b->back=m->throw_kind==1;b->frame=m->throw_frame;b->timer=1;b->freeze=0;
   m->throw_released=1;rules_end_hold(g);g->moves.grab=-1;g->combat.target=-1;
  }
 }
@@ -203,6 +203,15 @@ int max_selftest(void){Game g;unsigned saved=player_character;int i,ret=0,hp;flo
  max_tick(&g,0,0,0,1,0);for(i=0;i<60 && g.max.mode==MX_HOLDJUMP;++i){max_tick(&g,0,0,0,0,0);}
  CHECK(g.combat.target==-1 && g.physics.body[1].phase==BODY_NONE && !g.motion.z[1] && g.enemies[0].hp==40,2410);
  game_reset(&g);g.player.hp=8;max_tick(&g,0,0,0,0,1);CHECK(g.max.mode==MX_IDLE && g.player.hp==8,2411);
+ /* Throws carry the victim over Max and on behind him, for both facings and both grabs (regression: tables were indexed by the wrong orientation). */
+ {int f,back;for(f=-1;f<=1;f+=2)for(back=0;back<2;++back){float start,rel=0,end;
+  game_reset(&g);for(i=1;i<4;++i){g.enemies[i].x=220;g.enemies[i].stun=10000;}
+  g.player.x=100;g.player.y=100;g.player.facing=f;g.enemies[0].y=101.3f;g.enemies[0].hp=100;g.enemies[0].x=100+f*(back?12:16);g.enemies[0].facing=back?f:-f;
+  g.combat.target=0;g.combat.back=back;rules_begin_hold(&g,0);g.moves.grab=0;enter(&g,MX_HOLD,back?0xa:8);g.combat.action=CB_HOLD;
+  start=(g.enemies[0].x-g.player.x)*f;max_tick(&g,back?0:-f,0,1,0,0);
+  for(i=0;i<60 && g.physics.body[1].phase!=BODY_FLIGHT;++i)max_tick(&g,0,0,0,0,0);
+  rel=(g.enemies[0].x-g.player.x)*f;for(i=0;i<20;++i)max_tick(&g,0,0,0,0,0);end=(g.enemies[0].x-g.player.x)*f;
+  CHECK(start>0 && rel<0 && end<=rel+.01f && g.player.x==100,2412+back+(f>0?2:0));}}
  done:player_character=saved;return ret;
 #undef CHECK
 }
