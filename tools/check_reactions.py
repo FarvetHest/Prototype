@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL02401':
+        if (status.get('game')or{}).get('id')!='SORL00025':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -213,6 +213,7 @@ try:
   elif started:break
   time.sleep(.012)
  checks['electric_damage_5']=state()['player'][2]==95
+ checks['electric_original_sound']=struct.unpack('<I',p.read(p.symbols['sfx_stats']+52+9*4,4))[0]>0
  checks['both_native_electric_poses']={920,921}<=seen
  checks['electric_state_ends_at_landing']=started and rx()[5]==0
  trace['electric_frames']=sorted(seen)

@@ -59,7 +59,7 @@ def main():
         '-lpspge','-lpspctrl','-lm')
     run('psp-fixup-imports',elf)
     run('psp-prxgen',elf,out/'sorr-lite.prx')
-    run('mksfoex','-d','MEMSIZE=0','-s','DISC_ID=SORL02401','-s','DISC_VERSION=1.01','SoRR PSP Lite v0.24.1',out/'PARAM.SFO')
+    run('mksfoex','-d','MEMSIZE=0','-s','DISC_ID=SORL00025','-s','DISC_VERSION=1.01','SoRR PSP Lite v0.25',out/'PARAM.SFO')
     run('pack-pbp',out/'EBOOT.PBP',out/'PARAM.SFO',*(['NULL']*5),out/'sorr-lite.prx','NULL')
     run('psp-size',elf)
     pbp=out/'EBOOT.PBP'

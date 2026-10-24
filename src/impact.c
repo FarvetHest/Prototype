@@ -17,6 +17,14 @@ int impact_overlap(const Game *g,int from,int to,int id){const Actor *a=actor(g,
  fx_note_attack_top((int)y);return 1;}
 }
 unsigned impact_sound(int encoded){int d=encoded&63;return d<3?0x18:d<5?0x26:d<7?0x21:0x32;}
+/* loc_2522C / loc_26234 / sub_26220. The special $6F flag takes precedence. */
+unsigned impact_contact_sound(const Game *g,int from,int to,int encoded){
+ static const int own[]={0x1c,0xce,0xda,0xd0,0xde,0xf6};int i;
+ if(to && (g->status6f[to]&1))return 0x218;
+ if(g->rules.actor[to].type==0x34)return 0;
+ for(i=0;i<6;++i)if(g->rules.actor[from].type==own[i])return 0;
+ return impact_sound(encoded);
+}
 int impact_apply(Game *g,int from,int to,int encoded){int damage,freeze,facing=actor(g,from)->facing;
  if(!from)encoded=character_damage(encoded);
  damage=encoded&63;freeze=2+(damage>>2);
@@ -25,12 +33,13 @@ int impact_apply(Game *g,int from,int to,int encoded){int damage,freeze,facing=a
  if(freeze>8)freeze=8;
  if(encoded&64)facing=-facing;
  if(!to){rules_end_hold(g);g->moves.grab=-1;g->moves.grab_timer=0;g->combat.target=-1;g->combat.escape=0;g->combat.hold=0;g->combat.action=CB_NONE;}
- physics_hit(g,to,damage,(encoded&128)!=0,facing);
+ /* Chk_Hit loc_257B2 -> loc_25896: guarded contacts do not subtract HP or change pose. */
+ if(to && (g->status6f[to]&1))g->physics.body[to].freeze=freeze;else physics_hit(g,to,damage,(encoded&128)!=0,facing);
  /* loc_25192 / SetHitFlag: enemy target 5, player target 10 source ticks. */
  g->physics.body[to].inv=to?5:10;
  if(from)g->impact.freeze[from]=freeze;else g->bk3.hitstop=freeze;
- g->impact.freeze[to]=0;g->impact.last_from[to]=from;g->impact.damage[to]=encoded;++g->impact.contacts[from];sfx_emit(impact_sound(encoded),g->combat.ticks,(int)(actor(g,to)->x*256/240));
- reaction_hit(g,from,to,encoded);fx_spark(g,from,to);
+ g->impact.freeze[to]=to && (g->status6f[to]&1)?freeze:0;g->impact.last_from[to]=from;g->impact.damage[to]=encoded;++g->impact.contacts[from];{unsigned sound=impact_contact_sound(g,from,to,encoded);if(!sound && from && g->rules.actor[to].type!=0x34 && g->rules.actor[from].type==0x1c)sound=g->extra[from-1].action==EP_UPPER?0x10013:0x10014;if(sound)sfx_emit(sound,g->combat.ticks,(int)(actor(g,to)->x*256/240));}
+ reaction_hit(g,from,to,encoded);fx_spark(g,from,to);if(to && (g->status6f[to]&1))g->fx.slot[from].idx=0x19;
  if(to && (g->rules.actor[to].status58&16) && g->physics.body[to].phase==BODY_FLIGHT){rules_end_hold(g);g->moves.grab=-1;g->combat.target=-1;}
  return 1;
 }
@@ -61,5 +70,10 @@ int impact_selftest(void){Game g;int i,hp;
  if(impact_sound(2)!=0x18 || impact_sound(3)!=0x26 || impact_sound(5)!=0x21 || impact_sound(7)!=0x32 || impact_sound(0xc2)!=0x18)return 721;
  game_reset(&g);impact_apply(&g,0,1,0xff);if(g.enemies[0].hp || g.physics.body[1].freeze!=8 || g.physics.body[1].phase!=BODY_FLIGHT)return 722;
  game_reset(&g);if(impact_apply(&g,0,1,0xc0) || g.enemies[0].hp!=40 || g.impact.contacts[0])return 723;
+ game_reset(&g);{static const int ids[]={0x1c,0xce,0xda,0xd0,0xde,0xf6};for(i=0;i<6;++i){g.rules.actor[1].type=ids[i];if(impact_contact_sound(&g,1,0,7))return 724;}}
+ game_reset(&g);g.rules.actor[1].type=0x34;if(impact_contact_sound(&g,0,1,7))return 725;
+ g.status6f[1]=1;if(impact_contact_sound(&g,0,1,7)!=0x218)return 726;
+ if(!impact_apply(&g,0,1,2) || g.fx.slot[0].idx!=0x19 || g.fx.slot[0].count!=3 || g.enemies[0].hp!=40 || g.physics.body[1].phase || g.impact.freeze[1]!=2)return 727;
+ game_reset(&g);g.status6f[1]=2;if(impact_contact_sound(&g,0,1,2)!=0x18)return 728;
  return 0;
 }

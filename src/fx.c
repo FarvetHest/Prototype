@@ -39,7 +39,7 @@ static int frame_of(int row){int tile=fx_tile_word[row],size=fx_size_word[row]>>
 int fx_spans(const Game *g,FxSpan *out,int max){int i,n=0;
  for(i=0;i<5;++i){const FxSlot *s=&g->fx.slot[i];int row,frame,x,y,px,py;const unsigned char *p;
   if(!s->active)continue;
-  row=(s->idx&0xfe)>>1;if(row>10)continue;frame=frame_of(row);if(frame<0)continue;
+  row=(s->idx&0xfe)>>1;if(row>12)continue;frame=frame_of(row);if(frame<0)continue;
   if(s->idx>=0x0c && s->idx<0x16){const Actor *a=i?&g->enemies[i-1]:&g->player; /* loc_3100: smoke at the body's X, 12 above its ground Y */
    x=(int)(a->x*2);y=stage_foot_y(a->y)-12;
   }else {x=s->x-(fx_size_word[row]&255);y=s->y;}
@@ -86,5 +86,9 @@ int fx_selftest(void){Game g;int i,pos[16],view[16],seen=0;
  /* Flipped sparks mirror their pixels and keep the same left edge. */
  game_reset(&g);g.enemies[0].x=100;fx_note_attack_top(70);fx_spark(&g,0,1);
  {FxSpan a[300],b[300];int na=fx_spans(&g,a,300),nb;g.fx.slot[0].flip=1;nb=fx_spans(&g,b,300);if(na!=nb || na<=0)return 1613;}
+ /* Special $1903: four source ticks selecting $5D4, never an ordinary star. */
+ game_reset(&g);fx_note_attack_top(70);fx_spark(&g,0,1);g.fx.slot[0].idx=0x19;
+ for(i=0;i<4;++i){if(!g.fx.slot[0].active || fx_tile_word[(g.fx.slot[0].idx&0xfe)>>1]!=0x5d4 || fx_size_word[(g.fx.slot[0].idx&0xfe)>>1]!=12)return 1617;fx_tick(&g);}
+ if(g.fx.slot[0].active)return 1618;
  return 0;
 }

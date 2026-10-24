@@ -11,7 +11,7 @@
   "render_snapshot": {
     "actors": 5,
     "batches": 2,
-    "slices": 1339
+    "slices": 913
   },
   "seconds": 35,
   "last_30_fps": {
@@ -19,6 +19,6 @@
     "median": 29.97,
     "max": 29.97
   },
-  "eboot_sha256": "064ba51caf5d42ef4952b25370b2abbcd0bf060fea8a25afe630188e0e2d7558",
+  "eboot_sha256": "9b5414f2a0fe49ce1e60dce6f408adee3b29a03f72b40322fddd2b451bbce7ee",
   "note": "Max selected, RAM character atlas, PPSSPP software-renderer stress fixture: final background position, two Electra and two Zack at source AI level7 (clamped to6 for Electra), including RAM atlas access, player invulnerability to sustain combat. Not hardware performance."
 }

@@ -16,3 +16,5 @@ v0.21 embeds unmodified original SoRR WAVs seg1.wav,seg2.wav,seg3.wav,se53.wav,s
 v0.21 adds native Barbon art, palette, animation and code/data excerpts from the pinned SoR2 listing in the same repository. Original SEGA authorship retained. See BOSS-RU.md for the precise adaptation limits.
 
 v0.22 adds the pinned SoR1 REV00 listing and native first-round stage tiles/maps/palette, plus native BK3 ArtNem_HUD/Ani_SpecialBar/word_88C6 special gauge. Original SEGA authorship retained; no new ownership or license asserted. Provenance: assets/route1-manifest.json and assets/hud-manifest.json.
+
+v0.25 adds unmodified SoRR se33.wav, se13.wav, se14.wav and six pixel run frames168..173 from original/max.fpg, palette-matched to native Max. All rights remain with their original owners.

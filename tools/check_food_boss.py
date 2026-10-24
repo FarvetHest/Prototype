@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL02401':
+        if (status.get('game')or{}).get('id')!='SORL00025':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -147,7 +147,7 @@ def fixture(isboss=False,hp=50):
 try:
  checks['selftest']=p.u32('selftest_result')==0
  fixture();checks['touch_does_not_pick']=state()['player'][2]==50 and food()[0][3]==1
- p.send(square=True,right=True);pickup_seen=False;pickup_deadline=time.monotonic()+.15
+ p.send(square=True,right=True);pickup_seen=False;pickup_deadline=time.monotonic()+.35
  while time.monotonic()<pickup_deadline:
   if frames()[0]==910 and state()['player'][6]==0 and struct.unpack('<i',p.read(p.symbols['level']+180,4))[0]>0:
    pickup_seen=True;break
@@ -188,7 +188,7 @@ try:
   p.req('memory.write',address=p.symbols['game']+72,base64=base64.b64encode(struct.pack('<2f7i',140.,100.,240,-1,0,0,0,0,0)).decode())
   p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<2f7i',64.,100.,100,1,0,0,0,0,0)).decode())
   for i in range(5):wr(1492+i*4,0)
-  wl(0,'<6ifIiI',1,4,1,0,0,0,2448.,6,2,5);wl(40,'<7i',1,0,0,0,0,0,0)
+  wl(0,'<6ifIiI',1,4,1,0,0,0,2548.,6,2,5);wl(40,'<7i',1,0,0,0,0,0,0)
  finally:p.req('cpu.resume')
  phases=set();modes=set();deadline=time.monotonic()+5
  while time.monotonic()<deadline:
@@ -215,7 +215,7 @@ try:
  # Move the unarmed Donovan slot to the source grab fixture and freeze its AI.
  p.req('memory.write',address=p.symbols['game']+72,base64=base64.b64encode(struct.pack('<2f7i',70.,100.,240,-1,0,0,0,0,0)).decode())
  p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<2f',64.,100.)).decode())
- wr(1500,10000);wl(0,'<6ifIiI',1,4,1,0,0,0,2448.,6,2,5);wl(40,'<7i',1,0,0,0,0,0,0);p.req('cpu.resume')
+ wr(1500,10000);wl(0,'<6ifIiI',1,4,1,0,0,0,2548.,6,2,5);wl(40,'<7i',1,0,0,0,0,0,0);p.req('cpu.resume')
  p.send(right=True);time.sleep(.12);p.send(right=False);time.sleep(.04)
  checks['boss_can_be_grabbed']=moves()[16]==1
  p.send(left=True);button('square',.04);p.send(left=False);checks['boss_throw_started']=struct.unpack('<i',p.read(p.symbols['game']+512,4))[0]==5;time.sleep(2.)

@@ -9,14 +9,14 @@
 typedef struct { unsigned id; int pan; } Event;
 typedef struct { int cursor,gain,pan,active,clip; } Voice;
 volatile SfxStats sfx_stats;
-unsigned sfx_test_hashes[8];
+unsigned sfx_test_hashes[SFX_CLIP_COUNT];
 short __attribute__((aligned(64))) sfx_pcm[2][BLOCK*2];
 static Event queue[QUEUE];
 static volatile unsigned head,tail;
 static volatile int running,paused,reset_requested;
 static int thread_id=-1;
 static unsigned previous_tick=~0u,previous_id;
-static int clip(unsigned id){return id==0x20a?5:id==0x20b?6:id==0x217?7:id==0x26?1:id==0x21?2:id==0x32?3:id==0x346?4:0;}
+static int clip(unsigned id){return id==0x218?8:id==0x10013?9:id==0x10014?10:id==0x20a?5:id==0x20b?6:id==0x217?7:id==0x26?1:id==0x21?2:id==0x32?3:id==0x346?4:0;}
 static int mix(Voice *v,short *out,int frames){int f,i,peak=0;
  for(f=0;f<frames;++f){int left=0,right=0,n=0;
   for(i=0;i<4;++i)if(v[i].active){int sample=sfx_clips[v[i].clip].pcm[v[i].cursor]*v[i].gain/256;

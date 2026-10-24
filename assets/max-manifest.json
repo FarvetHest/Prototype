@@ -1667,7 +1667,81 @@
         "mapping": "word_A0766",
         "art": "byte_B291A"
       }
+    ],
+    "84": [
+      {
+        "ticks": 5,
+        "fpg": 1100,
+        "width": 0,
+        "height": 0,
+        "damage": 0,
+        "sound": 0,
+        "mapping": "SoRR max.fpg run 168",
+        "art": "SoRR max.fpg"
+      },
+      {
+        "ticks": 5,
+        "fpg": 1101,
+        "width": 0,
+        "height": 0,
+        "damage": 0,
+        "sound": 0,
+        "mapping": "SoRR max.fpg run 169",
+        "art": "SoRR max.fpg"
+      },
+      {
+        "ticks": 5,
+        "fpg": 1102,
+        "width": 0,
+        "height": 0,
+        "damage": 0,
+        "sound": 0,
+        "mapping": "SoRR max.fpg run 170",
+        "art": "SoRR max.fpg"
+      },
+      {
+        "ticks": 5,
+        "fpg": 1103,
+        "width": 0,
+        "height": 0,
+        "damage": 0,
+        "sound": 0,
+        "mapping": "SoRR max.fpg run 171",
+        "art": "SoRR max.fpg"
+      },
+      {
+        "ticks": 5,
+        "fpg": 1104,
+        "width": 0,
+        "height": 0,
+        "damage": 0,
+        "sound": 0,
+        "mapping": "SoRR max.fpg run 172",
+        "art": "SoRR max.fpg"
+      },
+      {
+        "ticks": 5,
+        "fpg": 1105,
+        "width": 0,
+        "height": 0,
+        "damage": 0,
+        "sound": 0,
+        "mapping": "SoRR max.fpg run 173",
+        "art": "SoRR max.fpg"
+      }
     ]
+  },
+  "run_extension": {
+    "source_sha256": "399ea5927d7385c28a220fbd88cd988ce87df2c51d6aa90c575097733745135a",
+    "source_frames": [
+      168,
+      169,
+      170,
+      171,
+      172,
+      173
+    ],
+    "palette_conversion": "nearest original SoR2 Max RGB; horizontally mirrored to native left-facing convention"
   },
   "palette": [
     [
@@ -3209,8 +3283,8 @@
   ],
   "atlas_pages": 3,
   "atlas_bytes": 786432,
-  "atlas_sha256": "bf1e95b4fd3f3865685b854ad532ba0d7bc35ceade94f62d384699d79ecbf87b",
-  "frame_count": 80,
+  "atlas_sha256": "cbcc377c84b654a61c2d524ad7365317c980472e1de8e7dc9d68d4909bba861e",
+  "frame_count": 86,
   "frames": [
     {
       "id": 1000,
@@ -4171,6 +4245,78 @@
       "u": 294,
       "v": 1110,
       "pixel_sha256": "83b6a1c37d0eac0cd7da054b62a1851fd0f9140de7084200ddca0a2222ff764b"
+    },
+    {
+      "id": 1100,
+      "w": 88,
+      "h": 75,
+      "px": 42,
+      "py": 75,
+      "mapping": "SoRR max.fpg run 168",
+      "art": "SoRR max.fpg",
+      "u": 358,
+      "v": 1110,
+      "pixel_sha256": "d4ed0ec7a0ece14d7f2381407d41704f41b48f7e980f0fb045bb8caef4482a3f"
+    },
+    {
+      "id": 1101,
+      "w": 79,
+      "h": 74,
+      "px": 37,
+      "py": 73,
+      "mapping": "SoRR max.fpg run 169",
+      "art": "SoRR max.fpg",
+      "u": 1,
+      "v": 1212,
+      "pixel_sha256": "a0ddd6bffb648ea5c290ee53cf13f123183d6fc13b2e0e8ffea2da48f8c7235d"
+    },
+    {
+      "id": 1102,
+      "w": 52,
+      "h": 74,
+      "px": 25,
+      "py": 72,
+      "mapping": "SoRR max.fpg run 170",
+      "art": "SoRR max.fpg",
+      "u": 82,
+      "v": 1212,
+      "pixel_sha256": "7946bf506a1e6950189cd51f6c01932ca06660743ce6e453dd7357d56212c222"
+    },
+    {
+      "id": 1103,
+      "w": 87,
+      "h": 76,
+      "px": 42,
+      "py": 76,
+      "mapping": "SoRR max.fpg run 171",
+      "art": "SoRR max.fpg",
+      "u": 136,
+      "v": 1212,
+      "pixel_sha256": "c7a736d35c5d3fa9527971454f8e6fb2fec21b6c37b23b4f8b4e0b4ec428daab"
+    },
+    {
+      "id": 1104,
+      "w": 78,
+      "h": 75,
+      "px": 37,
+      "py": 74,
+      "mapping": "SoRR max.fpg run 172",
+      "art": "SoRR max.fpg",
+      "u": 225,
+      "v": 1212,
+      "pixel_sha256": "6e10b144f1fdfbd0f0f99646d4d92b7a44c4c49133765abca9ba94beafba5890"
+    },
+    {
+      "id": 1105,
+      "w": 51,
+      "h": 74,
+      "px": 25,
+      "py": 72,
+      "mapping": "SoRR max.fpg run 173",
+      "art": "SoRR max.fpg",
+      "u": 305,
+      "v": 1212,
+      "pixel_sha256": "38414013bd79228246e5722d7c65242ac2d9f5a1628b70045def146637c4d748"
     }
   ]
 }

@@ -13,7 +13,7 @@
 static float ab(float x){return x<0?-x:x;}
 static float clamp(float x,float lo,float hi){return x<lo?lo:x>hi?hi:x;}
 int enemy_type(const Game *g,int i){int t=g->extra[i].type;return t>=0 && t<=EN_BARBON?t:i&1;}
-void enemy_set_type(Game *g,int i,int type){memset(&g->extra[i],0,sizeof(g->extra[i]));g->extra[i].type=type;g->pose[i]=(EnemyPose){0};g->rules.actor[i+1].type=type==EN_BARBON?0x100:type==EN_ELECTRA?28:type==EN_ZACK?30:type?16:14;}
+void enemy_set_type(Game *g,int i,int type){memset(&g->extra[i],0,sizeof(g->extra[i]));g->extra[i].type=type;g->status6f[i+1]=0;g->pose[i]=(EnemyPose){0};g->rules.actor[i+1].type=type==EN_BARBON?0x100:type==EN_ELECTRA?28:type==EN_ZACK?30:type?16:14;}
 const EnemyFrame *variety_sequence(int t,int k,int *n){
  if(t==EN_BARBON){if(k<0 || k>=15)k=EP_HELD;*n=barbon_sizes[k];return barbon_sequences[k];}
 #define S(kind,name) case kind:if(t==EN_ELECTRA){*n=sizeof(electra_##name)/sizeof(EnemyFrame);return electra_##name;}*n=sizeof(zack_##name)/sizeof(EnemyFrame);return zack_##name;

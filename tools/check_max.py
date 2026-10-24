@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL02401':
+        if (status.get('game')or{}).get('id')!='SORL00025':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -157,7 +157,11 @@ def holdjump(back=False,face=1):
  hold(back,face);button('cross',.06);return wait_mode(6)
 try:
  checks['mips_original_Max_and_upstream_FX_selftests']=p.u32('selftest_result')==0
- checks['ABI_legacy_offsets_preserved']=abi[:3]==[2088,1980,108]
+ checks['ABI_legacy_offsets_preserved']=abi[:3]==[2096,1980,108]
+ # Running uses real button edges and resolves the six original SoRR run poses.
+ fixture(200,220.);p.send(right=True);time.sleep(.07);p.send(right=False);time.sleep(.07);p.send(right=True);time.sleep(.14)
+ observations['run']=dict(mx=mx(),moves=moves(),frames=frames());checks['double_tap_run_animation']=mx()[2]==0x54 and moves()[0]==1 and frames()[0]in range(1100,1106)
+ p.send(right=False);time.sleep(.10);checks['run_stops_on_release']=moves()[0]==0 and mx()[2]==0
  # Real button attacks, source collision damage and contact-driven combo advancement.
  fixture(200,82.);button('square',.06);time.sleep(.45)
  checks['original_first_combo_hit']=state()['enemies'][0][2]<200 and mx()[5]==1

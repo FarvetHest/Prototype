@@ -17,7 +17,7 @@ checks={};checks['pinned_ROM_listing']=hashlib.sha256(raw).hexdigest()==m['sourc
 # The original Get_AttackCollisionData uses (remaining FrameID-1)*4.
 for anim,rows in m['scripts'].items():
  anim=int(anim)
- if anim<0x30:continue
+ if anim<0x30 or anim==0x54:continue
  table='AttackCollision_Max'if anim==0x30 else'word_%X'%(0x2400+anim-0x30)
  cm=re.search(r'dc\.w\s+(byte_\w+)-',block(table))if table in labels else None
  coll=bytes_at(cm[1])if cm else None
@@ -29,13 +29,17 @@ for anim,rows in m['scripts'].items():
 checks['all_attack_records_use_remaining_FrameID']=True
 checks['original_combo_timers']=[r['ticks']for r in m['scripts']['58']]==[3,3,3,8] and [r['ticks']for r in m['scripts']['60']]==[3,3,6,8,5]
 checks['atomic_damage_seven_bits']=m['scripts']['82'][0]['damage']==0xc6 and (m['scripts']['82'][0]['damage']&127)==70
-checks['43_scripts_80_unique_poses']=len(m['scripts'])==43 and m['frame_count']==80
+checks['43_original_scripts_80_poses_plus_6_run_poses']=len(m['scripts'])==44 and m['frame_count']==86 and sum(e['id']<1100 for e in m['frames'])==80
 checks['atlas_RAM_3_pages']=m['atlas_bytes']==786432 and m['atlas_pages']==3 and len((p/'assets/max.t8').read_bytes())==786432
 checks['atlas_hash']=hashlib.sha256((p/'assets/max.t8').read_bytes()).hexdigest()==m['atlas_sha256']
 checks['no_page_crossing']=all(e['u']+e['w']<=512 and e['v']//512==(e['v']+e['h'])//512 for e in m['frames'])
 checks['all_script_poses_exist']=all(r['fpg']in{e['id']for e in m['frames']}for rows in m['scripts'].values()for r in rows)
-base=p.parent/'SoRR-PSP-Lite-v0.23'
-checks['Axel_enemy_stage_audio_assets_unchanged']=all((base/f).read_bytes()==(p/f).read_bytes()for f in ['assets/sprites.t8','assets/stage.t8','assets/hud.rgba','music.wav','src/sfx_data.h'])
+base=json.loads((p/'assets/v0241-combat-baseline.json').read_text())
+checks['Axel_enemy_stage_music_assets_unchanged']=all(hashlib.sha256((p/f).read_bytes()).hexdigest()==sha for f,sha in base['unchanged_files'].items())
+checks['original_43_Max_scripts_unchanged']=all(m['scripts'][k]==v for k,v in base['Max_original_scripts'].items())
+checks['original_80_Max_pixel_hashes_unchanged']=all(base['Max_original_pixel_hashes'][str(e['id'])]==e['pixel_sha256'] for e in m['frames']if e['id']<1100)
+checks['original_eight_sound_clips_unchanged']=json.loads((p/'assets/sfx-manifest.json').read_text())['clips'][:8]==base['original_eight_sfx_clips']
+checks['run_source_frames']=m['run_extension']['source_frames']==list(range(168,174)) and m['run_extension']['source_sha256']==hashlib.sha256((p/'original/max.fpg').read_bytes()).hexdigest()
 # Regenerate the actual assets to check deterministic extraction, pixels and maps.
 files=['src/max_data.h','src/max_sor2_data.h','assets/max.t8','assets/max-sor2-source.json','assets/max-contact.png']
 before={f:hashlib.sha256((p/f).read_bytes()).hexdigest()for f in files}

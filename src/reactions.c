@@ -58,7 +58,7 @@ int reaction_block(Game *g,int from,int to){int i=to-1,l;EnemyExtra *v;Actor *e;
  if(v->action!=14 && (v->action || bk3_random_range(g,100)>=chance[l]))return 0;
  v->action=14;v->frame=v->timer=0;v->wait=30;v->vx=-e->facing*196608;g->rules.ai[i].mode=6;g->combat.enemy[i].mask=0;++r->blocks;if(v->z<3)++v->z;
  if(l>=3 && (g->bk3.script==BK_BLITZ || g->combat.action==CB_FORWARD || v->z>=3) && bk3_random_range(g,100)<counter[l]){v->action=15;v->vx=0;v->z=0;g->rules.ai[i].mode=0x4c;++r->counters;}
- sfx_emit(0x18,g->combat.ticks,(int)(e->x*256/240));return 1;
+ sfx_emit(0x218,g->combat.ticks,(int)(e->x*256/240));return 1;
 }
 int reaction_selftest(void){Game g;int j;
  game_reset(&g);enemy_set_type(&g,0,EN_ZACK);g.enemies[0].x=70;g.enemies[0].y=100;g.enemies[0].facing=-1;

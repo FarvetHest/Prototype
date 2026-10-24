@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL02401':
+        if (status.get('game')or{}).get('id')!='SORL00025':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -113,7 +113,7 @@ try:
  try:
   def wr(address,n):p.req('memory.write_u32',address=address,value=n)
   wr(p.symbols['sample_count'],0);wr(p.symbols['game']+824,10000)
-  p.req('memory.write',address=p.symbols['level'],base64=base64.b64encode(struct.pack('<6ifIiI',1,4,1,0,0,0,2448.,1,15,0)).decode())
+  p.req('memory.write',address=p.symbols['level'],base64=base64.b64encode(struct.pack('<6ifIiI',1,4,1,0,0,0,2548.,1,15,0)).decode())
   for i in range(4):
    hp=40
    p.req('memory.write',address=p.symbols['game']+1664+i*32,base64=base64.b64encode(struct.pack('<8i',2+i%2,0,0,0,0,0,0,0)).decode())

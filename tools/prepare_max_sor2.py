@@ -3,7 +3,7 @@ No guessed Axel-to-Max attack aliases. Coordinates are the normal (second) X.
 """
 from pathlib import Path
 import re,json,hashlib,argparse,struct
-from prepare_sprites import png
+from prepare_sprites import png,decode
 p=Path(__file__).resolve().parents[1]
 ap=argparse.ArgumentParser();ap.add_argument('--asm',type=Path,required=True);a=ap.parse_args()
 raw=a.asm.read_bytes();assert hashlib.sha256(raw).hexdigest()=='30f9c07ff55b85dd53083fe9b0a828faa3fb4600a0ac54dfc5f2d432265da274'
@@ -60,7 +60,20 @@ for anim in list(range(0,0x54,2))+[0x62]:
   collision=coll[ci*4:ci*4+4]if coll else[0,0,0,0];assert len(collision)==4,(hex(anim),j,len(coll))
   rows.append(dict(ticks=num(ticks),fpg=cache[key],width=signed(collision[0])*2,height=signed(collision[1]),damage=collision[2],sound=collision[3],mapping=mapping,art=art))
  scripts[anim]=rows
-# Two pages are expected; allocate only RAM and assert bounds at extraction time.
+# SoRR's finished pixel run cycle is a remake extension (SoR2 had no run).
+# Match the original sixteen-colour Max palette; source frames face right, native Max faces left.
+fpg=p/'original/max.fpg';assert hashlib.sha256(fpg.read_bytes()).hexdigest()=='399ea5927d7385c28a220fbd88cd988ce87df2c51d6aa90c575097733745135a'
+runpal,runframes=decode(fpg)
+colourmap={i:min(range(1,16),key=lambda j:sum((runpal[i][k]-palette[j][k])**2 for k in range(3)))for i in range(1,256)};colourmap[0]=0
+run=[]
+for code in range(168,174):
+ f=runframes[code];w=f['w'];hh=f['h'];pix=bytearray(colourmap[f['pixels'][yy*w+(w-1-xx)]]for yy in range(hh)for xx in range(w))
+ pts=[(i%w,i//w)for i,v in enumerate(pix)if v];x0=min(x for x,y in pts);y0=min(y for x,y in pts);x1=max(x for x,y in pts);y1=max(y for x,y in pts)
+ fid=1100+len(run);poses[fid]=dict(id=fid,w=x1-x0+1,h=y1-y0+1,px=w-1-f['pivot'][0]-x0,py=f['pivot'][1]-y0,pixels=b''.join(pix[y*w+x0:y*w+x1+1]for y in range(y0,y1+1)),mapping='SoRR max.fpg run %d'%code,art='SoRR max.fpg')
+ run.append(dict(ticks=5,fpg=fid,width=0,height=0,damage=0,sound=0,mapping=poses[fid]['mapping'],art='SoRR max.fpg'))
+scripts[0x54]=run
+# RAM only; no additional VRAM allocation.
+
 atlas=bytearray(512*512*4);x=y=1;row=0
 for e in poses.values():
  if x+e['w']+1>512:x=1;y+=row+2;row=0
@@ -86,7 +99,7 @@ dh+=['static const MaxFrame *const max_sequences[50]={'+','.join('max_seq_%02x'%
 for name in['word_D276','word_D640','word_D266']:
  blob=data(name,24 if name=='word_D266' else 48);values=struct.unpack('>'+str(len(blob)//2)+'h',blob);dh.append('static const short max_%s[]={%s};'%(name,','.join(map(str,values))));used.add(name)
 dh+=['#endif'];(p/'src/max_sor2_data.h').write_text('\n'.join(dh)+'\n')
-manifest=dict(source_sha256=hashlib.sha256(raw).hexdigest(),commit='4dd719f3ed5c24c86deee616b56cea885e3113d7',scripts=scripts,palette=palette,atlas_pages=pages,atlas_bytes=len(sw),atlas_sha256=hashlib.sha256(sw).hexdigest(),frame_count=len(poses),frames=[dict({k:v for k,v in e.items()if k!='pixels'},pixel_sha256=hashlib.sha256(e['pixels']).hexdigest())for e in poses.values()])
+manifest=dict(source_sha256=hashlib.sha256(raw).hexdigest(),commit='4dd719f3ed5c24c86deee616b56cea885e3113d7',scripts=scripts,run_extension=dict(source_sha256=hashlib.sha256(fpg.read_bytes()).hexdigest(),source_frames=list(range(168,174)),palette_conversion='nearest original SoR2 Max RGB; horizontally mirrored to native left-facing convention'),palette=palette,atlas_pages=pages,atlas_bytes=len(sw),atlas_sha256=hashlib.sha256(sw).hexdigest(),frame_count=len(poses),frames=[dict({k:v for k,v in e.items()if k!='pixels'},pixel_sha256=hashlib.sha256(e['pixels']).hexdigest())for e in poses.values()])
 (p/'assets/max-sor2-source.json').write_text(json.dumps(manifest,indent=2))
 (p/'assets/max-manifest.json').write_text(json.dumps(manifest,indent=2))
 cw=1024;ch=((len(poses)+9)//10)*128;rgba=bytearray(bytes((24,24,32,255))*(cw*ch))

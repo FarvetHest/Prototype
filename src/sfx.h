@@ -1,6 +1,6 @@
 #ifndef LITE_SFX_H
 #define LITE_SFX_H
-typedef struct { int status,error; unsigned enqueued,played,active,max_active,dropped,clipped,blocks,paused_blocks,peak,last_id,last_clip,clip_counts[8]; } SfxStats;
+typedef struct { int status,error; unsigned enqueued,played,active,max_active,dropped,clipped,blocks,paused_blocks,peak,last_id,last_clip,clip_counts[11]; } SfxStats;
 extern volatile SfxStats sfx_stats;
 void sfx_start(void);
 void sfx_emit(unsigned id,unsigned tick,int pan);

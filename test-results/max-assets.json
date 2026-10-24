@@ -4,14 +4,18 @@
     "all_attack_records_use_remaining_FrameID": true,
     "original_combo_timers": true,
     "atomic_damage_seven_bits": true,
-    "43_scripts_80_unique_poses": true,
+    "43_original_scripts_80_poses_plus_6_run_poses": true,
     "atlas_RAM_3_pages": true,
     "atlas_hash": true,
     "no_page_crossing": true,
     "all_script_poses_exist": true,
-    "Axel_enemy_stage_audio_assets_unchanged": true,
+    "Axel_enemy_stage_music_assets_unchanged": true,
+    "original_43_Max_scripts_unchanged": true,
+    "original_80_Max_pixel_hashes_unchanged": true,
+    "original_eight_sound_clips_unchanged": true,
+    "run_source_frames": true,
     "deterministic_original_extraction": true
   },
-  "eboot_sha256": "064ba51caf5d42ef4952b25370b2abbcd0bf060fea8a25afe630188e0e2d7558",
+  "eboot_sha256": "9b5414f2a0fe49ce1e60dce6f408adee3b29a03f72b40322fddd2b451bbce7ee",
   "source_sha256": "30f9c07ff55b85dd53083fe9b0a828faa3fb4600a0ac54dfc5f2d432265da274"
 }

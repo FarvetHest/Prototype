@@ -29,11 +29,11 @@ static void anchor(Game *g){int i=g->combat.target;Actor *e=&g->enemies[i];
 static int hit(Game *g,int i,int encoded,int facing,int top){int damage=encoded&127,freeze;Actor *e=&g->enemies[i];
  if(!damage || e->hp<=0 || g->physics.body[i+1].inv || !(rules_flags(g,i+1)&128))return 0;
  if(reaction_block(g,0,i+1))return 1;
- physics_hit(g,i+1,damage,(encoded&128)!=0,facing);
+ if(!(g->status6f[i+1]&1))physics_hit(g,i+1,damage,(encoded&128)!=0,facing);
  freeze=4+(damage>>2);if(freeze>8)freeze=8;
- g->physics.body[i+1].freeze=freeze;g->physics.body[i+1].inv=5;g->max.hitstop=freeze;
+ g->physics.body[i+1].freeze=freeze;g->physics.body[i+1].inv=5;g->impact.freeze[i+1]=(g->status6f[i+1]&1)?freeze:0;g->max.hitstop=freeze;
  g->impact.last_from[i+1]=0;g->impact.damage[i+1]=encoded;++g->impact.contacts[0];++g->max.hits;
- fx_note_attack_top(top);fx_spark(g,0,i+1);sfx_emit(damage<8?0x18:damage<16?0x26:damage<24?0x21:0x32,g->combat.ticks,(int)(e->x*256/240));
+ fx_note_attack_top(top);fx_spark(g,0,i+1);if(g->status6f[i+1]&1)g->fx.slot[0].idx=0x19;sfx_emit((g->status6f[i+1]&1)?0x218:damage<8?0x18:damage<16?0x26:damage<24?0x21:0x32,g->combat.ticks,(int)(e->x*256/240));
  reaction_hit(g,0,i+1,encoded&128);
  if(g->physics.body[i+1].phase==BODY_FLIGHT && g->combat.target==i)release(g);
  return 1;
@@ -99,7 +99,7 @@ static void present(Game *g){MaxCombat *m=&g->max;
  g->bk3.damage=frame(m)->damage;g->bk3.collision=0;g->bk3.mask=m->mask;g->bk3.hitstop=m->hitstop;g->bk3.script=m->mode==MX_SLIDE?BK_BLITZ:m->mode==MX_JUMP?BK_JUMP:BK_PUNCH1;
  g->player.attack=m->mode!=MX_IDLE && m->mode!=MX_HOLD && m->mode!=MX_LAND && !(m->mode==MX_JUMP && !m->air_attack);
  g->player.jump=m->mode==MX_JUMP || m->mode==MX_HOLDJUMP || m->mode==MX_AIRSLAM || m->mode==MX_ATOMIC;
- g->motion.z[0]=-m->z/65536.f;g->motion.vz[0]=-m->vz/65536.f;g->moves.run_dir=0;g->moves.combo=m->combo+1;g->moves.charge=0;g->combat.raw_charge=0;
+ g->motion.z[0]=-m->z/65536.f;g->motion.vz[0]=-m->vz/65536.f;g->moves.run_dir=m->mode==MX_IDLE && m->anim==0x54?g->bk3.run:0;g->moves.combo=m->combo+1;g->moves.charge=0;g->combat.raw_charge=0;
 }
 void max_tick(Game *g,float x,float y,int attack,int jump,int special){MaxCombat *m=&g->max;Actor *p=&g->player;int dx=dir(x),dy=dir(y),i,remaining,started=0;
  (void)max_abi[0];++g->combat.ticks;++g->bk3.ticks;++m->ticks;fx_tick(g);g->rules.actor[0].depth=4;
@@ -126,8 +126,8 @@ void max_tick(Game *g,float x,float y,int attack,int jump,int special){MaxCombat
    if(dx && g->bk3.run==dx){m->combo=0;m->vx=327680;enter(g,MX_SLIDE,0x48);}else enter(g,MX_ATTACK,anim);
    m->combo_wait=16;
   }else{
-   int anim=dx||dy?2:0;if(m->anim!=anim)enter(g,MX_IDLE,anim);
-   p->x=bound(p->x+dx*.5f,10,230);p->y=bound(p->y+dy*.5f/.76f,76,126);if(dx)p->facing=dx;
+   int running=dx && g->bk3.run==dx;int anim=running?0x54:dx||dy?2:0;if(m->anim!=anim)enter(g,MX_IDLE,anim);
+   p->x=bound(p->x+dx*(running?1.f:.5f),10,230);p->y=bound(p->y+dy*.5f/.76f,76,126);if(dx)p->facing=dx;
    if((dx||dy) && !g->moves.grab_cooldown)for(i=0;i<4;++i)if(rules_can_grab(g,0,i+1,1)){
     g->combat.target=i;g->combat.back=g->enemies[i].facing==p->facing;g->combat.hits=0;g->combat.escape=0;rules_begin_hold(g,i);g->moves.grab=i;anchor(g);enter(g,MX_HOLD,g->combat.back?0xa:8);g->combat.action=CB_HOLD;break;
    }
@@ -188,6 +188,10 @@ int max_selftest(void){Game g;unsigned saved=player_character;int i,ret=0,hp;flo
 #define CHECK(c,n) if(!(c)){ret=n;goto done;}
  player_character=PLAYER_MAX;game_reset(&g);for(i=0;i<4;++i){g.enemies[i].x=220;g.enemies[i].stun=10000;}
  x=g.player.x;max_tick(&g,1,0,0,0,0);CHECK(g.player.x-x==.5f,2401);
+ /* Double-tap run: twice walk speed, six real run poses, immediate stop. */
+ max_tick(&g,0,0,0,0,0);x=g.player.x;max_tick(&g,1,0,0,0,0);CHECK(g.player.x-x==1.f && g.max.anim==0x54 && g.moves.run_dir==1,2416);
+ max_tick(&g,0,0,0,0,0);CHECK(!g.moves.run_dir && g.max.anim==0,2417);
+ game_reset(&g);for(i=0;i<4;++i){g.enemies[i].x=220;g.enemies[i].stun=10000;}
  CHECK(max_seq_3a[2].damage==16 && max_seq_52[0].damage==0xc6,2402);
  idle(&g);max_tick(&g,0,0,1,0,0);for(i=0;i<40;++i)max_tick(&g,0,0,0,0,0);CHECK(g.max.mode==MX_IDLE && g.max.combo==0,2403);
  idle(&g);hp=g.player.hp;special_begin(&g,0);for(i=0;i<80;++i){max_tick(&g,0,0,0,0,0);}CHECK(g.player.hp==hp,2404);

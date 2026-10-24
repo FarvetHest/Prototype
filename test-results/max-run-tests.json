@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "native_selftests": true,
+    "right_run_pose_and_facing": true,
+    "right_run_attack_is_original_slide": true,
+    "left_run_pose_and_facing": true,
+    "left_run_attack_is_original_slide": true,
+    "expired_double_tap_is_walk": true
+  },
+  "eboot_sha256": "9b5414f2a0fe49ce1e60dce6f408adee3b29a03f72b40322fddd2b451bbce7ee",
+  "note": "Real button double taps, resolved run poses in both directions, source slide, expired tap window. Hardware not tested."
+}

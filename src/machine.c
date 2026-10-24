@@ -67,7 +67,7 @@ static unsigned mode(Game *g,int i){Body *b=&g->physics.body[i];int action=g->co
 }
 /* Explicit field bridge: byte/word/long widths, never a host struct overlay.
    Unported fields remain untouched in the original RAM bank. */
-static const unsigned char fields[][2]={{0,2},{0xc,2},{0xf,1},{0x16,2},{0x18,2},{0x1e,1},{0x68,2},{0x40,4},{0x44,4},{0x58,1},{0x5a,1},{0x5b,1},{0x5c,2},{0x5e,2},{0x60,2},{0x6c,1},{0x89,1},{0xb0,1},{0xb1,1},{0xb6,2},{0xde,1}};
+static const unsigned char fields[][2]={{0,2},{0xc,2},{0xf,1},{0x16,2},{0x18,2},{0x1e,1},{0x68,2},{0x40,4},{0x44,4},{0x58,1},{0x5a,1},{0x5b,1},{0x5c,2},{0x5e,2},{0x60,2},{0x6c,1},{0x6f,1},{0x89,1},{0xb0,1},{0xb1,1},{0xb6,2},{0xde,1}};
 static void word(unsigned char *p,unsigned o,unsigned v){p[o]=v>>8;p[o+1]=v;}
 static void lng(unsigned char *p,unsigned o,unsigned v){p[o]=v>>24;p[o+1]=v>>16;p[o+2]=v>>8;p[o+3]=v;}
 static unsigned link(int i){return i>=0 && i<5?bk3_sst_address(i)&65535:0;}
@@ -77,7 +77,7 @@ static void image(Game *g,int i,unsigned char p[256],int buttons,int edges){Acto
  memset(p,0,256);word(p,0,mode(g,i));word(p,0xc,id);p[0xf]=a->facing<0?1:0;
  word(p,0x16,i?g->combat.enemy[i-1].anim_timer:g->bk3.timer);word(p,0x18,i?g->combat.enemy[i-1].fpg:g->bk3.fpg);
  lng(p,0x40,(uint32_t)(int32_t)(a->x*131072.f));lng(p,0x44,(uint32_t)(int32_t)(a->y*.76f*65536.f));
- p[0x58]=r->status58;p[0x5a]=r->status5a;p[0x5b]=r->status5b;p[0x89]=r->status89;p[0xde]=r->statusde;
+ p[0x6f]=g->status6f[i];p[0x58]=r->status58;p[0x5a]=r->status5a;p[0x5b]=r->status5b;p[0x89]=r->status89;p[0xde]=r->statusde;
  word(p,0x5c,g->physics.body[i].inv);word(p,0x5e,link(r->held));word(p,0x60,link(r->gripper));
  p[0x6c]=a->hp<0?0:a->hp>255?255:a->hp;word(p,0xb6,r->hold_timer);
  if(i && death_pending(g,i-1)){word(p,0x68,death_fx[i-1].timer<0?0:death_fx[i-1].timer);p[0x1e]=death_visible(g,i-1)?0:16;}
@@ -94,7 +94,7 @@ static void publish(Game *g,int i,int buttons,int edges,int reconcile){unsigned 
 static void pull(Game *g,int i){unsigned a=bk3_sst_address(i),id=bk3_ram16(a+0xc);Actor *p=actor(g,i);ActorRules *r=&g->rules.actor[i];
  p->x=(int32_t)bk3_ram32(a+0x40)/131072.f;p->y=(int32_t)bk3_ram32(a+0x44)/(.76f*65536.f);
  p->hp=bk3_ram8(a+0x6c);p->facing=(bk3_ram8(a+0xf)&1)?-1:1;
- r->status58=bk3_ram8(a+0x58);r->status5a=bk3_ram8(a+0x5a);r->status5b=bk3_ram8(a+0x5b);r->status89=bk3_ram8(a+0x89);r->statusde=bk3_ram8(a+0xde);
+ g->status6f[i]=bk3_ram8(a+0x6f);r->status58=bk3_ram8(a+0x58);r->status5a=bk3_ram8(a+0x5a);r->status5b=bk3_ram8(a+0x5b);r->status89=bk3_ram8(a+0x89);r->statusde=bk3_ram8(a+0xde);
  r->hold_timer=bk3_ram16(a+0xb6);r->held=unlink(bk3_ram16(a+0x5e));r->gripper=unlink(bk3_ram16(a+0x60));g->physics.body[i].inv=bk3_ram16(a+0x5c);
  if(i){int type=mapped_type(id);
   if(type>=0 && type!=enemy_type(g,i-1))enemy_set_type(g,i-1,type);

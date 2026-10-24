@@ -1,2 +1,2 @@
-064ba51caf5d42ef4952b25370b2abbcd0bf060fea8a25afe630188e0e2d7558  EBOOT.PBP
+9b5414f2a0fe49ce1e60dce6f408adee3b29a03f72b40322fddd2b451bbce7ee  EBOOT.PBP
 50ed1dfb17757abf21fcac5d65fad8cec2515c7717a91bd29aeca55b0217fc4d  music.wav

@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL02401':
+        if (status.get('game')or{}).get('id')!='SORL00025':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -97,13 +97,13 @@ def arrange(hp,player_hp=100,attack=0,x=82.0,one=False):
         p.req('memory.write',address=a+192,base64=base64.b64encode(raw).decode())
     finally:p.req('cpu.resume')
 
-def stats():return list(struct.unpack('<18I',p.read(p.symbols['sfx_stats'],72)))
+def stats():return list(struct.unpack('<24I',p.read(p.symbols['sfx_stats'],96)))
 try:
  checks['selftest']=p.u32('selftest_result')==0
- hashes=list(struct.unpack('<5I',p.read(p.symbols['sfx_test_hashes'],20)));checks['five_native_mix_waveforms_distinct']=len(set(hashes))==5 and all(hashes)
+ hashes=list(struct.unpack('<11I',p.read(p.symbols['sfx_test_hashes'],44)));checks['eleven_native_mix_waveforms_distinct']=len(set(hashes))==11 and all(hashes)
  reset();arrange(100,x=220.);time.sleep(.2)
  captured={}
- for clip,id in enumerate([0x18,0x26,0x21,0x32,0x346]):
+ for clip,id in enumerate([0x18,0x26,0x21,0x32,0x346,0x20a,0x20b,0x217,0x218,0x10013,0x10014]):
   time.sleep(.27);before=stats();p.req('cpu.stepping')
   head=p.u32('head');nxt=(head+1)&15;assert nxt!=p.u32('tail')
   p.req('memory.write',address=p.symbols['queue']+head*8,base64=base64.b64encode(struct.pack('<Ii',id,128)).decode())
@@ -120,14 +120,14 @@ try:
  checks['real_contact_ducks_music']=p.u32('music_duck_events')>before and 0x1800 in volumes
  time.sleep(.15);checks['music_returns_to_baseline']=p.u32('music_output_volume')==0x4000
  v=stats();checks['no_audio_errors_drops_or_clipping']=v[0]==1 and v[1]==v[6]==v[7]==0
- clips=json.loads((project/'assets/sfx-manifest.json').read_text())['clips'][:5];elf=(project/'build/sorr-lite.elf').read_bytes();import wave
+ clips=json.loads((project/'assets/sfx-manifest.json').read_text())['clips'];elf=(project/'build/sorr-lite.elf').read_bytes();import wave
  ok=True;original=True
  for c in clips:
   f=project/'assets'/('impact-'+c['name']+'.wav');original &= hashlib.sha256(f.read_bytes()).hexdigest()==c['source_sha256']
   with wave.open(str(f),'rb')as w:data=w.readframes(w.getnframes())
   ok &= hashlib.sha256(data).hexdigest()==c['pcm_sha256'] and data in elf
- checks['five_verified_PCM_clips_embedded']=ok and len(clips)==5
- checks['original_WAV_bytes_preserved']=original and len(clips)==5
+ checks['eleven_verified_PCM_clips_embedded']=ok and len(clips)==11
+ checks['original_WAV_bytes_preserved']=original and len(clips)==11
  result=dict(checks=checks,captured=captured,native_mix_hashes=hashes,contact_music_volumes=sorted(set(volumes)),eboot_sha256=hashlib.sha256((project/'build/EBOOT.PBP').read_bytes()).hexdigest(),note='Five event IDs injected into the normal SFX queue to verify the real MIPS audio worker. Separate real Square collision verifies emitter and music ducking. PCM buffers are measured before hardware output, not a microphone recording of PSP speakers.')
  (artifacts/'sfx-strength-tests.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2));assert all(checks.values())
 finally:p.send(square=False);p.close()

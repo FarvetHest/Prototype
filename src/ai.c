@@ -26,13 +26,13 @@ static void decide(Game *g,int i,float x,float y){EnemyBrain *b=&g->combat.enemy
  if(g->rules.actor[i+1].status89&64){select_state(g,i,12);return;}
  if(d>160){select_state(g,i,6);return;}if(d>120){select_state(g,i,4);return;}
  if(ab(y)<=7 && (rules_flags(g,0)&128)){
-  if(!(i&1) && !(g->combat.ticks&2) && d>96){a->mode=0x2e;b->fpg=1;return;}
-  if(ab(x)<=50){select_state(g,i,(i&1) && b->level>=5 && g->motion.z[0]!=0?10:8);return;}
+  if(enemy_type(g,i)==EN_GALSIA && !(g->combat.ticks&2) && d>96){a->mode=0x2e;b->fpg=1;return;}
+  if(ab(x)<=50){select_state(g,i,(enemy_type(g,i)==EN_DONOVAN) && b->level>=5 && g->motion.z[0]!=0?10:8);return;}
  }
  roll=rnd(g,100);for(s=0;s<4;++s){roll-=p[s];if(roll<0)break;}select_state(g,i,s);
 }
 static void start_attack(Game *g,int i,int upper){EnemyBrain *b=&g->combat.enemy[i];SourceAI *a=&g->rules.ai[i];a->mode=upper==2?0x30:upper?0x1c:0x1a;b->upper=upper;b->frame=0;b->anim_timer=0;b->mask=0;g->enemies[i].attack=1;}
-static void animate(Game *g,int i){EnemyBrain *b=&g->combat.enemy[i];SourceAI *a=&g->rules.ai[i];int kind=!(i&1)?EP_JAB:b->upper==2?EP_KICK:b->upper?EP_UPPER:EP_JAB;const EnemyFrame *f=enemy_frames(g,i,kind);int n=enemy_count(g,i,kind);
+static void animate(Game *g,int i){EnemyBrain *b=&g->combat.enemy[i];SourceAI *a=&g->rules.ai[i];int kind=enemy_type(g,i)==EN_GALSIA?EP_JAB:b->upper==2?EP_KICK:b->upper?EP_UPPER:EP_JAB;const EnemyFrame *f=enemy_frames(g,i,kind);int n=enemy_count(g,i,kind);
  if(!b->anim_timer){if(b->frame>=n){a->mode=2;g->enemies[i].attack=0;b->fpg=1;return;}b->anim_timer=f[b->frame].ticks;b->mask=0;}
  b->fpg=f[b->frame].fpg;g->pose[i].kind=kind;g->pose[i].fpg=b->fpg;g->pose[i].hurt=f[b->frame].hurt;combat_enemy_attack_frame(g,i,f[b->frame].collision,f[b->frame].damage);if(!--b->anim_timer){if(++b->frame>=n){a->mode=2;g->enemies[i].attack=0;b->fpg=1;}}
 }
@@ -116,10 +116,10 @@ static void source_ai_step(Game *g,int i){EnemyBrain *b=&g->combat.enemy[i];Sour
   if(ab(y)>7 || (s==8 && ab(x)>50) || (s==9 && ab(x)>40)){decide(g,i,x,y);return;}
   b->fpg=1;if(--b->timer>=0)return;
   if(s==8){b->state=9;b->timer=p[28]+rnd(g,p[29]);start_attack(g,i,0);}
-  else if(s==9){if(i&1){b->state=(bk3_random32(g)&3)?10:11;b->timer=p[28]+rnd(g,p[29]);}else{b->state=7;b->timer=0;}start_attack(g,i,0);}
+  else if(s==9){if(enemy_type(g,i)==EN_DONOVAN){b->state=(bk3_random32(g)&3)?10:11;b->timer=p[28]+rnd(g,p[29]);}else{b->state=7;b->timer=0;}start_attack(g,i,0);}
   else{b->state=7;b->timer=0;start_attack(g,i,s==11?2:1);}return;
  }
- if(s>=1 && s<=4 && ab(x)<=50 && ab(y)<=7){select_state(g,i,(i&1) && b->level>=5 && g->motion.z[0]!=0?10:8);return;}
+ if(s>=1 && s<=4 && ab(x)<=50 && ab(y)<=7){select_state(g,i,(enemy_type(g,i)==EN_DONOVAN) && b->level>=5 && g->motion.z[0]!=0?10:8);return;}
  if(!s){b->fpg=1;if(--b->timer<0)decide(g,i,x,y);return;}
  direction=b->direction&7;
  if(s==2)direction=toward(x,y);
@@ -161,6 +161,11 @@ int source_ai_selftest(void){Game g;int i,s;unsigned seed;
  game_reset(&g);g.enemies[1].x=82;g.enemies[1].y=100;g.combat.enemy[1].state=2;g.motion.z[0]=20;source_ai_tick(&g,1);if(g.combat.enemy[1].state!=10)return 633;
  game_reset(&g);g.enemies[1].x=82;g.enemies[1].y=100;g.combat.enemy[1].level=4;g.combat.enemy[1].state=2;g.motion.z[0]=20;source_ai_tick(&g,1);if(g.combat.enemy[1].state!=8)return 634;
  game_reset(&g);g.enemies[0].x=82;g.enemies[0].y=100;g.combat.enemy[0].state=2;g.motion.z[0]=20;source_ai_tick(&g,0);if(g.combat.enemy[0].state!=8)return 635;
+ /* Attack identity follows ObjID, not the allocator slot parity. */
+ game_reset(&g);enemy_set_type(&g,0,EN_DONOVAN);g.enemies[0].x=82;g.enemies[0].y=100;g.combat.enemy[0].state=2;g.motion.z[0]=20;source_ai_tick(&g,0);if(g.combat.enemy[0].state!=10)return 636;
+ game_reset(&g);enemy_set_type(&g,1,EN_GALSIA);g.enemies[1].x=82;g.enemies[1].y=100;g.combat.enemy[1].state=2;g.motion.z[0]=20;source_ai_tick(&g,1);if(g.combat.enemy[1].state!=8)return 637;
+ game_reset(&g);enemy_set_type(&g,0,EN_DONOVAN);g.rules.ai[0].mode=0x1c;g.combat.enemy[0].upper=1;source_ai_tick(&g,0);if(g.pose[0].kind!=EP_UPPER)return 638;
+ game_reset(&g);enemy_set_type(&g,1,EN_GALSIA);g.rules.ai[1].mode=0x1c;g.combat.enemy[1].upper=1;source_ai_tick(&g,1);if(g.pose[1].kind!=EP_JAB)return 639;
  return 0;
 }
 
