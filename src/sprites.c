@@ -130,8 +130,8 @@ void sprites_draw(const Actor *a,int index) {
         int u0,u1;
         if(ex>f->w) ex=f->w;
         u0=flip?f->u+f->w-sx:f->u+sx;u1=flip?f->u+f->w-ex:f->u+ex;
-        v[slice*2]=(SpriteVertex){u0,f->v%512,color,left+sx,y-f->py,0,0};
-        v[slice*2+1]=(SpriteVertex){u1,f->v%512+f->h,color,left+ex,y-f->py+f->h,0,0};
+        v[slice*2]=(SpriteVertex){u0,f->v%512,color,stage_world_x(left+sx),stage_world_y(y-f->py),0,0};
+        v[slice*2+1]=(SpriteVertex){u1,f->v%512+f->h,color,stage_world_x(left+ex),stage_world_y(y-f->py+f->h),0,0};
     }
     sceGuDrawArray(GU_SPRITES,GU_TEXTURE_16BIT|GU_COLOR_8888|GU_VERTEX_16BIT|GU_TRANSFORM_2D,count*2,0,v);
     ++frame_draws;frame_slices+=count;

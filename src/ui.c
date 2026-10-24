@@ -29,8 +29,8 @@ static void image(int set,int id,int x,int y,int clip) {
     for(sx=0;sx<width;sx+=32) {
         int end=sx+32;if(end>width)end=width;
         if(count+2>MAX_UI_VERTICES)return;
-        vertices[count++]=(UiVertex){f->u+sx,f->v,x+sx,y,0};
-        vertices[count++]=(UiVertex){f->u+end,f->v+f->h,x+end,y+f->h,0};
+        vertices[count++]=(UiVertex){f->u+sx,f->v,set==HUD_ITEM?stage_world_x(x+sx):x+sx,set==HUD_ITEM?stage_world_y(y):y,0};
+        vertices[count++]=(UiVertex){f->u+end,f->v+f->h,set==HUD_ITEM?stage_world_x(x+end):x+end,set==HUD_ITEM?stage_world_y(y+f->h):y+f->h,0};
     }
 }
 void ui_text(int x,int y,const char *s) {
@@ -102,7 +102,7 @@ static void bar(int x,int y,unsigned hp,unsigned max) {
 void ui_draw(const Game *g,int error) {
     char score[32];unsigned value=ui_score>9999999?9999999:ui_score;
     if(flow.state==FLOW_TITLE) {
-        ui_text(152,98,"SORR PSP LITE");ui_text(216,118,"V0.21");
+        ui_text(152,98,"SORR PSP LITE");ui_text(216,118,"V0.22");
         ui_text(158,140,"START OR CROSS");
         snprintf(score,sizeof(score),"BEST %07u",flow.best>9999999?9999999:flow.best);ui_text(160,164,score);
         if(error)ui_text(180,190,"SELFTEST ERROR");
@@ -130,9 +130,8 @@ void ui_draw(const Game *g,int error) {
         if(enemy_type(g,target)<EN_ELECTRA)image(galsia?HUD_GALSIA:HUD_DONOVAN,300,9,28,-1);
         ui_text(26,27,boss?"BARBON":enemy_type(g,target)==EN_ELECTRA?"ELECTRA":enemy_type(g,target)==EN_ZACK?"ZACK":galsia?"GALSIA":"DONOVAN");bar(25,35,boss?(unsigned)(g->enemies[target].hp>0?g->enemies[target].hp:0):ui_enemy_hp,boss?LEVEL_BOSS_HP:40);
     }
-    image(HUD_BARRA,24,25,47,-1);
-    if(g->moves.charge)image(HUD_BARRA_AZUL,24,26,48,104*g->moves.charge/100);
-    ui_text(138,47,g->moves.charge==100?"OK":"SP");
+    {int state=g->combat.raw_charge/16;if(state<0)state=0;if(state>12)state=12;
+     image(HUD_BK3_SPECIAL,state,166,8,-1);}
     ui_text(224,7,"TIME");
     image(HUD_FUENTE,248+(int)ui_timer/10,224,17,-1);
     image(HUD_FUENTE,248+(int)ui_timer%10,240,17,-1);

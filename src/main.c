@@ -17,14 +17,14 @@
 #include "held.h"
 #include "level.h"
 
-PSP_MODULE_INFO("SoRR PSP Lite", 0, 0, 21);
+PSP_MODULE_INFO("SoRR PSP Lite", 0, 0, 22);
 PSP_MAIN_THREAD_ATTR(PSP_THREAD_ATTR_USER);
 PSP_MAIN_THREAD_STACK_SIZE_KB(128);
 PSP_HEAP_SIZE_KB(4096);
 
 #define RGB(r,g,b) (0xff000000u | ((b)<<16) | ((g)<<8) | (r))
 #define WHITE RGB(224,224,208)
-static unsigned int __attribute__((aligned(16))) commands[65536];
+static unsigned int __attribute__((aligned(16))) commands[131072];
 static volatile int running = 1;
 Flow flow;
 Game game; /* Kept as a symbol for emulator inspection. */
@@ -105,13 +105,18 @@ static void render(void) {
     Actor *actors[5] = {&game.player,&game.enemies[0],&game.enemies[1],&game.enemies[2],&game.enemies[3]};
     sceGuStart(GU_DIRECT,commands); sceGuClear(GU_COLOR_BUFFER_BIT);
     vertices = (Vertex *)sceGuGetMemory(MAX_VERTICES * sizeof(Vertex)); vertex_count = batch_start = 0;
-    stage_draw();
+    stage_set_view(game.player.x);stage_draw();
     ui_begin();ui_food();ui_end();
     for(i=1;i<5;++i) { int k=order[i]; j=i; while(j && actors[order[j-1]]->y>actors[k]->y) {order[j]=order[j-1]; --j;} order[j]=k; }
-    for(i=0;i<5;++i) if(!i || !level.enabled || (level.slots&(1<<(i-1))))rect((int)actors[i]->x-7,stage_foot_y(actors[i]->y)/2-1,14,2,RGB(24,24,32));
+    for(i=0;i<5;++i) if(!i || !level.enabled || (level.slots&(1<<(i-1)))){
+      int x=(int)(actors[i]->x*2)-14,y=stage_foot_y(actors[i]->y)-2;Vertex *v=vertices+vertex_count;vertex_count+=2;
+      v[0]=(Vertex){RGB(24,24,32),stage_world_x(x),stage_world_y(y),0,0};
+      v[1]=(Vertex){RGB(24,24,32),stage_world_x(x+28),stage_world_y(y+4),0,0};
+    }
     flush_rects();
     sprites_begin();
     for(i=0;i<5;++i) { j=order[i];if(!j || !level.enabled || (level.slots&(1<<(j-1))))sprites_draw(actors[j],j); }
+    stage_draw_foreground();
     if(flow.state==FLOW_TITLE || flow.state>=FLOW_CONTINUE) {
         rect(40,44,160,56,RGB(8,12,24));flush_rects();
     }
@@ -142,7 +147,7 @@ static void save_profile(void) {
     unsigned i; int failed=0;
     FILE *f = fopen("lite-profile.csv","w");
     if (!f) {save_status=-1; return;}
-    if (fprintf(f,"# SoRR PSP Lite v0.21; selftest=%d; cpu_mhz=%d; samples=%u; capacity=900; music_status=%d; music_error=%d; rate=%u; loops=%u\n", selftest_result,scePowerGetCpuClockFrequencyInt(),sample_count,music_stats.status,music_stats.error,music_stats.rate,music_stats.loops)<0) failed=1;
+    if (fprintf(f,"# SoRR PSP Lite v0.22; selftest=%d; cpu_mhz=%d; samples=%u; capacity=900; music_status=%d; music_error=%d; rate=%u; loops=%u\n", selftest_result,scePowerGetCpuClockFrequencyInt(),sample_count,music_stats.status,music_stats.error,music_stats.rate,music_stats.loops)<0) failed=1;
     if (fprintf(f,"sample,fps,logic_hz,logic_ms,render_sync_ms,dropped_ticks_total,music_blocks,music_late,music_decode_max_ms\n")<0) failed=1;
     for(i=0;i<sample_count;++i) {
         Sample *s=&samples[i];

@@ -1,6 +1,6 @@
 {
   "checks": {
-    "four_enemies_two_RAM_batches": true,
+    "four_enemies_batched_native_tiles": true,
     "fps_target_met": true,
     "no_new_drops": true,
     "music_ok": true,
@@ -11,7 +11,7 @@
   "render_snapshot": {
     "actors": 5,
     "batches": 2,
-    "slices": 16
+    "slices": 1339
   },
   "seconds": 35,
   "last_30_fps": {
@@ -19,6 +19,6 @@
     "median": 29.97,
     "max": 29.97
   },
-  "eboot_sha256": "9f1acf6ddfa973557746d149e3b27a96e615c51c8c4dd195095b09a33664a4e9",
+  "eboot_sha256": "5d998db0e9384ca09ee0728ead65515e1d59666aa0606e6a6987a099d1a825a8",
   "note": "PPSSPP software-renderer stress fixture: final background position, two Electra and two Zack at source AI level7 (clamped to6 for Electra), including RAM atlas access, player invulnerability to sustain combat. Not hardware performance."
 }

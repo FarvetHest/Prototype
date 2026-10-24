@@ -5,7 +5,7 @@ Level level;
 int level_is_boss(int i){return level.enabled && level.boss==1 && i==LEVEL_BOSS_SLOT;}
 static float ab(float x){return x<0?-x:x;}
 static void food_spawn(Level *l,int i){
- static const float x[]={380,920,1246};
+ static const float x[]={380,920,2508};
  if(l->food_spawned&(1u<<i))return;
  l->food[i]=(Food){x[i],112,i==2,1};l->food_spawned|=1u<<i;
 }
@@ -40,14 +40,14 @@ void level_food_step(Level *l,Game *g){int i,hp;
 }
 
 /* BK3 Chk_Area/GetNextEnemyGroup/sub_499C6: position/delay/count-driven queue.
-   Coordinates and encounters below are authored for the Lite 2852-pixel background. */
+   Coordinates and encounters below are authored for the Lite SoR1 5376-pixel street. */
 typedef struct {short trigger,y;unsigned char family,ai; signed char side;} Cue;
 static const Cue cues[LEVEL_CUES]={
- {0,88,0,1,1},{0,114,1,1,1},{64,100,0,1,1},{128,122,3,1,-1},
- {192,84,2,2,1},{256,112,1,2,1},{320,96,0,2,-1},{384,122,3,2,1},
- {448,82,2,4,1},{512,108,1,4,1},{576,120,0,4,1},{640,90,3,4,-1},
- {704,102,2,5,1},{768,124,1,5,1},{832,80,0,5,-1},{896,112,3,5,1},
- {960,96,2,7,1},{1024,122,1,7,-1},{1088,84,0,7,1},{1152,108,3,7,1}
+ {0,88,0,1,1},{0,114,1,1,1},{128,100,0,1,1},{256,122,3,1,-1},
+ {384,84,2,2,1},{512,112,1,2,1},{640,96,0,2,-1},{768,122,3,2,1},
+ {896,82,2,4,1},{1024,108,1,4,1},{1152,120,0,4,1},{1280,90,3,4,-1},
+ {1408,102,2,5,1},{1536,124,1,5,1},{1664,80,0,5,-1},{1792,112,3,5,1},
+ {1920,96,2,7,1},{2048,122,1,7,-1},{2176,84,0,7,1},{2304,108,3,7,1}
 };
 static int busy(const Level *l,const Game *g){int i,n=0;for(i=0;i<4;++i)if((l->slots&(1<<i)) && (g->enemies[i].hp>0 || g->physics.body[i+1].phase || g->combat.enemy[i].z<0 || g->combat.target==i || death_pending(g,i)))++n;return n;}
 static int free_slot(const Level *l,int family){int i;for(i=family&1;i<4;i+=2)if(!(l->slots&(1<<i)))return i;return -1;}
@@ -80,7 +80,7 @@ static void collect_slots(Level *l,const Game *g){int i;for(i=0;i<4;++i)if((l->s
 static void feed(Level *l,Game *g){int end=l->gate?LEVEL_CUES:10,n,i;
  if(l->boss || l->spawn_wait)return;
  while(l->cue<end){const Cue *c=&cues[l->cue];n=busy(l,g);
-  if(c->trigger>l->camera && !(n<2 && c->trigger<=l->camera+64))return;
+  if(c->trigger>l->camera && !(n<2 && c->trigger<=l->camera+128))return;
   i=free_slot(l,c->family);if(i<0)return;
   spawn_slot(l,g,i,40,c->ai,c->y,c->side,l->cue<2?30+l->cue*12:0,c->family);
   if(n>0)++l->overlap;
@@ -137,10 +137,10 @@ int level_selftest(void){Level l;Game g;int i,n;float old,world;
  g.paused=1;old=l.camera;level_step(&l,&g);if(l.camera!=old)return 1203;g.paused=0;
  g.player.x=20;old=l.camera;level_step(&l,&g);if(l.camera!=old)return 1204;
  g.combat.target=0;g.player.x=220;old=l.camera;level_step(&l,&g);if(l.camera!=old)return 1205;g.combat.target=-1;
- game_reset(&g);level_start(&l,&g);l.camera=64;l.spawn_wait=0;g.player.x=100;g.enemies[0].hp=17;level_step(&l,&g);
+ game_reset(&g);level_start(&l,&g);l.camera=128;l.spawn_wait=0;g.player.x=100;g.enemies[0].hp=17;level_step(&l,&g);
  if(l.cue!=3 || l.slots!=7 || g.enemies[0].hp!=17 || l.overlap<2)return 1206;
- l.camera=128;l.spawn_wait=0;level_step(&l,&g);if(l.slots!=15 || l.cue!=4)return 1207;
- g.player.x=220;l.camera=192;old=l.camera;level_step(&l,&g);if(l.camera!=old || l.cue!=4)return 1208;
+ l.camera=256;l.spawn_wait=0;level_step(&l,&g);if(l.slots!=15 || l.cue!=4)return 1207;
+ g.player.x=220;l.camera=384;old=l.camera;level_step(&l,&g);if(l.camera!=old || l.cue!=4)return 1208;
  g.enemies[0].hp=0;g.physics.body[1].phase=BODY_FLIGHT;l.spawn_wait=0;level_step(&l,&g);if(l.cue!=4 || !(l.slots&1))return 1209;
  g.physics.body[1].phase=0;level_step(&l,&g);if(l.cue!=5 || g.enemies[0].hp!=40 || g.enemies[1].hp!=40)return 1210;
  game_reset(&g);level_start(&l,&g);l.cue=10;l.camera=LEVEL_MID_GATE;g.player.x=220;level_step(&l,&g);if(!l.locked || l.gate || l.camera!=LEVEL_MID_GATE)return 1211;
@@ -158,7 +158,7 @@ int level_selftest(void){Level l;Game g;int i,n;float old,world;
  level_food_step(&l,&g);if(g.player.hp!=75 || l.food[0].active || l.food_taken!=1)return 1218;
  for(i=0;i<3;++i){level_food_step(&l,&g);}if(l.pickup_timer || l.pickup_item!=-1)return 1219;
  food_spawn(&l,0);if(l.food[0].active || level_pickup_button(&l,&g,1,0,0))return 1220;
- food_spawn(&l,2);l.camera=1186;g.player.x=60;g.player.hp=80;
+ food_spawn(&l,2);l.camera=LEVEL_CAMERA_MAX;g.player.x=60;g.player.hp=80;
  if(!level_pickup_button(&l,&g,1,0,0))return 1221;
  for(i=0;i<6;++i){level_food_step(&l,&g);}if(g.player.hp!=100 || l.heal_amount!=20 || l.food[2].active)return 1222;
  level_start(&l,&g);food_spawn(&l,0);l.camera=260;g.player.x=120;g.player.y=112;
@@ -179,7 +179,7 @@ int level_entry_selftest(void){Level saved=level;Game g;int i,n,result=0;float x
  for(i=0;i<2;++i)CHECK(g.enemies[i].x>240 && !impact_apply(&g,0,i+1,2),1231);
  for(n=0;n<100 && level.entering;++n)for(i=0;i<2;++i){source_ai_tick(&g,i);}
  CHECK(!level.entering,1232);
- level.camera=64;level.spawn_wait=0;g.player.x=100;level_step(&level,&g);CHECK(level.entering&4,1233);
+ level.camera=128;level.spawn_wait=0;g.player.x=100;level_step(&level,&g);CHECK(level.entering&4,1233);
  x=g.enemies[2].x;g.player.x=220;level_step(&level,&g);CHECK(g.enemies[2].x==x,1234);
  for(n=0;n<80 && (level.entering&4);++n){source_ai_tick(&g,2);}CHECK(!(level.entering&4),1235);
  game_reset(&g);level_start(&level,&g);for(i=0;i<LEVEL_INTRO;++i){level_step(&level,&g);}CHECK(!level.intro && !level_fade(&level),1236);

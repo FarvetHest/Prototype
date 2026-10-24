@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00021':
+        if (status.get('game')or{}).get('id')!='SORL00022':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -44,6 +44,9 @@ while p.u32('frame_count')<2:
     if time.monotonic()>ready_deadline:raise RuntimeError('PSP startup did not reach rendering')
     time.sleep(.1)
 checks={}
+# Legacy 1:1 projection isolates original-pixel asset checks; native projection is
+# covered by check_route1 and the default performance runs.
+p.req('memory.write_u32',address=p.symbols['stage_native_view'],value=0)
 def state():
     raw=p.read(p.symbols['game'],192)
     return dict(player=list(struct.unpack_from('<2f7i',raw)), enemies=[list(struct.unpack_from('<2f7i',raw,36*(i+1))) for i in range(4)], ticks=struct.unpack_from('<I',raw,180)[0],paused=struct.unpack_from('<i',raw,184)[0],won=struct.unpack_from('<i',raw,188)[0])
@@ -177,7 +180,7 @@ try:
  reset();arrange(40,x=220.);p.req('cpu.stepping')
  try:
   for i in range(4):wr(36*(i+1)+8,0)
-  p.req('memory.write',address=p.symbols['level'],base64=base64.b64encode(struct.pack('<6ifIiI',1,4,0,1,0,0,1186.,20,0,0)).decode())
+  p.req('memory.write',address=p.symbols['level'],base64=base64.b64encode(struct.pack('<6ifIiI',1,4,0,1,0,0,2448.,20,0,0)).decode())
   p.req('memory.write',address=p.symbols['level']+132,base64=base64.b64encode(bytes(96)).decode());p.req('memory.write_u32',address=p.symbols['level']+188,value=20);p.req('memory.write_u32',address=p.symbols['level']+192,value=1);p.req('memory.write_u32',address=p.symbols['level']+220,value=1)
  finally:p.req('cpu.resume')
  time.sleep(.25)

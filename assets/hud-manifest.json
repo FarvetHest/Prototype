@@ -586,10 +586,127 @@
       "v": 64,
       "w": 16,
       "h": 16
+    },
+    {
+      "file": "bk3_special",
+      "id": 0,
+      "u": 1,
+      "v": 84,
+      "w": 16,
+      "h": 32
+    },
+    {
+      "file": "bk3_special",
+      "id": 1,
+      "u": 19,
+      "v": 84,
+      "w": 16,
+      "h": 32
+    },
+    {
+      "file": "bk3_special",
+      "id": 2,
+      "u": 37,
+      "v": 84,
+      "w": 16,
+      "h": 32
+    },
+    {
+      "file": "bk3_special",
+      "id": 3,
+      "u": 55,
+      "v": 84,
+      "w": 16,
+      "h": 32
+    },
+    {
+      "file": "bk3_special",
+      "id": 4,
+      "u": 73,
+      "v": 84,
+      "w": 16,
+      "h": 32
+    },
+    {
+      "file": "bk3_special",
+      "id": 5,
+      "u": 91,
+      "v": 84,
+      "w": 16,
+      "h": 32
+    },
+    {
+      "file": "bk3_special",
+      "id": 6,
+      "u": 109,
+      "v": 84,
+      "w": 16,
+      "h": 32
+    },
+    {
+      "file": "bk3_special",
+      "id": 7,
+      "u": 127,
+      "v": 84,
+      "w": 16,
+      "h": 32
+    },
+    {
+      "file": "bk3_special",
+      "id": 8,
+      "u": 145,
+      "v": 84,
+      "w": 16,
+      "h": 32
+    },
+    {
+      "file": "bk3_special",
+      "id": 9,
+      "u": 163,
+      "v": 84,
+      "w": 16,
+      "h": 32
+    },
+    {
+      "file": "bk3_special",
+      "id": 10,
+      "u": 181,
+      "v": 84,
+      "w": 16,
+      "h": 32
+    },
+    {
+      "file": "bk3_special",
+      "id": 11,
+      "u": 199,
+      "v": 84,
+      "w": 16,
+      "h": 32
+    },
+    {
+      "file": "bk3_special",
+      "id": 12,
+      "u": 217,
+      "v": 84,
+      "w": 16,
+      "h": 32
     }
   ],
   "texture_bytes": 262144,
-  "texture_sha256": "89153198632b34e4cae6b231ecdffc32e7142dfee689c5013b6f4758e44a262c",
+  "texture_sha256": "2416feb54d7040e1179eac6b1009e1c110f41e001a5b6ec74362f043be29bb3c",
   "format": "256x256 GU_PSM_8888 swizzled; original 6-bit palette expanded to 8-bit; index 0 transparent",
-  "swizzle_roundtrip_verified": true
+  "swizzle_roundtrip_verified": true,
+  "bk3_special": {
+    "art": "ArtNem_HUD",
+    "vram_base": "D6A0",
+    "scripts": "Ani_SpecialBar",
+    "palette": "word_88C6",
+    "source_sha256": "ab4fcf0be4c9b5bac1f60f1d863c2cb6b781c5fb157dad72574c9755534409c3",
+    "states": 13,
+    "size": [
+      16,
+      32
+    ],
+    "charge": "Combat.raw_charge / 16; no percentage stretch; original 2x4 tile states"
+  }
 }

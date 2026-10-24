@@ -14,7 +14,7 @@
     "jump_state_connected": true,
     "pause_freezes_machine": true
   },
-  "eboot_sha256": "9f1acf6ddfa973557746d149e3b27a96e615c51c8c4dd195095b09a33664a4e9",
+  "eboot_sha256": "5d998db0e9384ca09ee0728ead65515e1d59666aa0606e6a6987a099d1a825a8",
   "ram_bytes": 65536,
   "game_bytes": 1840,
   "note": "Native MIPS execution: debugger changes actual big-endian SST RAM, not only legacy Game fields. Existing translated handlers remain migration adapters."

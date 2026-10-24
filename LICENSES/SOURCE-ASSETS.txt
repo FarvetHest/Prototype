@@ -14,3 +14,5 @@ v0.20 includes the complete pinned BK3 IDA listing from gsaurus/sor-disassemblie
 v0.21 embeds unmodified original SoRR WAVs seg1.wav,seg2.wav,seg3.wav,se53.wav,se45.wav,sev1.wav,sev2.wav,seblaze1.wav. WAV and decoded PCM hashes are recorded in assets/sfx-manifest.json. Rights remain with the original authors. No synthetic or DSP replacement samples are included.
 
 v0.21 adds native Barbon art, palette, animation and code/data excerpts from the pinned SoR2 listing in the same repository. Original SEGA authorship retained. See BOSS-RU.md for the precise adaptation limits.
+
+v0.22 adds the pinned SoR1 REV00 listing and native first-round stage tiles/maps/palette, plus native BK3 ArtNem_HUD/Ani_SpecialBar/word_88C6 special gauge. Original SEGA authorship retained; no new ownership or license asserted. Provenance: assets/route1-manifest.json and assets/hud-manifest.json.

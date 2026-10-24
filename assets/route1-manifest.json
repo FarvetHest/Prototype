@@ -1,0 +1,46 @@
+{
+  "source": "SOR1 REV00 disassembly",
+  "source_sha256": "f14690a8fa50b081be5c04533e482b68ff2d1d9e7760d45c5105a86fa26a8300",
+  "repository": "https://github.com/gsaurus/sor-disassemblies",
+  "commit": "4dd719f3ed5c24c86deee616b56cea885e3113d7",
+  "descriptor": "dword_5F5C8",
+  "layouts": [
+    "off_5F7A8",
+    "off_5F9DA"
+  ],
+  "dimensions": [
+    5376,
+    240
+  ],
+  "display_height": 224,
+  "tile_count": 542,
+  "atlas_bytes": 262144,
+  "atlas_sha256": "59905e006479724d756c25c5cc8416d4cedf00caa18ac191c0c907a0d1e9caf3",
+  "map_bytes": 10080,
+  "groups": [
+    [
+      {
+        "rows": 15,
+        "chunks": 21,
+        "ratio": 65537,
+        "mode": 0,
+        "base": 0,
+        "advance": 5040
+      }
+    ],
+    [
+      {
+        "rows": 15,
+        "chunks": 21,
+        "ratio": 65537,
+        "mode": 0,
+        "base": 0,
+        "advance": 5040
+      }
+    ]
+  ],
+  "rounds_in_source": 8,
+  "rounds_connected": 1,
+  "enemy_encounters": "Lite authored adapters, not original SoR1 cue interpreter",
+  "music": "Unchanged SoRR Go Straight track; SoR1 music pending"
+}

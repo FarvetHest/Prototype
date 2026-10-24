@@ -4,8 +4,8 @@ struct Game;
 #define LEVEL_WAVES 5
 #define LEVEL_CUES 20
 #define LEVEL_CAMERA_STEP 3.0f
-#define LEVEL_MID_GATE 512
-#define LEVEL_WIDTH 2852
+#define LEVEL_MID_GATE 1024
+#define LEVEL_WIDTH 5376
 #define LEVEL_CAMERA_MAX ((LEVEL_WIDTH-480)/2)
 #define LEVEL_BOSS_SLOT 1
 #define LEVEL_BOSS_HP 240

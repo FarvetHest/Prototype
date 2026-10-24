@@ -9,8 +9,8 @@ PSP_LARGE_MEMORY = 0
 LIBS = -lpspaudio -lpspgu -lpsppower -lm
 LDFLAGS = -Wl,--gc-sections
 EXTRA_TARGETS = EBOOT.PBP
-PSP_EBOOT_TITLE = SoRR PSP Lite v0.21
-SFOFLAGS = -s DISC_ID=SORL00021
+PSP_EBOOT_TITLE = SoRR PSP Lite v0.22
+SFOFLAGS = -s DISC_ID=SORL00022
 PSPSDK := $(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
 
@@ -19,7 +19,7 @@ src/sprites.o: src/sprite_data.h src/sprites.h src/game.h
 src/main.o: src/game.h src/sprites.h
 src/game.o: src/game.h
 
-src/stage_texture.o: assets/stage.rgb565
+src/stage_texture.o: assets/stage.t8
 src/stage.o: src/stage.h
 src/music.o: src/music.h
 src/sprites.o: src/stage.h

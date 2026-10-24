@@ -1,9 +1,0 @@
-{
-  "full_track_pcm_matches_source_decode": true,
-  "rate": 44100,
-  "frames": 8599534,
-  "pcm_bytes": 34398136,
-  "pcm_sha256": "548d6debecb2e612d537fdf12fa9e5fffc8f0ef13912c75eee1ce9684f0abca0",
-  "peak": 32768,
-  "rms": 8667.19962333204
-}

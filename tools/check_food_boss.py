@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00021':
+        if (status.get('game')or{}).get('id')!='SORL00022':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -44,6 +44,9 @@ while p.u32('frame_count')<2:
     if time.monotonic()>ready_deadline:raise RuntimeError('PSP startup did not reach rendering')
     time.sleep(.1)
 checks={}
+# Legacy 1:1 projection isolates original-pixel asset checks; native projection is
+# covered by check_route1 and the default performance runs.
+p.req('memory.write_u32',address=p.symbols['stage_native_view'],value=0)
 def state():
     raw=p.read(p.symbols['game'],192)
     return dict(player=list(struct.unpack_from('<2f7i',raw)), enemies=[list(struct.unpack_from('<2f7i',raw,36*(i+1))) for i in range(4)], ticks=struct.unpack_from('<I',raw,180)[0],paused=struct.unpack_from('<i',raw,184)[0],won=struct.unpack_from('<i',raw,188)[0])
@@ -128,7 +131,7 @@ def food_pixels(id):
   for x in range(f['w']):
    u=f['u']+x;v=f['v']+y;byte=u*4;off=((v//8)*64+byte//16)*128+(v%8)*16+byte%16;r,g,b,a=atlas[off:off+4]
    if not a:continue
-   want=(r>>3)|((g>>2)<<5)|((b>>3)<<11);screen=(247-f['h']+y)*1024+(240-f['w']//2+x)*2
+   want=(r>>3)|((g>>2)<<5)|((b>>3)<<11);screen=(247-f['h']+y)*1024+(120-f['w']//2+x)*2
    matched+=struct.unpack_from('<H',raw,screen)[0]==want;total+=1
  return dict(matched=matched,total=total)
 def fixture(isboss=False,hp=50):
@@ -158,7 +161,8 @@ try:
  time.sleep(.2);checks['food_consumed_once']=state()['player'][2]==75
  fixture(hp=90);button('square',.04);time.sleep(.15);checks['apple_caps_100']=state()['player'][2]==100
  fixture(hp=100);button('square',.04);time.sleep(.2);checks['full_HP_keeps_food']=food()[0][3]==1 and struct.unpack('<i',p.read(p.symbols['level']+180,4))[0]==0
- p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<f',92.)).decode());time.sleep(.1);screenshot(artifacts/'food-apple.png');apple_pixels=food_pixels(4);checks['rendered_apple_matches_source']=apple_pixels['matched']==apple_pixels['total']
+ # Move the asset probe left of the native foreground lamp; combat pickup fixtures above stay unchanged.
+ wl(68,'<f',320.);p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<f',92.)).decode());time.sleep(.1);screenshot(artifacts/'food-apple.png');apple_pixels=food_pixels(4);checks['rendered_apple_matches_source']=apple_pixels['matched']==apple_pixels['total']
  fixture();p.send(square=True);time.sleep(.04);p.send(square=False);p.send(start=True);time.sleep(.04);p.send(start=False);before=struct.unpack('<i',p.read(p.symbols['level']+180,4))[0];hp=state()['player'][2];time.sleep(.15)
  checks['pause_freezes_pickup']=before>0 and struct.unpack('<i',p.read(p.symbols['level']+180,4))[0]==before and state()['player'][2]==hp
  button('start',.04);time.sleep(.2);checks['resume_finishes_pickup']=state()['player'][2]==75 and food()[0][3]==0
@@ -168,7 +172,7 @@ try:
  button('square',.04);time.sleep(.2);checks['new_square_after_landing_picks']=state()['player'][2]==65 and food()[0][3]==0
  fixture(hp=100);p.req('cpu.stepping');wl(68,'<2f2i',380.,112.,1,1);wr(8,30);p.req('cpu.resume');button('square',.04);time.sleep(.2)
  checks['chicken_heals_60']=state()['player'][2]==90 and food()[0][3]==0
- fixture(hp=100);p.req('cpu.stepping');wl(68,'<2f2i',380.,112.,1,1);p.req('cpu.resume');p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<f',92.)).decode());time.sleep(.1);screenshot(artifacts/'food-chicken.png');chicken_pixels=food_pixels(18);checks['rendered_chicken_matches_source']=chicken_pixels['matched']==chicken_pixels['total']
+ fixture(hp=100);p.req('cpu.stepping');wl(68,'<2f2i',320.,112.,1,1);p.req('cpu.resume');p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<f',92.)).decode());time.sleep(.1);screenshot(artifacts/'food-chicken.png');chicken_pixels=food_pixels(18);checks['rendered_chicken_matches_source']=chicken_pixels['matched']==chicken_pixels['total']
  fixture();p.send(square=True);time.sleep(.8);p.send(square=False);time.sleep(.12)
  checks['pickup_hold_release_has_no_charged_kick']=state()['player'][2]==75 and state()['player'][6]==0 and frames()[0]!=910 and struct.unpack('<2i',p.read(p.symbols['held_attack'],8))==(0,0)
  fixture();p.send(rtrigger=True);button('square',.04);p.send(rtrigger=False);time.sleep(.15);checks['rear_attack_does_not_pick']=state()['player'][2]==50 and food()[0][3]==1
@@ -184,7 +188,7 @@ try:
   p.req('memory.write',address=p.symbols['game']+72,base64=base64.b64encode(struct.pack('<2f7i',140.,100.,240,-1,0,0,0,0,0)).decode())
   p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<2f7i',64.,100.,100,1,0,0,0,0,0)).decode())
   for i in range(5):wr(1492+i*4,0)
-  wl(0,'<6ifIiI',1,4,1,0,0,0,1186.,6,2,5);wl(40,'<7i',1,0,0,0,0,0,0)
+  wl(0,'<6ifIiI',1,4,1,0,0,0,2448.,6,2,5);wl(40,'<7i',1,0,0,0,0,0,0)
  finally:p.req('cpu.resume')
  phases=set();modes=set();deadline=time.monotonic()+5
  while time.monotonic()<deadline:
@@ -211,7 +215,7 @@ try:
  # Move the unarmed Donovan slot to the source grab fixture and freeze its AI.
  p.req('memory.write',address=p.symbols['game']+72,base64=base64.b64encode(struct.pack('<2f7i',70.,100.,240,-1,0,0,0,0,0)).decode())
  p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<2f',64.,100.)).decode())
- wr(1500,10000);wl(0,'<6ifIiI',1,4,1,0,0,0,1186.,6,2,5);wl(40,'<7i',1,0,0,0,0,0,0);p.req('cpu.resume')
+ wr(1500,10000);wl(0,'<6ifIiI',1,4,1,0,0,0,2448.,6,2,5);wl(40,'<7i',1,0,0,0,0,0,0);p.req('cpu.resume')
  p.send(right=True);time.sleep(.12);p.send(right=False);time.sleep(.04)
  checks['boss_can_be_grabbed']=moves()[16]==1
  p.send(left=True);button('square',.04);p.send(left=False);checks['boss_throw_started']=struct.unpack('<i',p.read(p.symbols['game']+512,4))[0]==5;time.sleep(2.)

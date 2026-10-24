@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00021':
+        if (status.get('game')or{}).get('id')!='SORL00022':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -140,26 +140,18 @@ try:
  score=p.u32('ui_score');wr(116,38);time.sleep(.1);checks['reused_slot_damage_scores']=p.u32('ui_score')==score+10
  screenshot(artifacts/'stream-reinforcement.png')
  # Reproduce the old release condition: player at x220 against a locked midpoint.
- native_reset();p.req('cpu.stepping');wl(24,'<f',512.);wl(188,'<2i',10,0);wl(196,'<i',0);wl(200,'<i',10);wl(132,'<I',0);player_x(220.);wr(824,10000);p.req('cpu.resume');time.sleep(.06)
- checks['midpoint_gate_holds_live_enemies']=lv()['camera']==512 and lv()['locked']==1
+ native_reset();p.req('cpu.stepping');wl(24,'<f',1024.);wl(188,'<2i',10,0);wl(196,'<i',0);wl(200,'<i',10);wl(132,'<I',0);player_x(220.);wr(824,10000);p.req('cpu.resume');time.sleep(.06)
+ checks['midpoint_gate_holds_live_enemies']=lv()['camera']==1024 and lv()['locked']==1
  p.req('cpu.stepping');world=lv()['camera']+state()['player'][0];retire(0);retire(1);p.req('cpu.resume')
  motion=[];deadline=time.monotonic()+.55
  while time.monotonic()<deadline:
   p.req('cpu.stepping');a=lv();b=st();x=state()['player'][0];motion.append((a['timer'],a['camera'],x,b['camera_step']));p.req('cpu.resume');time.sleep(.035)
- checks['unlock_does_not_teleport']=all(0<=v[3]<=3 for v in motion) and motion[0][1]-512<=3*max(1,motion[0][0])
+ checks['unlock_does_not_teleport']=all(0<=v[3]<=3 for v in motion) and motion[0][1]-1024<=3*max(1,motion[0][0])
  checks['unlock_preserves_player_world_X']=all(abs(c+x-world)<.01 for _,c,x,_ in motion)
- checks['unlock_spawns_next_encounter_immediately']=st()['gate']==1 and st()['spawned']>=11 and lv()['camera']>512
- # Actual rendered source pixels at all page boundaries; pause makes this independent of scrolling.
- native_reset();time.sleep(.9);button('start',.04);stage=(project/'assets/stage.rgb565').read_bytes();max_batches=0
- for cam in [0,511,1023,1535,2047,2372]:
-  wl(24,'<f',cam/2);time.sleep(.08);raw=p.read(p.u32('presented_buffer'),512*272*2);ok=True
-  for x in [0,31,32,239,479]:
-   worldx=cam+x;page,u=divmod(worldx,512);sy=64;byte=u*2;off=page*262144+((sy//8)*64+byte//16)*128+(sy%8)*16+byte%16
-   ok &= raw[96*1024+x*2:96*1024+x*2+2]==stage[off:off+2]
-  checks['source_pixels_'+str(cam)]=bool(ok);max_batches=max(max_batches,p.u32('stage_draw_count'))
- checks['at_most_two_background_batches']=max_batches<=2
+ checks['unlock_spawns_next_encounter_immediately']=st()['gate']==1 and st()['spawned']>=11 and lv()['camera']>1024
+ # Native two-layer pixel checks live in check_route1.py.
  # Traverse with real Right input. Debugger kills one arrived enemy at a time to accelerate fights.
- native_reset();wr(824,10000);p.send(right=True);deadline=time.monotonic()+70;next_hit=0;max_slots=0;moving_with_enemies=False;empty_at=None;max_empty_walk=0;last=None;bounded=True;continued=False
+ native_reset();wr(824,10000);p.send(right=True);deadline=time.monotonic()+120;next_hit=0;max_slots=0;moving_with_enemies=False;empty_at=None;max_empty_walk=0;last=None;bounded=True;continued=False
  while time.monotonic()<deadline:
   p.req('cpu.stepping');a=lv();b=st();g=state();boss=struct.unpack('<i',p.read(p.symbols['level']+40,4))[0];entry=struct.unpack('<I',p.read(p.symbols['level']+132,4))[0]
   alive=[i for i,e in enumerate(g['enemies'])if e[2]>0];max_slots=max(max_slots,a['slots'].bit_count());moving_with_enemies |= bool(alive and b['camera_step']>0)
@@ -190,7 +182,7 @@ try:
  checks['boss_defeat_scores_9400']=p.u32('ui_score')==9400
  p.send(right=True);deadline=time.monotonic()+8
  while not lv()['finished'] and time.monotonic()<deadline:time.sleep(.05)
- p.send(right=False);checks['exit_fade_and_stage_clear']=lv()['finished']==1 and state()['won']==1 and lv()['camera']==1186 and struct.unpack('<i',p.read(p.symbols['flow'],4))[0]==5
+ p.send(right=False);checks['exit_fade_and_stage_clear']=lv()['finished']==1 and state()['won']==1 and lv()['camera']==2448 and struct.unpack('<i',p.read(p.symbols['flow'],4))[0]==5
  screenshot(artifacts/'stage-clear.png');native_reset();checks['new_run_resets_queue']=st()['cue']==2 and st()['spawned']==2 and st()['retired']==0 and lv()['camera']==0 and p.u32('ui_score')==0
  checks['no_missing_frames']=p.u32('missing_sprite_frames')==0
  result=dict(checks=checks,release_trace=motion,cue_trace=traces,max_slots=max_slots,max_empty_walk_pixels=max_empty_walk*2,eboot_sha256=hashlib.sha256((project/'build/EBOOT.PBP').read_bytes()).hexdigest(),note='Camera/world conservation and stream traversal use real Right input; debugger kills arrived enemies to accelerate progression and fixtures arrange a held survivor/midpoint release. Distances use half-pixel world units. Not hardware timing.')

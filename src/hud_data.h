@@ -3,7 +3,7 @@
 #define HUD_DATA_H
 typedef struct { short set,id,u,v,w,h; } HudFrame;
 extern const unsigned char hud_texture[];
-enum { HUD_BARRA=0,HUD_BARRA_AMARILLA=1,HUD_BARRA_AZUL=2,HUD_SORR=3,HUD_GALSIA=4,HUD_DONOVAN=5,HUD_GENERAL=6,HUD_ITEM=7,HUD_FUENTE=8 };
+enum { HUD_BARRA=0,HUD_BARRA_AMARILLA=1,HUD_BARRA_AZUL=2,HUD_SORR=3,HUD_GALSIA=4,HUD_DONOVAN=5,HUD_GENERAL=6,HUD_ITEM=7,HUD_FUENTE=8,HUD_BK3_SPECIAL=9 };
 static const HudFrame hud_frames[] = {
 {0,24,1,1,106,9},
 {1,24,109,1,104,6},
@@ -64,6 +64,19 @@ static const HudFrame hud_frames[] = {
 {8,255,1,64,16,16},
 {8,256,19,64,16,16},
 {8,257,37,64,16,16},
+{9,0,1,84,16,32},
+{9,1,19,84,16,32},
+{9,2,37,84,16,32},
+{9,3,55,84,16,32},
+{9,4,73,84,16,32},
+{9,5,91,84,16,32},
+{9,6,109,84,16,32},
+{9,7,127,84,16,32},
+{9,8,145,84,16,32},
+{9,9,163,84,16,32},
+{9,10,181,84,16,32},
+{9,11,199,84,16,32},
+{9,12,217,84,16,32},
 };
 #define HUD_FRAME_COUNT (sizeof(hud_frames)/sizeof(hud_frames[0]))
 #endif

@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00021':
+        if (status.get('game')or{}).get('id')!='SORL00022':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -104,7 +104,7 @@ def render_snapshot():
   p.req('cpu.stepping')
   try:value=dict(actors=p.u32('sprite_draw_count'),batches=p.u32('stage_draw_count'),slices=p.u32('stage_slice_count'))
   finally:p.req('cpu.resume')
-  if value['batches']==2 and value['slices']==16:return value
+  if value['batches']>=1 and value['slices']>500:return value
   time.sleep(.02)
  return value
 try:
@@ -112,7 +112,7 @@ try:
  try:
   def wr(address,n):p.req('memory.write_u32',address=address,value=n)
   wr(p.symbols['sample_count'],0);wr(p.symbols['game']+824,10000)
-  p.req('memory.write',address=p.symbols['level'],base64=base64.b64encode(struct.pack('<6ifIiI',1,4,1,0,0,0,1186.,1,15,0)).decode())
+  p.req('memory.write',address=p.symbols['level'],base64=base64.b64encode(struct.pack('<6ifIiI',1,4,1,0,0,0,2448.,1,15,0)).decode())
   for i in range(4):
    hp=40
    p.req('memory.write',address=p.symbols['game']+1664+i*32,base64=base64.b64encode(struct.pack('<8i',2+i%2,0,0,0,0,0,0,0)).decode())
@@ -126,7 +126,7 @@ try:
  rows=list(csv.DictReader((artifacts/'level-battle-profile.csv').read_text().splitlines()[1:]))[-30:]
  fps=[float(v['fps'])for v in rows]
  render_stats=render_snapshot()
- checks['four_enemies_two_RAM_batches']=render_stats['actors']==5 and render_stats['batches']==2
+ checks['four_enemies_batched_native_tiles']=render_stats['actors']==5 and 1<=render_stats['batches']<=4
  checks['fps_target_met']=len(fps)==30 and min(fps)>=29 and statistics.median(fps)>=29.5
  checks['no_new_drops']=p.u32('dropped_ticks')==before
  checks['music_ok']=music()[0]==1 and music()[1]==0

@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00021':
+        if (status.get('game')or{}).get('id')!='SORL00022':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -153,7 +153,7 @@ try:
  checks['intro_and_banner_finish']=ext()[9]==0 and ext()[11]==0
  screenshot(artifacts/'entries-finished.png')
  # Reach the boss through the production last-wave-clear path, retaining its own entrance.
- native_reset();time.sleep(.85);p.req('cpu.stepping');poke_l(188,'<2i',20,1);poke_l(200,'<i',20);poke_l(4,'<i',4);poke_l(24,'<f',1186.);p.req('cpu.resume');kill_wave()
+ native_reset();time.sleep(.85);p.req('cpu.stepping');poke_l(188,'<2i',20,1);poke_l(200,'<i',20);poke_l(4,'<i',4);poke_l(24,'<f',2448.);p.req('cpu.resume');kill_wave()
  v=ext();checks['boss_entrance_is_solo']=v[0]==2 and lv()['slots']==2 and state()['enemies'][1][0]>240 and struct.unpack('<i',p.read(p.symbols['level']+40,4))[0]==1
  checks['boss_warning_banner']=v[11]>0
  screenshot(artifacts/'boss-warning.png');checks['boss_entrance_finishes']=wait_entry()
