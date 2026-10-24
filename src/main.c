@@ -17,7 +17,7 @@
 #include "held.h"
 #include "level.h"
 
-PSP_MODULE_INFO("SoRR PSP Lite", 0, 0, 22);
+PSP_MODULE_INFO("SoRR PSP Lite", 0, 0, 23);
 PSP_MAIN_THREAD_ATTR(PSP_THREAD_ATTR_USER);
 PSP_MAIN_THREAD_STACK_SIZE_KB(128);
 PSP_HEAP_SIZE_KB(4096);
@@ -147,7 +147,7 @@ static void save_profile(void) {
     unsigned i; int failed=0;
     FILE *f = fopen("lite-profile.csv","w");
     if (!f) {save_status=-1; return;}
-    if (fprintf(f,"# SoRR PSP Lite v0.22; selftest=%d; cpu_mhz=%d; samples=%u; capacity=900; music_status=%d; music_error=%d; rate=%u; loops=%u\n", selftest_result,scePowerGetCpuClockFrequencyInt(),sample_count,music_stats.status,music_stats.error,music_stats.rate,music_stats.loops)<0) failed=1;
+    if (fprintf(f,"# SoRR PSP Lite v0.23; selftest=%d; cpu_mhz=%d; samples=%u; capacity=900; music_status=%d; music_error=%d; rate=%u; loops=%u\n", selftest_result,scePowerGetCpuClockFrequencyInt(),sample_count,music_stats.status,music_stats.error,music_stats.rate,music_stats.loops)<0) failed=1;
     if (fprintf(f,"sample,fps,logic_hz,logic_ms,render_sync_ms,dropped_ticks_total,music_blocks,music_late,music_decode_max_ms\n")<0) failed=1;
     for(i=0;i<sample_count;++i) {
         Sample *s=&samples[i];
@@ -175,7 +175,7 @@ int main(void) {
     if(th>=0) sceKernelStartThread(th,0,0);
     scePowerSetClockFrequency(333,333,166);
     sceCtrlSetSamplingCycle(0); sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
-    selftest_result=game_selftest(); if(!selftest_result)selftest_result=sprites_selftest(); if(!selftest_result)selftest_result=flow_selftest(); if(!selftest_result)selftest_result=held_selftest(); if(!selftest_result)selftest_result=level_selftest(); if(!selftest_result)selftest_result=level_boss_selftest(); if(!selftest_result)selftest_result=level_entry_selftest(); flow_init(&flow); game_reset(&game); init_gu(); sprites_init(&game); stage_init(); ui_init(&game); music_start();sfx_start();
+    selftest_result=game_selftest(); if(!selftest_result)selftest_result=sprites_selftest(); if(!selftest_result)selftest_result=flow_selftest(); if(!selftest_result)selftest_result=held_selftest(); if(!selftest_result)selftest_result=level_selftest(); if(!selftest_result)selftest_result=level_boss_selftest(); if(!selftest_result)selftest_result=level_entry_selftest(); if(!selftest_result)selftest_result=character_selftest(); flow_init(&flow); game_reset(&game); init_gu(); sprites_init(&game); stage_init(); ui_init(&game); music_start();sfx_start();
     prev=sceKernelGetSystemTimeWide()-TICK_US; window=prev; last_vblank=sceDisplayGetVcount();
     while(running) {
         uint64_t now=sceKernelGetSystemTimeWide(), delta=now-prev, a,b;
@@ -189,6 +189,7 @@ int main(void) {
         {
             int menu=flow.state==FLOW_TITLE || flow.state>=FLOW_CONTINUE;
             if(menu) {
+                if(flow.state==FLOW_TITLE && (edges&(PSP_CTRL_LEFT|PSP_CTRL_RIGHT))){player_character=(player_character+1)%PLAYER_COUNT;sprites_reset(&game);}
                 flow_button(&flow,(edges&(PSP_CTRL_START|PSP_CTRL_CROSS))!=0,(edges&PSP_CTRL_CIRCLE)!=0);
                 pending=0;apply_flow_request();
             } else if(flow.state==FLOW_PLAY && (edges&PSP_CTRL_START)) {

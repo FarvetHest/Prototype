@@ -6,6 +6,7 @@
 #include "stage.h"
 #include "level.h"
 #include "sprite_data.h"
+#include "max_data.h"
 
 #define TEXTURE_BYTES (512*512*3)
 #define TEXTURE_VRAM_OFFSET (512*272*2*2)
@@ -21,7 +22,10 @@ unsigned sprite_draw_count,sprite_slice_count,missing_sprite_frames,missing_spri
 static unsigned frame_draws,frame_slices;
 static const Actor *get_actor(const Game *g,int i) { return i ? &g->enemies[i-1] : &g->player; }
 static int family(int i) { return actor_family[i]; }
+static unsigned max_pose(unsigned id){unsigned j;for(j=0;j<sizeof(max_aliases)/sizeof(max_aliases[0]);++j)if(max_aliases[j][0]==id)return max_aliases[j][1];
+ ++missing_sprite_frames;missing_sprite_family=6;missing_sprite_id=id;return max_aliases[0][1];}
 static const SpriteFrame *find_frame(int set,unsigned id) {
+ if(set==6){unsigned j;for(j=0;j<sizeof(max_frames)/sizeof(max_frames[0]);++j)if(max_frames[j].id==(int)id)return &max_frames[j];}
     unsigned i;
     for(i=0;i<SPRITE_FRAME_COUNT;++i) if(sprite_frames[i].family==set && sprite_frames[i].id==(int)id) return &sprite_frames[i];
     ++missing_sprite_frames;missing_sprite_family=(unsigned)set;missing_sprite_id=id;return &sprite_frames[0];
@@ -30,7 +34,7 @@ void sprites_reset(const Game *g) {
     int i;
     for(i=0;i<5;++i) {
         const Actor *a=get_actor(g,i);
-        actor_visibility[i]=i?death_visible(g,i-1):1;actor_family[i]=i?enemy_type(g,i-1)+1:0;actor_lift[i]=0;animation[i]=(Animation){a->x,a->y,0}; actor_frames[i]=i?enemy_frames(g,i-1,EP_IDLE)[0].fpg:1; actor_states[i]=ANIM_IDLE;
+        actor_visibility[i]=i?death_visible(g,i-1):1;actor_family[i]=i?enemy_type(g,i-1)+1:player_character==PLAYER_MAX?6:0;actor_lift[i]=0;animation[i]=(Animation){a->x,a->y,0}; actor_frames[i]=i?enemy_frames(g,i-1,EP_IDLE)[0].fpg:player_character==PLAYER_MAX?max_pose(1):1; actor_states[i]=ANIM_IDLE;
     }
 }
 void sprites_spawn_enemies(const Game *g,unsigned mask){int i;for(i=0;i<4;++i)if(mask&(1u<<i)){
@@ -48,8 +52,8 @@ void sprites_step(const Game *g) {
     int i;
     if(g->paused) return;
     for(i=0;i<5;++i) {
-        actor_visibility[i]=i?death_visible(g,i-1):1;actor_family[i]=i?enemy_type(g,i-1)+1:0;const Actor *a=get_actor(g,i); Animation *v=&animation[i];
-        unsigned state=ANIM_IDLE, frame=1, set=family(i);
+        actor_visibility[i]=i?death_visible(g,i-1):1;actor_family[i]=i?enemy_type(g,i-1)+1:player_character==PLAYER_MAX?6:0;const Actor *a=get_actor(g,i); Animation *v=&animation[i];
+        unsigned state=ANIM_IDLE, frame=1, set=i?family(i):0;
         int moved=(a->x!=v->x || a->y!=v->y),finished=(g->won || g->player.hp<=0);
         if(a->hp<=0 || (i && g->moves.down[i-1])) state=ANIM_DOWN;
         else if(!finished && !i && g->moves.special) state=ANIM_SPECIAL;
@@ -97,7 +101,7 @@ void sprites_step(const Game *g) {
         if(!i && level.enabled && level.pickup_timer && !g->physics.body[0].phase && a->hp>0){frame=910;actor_states[i]=ANIM_GRAB;}
         if(!i && g->reaction.shock && g->physics.body[0].phase==BODY_FLIGHT)frame=920+g->reaction.shock_frame;
         else if(!i && g->reaction.holder>=0)frame=g->reaction.side?923:922;
-        actor_frames[i]=frame;actor_lift[i]=g->motion.z[i];
+        actor_frames[i]=!i && player_character==PLAYER_MAX?max_pose(frame):frame;actor_lift[i]=g->motion.z[i];
         v->x=a->x;v->y=a->y;
     }
 }
@@ -112,7 +116,7 @@ void sprites_begin(void) {
 }
 void sprites_draw(const Actor *a,int index) {
     if(!actor_visibility[index])return;
-    int set=family(index),flip=(set==0 ? a->facing<0 : a->facing>0);
+    int set=family(index),flip=(set==0 || set==6 ? a->facing<0 : a->facing>0);
     const SpriteFrame *f=find_frame(set,actor_frames[index]);
     SpriteVertex *v;int slice,count=(f->w+31)/32,lift=0;
     int x=(int)(a->x*2),y=stage_foot_y(a->y),left;
@@ -122,8 +126,8 @@ void sprites_draw(const Actor *a,int index) {
     /* FPG control point 0 is retained, including during mirrored attacks. */
     left=x-(flip ? f->w-f->px : f->px);
     /* Source pose/palette retained during hurt; no synthetic red tint. */
-    sceGuTexImage(0,512,512,512,(f->v/512<3?(const unsigned char *)texture_vram:sprite_atlas)+(f->v/512)*512*512);
-    sceGuClutLoad(32,sprite_palettes[set]);
+    sceGuTexImage(0,512,512,512,(set==6?max_atlas:(f->v/512<3?(const unsigned char *)texture_vram:sprite_atlas))+(f->v/512)*512*512);
+    sceGuClutLoad(32,set==6?max_palette:sprite_palettes[set]);
     v=(SpriteVertex *)sceGuGetMemory(count*2*sizeof(SpriteVertex));
     for(slice=0;slice<count;++slice) {
         int sx=slice*32,ex=sx+32;

@@ -8,6 +8,12 @@
 #include "rules.h"
 #include "impact.h"
 #include "enemy.h"
+enum { PLAYER_AXEL,PLAYER_MAX,PLAYER_COUNT };
+extern unsigned player_character;
+int character_damage(int encoded);
+int character_frame_ticks(int script,int ticks);
+float character_speed(void);
+int character_selftest(void);
 #define ENEMIES 4
 #define TICK_US 33333u
 typedef struct { float x, y; int hp, facing, cooldown, stun, attack, jump; unsigned hit; } Actor;

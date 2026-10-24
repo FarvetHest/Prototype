@@ -1,0 +1,18 @@
+{
+  "checks": {
+    "source_pin": true,
+    "original_palette": true,
+    "all_pixels_and_control_points": true,
+    "no_frame_crosses_page": true,
+    "every_player_pose_has_alias": true,
+    "aliases_are_real_Max_frames": true,
+    "Axel_and_enemies_atlas_unchanged": true,
+    "native_stage_unchanged": true,
+    "original_sfx_unchanged": true,
+    "music_unchanged": true,
+    "HD_Floyd_not_in_project": true,
+    "extraction_reproducible": true
+  },
+  "eboot_sha256": "02343f30642e81d139cad71326f11a1f5f281fb68e7311c1f4875f6dad80b612",
+  "note": "Original Max FPG indices, palette and pivots preserved byte-for-byte; no HD or manual limb assembly. Base-version comparison needs sibling v0.22."
+}

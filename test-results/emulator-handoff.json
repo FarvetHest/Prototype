@@ -1,5 +1,5 @@
 {
-  "eboot_sha256": "5d998db0e9384ca09ee0728ead65515e1d59666aa0606e6a6987a099d1a825a8",
+  "eboot_sha256": "02343f30642e81d139cad71326f11a1f5f281fb68e7311c1f4875f6dad80b612",
   "selftest": 0,
   "flow": [
     1,
@@ -9,7 +9,9 @@
   ],
   "paused": 1,
   "native_view": 1,
-  "ticks": 58,
+  "character": 1,
+  "family": 6,
+  "ticks": 41,
   "controls_restored": true,
   "visible_launch_requested": true
 }

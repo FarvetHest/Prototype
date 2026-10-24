@@ -43,6 +43,7 @@ def main():
     for name in ('main','level','held','flow','game','machine','death','bk3','combat','rules','impact','enemy','variety','reactions','sfx','ai','physics','sprites','stage','music','ui'):
         run('psp-gcc', *common, '-c', 'src/'+name+'.c','-o',(out/(name+'.o')).as_posix())
     run('psp-gcc','-G0','-c','src/sprite_atlas.S','-o',(out/'sprite_atlas.o').as_posix())
+    run('psp-gcc','-G0','-c','src/max_texture.S','-o',(out/'max_texture.o').as_posix())
     run('psp-gcc','-G0','-c','src/stage_texture.S','-o',(out/'stage_texture.o').as_posix())
     run('psp-gcc','-G0','-c','src/hud_texture.S','-o',(out/'hud_texture.o').as_posix())
     elf = out/'sorr-lite.elf'
@@ -51,14 +52,14 @@ def main():
         '-Wl,-q,-T'+(sdk/'psp/sdk/lib/linkfile.prx').as_posix(),
         '-Wl,-zmax-page-size=128','-Wl,--gc-sections','-Wl,-Map='+ (out/'sorr-lite.map').as_posix(),
         '-o',elf.as_posix(),(out/'main.o').as_posix(),(out/'level.o').as_posix(),(out/'held.o').as_posix(),(out/'flow.o').as_posix(),(out/'game.o').as_posix(),(out/'machine.o').as_posix(),(out/'death.o').as_posix(),(out/'bk3.o').as_posix(),(out/'combat.o').as_posix(),(out/'physics.o').as_posix(),(out/'rules.o').as_posix(),(out/'impact.o').as_posix(),(out/'enemy.o').as_posix(),(out/'variety.o').as_posix(),(out/'reactions.o').as_posix(),(out/'sfx.o').as_posix(),(out/'ai.o').as_posix(),
-        (out/'sprites.o').as_posix(),(out/'sprite_atlas.o').as_posix(),
+        (out/'sprites.o').as_posix(),(out/'sprite_atlas.o').as_posix(),(out/'max_texture.o').as_posix(),
         (out/'stage.o').as_posix(),(out/'music.o').as_posix(),(out/'stage_texture.o').as_posix(),
         (out/'ui.o').as_posix(),(out/'hud_texture.o').as_posix(),
         (sdk/'psp/sdk/lib/prxexports.o').as_posix(),'-lpspaudio','-lpspgu','-lpsppower','-lpspdisplay',
         '-lpspge','-lpspctrl','-lm')
     run('psp-fixup-imports',elf)
     run('psp-prxgen',elf,out/'sorr-lite.prx')
-    run('mksfoex','-d','MEMSIZE=0','-s','DISC_ID=SORL00022','SoRR PSP Lite v0.22',out/'PARAM.SFO')
+    run('mksfoex','-d','MEMSIZE=0','-s','DISC_ID=SORL00023','SoRR PSP Lite v0.23',out/'PARAM.SFO')
     run('pack-pbp',out/'EBOOT.PBP',out/'PARAM.SFO',*(['NULL']*5),out/'sorr-lite.prx','NULL')
     run('psp-size',elf)
     pbp=out/'EBOOT.PBP'

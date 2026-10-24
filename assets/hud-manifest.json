@@ -690,10 +690,18 @@
       "v": 84,
       "w": 16,
       "h": 32
+    },
+    {
+      "file": "max_portrait",
+      "id": 0,
+      "u": 1,
+      "v": 122,
+      "w": 14,
+      "h": 13
     }
   ],
   "texture_bytes": 262144,
-  "texture_sha256": "2416feb54d7040e1179eac6b1009e1c110f41e001a5b6ec74362f043be29bb3c",
+  "texture_sha256": "adb1641230da4db97f9b414765ed4138e746ff59a519928b7c1d0517d4a155b3",
   "format": "256x256 GU_PSM_8888 swizzled; original 6-bit palette expanded to 8-bit; index 0 transparent",
   "swizzle_roundtrip_verified": true,
   "bk3_special": {

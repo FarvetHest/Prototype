@@ -102,10 +102,11 @@ static void bar(int x,int y,unsigned hp,unsigned max) {
 void ui_draw(const Game *g,int error) {
     char score[32];unsigned value=ui_score>9999999?9999999:ui_score;
     if(flow.state==FLOW_TITLE) {
-        ui_text(152,98,"SORR PSP LITE");ui_text(216,118,"V0.22");
+        ui_text(152,98,"SORR PSP LITE");ui_text(216,118,"V0.23");
         ui_text(158,140,"START OR CROSS");
         snprintf(score,sizeof(score),"BEST %07u",flow.best>9999999?9999999:flow.best);ui_text(160,164,score);
-        if(error)ui_text(180,190,"SELFTEST ERROR");
+        ui_text(208,188,player_character==PLAYER_MAX?"MAX":"AXEL");ui_text(200,208,"LEFT RIGHT");
+        if(error)ui_text(180,232,"SELFTEST ERROR");
         return;
     }
     if(level.enabled){
@@ -119,7 +120,8 @@ void ui_draw(const Game *g,int error) {
             if(level.boss==1)ui_text(212,96,"WARNING");
             else ui_text(214,96,"STAGE 1");
         }}
-    image(HUD_SORR,176,8,8,-1);image(HUD_SORR,250,26,8,-1);
+    if(player_character==PLAYER_MAX){image(HUD_MAX,0,8,8,-1);ui_text(26,8,"MAX");}
+    else {image(HUD_SORR,176,8,8,-1);image(HUD_SORR,250,26,8,-1);}
     snprintf(score,sizeof(score),"%07u",value);ui_text(80,8,score);
     bar(25,16,ui_player_hp,100);
     snprintf(score,sizeof(score),"X%d",flow.lives);ui_text(138,16,score);

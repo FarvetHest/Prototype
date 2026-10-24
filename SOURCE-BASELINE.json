@@ -1,6 +1,6 @@
 {
-  "version": "0.21",
-  "commit": "d9eb691",
-  "eboot_sha256": "9f1acf6ddfa973557746d149e3b27a96e615c51c8c4dd195095b09a33664a4e9",
-  "note": "v0.21 baseline reports do not certify v0.22"
+  "version": "0.22",
+  "commit": "483a1bb6b84b8d377a780cf9757a0f9d457f9825",
+  "eboot_sha256": "5d998db0e9384ca09ee0728ead65515e1d59666aa0606e6a6987a099d1a825a8",
+  "note": "v0.23 Max; previous reports not certification"
 }

@@ -1,0 +1,24 @@
+{
+  "checks": {
+    "four_enemies_batched_native_tiles": true,
+    "fps_target_met": true,
+    "no_new_drops": true,
+    "music_ok": true,
+    "level_remains_locked": true,
+    "no_missing_frames": true,
+    "no_machine_dispatch_faults": true
+  },
+  "render_snapshot": {
+    "actors": 5,
+    "batches": 2,
+    "slices": 1339
+  },
+  "seconds": 35,
+  "last_30_fps": {
+    "min": 29.97,
+    "median": 29.97,
+    "max": 29.97
+  },
+  "eboot_sha256": "02343f30642e81d139cad71326f11a1f5f281fb68e7311c1f4875f6dad80b612",
+  "note": "Max selected, RAM character atlas, PPSSPP software-renderer stress fixture: final background position, two Electra and two Zack at source AI level7 (clamped to6 for Electra), including RAM atlas access, player invulnerability to sustain combat. Not hardware performance."
+}

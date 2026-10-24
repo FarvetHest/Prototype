@@ -1,0 +1,91 @@
+{
+  "checks": {
+    "native_selftest": true,
+    "default_is_Axel": true,
+    "title_selects_Max": true,
+    "title_returns_to_Axel": true,
+    "Max_starts_in_family6": true,
+    "Max_slower_walk": true,
+    "walking_original_frames": true,
+    "heavy_jab_damage3": true,
+    "jab_uses_Max10": true,
+    "held_release_Max_combo": true,
+    "jump_original_poses": true,
+    "neutral_special_Max_spin": true,
+    "full_charge_special_no_HP_cost": true,
+    "partial_charge_special_pays_HP": true,
+    "forward_special_Max_poses": true,
+    "throw_uses_Max_poses": true,
+    "heavy_throw_lands": true,
+    "Max_pickup_pose74": true,
+    "Max_food_heals25": true,
+    "new_run_preserves_Max": true,
+    "all_58_poses_pixels_facing_1": true,
+    "all_58_poses_pixels_facing_-1": true,
+    "no_missing_frames": true,
+    "no_dispatch_faults": true,
+    "continue_keeps_Max": true,
+    "switch_back_restores_Axel_damage2": true
+  },
+  "observed": {
+    "jab": [
+      1,
+      2,
+      10
+    ],
+    "charged": [
+      1,
+      24,
+      25,
+      26,
+      27
+    ],
+    "jump": [
+      1,
+      2,
+      11,
+      12,
+      13
+    ],
+    "special": [
+      1,
+      2,
+      24,
+      25,
+      26,
+      27,
+      28
+    ],
+    "forward": [
+      35,
+      36,
+      37,
+      38
+    ],
+    "throw": [
+      1,
+      2,
+      3,
+      153,
+      154,
+      155,
+      156
+    ]
+  },
+  "rendered": {
+    "summary_1": {
+      "poses": 58,
+      "pixels": 149923
+    },
+    "summary_-1": {
+      "poses": 58,
+      "pixels": 149923
+    }
+  },
+  "walk": {
+    "ticks": 9,
+    "distance": 10.0
+  },
+  "eboot_sha256": "02343f30642e81d139cad71326f11a1f5f281fb68e7311c1f4875f6dad80b612",
+  "note": "Real selection/controller, Max heavy-profile moves and original-pixel proof at 1:1 for all58 poses/mirrors. Fixtures position targets or seed a grab; Max remains a BK3/Lite mechanics adapter, not original SoR2 code execution."
+}

@@ -12,10 +12,13 @@ int impact_overlap(const Game *g,int from,int to,int id){const Actor *a=actor(g,
  box=from?enemy_box(g,from-1,id,0):bk3_attack_boxes[id];if(!box)return 0;box+=a->facing>0?4:0;
  z=from?-(int)(g->motion.z[from]*65536):g->bk3.z;
  x=a->x*2+box[0];y=stage_foot_y(a->y)+z/65536.f+box[2];
- return !(r[1]<x || r[0]>x+(int)box[1] || r[3]<y || r[2]>y+(int)box[3]);
+ {int width=(unsigned char)box[1];if(!from && player_character==PLAYER_MAX){if(box[0]+width/2<0)x-=12;width+=12;}
+ return !(r[1]<x || r[0]>x+width || r[3]<y || r[2]>y+(int)box[3]);}
 }
 unsigned impact_sound(int encoded){int d=encoded&63;return d<3?0x18:d<5?0x26:d<7?0x21:0x32;}
-int impact_apply(Game *g,int from,int to,int encoded){int damage=encoded&63,freeze=2+(damage>>2),facing=actor(g,from)->facing;
+int impact_apply(Game *g,int from,int to,int encoded){int damage,freeze,facing=actor(g,from)->facing;
+ if(!from)encoded=character_damage(encoded);
+ damage=encoded&63;freeze=2+(damage>>2);
  if(!damage || from==to || !(rules_flags(g,to)&128) || g->physics.body[to].inv || (!to && g->moves.invincible))return 0;
  if(reaction_block(g,from,to))return 1;
  if(freeze>8)freeze=8;

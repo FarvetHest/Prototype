@@ -118,6 +118,6 @@
       "total": 312
     }
   ],
-  "eboot_sha256": "5d998db0e9384ca09ee0728ead65515e1d59666aa0606e6a6987a099d1a825a8",
+  "eboot_sha256": "02343f30642e81d139cad71326f11a1f5f281fb68e7311c1f4875f6dad80b612",
   "note": "PPSSPP RGB565 framebuffer; reference pixels decoded from pinned SoR1 native layers; only solid interior samples avoid nearest-neighbour edge ambiguities. All opaque special-meter pixels compared in 13 states. Debugger freezes combat and sets cameras/charge; does not prove original enemy scripting or real-hardware FPS."
 }

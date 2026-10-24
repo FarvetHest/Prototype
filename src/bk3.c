@@ -13,7 +13,7 @@ static const Bk3Frame *frames(int script,int *count){
  *count=34;return bk3_idle;
 }
 static void enter(Bk3 *b,int script){int count;const Bk3Frame *f=frames(script,&count);
- b->script=script;b->frame=0;b->timer=f[0].ticks;b->mask=0;
+ b->script=script;b->frame=0;b->timer=character_frame_ticks(script,f[0].ticks);b->mask=0;
 }
 static void attack_start(Game *g){Bk3 *b=&g->bk3;
  int rear=b->queued==2,charged=b->queued==3;
@@ -35,7 +35,7 @@ static void collide(Game *g,const Bk3Frame *f){
   if(!impact_apply(g,0,i+1,f->damage))continue;
   b->mask|=1u<<i;b->enemy_inv[i]=5;g->player.hit|=1u<<i;hit=1;
  }
- if(hit){int freeze=2+((f->damage&63)>>2);b->hitstop=freeze>8?8:freeze;}
+ if(hit){int freeze=2+((character_damage(f->damage)&63)>>2);b->hitstop=freeze>8?8:freeze;}
 }
 void bk3_damage_frame(Game *g,int collision,int damage){Bk3Frame f={1,1,collision,damage};collide(g,&f);}
 void bk3_tick(Game *g,float x,float y,int attack,int jump){
@@ -58,7 +58,7 @@ void bk3_tick(Game *g,float x,float y,int attack,int jump){
    if(b->mode==1){if(b->script!=BK_BLITZ && b->script!=BK_BACKHAND)b->next_combo=b->combo%4;b->mode=0;enter(b,BK_IDLE);}
    else if(b->mode==2){b->frame=n-1;b->timer=1;}
    else enter(b,b->script);
-  }else b->timer=f[b->frame].ticks;
+  }else b->timer=character_frame_ticks(b->script,f[b->frame].ticks);
  }
  if(b->mode==0){
   if(jump){started_jump=1;b->mode=2;b->takeoff=4;b->landing=0;b->z=0;b->vz=BK3_JUMP_FP;b->airvx=0;b->air_attack=0;b->run=0;enter(b,BK_JUMP);b->queued=attack;}
@@ -66,8 +66,8 @@ void bk3_tick(Game *g,float x,float y,int attack,int jump){
   else{
    int script=b->run?BK_RUN:(dx||dy)?BK_WALK:BK_IDLE;
    if(b->script!=script)enter(b,script);
-   p->x=bound(p->x+dx*(b->run?BK3_RUN_FP:BK3_WALK_FP)/131072.0f,10,230);
-   if(!b->run)p->y=bound(p->y+dy*BK3_WALK_FP/(65536.0f*2*.76f),76,126);
+   p->x=bound(p->x+dx*(b->run?BK3_RUN_FP:BK3_WALK_FP)*character_speed()/131072.0f,10,230);
+   if(!b->run)p->y=bound(p->y+dy*BK3_WALK_FP*character_speed()/(65536.0f*2*.76f),76,126);
    if(dx)p->facing=dx;
   }
  }else if(b->mode==1 && b->script==BK_BLITZ){

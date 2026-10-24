@@ -1,4 +1,4 @@
-"""Compatibility entry point for the v0.22 impact bank."""
+"""Compatibility entry point for the v0.23 impact bank."""
 from pathlib import Path
 import runpy
 runpy.run_path(str(Path(__file__).with_name("prepare_sfx_bank.py")),run_name="__main__")

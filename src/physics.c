@@ -34,7 +34,7 @@ void physics_victim_start(Game *g,int i,int back){Body *b=&g->physics.body[i];in
  memset(b,0,sizeof(*b));b->phase=BODY_VICTIM;b->timer=f[0].ticks;b->back=back;b->hurt=f[0].hurt;b->fpg=f[0].fpg;
  /* While attached, vx stores the victim's own held X origin (16.16 screen pixels). */
  b->vx=(int)(actor(g,i)->x*131072);
- b->pending=back?(back_release[1]&65535):front_release[3];sync_body(g,i);
+ b->pending=character_damage(back?(back_release[1]&65535):front_release[3])&63;sync_body(g,i);
 }
 int physics_victim_tick(Game *g,int i){Body *b=&g->physics.body[i];int n,remaining;const EnemyFrame *f=body_frames(g,i,BODY_VICTIM,b->back,&n);const unsigned *offset=b->back?back_offsets:front_offsets;unsigned packed;
  if(!b->timer){++b->frame;b->timer=f[b->frame].ticks;}
@@ -57,6 +57,9 @@ int physics_rect(const Game *g,int index,float r[4]){const Actor *a=index?&g->en
  else if(index){id=g->pose[index-1].fpg?g->pose[index-1].hurt:enemy_frames(g,index-1,EP_IDLE)[0].hurt;}
  else if(!index && g->bk3.active){unsigned j;for(j=0;j<sizeof(axel_hurt_ids)/sizeof(axel_hurt_ids[0]);++j)if(axel_hurt_ids[j][0]==g->bk3.fpg){id=axel_hurt_ids[j][1];break;}}
  if(!id)return 0;
+ if(!index && player_character==PLAYER_MAX){int height=g->bk3.script==BK_TUCK?56:82;
+  r[0]=a->x*2-16;r[1]=a->x*2+16;r[3]=stage_foot_y(a->y)-g->motion.z[0];r[2]=r[3]-height;return 1;
+ }
  box=index?enemy_box(g,index-1,id,1):axel_hurt[id];if(!box)return 0;box+=a->facing>0?4:0;
  r[0]=a->x*2+box[0];r[1]=r[0]+(unsigned char)box[1];r[2]=stage_foot_y(a->y)-g->motion.z[index]+box[2];r[3]=r[2]+(unsigned char)box[3];return 1;
 }

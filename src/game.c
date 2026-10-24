@@ -2,6 +2,11 @@
 #include "sfx.h"
 #include <string.h>
 #include <stddef.h>
+unsigned player_character;
+/* Max is an authored heavyweight adapter on the BK3 combat core. */
+float character_speed(void){return player_character==PLAYER_MAX?.8f:1.f;}
+int character_damage(int encoded){int d=encoded&63;if(player_character==PLAYER_MAX){d=(d*3+1)/2;if(d>63)d=63;}return (encoded&~63)|d;}
+int character_frame_ticks(int script,int ticks){return player_character==PLAYER_MAX && script>=BK_PUNCH1 && script<=BK_TUCK?(ticks*3+1)/2:ticks;}
 void game_reset(Game *g){
  int i;bk3_machine_reset(g);death_reset(g);memset(g,0,sizeof(*g));g->reaction.holder=-1;g->player=(Actor){64,100,100,1,0,0,0,0,0};
  for(i=0;i<4;++i)g->enemies[i]=(Actor){144+i*23,79+i*12,40,-1,20+i*9,0,0,0,0};
@@ -31,3 +36,14 @@ void game_step(Game *g,Input in){
  g->won=1;for(i=0;i<4;++i)if(g->enemies[i].hp>0 || g->physics.body[i+1].phase==BODY_FLIGHT || g->physics.body[i+1].phase==BODY_VICTIM || g->combat.enemy[i].z<0 || death_pending(g,i))g->won=0;
 }
 int game_selftest(void){int result=bk3_selftest();if(result)return result;result=combat_selftest();if(result)return result;result=physics_selftest();if(result)return result;result=rules_selftest();if(result)return result;result=source_ai_selftest();if(result)return result;result=impact_selftest();if(result)return result;result=enemy_selftest();if(result)return result;result=variety_selftest();if(result)return result;result=reaction_selftest();if(result)return result;result=bk3_machine_selftest();if(result)return result;result=death_selftest();return result?result:sfx_selftest();}
+
+int character_selftest(void){
+ unsigned saved=player_character;Game g;int result=0,hp,i;float x;
+ player_character=PLAYER_MAX;
+ if(character_damage(0xc2)!=0xc3 || character_damage(0xff)!=0xff || character_damage(0xc0)!=0xc0 || character_frame_ticks(BK_PUNCH1,2)!=3){result=1501;goto done;}
+ game_reset(&g);for(i=0;i<4;++i){g.enemies[i].x=220;g.enemies[i].stun=10000;}
+ x=g.player.x;bk3_tick(&g,1,0,0,0);if(g.player.x-x<.499f || g.player.x-x>.501f){result=1502;goto done;}
+ game_reset(&g);hp=g.enemies[0].hp;if(!impact_apply(&g,0,1,2) || hp-g.enemies[0].hp!=3){result=1503;goto done;}
+ game_reset(&g);hp=g.player.hp;if(!impact_apply(&g,1,0,2) || hp-g.player.hp!=2){result=1504;goto done;}
+ done:player_character=saved;return result;
+}

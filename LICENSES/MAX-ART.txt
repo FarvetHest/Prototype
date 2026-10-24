@@ -1,0 +1,5 @@
+Max pixel sprites/palette/control points: original local SoRR5.2 max.fpg.
+Source SHA256: 399ea5927d7385c28a220fbd88cd988ce87df2c51d6aa90c575097733745135a
+Original SEGA/SoRR authorship retained; no new license or ownership asserted.
+The port preserves source pixels and pivots. Original SoR2 game logic is not
+fully ported; the current BK3/Lite mechanics adapter is described in MAX-RU.md.
