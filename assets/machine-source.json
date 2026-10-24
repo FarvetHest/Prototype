@@ -1,0 +1,848 @@
+{
+  "source_sha256": "ab4fcf0be4c9b5bac1f60f1d863c2cb6b781c5fb157dad72574c9755534409c3",
+  "constants": {
+    "ElevatorFloor": 16746517,
+    "Alarm": 16746522,
+    "ScreenShake": 16746525,
+    "EnableBikeFlag": 16746528,
+    "NeoXTimer": 16746576,
+    "CharacterPortraitTimer": 16746578,
+    "ScreenLockLeft": 16746594,
+    "ScreenLockRight": 16746596,
+    "GeneralCutscene": 16746604,
+    "CutSceneTimer": 16746606,
+    "CharacterPortrait": 16746616,
+    "ScreenFGHPos": 16746624,
+    "ScreenFGVPos": 16746628,
+    "ScreenInertiaFGHpos": 16746632,
+    "ScreenInertiaFGVpos": 16746636,
+    "ScreenBGHPos": 16746640,
+    "ScreenBGVPos": 16746644,
+    "ScreenVPosTimer": 16746645,
+    "ScreenInertiaBGHpos": 16746648,
+    "ScreenInertiaBGVpos": 16746652,
+    "CharacterPortraitData": 16746696,
+    "UncArtRAMAddresHolder": 16746712,
+    "Switch1": 16746720,
+    "Switch2": 16746721,
+    "GeneralTimer": 16746722,
+    "Level6Rooms": 16746723,
+    "NextGeneralMode": 16746728,
+    "GeneralHealth": 16746730,
+    "EnableVictyFlag": 16746735,
+    "GeneralDeadorAlive": 16746737,
+    "StartingLives": 16776970,
+    "RAMHolder": 4294958592,
+    "P1CharacterSST": 4294958848,
+    "P2CharacterSST": 4294959104,
+    "BossObjSST": 4294959360,
+    "EnemyObjSST": 4294959616,
+    "LeftElevatorUP": 4294962688,
+    "LeftElevatorDOWN": 4294962816,
+    "RightElevatorUP": 4294962944,
+    "RightElevatorDOWN": 4294963072,
+    "GeneralSST": 4294963200,
+    "SpriteMappingsBuffer": 4294963712,
+    "PauseFlag": 4294964485,
+    "LevelEndFlag": 4294964494,
+    "OptionModeLevelSelectFlag": 4294964517,
+    "EnemyData": 4294964548,
+    "CurrentEnemyELC": 4294964566,
+    "EnemySpawn_Counter": 4294964590,
+    "SpriteMappingsBufferPointer": 4294964742,
+    "KO_Flag": 4294964748,
+    "AreaUnlock": 4294964749,
+    "P1SpecialMoveCharger": 4294964758,
+    "P2SpecialMoveCharger": 4294964760,
+    "GameSelectMode": 4294964766,
+    "OptionMode": 4294964768,
+    "RAMCounter": 4294964772,
+    "P1JoypadWrite": 4294964996,
+    "P1JoypadPress": 4294964997,
+    "P2JoypadWrite": 4294965000,
+    "XCam": 4294965008,
+    "YCam": 4294965016,
+    "ButtonPressAuto_DemoData": 4294965168,
+    "NemDecBuffer": 4294965248,
+    "Pallette_Buffer": 4294965760,
+    "Game_Mode": 4294966016,
+    "Stage": 4294966018,
+    "Level": 4294966020,
+    "EnableAshFlag": 4294966028,
+    "EnableShivaFlag": 4294966029,
+    "ButtonPressAuto_Demo": 4294966035,
+    "Max_Enemy": 4294966036,
+    "Difficulty": 4294967048,
+    "OnePlayerGame": 4294967064,
+    "TwoPlayerGame": 4294967066,
+    "RoomDetect": 4294967068,
+    "SuperAxel1": 4294967069,
+    "SuperZan": 4294967070,
+    "SuperSkate": 4294967071,
+    "SuperAxel2": 4294967072,
+    "SuperAxel3": 4294967073,
+    "DataPortA": 10551299,
+    "DataPortB": 10551301,
+    "ObjMode": 0,
+    "CameraX": 2,
+    "CameraY": 6,
+    "SpriteStatus": 10,
+    "ObjID": 12,
+    "NextAnimation": 14,
+    "SpriteOrientation": 15,
+    "CurrentAnimation": 16,
+    "AnimationScriptOffset": 18,
+    "FrameTimer": 22,
+    "FrameID": 24,
+    "NextFramePointer": 26,
+    "PreviousFramePointer": 28,
+    "AnimationStatus": 30,
+    "SmallCharPic": 31,
+    "Hit_Collision_ID": 50,
+    "Atk_Collision_ID": 51,
+    "AttackDamage": 52,
+    "HitDamage": 54,
+    "Throw_V_Inertia": 60,
+    "HPos": 64,
+    "VPos": 68,
+    "HPosInertia": 72,
+    "VPosInertia": 76,
+    "XInertia": 80,
+    "YInertia": 84,
+    "ObjStatus1": 88,
+    "ObjStatus4": 91,
+    "InvinsibilityTimer": 92,
+    "Obj_Attacked": 94,
+    "Obj_Attacking": 96,
+    "HP": 108,
+    "HPBarSize": 109,
+    "ObjStatus5": 111,
+    "Held_Weapon_Addr": 112,
+    "CurrentSpriteArtAddress": 120,
+    "Score": 128,
+    "ArtBlockSize": 132,
+    "Lives": 139,
+    "ButtonHeldTimer": 154,
+    "Knockout_Move_Flag": 155,
+    "EnemyObj": 164,
+    "DpadTimer": 166,
+    "ButtonHeld": 176,
+    "ButtonPresses": 177,
+    "ButtonHeld6Button": 178,
+    "ButtonPresses6Button": 179,
+    "JoypadHeld": 180,
+    "GrabHoldTimer": 182,
+    "SuperAttackDamage": 200,
+    "CurrentBlitzStars": 229,
+    "NextBlitzStars": 233,
+    "Ani_Standing": 0,
+    "Ani_Walking": 2,
+    "Ani_Jumping": 4,
+    "Ani_JumpOver": 6,
+    "Ani_FrontGrab": 8,
+    "Ani_BackGrab": 10,
+    "Ani_Headlock": 12,
+    "Ani_PartnerBackGrab": 14,
+    "Ani_Hit2": 16,
+    "Ani_Hit1": 18,
+    "Ani_KnockedOut": 20,
+    "Ani_LyingOnGround": 22,
+    "Ani_GetUp": 24,
+    "Ani_Electricuted": 26,
+    "Ani_ItemPickUp": 28
+  },
+  "tables": {
+    "garcia": {
+      "2": {
+        "label": "Obj_GarciaDonovanMove",
+        "line": 53477
+      },
+      "4": {
+        "label": "Enemy_Hit",
+        "line": 53478
+      },
+      "6": {
+        "label": "Enemy_Death",
+        "line": 53479
+      },
+      "8": {
+        "label": "Enemy_Disappear",
+        "line": 53480
+      },
+      "10": {
+        "label": "Enemy_Knockout",
+        "line": 53481
+      },
+      "12": {
+        "label": "Enemy_ForwardGrab",
+        "line": 53482
+      },
+      "14": {
+        "label": "Enemy_BackwardGrab",
+        "line": 53483
+      },
+      "16": {
+        "label": "Enemy_ForwardThrow",
+        "line": 53484
+      },
+      "18": {
+        "label": "Enemy_BackwardThrow",
+        "line": 53485
+      },
+      "20": {
+        "label": "Obj_LoadGarciaData",
+        "line": 53486
+      },
+      "22": {
+        "label": "Init_Enemy_By_Player_Distance",
+        "line": 53487
+      },
+      "24": {
+        "label": "sub_26F2C",
+        "line": 53488
+      },
+      "26": {
+        "label": "Enemy_Attack",
+        "line": 53489
+      },
+      "28": {
+        "label": "Enemy_Attack",
+        "line": 53490
+      },
+      "30": {
+        "label": "sub_26376",
+        "line": 53491
+      },
+      "32": {
+        "label": "Enemy_Attack",
+        "line": 53492
+      },
+      "34": {
+        "label": "sub_27036",
+        "line": 53493
+      },
+      "36": {
+        "label": "sub_26DBC",
+        "line": 53494
+      },
+      "38": {
+        "label": "sub_26EE6",
+        "line": 53495
+      },
+      "40": {
+        "label": "sub_272E4",
+        "line": 53496
+      },
+      "42": {
+        "label": "loc_2733E",
+        "line": 53497
+      },
+      "44": {
+        "label": "loc_273A4",
+        "line": 53498
+      },
+      "46": {
+        "label": "loc_26C74",
+        "line": 53499
+      },
+      "48": {
+        "label": "Enemy_Attack",
+        "line": 53500
+      },
+      "50": {
+        "label": "sub_26F7E",
+        "line": 53501
+      },
+      "52": {
+        "label": "sub_26FC8",
+        "line": 53502
+      },
+      "54": {
+        "label": "sub_2707A",
+        "line": 53503
+      },
+      "56": {
+        "label": "sub_27186",
+        "line": 53504
+      },
+      "58": {
+        "label": "sub_2727E",
+        "line": 53505
+      },
+      "60": {
+        "label": "sub_23FA0",
+        "line": 53506
+      }
+    },
+    "electra": {
+      "2": {
+        "label": "sub_2B1AC",
+        "line": 60077
+      },
+      "4": {
+        "label": "Enemy_Hit",
+        "line": 60078
+      },
+      "6": {
+        "label": "Enemy_Death",
+        "line": 60079
+      },
+      "8": {
+        "label": "Enemy_Disappear",
+        "line": 60080
+      },
+      "10": {
+        "label": "Enemy_Knockout",
+        "line": 60081
+      },
+      "12": {
+        "label": "sub_2B750",
+        "line": 60082
+      },
+      "14": {
+        "label": "Enemy_BackwardGrab",
+        "line": 60083
+      },
+      "16": {
+        "label": "Enemy_ForwardThrow",
+        "line": 60084
+      },
+      "18": {
+        "label": "Enemy_BackwardThrow",
+        "line": 60085
+      },
+      "20": {
+        "label": "sub_2AF94",
+        "line": 60086
+      },
+      "22": {
+        "label": "sub_2B48A",
+        "line": 60087
+      },
+      "24": {
+        "label": "sub_2B520",
+        "line": 60088
+      },
+      "26": {
+        "label": "sub_2B596",
+        "line": 60089
+      },
+      "28": {
+        "label": "sub_2B686",
+        "line": 60090
+      },
+      "30": {
+        "label": "sub_2B706",
+        "line": 60091
+      },
+      "32": {
+        "label": "sub_2B1AC",
+        "line": 60092
+      },
+      "34": {
+        "label": "sub_2B1AC",
+        "line": 60093
+      },
+      "36": {
+        "label": "sub_2B7BE",
+        "line": 60094
+      },
+      "38": {
+        "label": "loc_2B812",
+        "line": 60095
+      },
+      "40": {
+        "label": "Init_Enemy_By_Player_Distance",
+        "line": 60096
+      },
+      "42": {
+        "label": "sub_23F5A",
+        "line": 60097
+      }
+    },
+    "zack": {
+      "2": {
+        "label": "sub_2C2E8",
+        "line": 60872
+      },
+      "4": {
+        "label": "Enemy_Hit",
+        "line": 60873
+      },
+      "6": {
+        "label": "Enemy_Death",
+        "line": 60874
+      },
+      "8": {
+        "label": "Enemy_Disappear",
+        "line": 60875
+      },
+      "10": {
+        "label": "Enemy_Knockout",
+        "line": 60876
+      },
+      "12": {
+        "label": "Enemy_ForwardGrab",
+        "line": 60877
+      },
+      "14": {
+        "label": "Enemy_BackwardGrab",
+        "line": 60878
+      },
+      "16": {
+        "label": "Enemy_ForwardThrow",
+        "line": 60879
+      },
+      "18": {
+        "label": "Enemy_BackwardThrow",
+        "line": 60880
+      },
+      "20": {
+        "label": "sub_2C08C",
+        "line": 60881
+      },
+      "22": {
+        "label": "Enemy_Attack",
+        "line": 60882
+      },
+      "24": {
+        "label": "Enemy_Attack",
+        "line": 60883
+      },
+      "26": {
+        "label": "sub_2C80E",
+        "line": 60884
+      },
+      "28": {
+        "label": "sub_2C8BA",
+        "line": 60885
+      },
+      "30": {
+        "label": "sub_2C91A",
+        "line": 60886
+      },
+      "32": {
+        "label": "sub_2C768",
+        "line": 60887
+      },
+      "34": {
+        "label": "sub_27036",
+        "line": 60888
+      },
+      "36": {
+        "label": "Init_Enemy_By_Player_Distance",
+        "line": 60889
+      },
+      "38": {
+        "label": "sub_23FA0",
+        "line": 60890
+      },
+      "40": {
+        "label": "sub_23F5A",
+        "line": 60891
+      },
+      "42": {
+        "label": "sub_24EB2",
+        "line": 60892
+      }
+    },
+    "blondie": {
+      "2": {
+        "label": "loc_2BB94",
+        "line": 60837
+      },
+      "4": {
+        "label": "Enemy_Hit",
+        "line": 60838
+      },
+      "6": {
+        "label": "Enemy_Death",
+        "line": 60839
+      },
+      "8": {
+        "label": "Enemy_Disappear",
+        "line": 60840
+      },
+      "10": {
+        "label": "Enemy_Knockout",
+        "line": 60841
+      },
+      "12": {
+        "label": "Enemy_ForwardGrab",
+        "line": 60842
+      },
+      "14": {
+        "label": "Enemy_BackwardGrab",
+        "line": 60843
+      },
+      "16": {
+        "label": "Enemy_ForwardThrow",
+        "line": 60844
+      },
+      "18": {
+        "label": "Enemy_BackwardThrow",
+        "line": 60845
+      },
+      "20": {
+        "label": "sub_2B934",
+        "line": 60846
+      },
+      "22": {
+        "label": "Enemy_Attack",
+        "line": 60847
+      },
+      "24": {
+        "label": "Enemy_Attack",
+        "line": 60848
+      },
+      "26": {
+        "label": "sub_2C990",
+        "line": 60849
+      },
+      "28": {
+        "label": "loc_2CA84",
+        "line": 60850
+      },
+      "30": {
+        "label": "sub_27036",
+        "line": 60851
+      },
+      "32": {
+        "label": "Init_Enemy_By_Player_Distance",
+        "line": 60852
+      },
+      "34": {
+        "label": "sub_23FA0",
+        "line": 60853
+      },
+      "36": {
+        "label": "sub_24E54",
+        "line": 60854
+      },
+      "38": {
+        "label": "sub_23F5A",
+        "line": 60855
+      },
+      "40": {
+        "label": "sub_24EB2",
+        "line": 60856
+      }
+    },
+    "axel": {
+      "2": {
+        "label": "Obj_Standing",
+        "line": 11901,
+        "expression": "Obj_Standing-Obj_Axel_02",
+        "unresolved": false
+      },
+      "4": {
+        "label": "Obj_Hit",
+        "line": 11903,
+        "expression": "Obj_Hit-Obj_Axel_04",
+        "unresolved": false
+      },
+      "6": {
+        "label": "Obj_Death",
+        "line": 11904,
+        "expression": "Obj_Death-Obj_Axel_06",
+        "unresolved": false
+      },
+      "8": {
+        "label": "Obj_Continue",
+        "line": 11905,
+        "expression": "Obj_Continue-Obj_Axel_08",
+        "unresolved": false
+      },
+      "10": {
+        "label": "Obj_KnockOut",
+        "line": 11906,
+        "expression": "Obj_KnockOut-Obj_Axel_0A",
+        "unresolved": false
+      },
+      "12": {
+        "label": "Obj_FrontGrab_Partner",
+        "line": 11907,
+        "expression": "Obj_FrontGrab_Partner-Obj_Axel_0C",
+        "unresolved": false
+      },
+      "14": {
+        "label": "Obj_BackGrab_Partner",
+        "line": 11908,
+        "expression": "Obj_BackGrab_Partner-Obj_Axel_0E",
+        "unresolved": false
+      },
+      "16": {
+        "label": "Obj_FrontGrabThrow_Partner",
+        "line": 11909,
+        "expression": "Obj_FrontGrabThrow_Partner-Obj_Axel_10",
+        "unresolved": false
+      },
+      "18": {
+        "label": "Obj_BackGrabThrow_Partner",
+        "line": 11910,
+        "expression": "Obj_BackGrabThrow_Partner-Obj_Axel_12",
+        "unresolved": false
+      },
+      "20": {
+        "label": "Obj_Combo",
+        "line": 11911,
+        "expression": "Obj_Combo-Obj_Axel_14",
+        "unresolved": false
+      },
+      "22": {
+        "label": "Obj_FrontGrabThrow",
+        "line": 11912,
+        "expression": "Obj_FrontGrabThrow-Obj_Axel_16",
+        "unresolved": false
+      },
+      "24": {
+        "label": "Obj_Jumping",
+        "line": 11913,
+        "expression": "Obj_Jumping-Obj_Axel_18",
+        "unresolved": false
+      },
+      "26": {
+        "label": "Obj_FrontGrab",
+        "line": 11914,
+        "expression": "Obj_FrontGrab-Obj_Axel_1A",
+        "unresolved": false
+      },
+      "28": {
+        "label": "Obj_BackGrab",
+        "line": 11915,
+        "expression": "Obj_BackGrab-Obj_Axel_1C",
+        "unresolved": false
+      },
+      "30": {
+        "label": "Obj_FrontGrabThrow_0",
+        "line": 11916,
+        "expression": "Obj_FrontGrabThrow_0-Obj_Axel_1E",
+        "unresolved": false
+      },
+      "32": {
+        "label": "Obj_BackGrabThrow",
+        "line": 11917,
+        "expression": "Obj_BackGrabThrow-Obj_Axel_20",
+        "unresolved": false
+      },
+      "34": {
+        "label": "Obj_Vault",
+        "line": 11918,
+        "expression": "Obj_Vault-Obj_Axel_22",
+        "unresolved": false
+      },
+      "36": {
+        "label": "Obj_SuperAttack1",
+        "line": 11919,
+        "expression": "Obj_SuperAttack1-Obj_Axel_24",
+        "unresolved": false
+      },
+      "38": {
+        "label": "Obj_SuperAttack2",
+        "line": 11920,
+        "expression": "Obj_SuperAttack2-Obj_Axel_26",
+        "unresolved": false
+      },
+      "40": {
+        "label": "Obj_RunningAttack",
+        "line": 11921,
+        "expression": "Obj_RunningAttack-Obj_Axel_28",
+        "unresolved": false
+      },
+      "42": {
+        "label": "Obj_PartnerBackGrabThrow",
+        "line": 11922,
+        "expression": "Obj_PartnerBackGrabThrow-Obj_Axel_2A",
+        "unresolved": false
+      },
+      "44": {
+        "label": "Obj_PickUp",
+        "line": 11923,
+        "expression": "Obj_PickUp-Obj_Axel_2C",
+        "unresolved": false
+      },
+      "46": {
+        "label": "loc_C6FA",
+        "line": 11924,
+        "expression": "loc_C6FA-Obj_Axel_2E",
+        "unresolved": false
+      },
+      "48": {
+        "label": "Obj_PartnerBackGrabKick",
+        "line": 11925,
+        "expression": "Obj_PartnerBackGrabKick-Obj_Axel_30",
+        "unresolved": false
+      },
+      "50": {
+        "label": "Obj_BlitzAttack1",
+        "line": 11926,
+        "expression": "Obj_BlitzAttack1-Obj_Axel_32",
+        "unresolved": false
+      },
+      "52": {
+        "label": "sub_9F6E",
+        "line": 11927,
+        "expression": "sub_9F6E-Obj_Axel_34",
+        "unresolved": false
+      },
+      "54": {
+        "label": "Obj_BlitzAttack2",
+        "line": 11929,
+        "expression": "Obj_BlitzAttack2-Obj_Axel_36",
+        "unresolved": false
+      },
+      "56": {
+        "label": "Obj_BlitzAttack2",
+        "line": 11931,
+        "expression": "Obj_BlitzAttack2-Obj_Axel_38",
+        "unresolved": false
+      },
+      "58": {
+        "label": "0",
+        "line": 11933,
+        "expression": "0",
+        "unresolved": true
+      },
+      "60": {
+        "label": "0",
+        "line": 11934,
+        "expression": "0",
+        "unresolved": true
+      },
+      "62": {
+        "label": "0",
+        "line": 11935,
+        "expression": "0",
+        "unresolved": true
+      },
+      "64": {
+        "label": "Obj_BlitzAttack1",
+        "line": 11936,
+        "expression": "Obj_BlitzAttack1-Obj_Axel_40",
+        "unresolved": false
+      },
+      "66": {
+        "label": "Obj_Roll",
+        "line": 11938,
+        "expression": "Obj_Roll-Obj_Axel_42",
+        "unresolved": false
+      },
+      "68": {
+        "label": "-$7E10",
+        "line": 11940,
+        "expression": "-$7E10",
+        "unresolved": true
+      },
+      "70": {
+        "label": "Obj_Team_Attack",
+        "line": 11941,
+        "expression": "Obj_Team_Attack-Obj_Axel_46",
+        "unresolved": false
+      },
+      "72": {
+        "label": "Obj_Enter_Level",
+        "line": 11943,
+        "expression": "Obj_Enter_Level-Obj_Axel_48",
+        "unresolved": false
+      },
+      "74": {
+        "label": "Obj_Exit_Level",
+        "line": 11945,
+        "expression": "Obj_Exit_Level-Obj_Axel_4A",
+        "unresolved": false
+      },
+      "76": {
+        "label": "Obj_Escape_Pit",
+        "line": 11947,
+        "expression": "Obj_Escape_Pit-Obj_Axel_4C",
+        "unresolved": false
+      },
+      "78": {
+        "label": "loc_9BA8",
+        "line": 11949,
+        "expression": "loc_9BA8-Obj_Axel_4E",
+        "unresolved": false
+      },
+      "80": {
+        "label": "Obj_FallinPit",
+        "line": 11951,
+        "expression": "Obj_FallinPit-Obj_Axel_50",
+        "unresolved": false
+      },
+      "82": {
+        "label": "Obj_AutoPlay",
+        "line": 11953,
+        "expression": "Obj_AutoPlay-Obj_Axel_52",
+        "unresolved": false
+      },
+      "84": {
+        "label": "Obj_Trap",
+        "line": 11955,
+        "expression": "Obj_Trap-Obj_Axel_54",
+        "unresolved": false
+      },
+      "86": {
+        "label": "Obj_56",
+        "line": 11957,
+        "expression": "Obj_56-Obj_Axel_56",
+        "unresolved": false
+      },
+      "88": {
+        "label": "Obj_58",
+        "line": 11959,
+        "expression": "Obj_58-Obj_Axel_58",
+        "unresolved": false
+      },
+      "90": {
+        "label": "Obj_ContinueSelectCharacter",
+        "line": 11961,
+        "expression": "Obj_ContinueSelectCharacter-Obj_Axel_5A",
+        "unresolved": false
+      },
+      "92": {
+        "label": "Obj_5C",
+        "line": 11963,
+        "expression": "Obj_5C-Obj_Axel_5C",
+        "unresolved": false
+      },
+      "94": {
+        "label": "Obj_ContinueGameOver",
+        "line": 11965,
+        "expression": "Obj_ContinueGameOver-Obj_Axel_5E",
+        "unresolved": false
+      },
+      "96": {
+        "label": "Obj_60",
+        "line": 11967,
+        "expression": "Obj_60-Obj_Axel_60",
+        "unresolved": false
+      },
+      "98": {
+        "label": "Obj_62",
+        "line": 11969,
+        "expression": "Obj_62-Obj_Axel_62",
+        "unresolved": false
+      },
+      "100": {
+        "label": "Obj_Play_Scene",
+        "line": 11970,
+        "expression": "Obj_Play_Scene-Obj_Axel_64",
+        "unresolved": false
+      }
+    }
+  },
+  "loader": {
+    "label": "LoadEnemyObj",
+    "start": "BossObjSST",
+    "slots": 6,
+    "stride": 256,
+    "skip": "ObjMode == 0",
+    "timer": "word at SST+0x5c: decrement once if nonzero",
+    "post": [
+      "sub_23102",
+      "sub_22C8C",
+      "sub_23EBA"
+    ]
+  },
+  "warning": "Literal IDA table expressions preserved; unresolved Axel word offsets are not guessed."
+}

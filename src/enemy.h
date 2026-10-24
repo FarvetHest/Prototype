@@ -3,7 +3,7 @@
 typedef struct { unsigned short ticks,fpg; unsigned char hurt,collision,damage; } EnemyFrame;
 typedef struct { int kind,frame,timer,fpg,hurt,ticks; } EnemyPose;
 enum { EP_IDLE,EP_WALK,EP_HELD,EP_HURT2,EP_HURT,EP_FLIGHT,EP_FLOOR,EP_GETUP,EP_FRONT,EP_BACK,EP_JAB,EP_UPPER,EP_KICK };
-enum { EN_GALSIA,EN_DONOVAN,EN_ELECTRA,EN_ZACK };
+enum { EN_GALSIA,EN_DONOVAN,EN_ELECTRA,EN_ZACK,EN_BARBON };
 typedef struct { int type,action,frame,timer,z,vz,vx,wait; } EnemyExtra;
 typedef struct { int holder,side,hold_timer,hold_cooldown,strike_wait,shock,shock_frame,shock_timer; unsigned captures,blocks,counters,shocks; } Reactions;
 struct Game;

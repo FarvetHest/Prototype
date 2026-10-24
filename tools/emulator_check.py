@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00020':
+        if (status.get('game')or{}).get('id')!='SORL00021':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -141,7 +141,7 @@ try:
     hud_manifest=json.loads((project/'assets/hud-manifest.json').read_text())
     checks['hud_upload']=hashlib.sha256(p.read(0x04148000,256*256*4)).hexdigest()==hud_manifest['texture_sha256']
     manifest=json.loads((project/'assets/manifest.json').read_text())
-    checks['atlas_upload']=p.read(0x04088000,512*512*3)==(project/'assets/sprites.t8').read_bytes()[:512*512*3] and p.read(p.symbols['sprite_atlas']+512*512*3,512*512)==(project/'assets/sprites.t8').read_bytes()[512*512*3:]
+    checks['atlas_upload']=p.read(0x04088000,512*512*3)==(project/'assets/sprites.t8').read_bytes()[:512*512*3] and p.read(p.symbols['sprite_atlas']+512*512*3,512*512*2)==(project/'assets/sprites.t8').read_bytes()[512*512*3:]
     stage=json.loads((project/'assets/stage-manifest.json').read_text())
     checks['stage_RAM_source']=hashlib.sha256(p.read(p.symbols['stage_texture'],512*256*2)).hexdigest()==stage['first_page_sha256'] and p.u32('stage_draw_count')==1
     checks['music_source']=hashlib.sha256((project/'build/music.wav').read_bytes()).hexdigest()==json.loads((project/'assets/music-manifest.json').read_text())['wav_sha256']
@@ -171,7 +171,9 @@ try:
     checks['one_hit_per_attack']=all(e[2]==38 for e in a['enemies'])
     checks['hud_enemy_hp']=p.u32('ui_enemy_hp')==38 and p.u32('ui_target')==3
     checks['hud_score']=p.u32('ui_score')>=40
-    arrange(2);button('square');time.sleep(1.6);a=state()
+    arrange(2);button('square');deadline=time.monotonic()+5
+    while not state()['won'] and time.monotonic()<deadline:time.sleep(.03)
+    a=state()
     checks['four_enemy_victory']=a['won']==1 and all(e[2]==0 for e in a['enemies'])
     time.sleep(0.4);enemy_ref=json.loads((project/'assets/enemy-rom-match.json').read_text());checks['fall_animation']=frames()[1:]==[enemy_ref[k]['floor']['frames'][0]['fpg']for k in ['garcia','donovan','garcia','donovan']]
     screenshot(artifacts/'lite-victory.png')

@@ -10,6 +10,9 @@
 volatile MusicStats music_stats;
 volatile int music_seek_target=-1,music_muted;
 volatile int music_buffer_start[2]={-1,-1};
+volatile unsigned music_duck_until,music_duck_events;
+volatile int music_output_volume;
+void music_duck(unsigned microseconds){unsigned now=(unsigned)sceKernelGetSystemTimeWide(),until=now+microseconds;if((int32_t)(music_duck_until-now)<=0 || (int32_t)(until-music_duck_until)>0)music_duck_until=until;++music_duck_events;}
 static volatile int playing,paused;
 static int thread_id=-1;
 short __attribute__((aligned(64))) music_pcm[2][BLOCK_FRAMES*2];
@@ -71,7 +74,8 @@ static int worker(SceSize args,void *argp){
         }
         /* Finish CPU writes before the system audio path consumes the buffer. */
         sceKernelDcacheWritebackRange(music_pcm[index],BLOCK_BYTES);
-        volume=(silent || music_muted)?0:0x5000;
+        volume=(silent || music_muted)?0:(music_duck_until && (int32_t)(music_duck_until-(unsigned)sceKernelGetSystemTimeWide())>0)?0x1800:0x4000;
+        music_output_volume=volume;
         if(music_muted)++music_stats.muted_blocks;
         result=sceAudioOutputPannedBlocking(channel,volume,volume,music_pcm[index]);
         if(result<0){fail(result);break;}
@@ -83,7 +87,7 @@ cleanup:
     fclose(f);if(music_stats.status>=0)music_stats.status=0;return 0;
 }
 void music_start(void){
-    playing=1;paused=0;music_muted=0;music_seek_target=-1;
+    playing=1;paused=0;music_muted=0;music_seek_target=-1;music_duck_until=music_duck_events=0;music_output_volume=0;
     memset((void *)&music_stats,0,sizeof(music_stats));
     thread_id=sceKernelCreateThread("PCM music",worker,0x18,32*1024,PSP_THREAD_ATTR_USER,0);
     if(thread_id<0){fail(thread_id);return;}

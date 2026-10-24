@@ -17,7 +17,7 @@ static void sync_body(Game *g,int i){Body *b=&g->physics.body[i];Actor *a=actor(
   e->projectile=b->phase==BODY_FLIGHT && b->back>=0;g->moves.thrown[i-1]=e->projectile;
  }else {g->player.jump=b->phase==BODY_FLIGHT;}
 }
-void physics_hit(Game *g,int i,int damage,int down,int facing){Body *b=&g->physics.body[i];Actor *a=actor(g,i);int airborne=g->motion.z[i]>0;
+void physics_hit(Game *g,int i,int damage,int down,int facing){Body *b=&g->physics.body[i];Actor *a=actor(g,i);int airborne=g->motion.z[i]>0,old_hp=a->hp;
  memset(b,0,sizeof(*b));b->back=-1;b->chain=i && (g->rules.actor[i].status58&16);b->fpg=i?enemy_frames(g,i-1,b->chain?EP_HURT2:EP_HURT)[0].fpg:148;a->hp-=damage;if(a->hp<0)a->hp=0;a->attack=0;
  b->freeze=2+(damage>>2);if(b->freeze>8)b->freeze=8;
  /* Chk_Hit/sub_25954: Axel's ordinary unarmed moves select FFFAC400. */
@@ -26,6 +26,7 @@ void physics_hit(Game *g,int i,int damage,int down,int facing){Body *b=&g->physi
  else {b->phase=BODY_HURT;b->timer=i?3:3;b->frame=0;b->hurt=4;}
  if(i){g->extra[i-1].action=0;g->extra[i-1].z=g->extra[i-1].vz=g->extra[i-1].vx=0;g->rules.ai[i-1].mode=2;g->combat.enemy[i-1].state=0;g->combat.enemy[i-1].anim_timer=0;}
  else {bk3_suspend(g);g->moves.special=0;g->moves.invincible=0;g->combat.action=CB_NONE;}
+ if(i && old_hp>0 && a->hp<=0)death_begin(g,i-1);
  if(i && g->reaction.holder==i-1)reaction_release(g);
  sync_body(g,i);
 }
@@ -62,12 +63,12 @@ int physics_rect(const Game *g,int index,float r[4]){const Actor *a=index?&g->en
 static void floor_impact(Game *g,int i){Body *b=&g->physics.body[i];Actor *a=actor(g,i);
  sfx_emit(0x346,g->combat.ticks,(int)(a->x*256/240));
  /* loc_24380: throw damage is applied ONCE on the first ground impact. */
- if(b->pending){a->hp-=b->pending;if(a->hp<0)a->hp=0;b->pending=0;}
+ if(b->pending){a->hp-=b->pending;if(a->hp<0)a->hp=0;if(i && a->hp<=0)death_begin(g,i-1);b->pending=0;}
  b->phase=BODY_BOUNCE;b->z=-1;b->vz=BK3_BOUNCE_VZ;b->vx=(b->vx/65536>>1)*65536;
  b->timer=i?20:40;b->frame=0;b->hurt=0;b->fpg=i?enemy_frames(g,i-1,EP_FLOOR)[0].fpg:50;b->back=-1;
 }
 void physics_body_tick(Game *g,int i){Body *b=&g->physics.body[i];Actor *a=actor(g,i);int n,j;const EnemyFrame *f=enemy_frames(g,0,EP_HURT);
- dec(&b->inv);
+ if(!i || !bk3_machine_stats.dispatching)dec(&b->inv);
  if(!b->phase || b->phase==BODY_VICTIM)return;
  if(b->freeze){--b->freeze;sync_body(g,i);return;}
  if(b->phase==BODY_FLIGHT || b->phase==BODY_BOUNCE){

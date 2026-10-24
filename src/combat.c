@@ -104,8 +104,8 @@ void combat_enemy_attack_frame(Game *g,int i,int collision,int damage){EnemyBrai
 void combat_tick(Game *g,float x,float y,int attack,int jump,int special){Combat *c=&g->combat;Actor *p=&g->player;int i,dx=dir(x),dy=dir(y);++c->ticks;
  dec(&g->moves.grab_cooldown);dec(&g->moves.invincible);if(g->physics.body[0].phase)physics_body_tick(g,0);else{dec(&g->physics.body[0].inv);dec(&p->stun);}
  g->motion.vx[0]=0;
- if(reaction_player_tick(g,jump,special)){charge_tick(g);for(i=0;i<4;++i)source_ai_tick(g,i);return;}
- if(level_pickup_active(g)){charge_tick(g);for(i=0;i<4;++i)source_ai_tick(g,i);return;}
+ if(reaction_player_tick(g,jump,special)){charge_tick(g);if(!bk3_machine_stats.dispatching)for(i=0;i<4;++i)source_ai_tick(g,i);return;}
+ if(level_pickup_active(g)){charge_tick(g);if(!bk3_machine_stats.dispatching)for(i=0;i<4;++i)source_ai_tick(g,i);return;}
  if(!p->stun && !p->jump && !p->attack && c->action==CB_NONE && !g->moves.roll && dy && dy!=g->moves.last_y){
   if(g->moves.tap_y==dy && c->ticks-(unsigned)g->moves.tap_y_tick<=16){g->moves.roll_dir=dy;g->moves.tap_y=0;action_start(g,dy>0?CB_ROLL_DOWN:CB_ROLL_UP);}
   else {g->moves.tap_y=dy;g->moves.tap_y_tick=c->ticks;}
@@ -113,7 +113,7 @@ void combat_tick(Game *g,float x,float y,int attack,int jump,int special){Combat
  g->moves.last_y=dy;
  if(special && c->action!=CB_HOLD && !g->moves.special && !g->moves.roll && !p->jump && g->physics.body[0].phase<=BODY_HURT)special_start(g,c->action==CB_HOLD?0:dx);
  if(c->action==CB_HOLD){
-  if(c->back && c->target>=0 && (g->rules.actor[c->target+1].status5a&1)){charge_tick(g);for(i=0;i<4;++i)source_ai_tick(g,i);return;}
+  if(c->back && c->target>=0 && (g->rules.actor[c->target+1].status5a&1)){charge_tick(g);if(!bk3_machine_stats.dispatching)for(i=0;i<4;++i)source_ai_tick(g,i);return;}
   g->rules.actor[0].hold_timer=(g->rules.actor[0].hold_timer-1)&65535;c->hold=g->rules.actor[0].hold_timer;
   if(!rules_hold_valid(g) || p->stun || !c->hold){release(g);c->action=CB_NONE;}
   else {
@@ -137,7 +137,7 @@ void combat_tick(Game *g,float x,float y,int attack,int jump,int special){Combat
   }else bk3_suspend(g);
  }
  charge_tick(g);
- for(i=0;i<4;++i)source_ai_tick(g,i);
+ if(!bk3_machine_stats.dispatching)for(i=0;i<4;++i)source_ai_tick(g,i);
 }
 int bk3_special_trace[160][5];
 /* Executed on the PSP CPU before rendering; integration tests also inspect live state. */

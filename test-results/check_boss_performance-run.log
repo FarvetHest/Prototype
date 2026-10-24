@@ -1,13 +1,14 @@
 {
   "checks": {
     "boss_two_RAM_batches": true,
-    "boss_attacks_and_rushes": true,
+    "barbon_attacks_and_type": true,
     "food_remains_available": true,
     "fps_target_met": true,
     "no_new_drops": true,
     "music_ok": true,
     "level_remains_locked": true,
-    "no_missing_frames": true
+    "no_missing_frames": true,
+    "no_machine_dispatch_faults": true
   },
   "render_snapshot": {
     "actors": 2,
@@ -20,6 +21,6 @@
     "median": 29.97,
     "max": 29.97
   },
-  "eboot_sha256": "44e68b3e632160d3b4c8456abb537a9ee1fbb7bc27210a2d667ca13f755721d9",
-  "note": "PPSSPP software-renderer stress fixture: final background position, active captain and three visible food sprites, player invulnerability to sustain combat. Not hardware performance."
+  "eboot_sha256": "9f1acf6ddfa973557746d149e3b27a96e615c51c8c4dd195095b09a33664a4e9",
+  "note": "PPSSPP software-renderer stress fixture: final background position, active Barbon and three visible food sprites, player invulnerability to sustain combat. Not hardware performance."
 }

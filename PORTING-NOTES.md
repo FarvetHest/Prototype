@@ -1,3 +1,15 @@
+Звук v0.21: [SOUND-RU.md](SOUND-RU.md), пять исходных WAV SoRR (seg1/seg2/seg3/se53/se45) без обработки,
+полный уровень канала эффектов и приглушение музыки при контакте.
+Это дополнительное изменение текущего релиза.
+
+# v0.21 — текущий статус
+
+Исполняемая память и диспетчер: [original/MACHINE-PORT-RU.md](original/MACHINE-PORT-RU.md).
+Ниже — история предыдущих версий. Актуальный банк64КиБ работает в EBOOT;
+весь ASM не переведён. Game1840/Level228 и VRAM1568КиБ сохранены.
+
+---
+
 # v0.20 — текущий статус
 
 Предыдущие разделы ниже сохранены как история; ограничения v0.19 относятся
@@ -580,3 +592,21 @@ Chk_Boundary заменён границами арены с исходным а
 Интеграционный тест располагает актёров debugger-ом и проверяет реальные
 состояния, звук, кадры, броски и профиль. Это сверка с таблицами/формулами
 листинга, а не A/B-запуск ROM. Аппаратная проверка v0.12 ещё нужна.
+
+
+## v0.21 additions
+
+The static 64-KiB BK3 RAM bridge and object dispatcher are documented in
+original/MACHINE-PORT-RU.md. Existing combat C adapters remain in use;
+this is not a full translation of every 68000 state handler.
+
+The stage boss is now Barbon from SoR2, with 36 native poses, original CRAM,
+attack frame timers/damage and a partial movement/decision adapter. Its
+separate source pin, code/data extracts, limits and tests are in BOSS-RU.md.
+Five atlas pages occupy 1310720 bytes in RAM; only three are copied to VRAM.
+Total VRAM stays 1605632 bytes. No Game/Level ABI or BSS increase for Barbon.
+
+Eight unmodified SoRR WAVs supply five impact/floor variants and three death
+voices. Death disappearance follows the BK3 100-tick/bit-1 blink rule after
+settling. See SOUND-RU.md. Hardware timing and speaker output of this build
+still require testing on a real PSP-3000; PPSSPP checks are reported separately.

@@ -49,7 +49,7 @@ static const Cue cues[LEVEL_CUES]={
  {704,102,2,5,1},{768,124,1,5,1},{832,80,0,5,-1},{896,112,3,5,1},
  {960,96,2,7,1},{1024,122,1,7,-1},{1088,84,0,7,1},{1152,108,3,7,1}
 };
-static int busy(const Level *l,const Game *g){int i,n=0;for(i=0;i<4;++i)if((l->slots&(1<<i)) && (g->enemies[i].hp>0 || g->physics.body[i+1].phase || g->combat.enemy[i].z<0 || g->combat.target==i))++n;return n;}
+static int busy(const Level *l,const Game *g){int i,n=0;for(i=0;i<4;++i)if((l->slots&(1<<i)) && (g->enemies[i].hp>0 || g->physics.body[i+1].phase || g->combat.enemy[i].z<0 || g->combat.target==i || death_pending(g,i)))++n;return n;}
 static int free_slot(const Level *l,int family){int i;for(i=family&1;i<4;i+=2)if(!(l->slots&(1<<i)))return i;return -1;}
 static void enter_from_edge(Level *l,Game *g,int i,int side,int delay){
  g->enemies[i].x=side<0?-10:250;g->enemies[i].facing=side<0?1:-1;
@@ -74,9 +74,9 @@ static void spawn_slot(Level *l,Game *g,int i,int hp,int ai,int y,int side,int d
  for(j=0;j<4;++j)g->moves.throw_hit[j]&=~(1u<<i);
  g->rules.actor[i+1]=fresh.rules.actor[i+1];g->rules.ai[i]=fresh.rules.ai[i];g->pose[i]=fresh.pose[i];enemy_set_type(g,i,type);
  g->impact.freeze[i+1]=0;g->impact.last_from[i+1]=-1;
- enter_from_edge(l,g,i,side,delay);l->slots|=1<<i;l->spawn_mask|=1u<<i;
+ death_spawn(g,i);enter_from_edge(l,g,i,side,delay);l->slots|=1<<i;l->spawn_mask|=1u<<i;
 }
-static void collect_slots(Level *l,const Game *g){int i;for(i=0;i<4;++i)if((l->slots&(1<<i)) && g->enemies[i].hp<=0 && !g->physics.body[i+1].phase && g->combat.enemy[i].z>=0 && g->combat.target!=i){l->slots&=~(1<<i);l->entering&=~(1u<<i);++l->retired;}}
+static void collect_slots(Level *l,const Game *g){int i;for(i=0;i<4;++i)if((l->slots&(1<<i)) && g->enemies[i].hp<=0 && !g->physics.body[i+1].phase && g->combat.enemy[i].z>=0 && g->combat.target!=i && !death_pending(g,i)){l->slots&=~(1<<i);l->entering&=~(1u<<i);++l->retired;}}
 static void feed(Level *l,Game *g){int end=l->gate?LEVEL_CUES:10,n,i;
  if(l->boss || l->spawn_wait)return;
  while(l->cue<end){const Cue *c=&cues[l->cue];n=busy(l,g);
@@ -89,7 +89,7 @@ static void feed(Level *l,Game *g){int end=l->gate?LEVEL_CUES:10,n,i;
  }
 }
 static void spawn_boss(Level *l,Game *g){
- spawn_slot(l,g,LEVEL_BOSS_SLOT,LEVEL_BOSS_HP,10,100,1,12,EN_DONOVAN);
+ spawn_slot(l,g,LEVEL_BOSS_SLOT,LEVEL_BOSS_HP,5,100,1,12,EN_BARBON);
  l->boss=1;l->boss_phase=BOSS_APPROACH;l->boss_timer=30;l->locked=1;l->go=0;l->banner=LEVEL_BANNER;
  g->ticks=0;g->won=0;++l->generation;food_spawn(l,2);
 }

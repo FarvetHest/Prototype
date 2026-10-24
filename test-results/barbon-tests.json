@@ -1,0 +1,32 @@
+{
+  "checks": {
+    "selftest": true,
+    "level_spawns_Barbon_240HP": true,
+    "Barbon_uses_extension_ID_not_BK3_Garcia": true,
+    "attack_10_source_frames": true,
+    "attack_10_source_damage": true,
+    "attack_11_source_frames": true,
+    "attack_11_source_damage": true,
+    "attack_12_source_frames": true,
+    "attack_12_source_damage": true,
+    "throw_0_native_poses": true,
+    "throw_0_lands": true,
+    "throw_0_releases": true,
+    "throw_1_native_poses": true,
+    "throw_1_lands": true,
+    "throw_1_releases": true,
+    "native_Barbon_pixels_palette": true,
+    "all_36_native_poses": true,
+    "jab_ticks_8_2_12_3": true,
+    "kick_ticks_2_3_16": true,
+    "six_original_AI_profiles": true,
+    "no_missing_frames": true,
+    "no_dispatch_faults": true
+  },
+  "eboot_sha256": "9f1acf6ddfa973557746d149e3b27a96e615c51c8c4dd195095b09a33664a4e9",
+  "native_render": {
+    "matched": 2390,
+    "total": 2390
+  },
+  "note": "Original SoR2 art/scripts/damage in Lite movement, hurt-box and state adapter; defensive/grab AI not fully translated."
+}

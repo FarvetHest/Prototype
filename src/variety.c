@@ -7,12 +7,15 @@
 #include "bk3_data.h"
 #include "variety_data.h"
 #include "reaction_data.h"
+#include "barbon_data.h"
+#include "level.h"
 #include <string.h>
 static float ab(float x){return x<0?-x:x;}
 static float clamp(float x,float lo,float hi){return x<lo?lo:x>hi?hi:x;}
-int enemy_type(const Game *g,int i){int t=g->extra[i].type;return t>=0 && t<=EN_ZACK?t:i&1;}
-void enemy_set_type(Game *g,int i,int type){memset(&g->extra[i],0,sizeof(g->extra[i]));g->extra[i].type=type;g->pose[i]=(EnemyPose){0};g->rules.actor[i+1].type=type==EN_ELECTRA?28:type==EN_ZACK?30:type?16:14;}
+int enemy_type(const Game *g,int i){int t=g->extra[i].type;return t>=0 && t<=EN_BARBON?t:i&1;}
+void enemy_set_type(Game *g,int i,int type){memset(&g->extra[i],0,sizeof(g->extra[i]));g->extra[i].type=type;g->pose[i]=(EnemyPose){0};g->rules.actor[i+1].type=type==EN_BARBON?0x100:type==EN_ELECTRA?28:type==EN_ZACK?30:type?16:14;}
 const EnemyFrame *variety_sequence(int t,int k,int *n){
+ if(t==EN_BARBON){if(k<0 || k>=15)k=EP_HELD;*n=barbon_sizes[k];return barbon_sequences[k];}
 #define S(kind,name) case kind:if(t==EN_ELECTRA){*n=sizeof(electra_##name)/sizeof(EnemyFrame);return electra_##name;}*n=sizeof(zack_##name)/sizeof(EnemyFrame);return zack_##name;
  if(t==EN_ZACK && (k==16 || k==17)){*n=1;return k==16?defense_holder:defense_backholder;}
  if(t==EN_ZACK && (k==14 || k==15)){*n=1;return k==14?defense_guard:defense_counter;}
@@ -21,6 +24,7 @@ const EnemyFrame *variety_sequence(int t,int k,int *n){
  *n=1;return electra_idle;
 }
 const signed char *enemy_box(const Game *g,int i,int id,int hurt){int t=enemy_type(g,i);if(id<0)return 0;
+ if(t==EN_BARBON){if(hurt)return id?barbon_hurt:0;return id<(int)(sizeof(barbon_boxes)/8)?barbon_boxes[id]:0;}
  if(t==EN_ZACK && g->extra[i].action>=14){if(hurt)return id<(int)(sizeof(counter_hurt)/8)?counter_hurt[id]:0;return id<(int)(sizeof(counter_boxes)/8)?counter_boxes[id]:0;}
 #define BOX(type,prefix) case type:if(hurt)return id<(int)(sizeof(prefix##_hurt_boxes)/8)?prefix##_hurt_boxes[id]:0;return id<(int)(sizeof(prefix##_boxes)/8)?prefix##_boxes[id]:0;
  if(t==EN_GALSIA){if(hurt)return id<9?garcia_hurt_boxes[id]:0;return id<4?garcia_boxes[id]:0;}
@@ -69,7 +73,45 @@ static void animate(Game *g,int i){EnemyExtra *v=&g->extra[i];EnemyBrain *b=&g->
  }else if(((action>=EP_JAB && action<=EP_KICK) || action==15))combat_enemy_attack_frame(g,i,f[v->frame].collision,f[v->frame].damage);
  if(!--v->timer && ++v->frame>=n && action==13)v->frame=n-1;
 }
-int variety_tick(Game *g,int i){EnemyExtra *v=&g->extra[i];EnemyBrain *b=&g->combat.enemy[i];SourceAI *a=&g->rules.ai[i];Actor *e=&g->enemies[i];const unsigned char *p=profile(g,i);float x=(int)(g->player.x*2)-(int)(e->x*2),y=(int)(g->player.y*.76f)-(int)(e->y*.76f),d=ab(x)+ab(y);int sx=x>0?1:-1,sy=y>2?1:y<-2?-1:0,s;
+/* SoR2 loc_15180/151CC/1520C: two jabs then a kick. Coordinate scaling,
+   movement and collision response remain the Lite adapters, not a 68000 port. */
+static int barbon_tick(Game *g,int i){
+ EnemyExtra *v=&g->extra[i];EnemyBrain *b=&g->combat.enemy[i];SourceAI *a=&g->rules.ai[i];Actor *e=&g->enemies[i];
+ float x=(g->player.x-e->x)*2,y=(g->player.y-e->y)*.76f;int sx=x>=0?1:-1,sy=y>2?1:y<-2?-1:0,l=b->level,roll,k;const unsigned char *p;
+ if(l<0)l=0;
+ if(l>5)l=5;
+ p=barbon_profiles[l];
+ if(v->action && a->mode==2)v->action=0;
+ if(v->action){animate(g,i);return 1;}
+ e->attack=0;a->active=(rules_flags(g,0)&128)!=0;a->target=a->active?0:-1;
+ if(!a->active){b->state=7;return 1;}
+ e->facing=sx;a->visited|=1u<<(b->state>=0 && b->state<=12?b->state:7);++a->face_ticks;
+ if(b->state>=8 && b->state<=10){
+  if(ab(y)>7 || ab(x)>(b->state<10?61:74)){b->state=7;b->timer=0;return 1;}
+  if(--b->timer>=0)return 1;
+  if(b->state<10){++b->state;b->timer=b->state==9?4+random(g,8):0;begin(g,i,EP_JAB);}
+  else{b->state=7;b->timer=0;begin(g,i,ab(x)<=54?EP_KICK:EP_UPPER);}
+  if(level_is_boss(i)){++level.boss_attacks;level.boss_phase=BOSS_RECOVER;}
+  return 1;
+ }
+ if(b->timer>0)--b->timer;
+ if(ab(y)<=7 && ab(x)<=74 && !b->timer){
+  b->state=ab(x)<=61?8:10;b->timer=2+random(g,4);++a->decisions;
+  if(level_is_boss(i)){level.boss_phase=BOSS_WINDUP;level.boss_move=b->state==8?0:1;}
+  return 1;
+ }
+ if(level_is_boss(i))level.boss_phase=BOSS_APPROACH;
+ if(!b->timer || b->state==7){
+  ++a->decisions;roll=random(g,100);for(k=0;k<4;++k){roll-=p[k];if(roll<0)break;}b->state=k;
+  if(!k){b->timer=p[6]+random(g,p[7]);b->speed=0;}
+  else if(k==1){b->timer=p[8]+random(g,p[9]);b->speed=p[10]+random(g,p[11]);b->direction=random(g,8);}
+  else{b->timer=p[12];b->speed=p[13]+random(g,p[14]);}
+ }
+ if(b->state==1){static const int dx[]={0,1,1,1,0,-1,-1,-1},dy[]={-1,-1,0,1,1,1,0,-1};move(g,i,dx[b->direction&7],dy[b->direction&7],b->speed);}
+ else if(b->state)move(g,i,ab(x)>28?sx:ab(x)<20?-sx:0,sy,b->speed);
+ return 1;
+}
+int variety_tick(Game *g,int i){if(enemy_type(g,i)==EN_BARBON)return barbon_tick(g,i);EnemyExtra *v=&g->extra[i];EnemyBrain *b=&g->combat.enemy[i];SourceAI *a=&g->rules.ai[i];Actor *e=&g->enemies[i];const unsigned char *p=profile(g,i);float x=(int)(g->player.x*2)-(int)(e->x*2),y=(int)(g->player.y*.76f)-(int)(e->y*.76f),d=ab(x)+ab(y);int sx=x>0?1:-1,sy=y>2?1:y<-2?-1:0,s;
  /* A hit/hold is handled before this adapter. physics_hit cancels source mode. */
  if(v->action && a->mode==2){v->action=0;v->z=v->vz=v->vx=0;}
  if(v->action){animate(g,i);return 1;}

@@ -16,14 +16,9 @@ static float actor_lift[5];
 static int actor_family[5];
 static void *texture_vram;
 unsigned actor_frames[5],actor_states[5];
+unsigned actor_visibility[5]={1,1,1,1,1};
 unsigned sprite_draw_count,sprite_slice_count,missing_sprite_frames,missing_sprite_family,missing_sprite_id;
 static unsigned frame_draws,frame_slices;
-/* Captain: Donovan geometry, red trousers; no extra atlas or VRAM allocation. */
-static const unsigned __attribute__((aligned(16))) captain_palette[256]={
- 0,0xffe3e3e3u,0xff202020u,0xff61a2e3u,0xff2061a2u,0xff002061u,0xffff00ffu,0xffff00ffu,
- 0xff6060e8u,0xff202098u,0xff824120u,0xffa2a2a2u,0xff616161u,0xffff00ffu,0xffff00ffu,0xff202020u
-};
-
 static const Actor *get_actor(const Game *g,int i) { return i ? &g->enemies[i-1] : &g->player; }
 static int family(int i) { return actor_family[i]; }
 static const SpriteFrame *find_frame(int set,unsigned id) {
@@ -35,7 +30,7 @@ void sprites_reset(const Game *g) {
     int i;
     for(i=0;i<5;++i) {
         const Actor *a=get_actor(g,i);
-        actor_family[i]=i?enemy_type(g,i-1)+1:0;actor_lift[i]=0;animation[i]=(Animation){a->x,a->y,0}; actor_frames[i]=i?enemy_frames(g,i-1,EP_IDLE)[0].fpg:1; actor_states[i]=ANIM_IDLE;
+        actor_visibility[i]=i?death_visible(g,i-1):1;actor_family[i]=i?enemy_type(g,i-1)+1:0;actor_lift[i]=0;animation[i]=(Animation){a->x,a->y,0}; actor_frames[i]=i?enemy_frames(g,i-1,EP_IDLE)[0].fpg:1; actor_states[i]=ANIM_IDLE;
     }
 }
 void sprites_spawn_enemies(const Game *g,unsigned mask){int i;for(i=0;i<4;++i)if(mask&(1u<<i)){
@@ -53,7 +48,7 @@ void sprites_step(const Game *g) {
     int i;
     if(g->paused) return;
     for(i=0;i<5;++i) {
-        actor_family[i]=i?enemy_type(g,i-1)+1:0;const Actor *a=get_actor(g,i); Animation *v=&animation[i];
+        actor_visibility[i]=i?death_visible(g,i-1):1;actor_family[i]=i?enemy_type(g,i-1)+1:0;const Actor *a=get_actor(g,i); Animation *v=&animation[i];
         unsigned state=ANIM_IDLE, frame=1, set=family(i);
         int moved=(a->x!=v->x || a->y!=v->y),finished=(g->won || g->player.hp<=0);
         if(a->hp<=0 || (i && g->moves.down[i-1])) state=ANIM_DOWN;
@@ -116,6 +111,7 @@ void sprites_begin(void) {
     sceGuClutMode(GU_PSM_8888,0,255,0);
 }
 void sprites_draw(const Actor *a,int index) {
+    if(!actor_visibility[index])return;
     int set=family(index),flip=(set==0 ? a->facing<0 : a->facing>0);
     const SpriteFrame *f=find_frame(set,actor_frames[index]);
     SpriteVertex *v;int slice,count=(f->w+31)/32,lift=0;
@@ -127,7 +123,7 @@ void sprites_draw(const Actor *a,int index) {
     left=x-(flip ? f->w-f->px : f->px);
     /* Source pose/palette retained during hurt; no synthetic red tint. */
     sceGuTexImage(0,512,512,512,(f->v/512<3?(const unsigned char *)texture_vram:sprite_atlas)+(f->v/512)*512*512);
-    sceGuClutLoad(32,index && level_is_boss(index-1)?captain_palette:sprite_palettes[set]);
+    sceGuClutLoad(32,sprite_palettes[set]);
     v=(SpriteVertex *)sceGuGetMemory(count*2*sizeof(SpriteVertex));
     for(slice=0;slice<count;++slice) {
         int sx=slice*32,ex=sx+32;

@@ -1,6 +1,8 @@
 #ifndef LITE_GAME_H
 #define LITE_GAME_H
 #include "bk3.h"
+#include "machine.h"
+#include "death.h"
 #include "combat.h"
 #include "physics.h"
 #include "rules.h"

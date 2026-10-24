@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00020':
+        if (status.get('game')or{}).get('id')!='SORL00021':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -111,7 +111,7 @@ try:
  reset();arrange(40,x=220.);p.req('cpu.stepping')
  try:
   def wr(address,n):p.req('memory.write_u32',address=address,value=n)
-  wr(p.symbols['sample_count'],0);wr(p.symbols['game']+824,10000)
+  wr(p.symbols['game']+1696,4);wr(p.symbols['game']+1132,0x100);wr(p.symbols['sample_count'],0);wr(p.symbols['game']+824,10000)
   p.req('memory.write',address=p.symbols['level'],base64=base64.b64encode(struct.pack('<6ifIiI',1,4,1,0,0,0,1186.,1,2,0)).decode())
   for i in range(4):
    hp=240 if i==1 else 0
@@ -127,15 +127,16 @@ try:
  fps=[float(v['fps'])for v in rows]
  render_stats=render_snapshot()
  checks['boss_two_RAM_batches']=render_stats['actors']==2 and render_stats['batches']==2
- checks['boss_attacks_and_rushes']=all(v>0 for v in struct.unpack('<2i',p.read(p.symbols['level']+60,8)))
+ checks['barbon_attacks_and_type']=struct.unpack('<i',p.read(p.symbols['level']+60,4))[0]>0 and struct.unpack('<i',p.read(p.symbols['game']+1696,4))[0]==4
  checks['food_remains_available']=all(struct.unpack('<i',p.read(p.symbols['level']+80+i*16,4))[0]==1 for i in range(3))
  checks['fps_target_met']=len(fps)==30 and min(fps)>=29 and statistics.median(fps)>=29.5
  checks['no_new_drops']=p.u32('dropped_ticks')==before
  checks['music_ok']=music()[0]==1 and music()[1]==0
  checks['level_remains_locked']=struct.unpack('<i',p.read(p.symbols['level']+8,4))[0]==1
  checks['no_missing_frames']=p.u32('missing_sprite_frames')==0
+ checks['no_machine_dispatch_faults']=struct.unpack('<I',p.read(p.symbols['bk3_machine_stats']+12,4))[0]==0
  screenshot(artifacts/'boss-battle-profile.png')
- result=dict(checks=checks,render_snapshot=render_stats,seconds=35,last_30_fps=dict(min=min(fps),median=statistics.median(fps),max=max(fps)),eboot_sha256=hashlib.sha256((project/'build/EBOOT.PBP').read_bytes()).hexdigest(),note='PPSSPP software-renderer stress fixture: final background position, active captain and three visible food sprites, player invulnerability to sustain combat. Not hardware performance.')
+ result=dict(checks=checks,render_snapshot=render_stats,seconds=35,last_30_fps=dict(min=min(fps),median=statistics.median(fps),max=max(fps)),eboot_sha256=hashlib.sha256((project/'build/EBOOT.PBP').read_bytes()).hexdigest(),note='PPSSPP software-renderer stress fixture: final background position, active Barbon and three visible food sprites, player invulnerability to sustain combat. Not hardware performance.')
  (artifacts/'boss-performance.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2));assert all(checks.values())
 finally:p.close()
 

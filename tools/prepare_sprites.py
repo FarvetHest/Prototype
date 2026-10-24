@@ -5,7 +5,7 @@ import argparse, hashlib, json, struct, zlib
 from pathlib import Path
 
 PROJECT=Path(__file__).resolve().parents[1]
-SETS={'bk3_axel':list(range(1,11))+[11,12,13,14,15,16,18,19,20,21,22,23,24,25,26,27,28]+list(range(34,44))+[47,48,49,50]+list(range(60,68))+[68,69,70,71,72,73,74,75,76,101,102,132,133,134,51,98,99,148,17,29,30,31,32,33,44,45,46,53,79,80,81,82,83,84,85,100,150,151,152,153,154,155,156,157,158,159,168,169,170,171,172,173], 'galsia':[1,2,3,4,7,8,9,12,17,18], 'donovan':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,23], 'electra':[], 'zack':[]}
+SETS={'bk3_axel':list(range(1,11))+[11,12,13,14,15,16,18,19,20,21,22,23,24,25,26,27,28]+list(range(34,44))+[47,48,49,50]+list(range(60,68))+[68,69,70,71,72,73,74,75,76,101,102,132,133,134,51,98,99,148,17,29,30,31,32,33,44,45,46,53,79,80,81,82,83,84,85,100,150,151,152,153,154,155,156,157,158,159,168,169,170,171,172,173], 'galsia':[1,2,3,4,7,8,9,12,17,18], 'donovan':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,23], 'electra':[], 'zack':[], 'barbon':[]}
 
 def png(path,w,h,data):
     def chunk(k,d):return struct.pack('>I',len(d))+k+d+struct.pack('>I',zlib.crc32(k+d))
@@ -33,7 +33,7 @@ def main():
     ap=argparse.ArgumentParser();ap.add_argument('--data',type=Path,required=True);args=ap.parse_args()
     dest=PROJECT/'assets';dest.mkdir(exist_ok=True)
     ref=json.loads((dest/'bk3-reference.json').read_text());SETS['bk3_axel']=sorted({f['fpg']for sc in ref['scripts'].values()for f in sc['frames']}|{48})
-    atlas=bytearray(512*2048);entries=[];palettes=[];sources=[];pending=[]
+    atlas=bytearray(512*2560);entries=[];palettes=[];sources=[];pending=[]
     for family,(name,ids) in enumerate(SETS.items()):
         ids=list(dict.fromkeys(ids));path=args.data/(('gold' if name=='zack' else name)+'.fpg');palette,frames=decode(path)
         if name=='bk3_axel' and (dest/'vault-native.json').exists():
@@ -50,7 +50,7 @@ def main():
             reactions=json.loads((dest/'reaction-native.json').read_text())
             frames.update({int(k):dict(v,pixels=bytes.fromhex(v['pixels']))for k,v in reactions['frames'].items()});ids+=list(map(int,reactions['frames']))
         SETS[name]=ids;palettes.append(palette)
-        sources.append({'file':(native[name]['source_art']+' + sprite mappings')if name in native else path.name,'sha256':native[name]['source_sha256']if name in native else hashlib.sha256(path.read_bytes()).hexdigest(),'color_source':path.name,'color_source_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'frame_ids':ids})
+        sources.append({'file':(native[name]['source_art']+' + sprite mappings')if name in native else path.name,'sha256':native[name]['source_sha256']if name in native else hashlib.sha256(path.read_bytes()).hexdigest(),'color_source':native[name]['palette_label']if name in native and 'palette_label'in native[name]else path.name,'color_source_sha256':native[name]['source_sha256']if name in native and 'palette_label'in native[name]else hashlib.sha256(path.read_bytes()).hexdigest(),'frame_ids':ids})
         for code in ids:
             f=frames[code];points=[(i%f['w'],i//f['w'])for i,v in enumerate(f['pixels'])if v]
             assert points
@@ -59,7 +59,7 @@ def main():
             pixels=b''.join(f['pixels'][(y0+y)*f['w']+x0:(y0+y)*f['w']+x0+w]for y in range(h))
             pending.append(dict(family=family,name=name,id=code,w=w,h=h,px=f['pivot'][0]-x0,py=f['pivot'][1]-y0,
                                 source_w=f['w'],source_h=f['h'],crop_left=x0,crop_top=y0,title=f['title'],pixels=pixels))
-    free=[(0,0,512,512),(0,512,512,512),(0,1024,512,512),(0,1536,512,512)]
+    free=[(0,0,512,512),(0,512,512,512),(0,1024,512,512),(0,1536,512,512),(0,2048,512,512)]
     for e in sorted(pending,key=lambda f:(f['w']*f['h'],max(f['w'],f['h'])),reverse=True):
         rw,rh=e['w']+2,e['h']+2
         fits=[(min(w-rw,h-rh),max(w-rw,h-rh),x,y)for x,y,w,h in free if rw<=w and rh<=h]
@@ -78,12 +78,12 @@ def main():
         entries.append({k:v for k,v in e.items()if k!='pixels'})
     # PSP texture layout: 16-byte by 8-row blocks, prepared once offline.
     swizzled=bytearray()
-    for by in range(0,2048,8):
+    for by in range(0,2560,8):
         for bx in range(0,512,16):
             for dy in range(8):swizzled+=atlas[(by+dy)*512+bx:(by+dy)*512+bx+16]
     # Independent inverse-layout check before embedding the atlas.
-    restored=bytearray(512*2048);offset=0
-    for by in range(0,2048,8):
+    restored=bytearray(512*2560);offset=0
+    for by in range(0,2560,8):
         for bx in range(0,512,16):
             for dy in range(8):
                 restored[(by+dy)*512+bx:(by+dy)*512+bx+16]=swizzled[offset:offset+16];offset+=16
@@ -92,7 +92,7 @@ def main():
     header=['/* Generated from local SoRR assets. Do not hand edit. */','#ifndef SPRITE_DATA_H','#define SPRITE_DATA_H',
             'typedef struct { short family, id, u, v, w, h, px, py; } SpriteFrame;',
             'extern const unsigned char sprite_atlas[];',
-            'static const unsigned __attribute__((aligned(16))) sprite_palettes[5][256] = {']
+            'static const unsigned __attribute__((aligned(16))) sprite_palettes[6][256] = {']
     for pal in palettes:header+=['{'+','.join(hex(r|(g<<8)|(b<<16)|(a<<24))+'u' for r,g,b,a in pal)+'},']
     header+=['};','static const SpriteFrame sprite_frames[] = {']
     for e in entries:header+=['{'+','.join(str(e[k]) for k in ('family','id','x','y','w','h','px','py'))+'},']
@@ -110,6 +110,6 @@ def main():
         fx=(i%12)*100+50;fy=sum((len(ids)+11)//12 for ids in list(SETS.values())[:e['family']])*120+(i//12)*120+110
         for dx in range(-3,4):sheet[(fy*width+fx+dx)*4:(fy*width+fx+dx)*4+4]=bytes((255,80,80,255))
     png(dest/'contact-sheet.png',width,height,sheet)
-    (dest/'manifest.json').write_text(json.dumps({'sources':sources,'frames':entries,'atlas_bytes':len(atlas),'atlas_sha256':hashlib.sha256(swizzled).hexdigest(),'swizzle_roundtrip_verified':True,'format':'four 512x512 swizzled GU_PSM_T8 pages, first three in VRAM and fourth in RAM; global v selects page; per-family RGBA8888 palettes; old enemies SoRR colors; Electra/Zack Pal_MainPal source CRAM; index 0 transparent'},indent=2))
+    (dest/'manifest.json').write_text(json.dumps({'sources':sources,'frames':entries,'atlas_bytes':len(atlas),'atlas_sha256':hashlib.sha256(swizzled).hexdigest(),'swizzle_roundtrip_verified':True,'format':'five 512x512 swizzled GU_PSM_T8 pages, first three in VRAM and fourth/fifth in RAM; global v selects page; per-family RGBA8888 palettes; old enemies SoRR colors; Electra/Zack Pal_MainPal and Barbon Pal_Barbon source CRAM; index 0 transparent'},indent=2))
     print('Prepared',len(entries),'frames;',len(atlas),'atlas bytes')
 if __name__=='__main__':main()

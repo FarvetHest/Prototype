@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00020':
+        if (status.get('game')or{}).get('id')!='SORL00021':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -120,7 +120,10 @@ def food():return [list(struct.unpack('<2f2i',p.read(p.symbols['level']+68+i*16,
 def boss():return list(struct.unpack('<7i',p.read(p.symbols['level']+40,28)))
 def food_pixels(id):
  m=json.loads((project/'assets/hud-manifest.json').read_text());f=next(v for v in m['frames'] if v['file']=='item' and v['id']==id);atlas=(project/'assets/hud.rgba').read_bytes()
- raw=p.read(p.u32('presented_buffer'),512*272*2);matched=total=0
+ p.req('cpu.stepping')
+ try:raw=p.read(p.u32('presented_buffer'),512*272*2)
+ finally:p.req('cpu.resume')
+ matched=total=0
  for y in range(f['h']):
   for x in range(f['w']):
    u=f['u']+x;v=f['v']+y;byte=u*4;off=((v//8)*64+byte//16)*128+(v%8)*16+byte%16;r,g,b,a=atlas[off:off+4]
@@ -141,8 +144,13 @@ def fixture(isboss=False,hp=50):
 try:
  checks['selftest']=p.u32('selftest_result')==0
  fixture();checks['touch_does_not_pick']=state()['player'][2]==50 and food()[0][3]==1
- p.send(square=True,right=True);time.sleep(.045);p.send(square=False,right=False)
- checks['square_starts_pickup_pose']=frames()[0]==910 and state()['player'][6]==0 and struct.unpack('<i',p.read(p.symbols['level']+180,4))[0]>0
+ p.send(square=True,right=True);pickup_seen=False;pickup_deadline=time.monotonic()+.15
+ while time.monotonic()<pickup_deadline:
+  if frames()[0]==910 and state()['player'][6]==0 and struct.unpack('<i',p.read(p.symbols['level']+180,4))[0]>0:
+   pickup_seen=True;break
+  time.sleep(.005)
+ p.send(square=False,right=False)
+ checks['square_starts_pickup_pose']=pickup_seen
  checks['pickup_locks_walk']=abs(state()['player'][0]-120)<.01
  screenshot(artifacts/'pickup-animation.png');time.sleep(.25)
  checks['apple_heals_25']=state()['player'][2]==75 and food()[0][3]==0 and p.u32('ui_player_hp')==75

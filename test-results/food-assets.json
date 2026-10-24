@@ -1,23 +1,25 @@
 {
   "checks": {
-    "all_203_previous_poses_pixels_pivots_unchanged": true,
+    "all_210_previous_poses_pixels_pivots_unchanged": true,
     "electra_all_native_pixels_pivots": true,
     "electra_original_CRAM": true,
     "zack_all_native_pixels_pivots": true,
     "zack_original_CRAM": true,
+    "barbon_all_native_pixels_pivots": true,
+    "barbon_original_CRAM": true,
     "four_player_reaction_poses_exact": true,
-    "210_frames_four_pages": true,
+    "246_frames_five_pages": true,
     "no_frame_crosses_a_page": true,
     "stage.rgb565_unchanged": true,
     "hud.rgba_unchanged": true,
     "music_unchanged": true,
     "full_atlas_embedded": true,
-    "three_VRAM_one_RAM_page": true
+    "three_VRAM_two_RAM_pages": true
   },
-  "eboot_sha256": "44e68b3e632160d3b4c8456abb537a9ee1fbb7bc27210a2d667ca13f755721d9",
-  "atlas_sha256": "4943ff25863d5d3ec9764ec90fb2827600f66c25508f8e8542a51a7e9ef3e9e9",
-  "old_poses": 203,
-  "new_poses": 7,
+  "eboot_sha256": "9f1acf6ddfa973557746d149e3b27a96e615c51c8c4dd195095b09a33664a4e9",
+  "atlas_sha256": "b7abd2d4cfc693ab03b40a7596b227140bebcfa0c21b45951328a6bd5a50bf1f",
+  "old_poses": 210,
+  "new_poses": 36,
   "vram_resident_atlas_bytes": 786432,
-  "extra_RAM_atlas_bytes": 262144
+  "extra_RAM_atlas_bytes": 524288
 }

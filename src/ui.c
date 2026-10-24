@@ -102,7 +102,7 @@ static void bar(int x,int y,unsigned hp,unsigned max) {
 void ui_draw(const Game *g,int error) {
     char score[32];unsigned value=ui_score>9999999?9999999:ui_score;
     if(flow.state==FLOW_TITLE) {
-        ui_text(152,98,"SORR PSP LITE");ui_text(216,118,"V0.20");
+        ui_text(152,98,"SORR PSP LITE");ui_text(216,118,"V0.21");
         ui_text(158,140,"START OR CROSS");
         snprintf(score,sizeof(score),"BEST %07u",flow.best>9999999?9999999:flow.best);ui_text(160,164,score);
         if(error)ui_text(180,190,"SELFTEST ERROR");
@@ -128,7 +128,7 @@ void ui_draw(const Game *g,int error) {
         int boss=level_is_boss(target),galsia=enemy_type(g,target)==EN_GALSIA;
         portrait_type=enemy_type(g,target)>=EN_ELECTRA?enemy_type(g,target):-1;portrait_frame=enemy_frames(g,target,EP_IDLE)[0].fpg;
         if(enemy_type(g,target)<EN_ELECTRA)image(galsia?HUD_GALSIA:HUD_DONOVAN,300,9,28,-1);
-        ui_text(26,27,boss?"CAPTAIN":enemy_type(g,target)==EN_ELECTRA?"ELECTRA":enemy_type(g,target)==EN_ZACK?"ZACK":galsia?"GALSIA":"DONOVAN");bar(25,35,boss?(unsigned)(g->enemies[target].hp>0?g->enemies[target].hp:0):ui_enemy_hp,boss?LEVEL_BOSS_HP:40);
+        ui_text(26,27,boss?"BARBON":enemy_type(g,target)==EN_ELECTRA?"ELECTRA":enemy_type(g,target)==EN_ZACK?"ZACK":galsia?"GALSIA":"DONOVAN");bar(25,35,boss?(unsigned)(g->enemies[target].hp>0?g->enemies[target].hp:0):ui_enemy_hp,boss?LEVEL_BOSS_HP:40);
     }
     image(HUD_BARRA,24,25,47,-1);
     if(g->moves.charge)image(HUD_BARRA_AZUL,24,26,48,104*g->moves.charge/100);

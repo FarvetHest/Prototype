@@ -80,11 +80,11 @@ static void source_ai_step(Game *g,int i){EnemyBrain *b=&g->combat.enemy[i];Sour
  }
  if(g->combat.target==i){
   if(g->physics.body[i+1].phase==BODY_HURT)physics_body_tick(g,i+1);
-  else {if(g->physics.body[i+1].inv)--g->physics.body[i+1].inv;b->fpg=7;}
+  else {if(!bk3_machine_stats.dispatching && g->physics.body[i+1].inv)--g->physics.body[i+1].inv;b->fpg=7;}
   return;
  }
  if(g->physics.body[i+1].phase){physics_body_tick(g,i+1);return;}
- if(g->physics.body[i+1].inv)--g->physics.body[i+1].inv;
+ if(!bk3_machine_stats.dispatching && g->physics.body[i+1].inv)--g->physics.body[i+1].inv;
  if(e->hp<=0){b->fpg=9;return;}if(e->stun){--e->stun;b->fpg=7;return;}
  if(g->impact.freeze[i+1]>0){--g->impact.freeze[i+1];return;}
  if(enemy_type(g,i)>=EN_ELECTRA){variety_tick(g,i);return;}
@@ -181,6 +181,6 @@ int level_boss_selftest(void){Level saved=level;Game g;int n,result=0;
  for(n=0;n<14;++n){source_ai_tick(&g,1);}CHECK(g.rules.ai[1].mode==0x1c,1310);
  game_reset(&g);g.player.hp=0;level.boss_phase=0;level.boss_timer=0;source_ai_tick(&g,1);CHECK(!g.enemies[1].attack && level.boss_phase==0,1311);
  game_reset(&g);g.enemies[1].x=82;g.enemies[1].y=100;g.enemies[1].hp=240;physics_hit(&g,2,10,0,1);CHECK(g.enemies[1].hp==230 && g.physics.body[2].phase,1312);
- done:level=saved;return result;
+ done:if(!result){game_reset(&g);enemy_set_type(&g,1,EN_BARBON);g.enemies[1].x=90;g.enemies[1].y=100;g.combat.enemy[1].state=8;g.combat.enemy[1].timer=0;source_ai_tick(&g,1);if(g.extra[1].action!=EP_JAB || g.combat.enemy[1].state!=9 || enemy_count(&g,1,EP_JAB)!=4 || enemy_frames(&g,1,EP_JAB)[1].ticks!=2)result=1313;}level=saved;return result;
 #undef CHECK
 }

@@ -1,0 +1,56 @@
+{
+  "checks": {
+    "selftest": true,
+    "five_native_mix_waveforms_distinct": true,
+    "clip_0_plays": true,
+    "clip_1_plays": true,
+    "clip_2_plays": true,
+    "clip_3_plays": true,
+    "clip_4_plays": true,
+    "real_contact_ducks_music": true,
+    "music_returns_to_baseline": true,
+    "no_audio_errors_drops_or_clipping": true,
+    "five_verified_PCM_clips_embedded": true,
+    "original_WAV_bytes_preserved": true
+  },
+  "captured": {
+    "24": {
+      "peak": 9407,
+      "rms": 4492.3626993009275,
+      "last_clip": 0
+    },
+    "38": {
+      "peak": 9406,
+      "rms": 4540.115770546048,
+      "last_clip": 1
+    },
+    "33": {
+      "peak": 9133,
+      "rms": 4576.050504072296,
+      "last_clip": 2
+    },
+    "50": {
+      "peak": 8433,
+      "rms": 4398.635324148133,
+      "last_clip": 3
+    },
+    "838": {
+      "peak": 10776,
+      "rms": 5113.458679981192,
+      "last_clip": 4
+    }
+  },
+  "native_mix_hashes": [
+    1585497793,
+    1604994153,
+    2563209875,
+    294008831,
+    1202601653
+  ],
+  "contact_music_volumes": [
+    6144,
+    16384
+  ],
+  "eboot_sha256": "9f1acf6ddfa973557746d149e3b27a96e615c51c8c4dd195095b09a33664a4e9",
+  "note": "Five event IDs injected into the normal SFX queue to verify the real MIPS audio worker. Separate real Square collision verifies emitter and music ducking. PCM buffers are measured before hardware output, not a microphone recording of PSP speakers."
+}

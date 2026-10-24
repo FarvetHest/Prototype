@@ -7,6 +7,9 @@ typedef struct {
 extern volatile MusicStats music_stats;
 extern volatile int music_seek_target;
 extern volatile int music_muted;
+extern volatile unsigned music_duck_until,music_duck_events;
+extern volatile int music_output_volume;
+void music_duck(unsigned microseconds);
 void music_start(void);
 void music_pause(int paused);
 void music_restart(void);

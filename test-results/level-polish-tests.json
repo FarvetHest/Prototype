@@ -21,6 +21,7 @@
     "no_missing_frames": true
   },
   "entrance_masks": [
+    0,
     2,
     3
   ],
@@ -28,6 +29,6 @@
     414,
     422
   ],
-  "eboot_sha256": "44e68b3e632160d3b4c8456abb537a9ee1fbb7bc27210a2d667ca13f755721d9",
+  "eboot_sha256": "9f1acf6ddfa973557746d149e3b27a96e615c51c8c4dd195095b09a33664a4e9",
   "note": "Real entry/pose/GUI/fade timers and framebuffer. HP fixtures accelerate the final-wave/boss clear; no claim of hardware performance."
 }

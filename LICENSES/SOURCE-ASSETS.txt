@@ -10,3 +10,7 @@ Prepared PCM provenance and transformations: assets/sfx-manifest.json.
 v0.19 adds native Electra/Zack sprite geometry (ArtNem_Electra, ArtNem_GoldieZack) and Pal_MainPal CRAM from the pinned BK3 disassembly. Rights remain with the original rights holders. No new ownership or license is asserted.
 
 v0.20 includes the complete pinned BK3 IDA listing from gsaurus/sor-disassemblies for source analysis. Original game code/data remain the property of their rights holders; inclusion does not assert a new license or ownership. Seven native reaction/hold poses are extracted from the same revision.
+
+v0.21 embeds unmodified original SoRR WAVs seg1.wav,seg2.wav,seg3.wav,se53.wav,se45.wav,sev1.wav,sev2.wav,seblaze1.wav. WAV and decoded PCM hashes are recorded in assets/sfx-manifest.json. Rights remain with the original authors. No synthetic or DSP replacement samples are included.
+
+v0.21 adds native Barbon art, palette, animation and code/data excerpts from the pinned SoR2 listing in the same repository. Original SEGA authorship retained. See BOSS-RU.md for the precise adaptation limits.

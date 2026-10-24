@@ -1,0 +1,756 @@
+{
+  "source_file": "Streets of Rage 2 (U) [!].asm",
+  "source_sha256": "30f9c07ff55b85dd53083fe9b0a828faa3fb4600a0ac54dfc5f2d432265da274",
+  "repository": "https://github.com/gsaurus/sor-disassemblies",
+  "commit": "4dd719f3ed5c24c86deee616b56cea885e3113d7",
+  "scripts": {
+    "word_1EB8E4": [
+      {
+        "ticks": 6,
+        "fpg": 1000,
+        "mapping": "word_15F6FA",
+        "art": "byte_14FDBA"
+      },
+      {
+        "ticks": 8,
+        "fpg": 1001,
+        "mapping": "word_15F74E",
+        "art": "byte_15059A"
+      },
+      {
+        "ticks": 10,
+        "fpg": 1002,
+        "mapping": "word_15F79C",
+        "art": "byte_150D7A"
+      },
+      {
+        "ticks": 8,
+        "fpg": 1001,
+        "mapping": "word_15F74E",
+        "art": "byte_15059A"
+      }
+    ],
+    "word_1EB916": [
+      {
+        "ticks": 12,
+        "fpg": 1002,
+        "mapping": "word_15F79C",
+        "art": "byte_150D7A"
+      },
+      {
+        "ticks": 8,
+        "fpg": 1003,
+        "mapping": "word_15F7FC",
+        "art": "byte_15155A"
+      },
+      {
+        "ticks": 10,
+        "fpg": 1004,
+        "mapping": "word_15F84A",
+        "art": "byte_151C5A"
+      },
+      {
+        "ticks": 8,
+        "fpg": 1003,
+        "mapping": "word_15F7FC",
+        "art": "byte_15155A"
+      }
+    ],
+    "word_1EB948": [
+      {
+        "ticks": 8,
+        "fpg": 1003,
+        "mapping": "word_15F7FC",
+        "art": "byte_15155A"
+      },
+      {
+        "ticks": 10,
+        "fpg": 1004,
+        "mapping": "word_15F84A",
+        "art": "byte_151C5A"
+      },
+      {
+        "ticks": 8,
+        "fpg": 1003,
+        "mapping": "word_15F7FC",
+        "art": "byte_15155A"
+      },
+      {
+        "ticks": 12,
+        "fpg": 1002,
+        "mapping": "word_15F79C",
+        "art": "byte_150D7A"
+      }
+    ],
+    "word_1EB97A": [
+      {
+        "ticks": 10,
+        "fpg": 1005,
+        "mapping": "word_15FCD0",
+        "art": "byte_15677A"
+      },
+      {
+        "ticks": 4,
+        "fpg": 1006,
+        "mapping": "word_15FD30",
+        "art": "byte_156EFA"
+      },
+      {
+        "ticks": 10,
+        "fpg": 1007,
+        "mapping": "word_15FD7E",
+        "art": "byte_15759A"
+      },
+      {
+        "ticks": 4,
+        "fpg": 1008,
+        "mapping": "word_15FDDE",
+        "art": "byte_157C5A"
+      },
+      {
+        "ticks": 30,
+        "fpg": 1009,
+        "mapping": "word_15FE4A",
+        "art": "byte_1583BA"
+      },
+      {
+        "ticks": 4,
+        "fpg": 1008,
+        "mapping": "word_15FDDE",
+        "art": "byte_157C5A"
+      },
+      {
+        "ticks": 8,
+        "fpg": 1000,
+        "mapping": "word_15F6FA",
+        "art": "byte_14FDBA"
+      }
+    ],
+    "word_1EB9D0": [
+      {
+        "ticks": 12,
+        "fpg": 1010,
+        "mapping": "word_16029A",
+        "art": "byte_15E1BA"
+      }
+    ],
+    "word_1EB9DE": [
+      {
+        "ticks": 12,
+        "fpg": 1010,
+        "mapping": "word_16029A",
+        "art": "byte_15E1BA"
+      }
+    ],
+    "word_1EB9EC": [
+      {
+        "ticks": 12,
+        "fpg": 1011,
+        "mapping": "word_15F8A4",
+        "art": "byte_15237A"
+      }
+    ],
+    "word_1EB9FA": [
+      {
+        "ticks": 12,
+        "fpg": 1012,
+        "mapping": "word_15F8EC",
+        "art": "byte_1529DA"
+      }
+    ],
+    "word_1EBA08": [
+      {
+        "ticks": 3,
+        "fpg": 1013,
+        "mapping": "word_15F92E",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1014,
+        "mapping": "word_15F976",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1013,
+        "mapping": "word_15F92E",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1014,
+        "mapping": "word_15F976",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1013,
+        "mapping": "word_15F92E",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1014,
+        "mapping": "word_15F976",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1013,
+        "mapping": "word_15F92E",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1014,
+        "mapping": "word_15F976",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1013,
+        "mapping": "word_15F92E",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1014,
+        "mapping": "word_15F976",
+        "art": "byte_152EBA"
+      }
+    ],
+    "word_1EBA82": [
+      {
+        "ticks": 3,
+        "fpg": 1015,
+        "mapping": "word_15FA06",
+        "art": "byte_15351A"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1016,
+        "mapping": "word_15FA66",
+        "art": "byte_15351A"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1015,
+        "mapping": "word_15FA06",
+        "art": "byte_15351A"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1016,
+        "mapping": "word_15FA66",
+        "art": "byte_15351A"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1015,
+        "mapping": "word_15FA06",
+        "art": "byte_15351A"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1016,
+        "mapping": "word_15FA66",
+        "art": "byte_15351A"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1015,
+        "mapping": "word_15FA06",
+        "art": "byte_15351A"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1016,
+        "mapping": "word_15FA66",
+        "art": "byte_15351A"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1015,
+        "mapping": "word_15FA06",
+        "art": "byte_15351A"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1016,
+        "mapping": "word_15FA66",
+        "art": "byte_15351A"
+      }
+    ],
+    "word_1EBAFC": [
+      {
+        "ticks": 12,
+        "fpg": 1017,
+        "mapping": "word_15FAC6",
+        "art": "byte_153CFA"
+      }
+    ],
+    "word_1EBB0A": [
+      {
+        "ticks": 10,
+        "fpg": 1018,
+        "mapping": "word_15FB56",
+        "art": "byte_15441A"
+      }
+    ],
+    "word_1EBB18": [
+      {
+        "ticks": 8,
+        "fpg": 1019,
+        "mapping": "word_15FB8C",
+        "art": "byte_1549FA"
+      },
+      {
+        "ticks": 8,
+        "fpg": 1018,
+        "mapping": "word_15FB56",
+        "art": "byte_15441A"
+      },
+      {
+        "ticks": 10,
+        "fpg": 1019,
+        "mapping": "word_15FB8C",
+        "art": "byte_1549FA"
+      },
+      {
+        "ticks": 10,
+        "fpg": 1020,
+        "mapping": "word_15FBDA",
+        "art": "byte_15519A"
+      }
+    ],
+    "word_1EBB4A": [
+      {
+        "ticks": 40,
+        "fpg": 1005,
+        "mapping": "word_15FCD0",
+        "art": "byte_15677A"
+      }
+    ],
+    "word_1EBB58": [
+      {
+        "ticks": 8,
+        "fpg": 1021,
+        "mapping": "word_1603E4",
+        "art": "byte_160AE4"
+      }
+    ],
+    "word_1EBBD8": [
+      {
+        "ticks": 16,
+        "fpg": 1013,
+        "mapping": "word_15F92E",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 4,
+        "fpg": 1013,
+        "mapping": "word_15F92E",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 6,
+        "fpg": 1022,
+        "mapping": "word_15FB0E",
+        "art": "byte_153CFA"
+      },
+      {
+        "ticks": 20,
+        "fpg": 1023,
+        "mapping": "word_15F9BE",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 99,
+        "fpg": 1023,
+        "mapping": "word_15F9BE",
+        "art": "byte_152EBA"
+      }
+    ],
+    "word_1EBC16": [
+      {
+        "ticks": 16,
+        "fpg": 1013,
+        "mapping": "word_15F92E",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 4,
+        "fpg": 1013,
+        "mapping": "word_15F92E",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 6,
+        "fpg": 1013,
+        "mapping": "word_15F92E",
+        "art": "byte_152EBA"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1017,
+        "mapping": "word_15FAC6",
+        "art": "byte_153CFA"
+      },
+      {
+        "ticks": 99,
+        "fpg": 1018,
+        "mapping": "word_15FB56",
+        "art": "byte_15441A"
+      }
+    ],
+    "word_1EBD12": [
+      {
+        "ticks": 8,
+        "fpg": 1024,
+        "mapping": "word_15FEB0",
+        "art": "byte_158B9A"
+      },
+      {
+        "ticks": 2,
+        "fpg": 1025,
+        "mapping": "word_15FF16",
+        "art": "byte_1593BA"
+      },
+      {
+        "ticks": 12,
+        "fpg": 1026,
+        "mapping": "word_15FF6A",
+        "art": "byte_159ADA"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1025,
+        "mapping": "word_15FF16",
+        "art": "byte_1593BA"
+      }
+    ],
+    "word_1EBD44": [
+      {
+        "ticks": 2,
+        "fpg": 1027,
+        "mapping": "word_160048",
+        "art": "byte_15AF9A"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1028,
+        "mapping": "word_15FFBE",
+        "art": "byte_15A2BA"
+      },
+      {
+        "ticks": 16,
+        "fpg": 1029,
+        "mapping": "word_160012",
+        "art": "byte_15A93A"
+      }
+    ],
+    "word_1EBD6A": [
+      {
+        "ticks": 2,
+        "fpg": 1027,
+        "mapping": "word_160048",
+        "art": "byte_15AF9A"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1030,
+        "mapping": "word_16009C",
+        "art": "byte_15B63A"
+      },
+      {
+        "ticks": 5,
+        "fpg": 1031,
+        "mapping": "word_1600FC",
+        "art": "byte_15BCDA"
+      },
+      {
+        "ticks": 7,
+        "fpg": 1032,
+        "mapping": "word_160150",
+        "art": "byte_15C51A"
+      },
+      {
+        "ticks": 5,
+        "fpg": 1033,
+        "mapping": "word_160198",
+        "art": "byte_15CB1A"
+      },
+      {
+        "ticks": 4,
+        "fpg": 1034,
+        "mapping": "word_1601D4",
+        "art": "byte_15D1BA"
+      },
+      {
+        "ticks": 3,
+        "fpg": 1035,
+        "mapping": "word_16023A",
+        "art": "byte_15D97A"
+      }
+    ]
+  },
+  "profiles": [
+    15,
+    10,
+    20,
+    45,
+    99,
+    0,
+    30,
+    50,
+    40,
+    30,
+    6,
+    6,
+    60,
+    8,
+    10,
+    80,
+    20,
+    40,
+    50,
+    6,
+    50,
+    60,
+    5,
+    6,
+    30,
+    20,
+    8,
+    6,
+    4,
+    32,
+    0,
+    0,
+    15,
+    5,
+    25,
+    45,
+    99,
+    0,
+    20,
+    60,
+    40,
+    30,
+    8,
+    10,
+    60,
+    12,
+    20,
+    80,
+    40,
+    40,
+    50,
+    8,
+    50,
+    80,
+    6,
+    14,
+    30,
+    20,
+    16,
+    16,
+    32,
+    128,
+    0,
+    0,
+    15,
+    5,
+    30,
+    40,
+    99,
+    0,
+    20,
+    60,
+    40,
+    30,
+    10,
+    10,
+    60,
+    14,
+    24,
+    82,
+    40,
+    40,
+    50,
+    10,
+    50,
+    80,
+    10,
+    14,
+    30,
+    20,
+    16,
+    16,
+    48,
+    144,
+    0,
+    0,
+    15,
+    5,
+    35,
+    35,
+    99,
+    0,
+    20,
+    50,
+    40,
+    30,
+    12,
+    12,
+    60,
+    16,
+    26,
+    84,
+    40,
+    40,
+    50,
+    12,
+    50,
+    80,
+    14,
+    12,
+    30,
+    20,
+    16,
+    16,
+    64,
+    160,
+    0,
+    0,
+    15,
+    5,
+    40,
+    30,
+    99,
+    0,
+    20,
+    40,
+    40,
+    30,
+    14,
+    14,
+    60,
+    18,
+    28,
+    86,
+    40,
+    40,
+    50,
+    14,
+    50,
+    80,
+    16,
+    10,
+    30,
+    20,
+    20,
+    16,
+    96,
+    176,
+    0,
+    0,
+    15,
+    5,
+    40,
+    25,
+    99,
+    0,
+    20,
+    30,
+    40,
+    30,
+    16,
+    16,
+    60,
+    20,
+    30,
+    88,
+    40,
+    40,
+    50,
+    16,
+    50,
+    80,
+    18,
+    14,
+    30,
+    20,
+    24,
+    16,
+    128,
+    192,
+    0,
+    0
+  ],
+  "collisions": {
+    "byte_2A5C": [
+      0,
+      0,
+      0,
+      0,
+      32,
+      52,
+      8,
+      26,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "byte_2A6C": [
+      30,
+      112,
+      144,
+      30,
+      30,
+      40,
+      144,
+      30,
+      0,
+      0,
+      0,
+      0
+    ],
+    "byte_2A78": [
+      0,
+      0,
+      0,
+      0,
+      234,
+      56,
+      144,
+      26,
+      228,
+      68,
+      144,
+      26,
+      0,
+      72,
+      144,
+      26,
+      20,
+      64,
+      144,
+      26,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

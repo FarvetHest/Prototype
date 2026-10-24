@@ -1,0 +1,21 @@
+{
+  "checks": {
+    "native_selftest": true,
+    "original_slot_order": true,
+    "SST_ids_big_endian": true,
+    "SST_position_fixed_point": true,
+    "RAM_zero_mode_stops_dispatch": true,
+    "RAM_HP_drives_actor": true,
+    "inv_timer_once_per_internal_tick": true,
+    "legacy_write_committed_to_RAM": true,
+    "unknown_id_fails_closed": true,
+    "odd_enemy_mode_fails_closed": true,
+    "combo_state_connected": true,
+    "jump_state_connected": true,
+    "pause_freezes_machine": true
+  },
+  "eboot_sha256": "9f1acf6ddfa973557746d149e3b27a96e615c51c8c4dd195095b09a33664a4e9",
+  "ram_bytes": 65536,
+  "game_bytes": 1840,
+  "note": "Native MIPS execution: debugger changes actual big-endian SST RAM, not only legacy Game fields. Existing translated handlers remain migration adapters."
+}

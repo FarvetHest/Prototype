@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00020':
+        if (status.get('game')or{}).get('id')!='SORL00021':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -132,6 +132,7 @@ try:
  checks['music_ok']=music()[0]==1 and music()[1]==0
  checks['level_remains_locked']=struct.unpack('<i',p.read(p.symbols['level']+8,4))[0]==1
  checks['no_missing_frames']=p.u32('missing_sprite_frames')==0
+ checks['no_machine_dispatch_faults']=struct.unpack('<I',p.read(p.symbols['bk3_machine_stats']+12,4))[0]==0
  screenshot(artifacts/'level-battle-profile.png')
  result=dict(checks=checks,render_snapshot=render_stats,seconds=35,last_30_fps=dict(min=min(fps),median=statistics.median(fps),max=max(fps)),eboot_sha256=hashlib.sha256((project/'build/EBOOT.PBP').read_bytes()).hexdigest(),note='PPSSPP software-renderer stress fixture: final background position, two Electra and two Zack at source AI level7 (clamped to6 for Electra), including RAM atlas access, player invulnerability to sustain combat. Not hardware performance.')
  (artifacts/'level-performance.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2));assert all(checks.values())
