@@ -1,46 +1,30 @@
 {
-  "version": "0.23",
-  "eboot_bytes": 3151902,
-  "eboot_sha256": "02343f30642e81d139cad71326f11a1f5f281fb68e7311c1f4875f6dad80b612",
+  "version": "0.24",
+  "eboot_bytes": 3434734,
+  "eboot_sha256": "4971910468edce3c5585497e6ec5ba0a9880b0f54ebd56423b26a0151c0e6b8f",
   "metadata": {
     "MEMSIZE": 0,
-    "DISC_ID": "SORL00023",
+    "DISC_ID": "SORL00024",
     "BOOTABLE": 1,
     "CATEGORY": "MG",
     "DISC_VERSION": "1.00",
     "PARENTAL_LEVEL": 1,
     "PSP_SYSTEM_VER": "1.00",
     "REGION": 32768,
-    "TITLE": "SoRR PSP Lite v0.23"
+    "TITLE": "SoRR PSP Lite v0.24"
   },
-  "integration_checks": 155,
-  "asset_checks": 12,
+  "integration_checks": 158,
+  "asset_checks": 11,
   "source_checks": 22,
   "native_selftest": 0,
-  "rounds_in_source": 8,
-  "rounds_connected": 1,
-  "stage_dimensions": [
-    5376,
-    240
-  ],
-  "stage_display_height": 224,
-  "stage_RAM_bytes": 274776,
-  "stage_VRAM_bytes": 0,
-  "GU_command_RAM_bytes": 524288,
+  "upstream_commit": "7e8b66ad32fecb26f06f813fb1f6fdd7224083cb",
+  "Max_native_scripts": 43,
+  "Max_native_poses": 80,
+  "Max_atlas_RAM_bytes": 786432,
+  "game_bytes": 2088,
+  "Max_offset": 1980,
   "vram_bytes": 1605632,
   "vram_free_bytes": 491520,
-  "new_character": "Max",
-  "character_native_frames": 58,
-  "character_atlas_RAM_bytes": 524288,
-  "character_profile": "BK3/Lite heavyweight adapter, not original SoR2 Obj_Max",
-  "special_gauge_states": 13,
-  "special_gauge_native_size": [
-    16,
-    32
-  ],
-  "render_scale": "17/14 uniform; ~395x224 widescreen world view; HUD native size",
-  "physics": "BK3/Lite core with Max heavyweight movement/damage/hitbox adapter; Axel baseline retained",
-  "encounters": "20 Lite-authored cues and SoR2 Barbon; native SoR1 scripting/music/bosses not connected",
   "performance": {
     "level": {
       "fps": {
@@ -48,8 +32,8 @@
         "median": 29.97,
         "max": 29.97
       },
-      "logic_ms_median": 0.31305000000000005,
-      "render_ms_median": 0.80385
+      "logic_ms_median": 0.31320000000000003,
+      "render_ms_median": 0.87315
     },
     "max-level": {
       "fps": {
@@ -57,8 +41,8 @@
         "median": 29.97,
         "max": 29.97
       },
-      "logic_ms_median": 0.3133,
-      "render_ms_median": 0.8042
+      "logic_ms_median": 0.31275,
+      "render_ms_median": 0.8749
     },
     "max-boss": {
       "fps": {
@@ -66,8 +50,8 @@
         "median": 29.97,
         "max": 29.97
       },
-      "logic_ms_median": 0.305,
-      "render_ms_median": 0.8015
+      "logic_ms_median": 0.3045,
+      "render_ms_median": 0.87275
     }
   },
   "hardware_tested": false,
@@ -77,7 +61,7 @@
     "bk3.c": "5958c9b5a21401d7a32a633cba22b8ae017f294a5bded6746e4220f008863c45",
     "bk3.h": "9071920abb047b0afc314dabd38dee02b5581b07be7722023784f36db998f0a6",
     "bk3_data.h": "1e52112d1b82c4fe4fd692bc549bfb7c614550020edfbbb2935377775d398ab4",
-    "combat.c": "2544bf889834a43a2c5b76058ad431367f39ee54f3aabfdec82ecab1775cbfb3",
+    "combat.c": "9e3561224ed420679e5c974be40d99f62c4c0281da9d2d151941923407991ffe",
     "combat.h": "faf3855e3215930b1c856d802a9fe989395980235f89355233ebbc6db81c542b",
     "combat_data.h": "0fa3e5281e4f5d73975066c89bf67cddff6bcb3bf916ba5c04c958eb29555988",
     "death.c": "5f079779550648cf31c75d7ab5bb467314e94849dc5efe903c2610f248e94a94",
@@ -87,43 +71,49 @@
     "enemy_data.h": "c2838851114c74ef6285a4445437e709ed153949877151dc116114df0a5c9441",
     "flow.c": "3b89be7f6df7a2b70543943d1cd591997d1c15b388b135d8d948622fd85b1b29",
     "flow.h": "6c575a18409b23a57656c2d0b2711a5a6f7ad12574f001ee41041f4f58f4579f",
-    "game.c": "20eebd4263ed192eec0d108a7a0e223616aae2d33e727cf7b08568a5d298b31b",
-    "game.h": "b7b0041a6bb81c4e6b52c38660f919a071e168f8bb167e516a4c944c2889f539",
-    "held.c": "f727a8b7f752017d1dbd893fae2c81691081c0c6abd532600f886809932b969a",
+    "fx.c": "db710b44872952d777a5f26cf07d63a0cbcdd84b142598bef0e1e8c984030196",
+    "fx.h": "026995c0c54d021fb4cbe964b9ce85fc56d0552e1bc2852ba1221b1f59fd31dc",
+    "fx_data.h": "a19032d189fd9b6d91e6fab1c116baf9ccb6d1cf8b8e984092e0107a29d520e4",
+    "game.c": "e58efe854b23329092bbd5e136b7cb1bc525583efacc5d771ec074cff2065786",
+    "game.h": "737b31e2a6fa5398c42c1e9630aab188dc6fed688c310f86a95a2f9c2a905145",
+    "held.c": "98054fc18cc42806e2adad1eab78f105692f18697b66baabbff7ef7c8bf7dc5f",
     "held.h": "42a24c52b165b7c5cd872e7cbbe48936bba6046425c79ad1f2e2fb042d0ab505",
     "hud_data.h": "eca71e1a5c65ae8cabfed2a28106fb2eaeeb6fee3a3101f48dd63ddd2c18664a",
     "hud_texture.S": "0435d86ea93b9434bc71963323e6fab33ea8921cab33cef9769a635eb1fa5eb1",
-    "impact.c": "f8b3308a48dca93aefb73c007eb873251df5a7febc1e10fa9715b41ef0c0d2d1",
+    "impact.c": "814f9110bd126962b4a96fc225955e5c80535761948097500e51b3cba27b6f06",
     "impact.h": "b574c150945ffc9b06b3f784173372db0389c1837b42b7527a74a10825f20761",
     "level.c": "4d6cfa5c00e29bb132e5f7b9d4f95941c91e65bf0dd1a16d04d240f4a4ef25da",
     "level.h": "b4230dca9398fd66c6f58c8958bb5a27cd0de33008e94fb14e74de088d817dab",
     "machine.c": "a33c17caa312b428e396fc3bc45dfe083ff361afaea400d9edf44f00a82e5308",
     "machine.h": "eee9b505212ac95079426f6b26b68c4d0edbfe7e1b645072680e7e50141ebfcb",
     "machine_data.h": "4102b316df2c83e6331c9d1a0fc46592059c85f1ed9a78db5e76b0570b67690d",
-    "main.c": "4b1bd170fccbad2caf1e086fe2683a7c8d1b28780c77f025d0d31cbf2807be64",
-    "max_data.h": "09d6099e7353d1d9b513859222f9077dfdfe1bd02b2bd139f8494fb3c60a0cf0",
+    "main.c": "ba04fd48a7a131472459d8dc291f72224bfaa4d3372f7909c5aecd8bffc781da",
+    "max.c": "83cf6178539a70520b659d8ab575960f2461c1dbd49687c2e4c4f978f321c690",
+    "max.h": "cc0ad32a4d83a9fe7c13d8758ce1d507adb3fd59056da776455c991e25c1ec72",
+    "max_data.h": "56360e40325c8999d7c4e171cd2ad5d01fa8ab76e73fad6aacf49998d5bab797",
+    "max_sor2_data.h": "cc0ca9667d96b345e8c62c8c05aa9f8524bcad2df6e06c4fb81e4427cced3ee7",
     "max_texture.S": "564eec1d053d8a77338bb585afe9209e7fdb53c3cb1baa0376028f05e27992f1",
     "music.c": "36f078e4933a78d207b2146aa7b4261952c6eb4a733f44bcb29799ce1022744c",
     "music.h": "f9fa6338c492b87996358f840febbcb967f757803202629c8efb5da0f1a13bcc",
-    "physics.c": "025aae4b397e5b02535c8d67fe97d5127c88f7c517b40c94b4a28ae67f067c2b",
+    "physics.c": "d7ff3362e8df9e68b58671e616da2720834286473a3c5440367102733535402d",
     "physics.h": "2f0c403b5c9eda4946a7e9e4e20c6f1db6ed14568ebefd3be3bec6458ee15021",
     "physics_data.h": "b16b64f357d2c29b184458a25a484ddd4de0b62432dc272e40d0fedd09f9c964",
     "reactions.c": "2bc98c388280fd274aa63e78829775d912ff5293ac3cd30af3a1ba2989fb0439",
     "reaction_data.h": "ace14bab0379898b81c7e205f1a0c577333720149209fcd5d06dfdaad2d2dc4d",
-    "rules.c": "f0b6b67d02398882131a6d2c6174a2de1f10d4762156de74613ebc0a23221b5c",
+    "rules.c": "d818e5272a040775c952e5f37fcc8bffa7e1ab328b99579c7d9f5ed2af7ea817",
     "rules.h": "a4da7e977e770454557628bba4ea9b144b7482018bd05aec24d95b070ba7d9de",
     "sfx.c": "3f14f0dd0b6916cd1ab4e3efb5474f32be5ffa451855649bfc9d7e4b15f25c22",
     "sfx.h": "ef29348b37fc7f8e4ee2683e633747574c61abc72dfb8cdc4fb84286366b0f0c",
     "sfx_data.h": "4b5dead9efd7e20ad76c7ed095918170b0a80ae81c4d56891fff556ff38ef1dd",
-    "sprites.c": "f7c16a15fe0140be7d3727d0fa85228d9dd03749f21d2157b5d460857c46cb57",
+    "sprites.c": "72e6ec6840a49a7da3c1c0ef83e3f24ed61c7d15f7de76d2e41db07f888058b7",
     "sprites.h": "af68db10cf46414653d426fab33c48d59a92ddac905e9d52502b4eee7525bb9b",
     "sprite_atlas.S": "f8b95291d9a769d84279775585742cee94cca555c65844dbbadb4dea85a05139",
     "sprite_data.h": "1ba80826dbb8f6e812094341e0fac9d4c5b5980be7f11a70c0e1bfecc713f1a7",
-    "stage.c": "1b2c822f342f5891f4867e1f4546050cfa9c3d340871ce845bbc35a499832af2",
-    "stage.h": "1d572950a73813568c779907b37e84a9f79e1f835fd7c9748cd403063b09ec6f",
+    "stage.c": "8edc60e44902a27c9e50f33fad2c1478d2ad1d983b774f7a2a7e829bc7a0ec67",
+    "stage.h": "f331924560b77f68f5444e4c62206a936210434d81df40f5fed5a7b91e3b9d15",
     "stage_data.h": "4f63e05c0a41943b24661182090a7488083f306a70b8a16832c0a6ae29729a90",
     "stage_texture.S": "eac0baa7642373931d511141016c40cb2f299aa5b958e8210efe0fb077fe25e9",
-    "ui.c": "9e7b34f03f22bf0b42abc0a45c02abfe207707652c898fb29f6f07f77c2f01c7",
+    "ui.c": "6867b14ef453db1a07093ab59323c5c57ee2a4cbe911b76f0e4725f149ff347a",
     "ui.h": "8a8b615b85a63d8a984bcf0a89209325cf2a2aa73cfe6f0f1ea1c5b3a15b7a0f",
     "variety.c": "679cf1b4edcd0c983b168b7c8951ad189040e9d17ac2684cb043b4002193d039",
     "variety_data.h": "abccd171ef5f8ce6dc2df5f99451ee1eb2ad39985a88babd352aba24167dacb3"

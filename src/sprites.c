@@ -101,7 +101,7 @@ void sprites_step(const Game *g) {
         if(!i && level.enabled && level.pickup_timer && !g->physics.body[0].phase && a->hp>0){frame=910;actor_states[i]=ANIM_GRAB;}
         if(!i && g->reaction.shock && g->physics.body[0].phase==BODY_FLIGHT)frame=920+g->reaction.shock_frame;
         else if(!i && g->reaction.holder>=0)frame=g->reaction.side?923:922;
-        actor_frames[i]=!i && player_character==PLAYER_MAX?max_pose(frame):frame;actor_lift[i]=g->motion.z[i];
+        actor_frames[i]=!i && player_character==PLAYER_MAX?max_render_pose(g):frame;actor_lift[i]=g->motion.z[i];
         v->x=a->x;v->y=a->y;
     }
 }
@@ -116,7 +116,7 @@ void sprites_begin(void) {
 }
 void sprites_draw(const Actor *a,int index) {
     if(!actor_visibility[index])return;
-    int set=family(index),flip=(set==0 || set==6 ? a->facing<0 : a->facing>0);
+    int set=family(index),flip=(set==0 ? a->facing<0 : a->facing>0);
     const SpriteFrame *f=find_frame(set,actor_frames[index]);
     SpriteVertex *v;int slice,count=(f->w+31)/32,lift=0;
     int x=(int)(a->x*2),y=stage_foot_y(a->y),left;

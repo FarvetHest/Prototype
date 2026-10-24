@@ -12,7 +12,7 @@ int impact_overlap(const Game *g,int from,int to,int id){const Actor *a=actor(g,
  box=from?enemy_box(g,from-1,id,0):bk3_attack_boxes[id];if(!box)return 0;box+=a->facing>0?4:0;
  z=from?-(int)(g->motion.z[from]*65536):g->bk3.z;
  x=a->x*2+box[0];y=stage_foot_y(a->y)+z/65536.f+box[2];
- {int width=(unsigned char)box[1];if(!from && player_character==PLAYER_MAX){if(box[0]+width/2<0)x-=12;width+=12;}
+ {int width=(unsigned char)box[1];
  if(r[1]<x || r[0]>x+width || r[3]<y || r[2]>y+(int)box[3])return 0;
  fx_note_attack_top((int)y);return 1;}
 }

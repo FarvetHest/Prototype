@@ -133,7 +133,7 @@ void ui_draw(const Game *g,int error) {
         ui_text(26,27,boss?"BARBON":enemy_type(g,target)==EN_ELECTRA?"ELECTRA":enemy_type(g,target)==EN_ZACK?"ZACK":galsia?"GALSIA":"DONOVAN");bar(25,35,boss?(unsigned)(g->enemies[target].hp>0?g->enemies[target].hp:0):ui_enemy_hp,boss?LEVEL_BOSS_HP:40);
     }
     {int state=g->combat.raw_charge/16;if(state<0)state=0;if(state>12)state=12;
-     image(HUD_BK3_SPECIAL,state,166,8,-1);}
+     if(player_character!=PLAYER_MAX)image(HUD_BK3_SPECIAL,state,166,8,-1);else ui_text(166,8,"8HP");}
     ui_text(224,7,"TIME");
     image(HUD_FUENTE,248+(int)ui_timer/10,224,17,-1);
     image(HUD_FUENTE,248+(int)ui_timer%10,240,17,-1);

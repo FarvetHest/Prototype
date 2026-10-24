@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00023':
+        if (status.get('game')or{}).get('id')!='SORL00024':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -172,7 +172,7 @@ try:
  p.send(square=False);checks['combo_state_connected']=0x14 in seen
  time.sleep(.7);button('cross',.04);freeze();checks['jump_state_connected']=struct.unpack('>H',ram(0xdf00,2))[0]==0x18;go()
  button('start',.04);a=stats()[0];time.sleep(.12);checks['pause_freezes_machine']=stats()[0]==a and ram(0xf505,1)==bytes([1]);button('start',.04)
- result=dict(checks=checks,eboot_sha256=hashlib.sha256((project/'build/EBOOT.PBP').read_bytes()).hexdigest(),ram_bytes=65536,game_bytes=1840,note='Native MIPS execution: debugger changes actual big-endian SST RAM, not only legacy Game fields. Existing translated handlers remain migration adapters.')
+ result=dict(checks=checks,eboot_sha256=hashlib.sha256((project/'build/EBOOT.PBP').read_bytes()).hexdigest(),ram_bytes=65536,game_bytes=2088,note='Native MIPS execution: debugger changes actual big-endian SST RAM, not only legacy Game fields. Existing translated handlers remain migration adapters.')
  (artifacts/'machine-tests.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2));assert all(checks.values())
 finally:
  p.send(start=False,square=False,cross=False);p.close()

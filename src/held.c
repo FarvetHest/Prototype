@@ -5,11 +5,12 @@ void held_reset(void){held_attack=(HeldAttack){0,0};}
 /* The original release threshold is 40 ticks at 60Hz. One input tick is 30Hz. */
 int held_tick(const Game *g,int down,int edge,int rear){
  int ready=g->player.hp>0 && !g->paused && !g->player.stun && !g->player.jump && !g->physics.body[0].phase && g->combat.action==CB_NONE && !rear;
+ int threshold=player_character==PLAYER_MAX?60:40;
  int can_start=ready && g->bk3.mode==0 && !g->bk3.hitstop;
  if(!ready){held_reset();return edge;}
  if(edge==1 && can_start){held_attack.armed=1;held_attack.ticks=0;}
- if(down){if(held_attack.armed && held_attack.ticks<42)held_attack.ticks+=2;}
- else {int charged=held_attack.armed && held_attack.ticks>=40 && can_start;held_reset();if(charged)return 3;}
+ if(down){if(held_attack.armed && held_attack.ticks<threshold+2)held_attack.ticks+=2;}
+ else {int charged=held_attack.armed && held_attack.ticks>=threshold && can_start;held_reset();if(charged)return 3;}
  return edge;
 }
 int held_selftest(void){Game g;int i;

@@ -40,6 +40,6 @@
       921
     ]
   },
-  "eboot_sha256": "02343f30642e81d139cad71326f11a1f5f281fb68e7311c1f4875f6dad80b612",
+  "eboot_sha256": "4971910468edce3c5585497e6ec5ba0a9880b0f54ebd56423b26a0151c0e6b8f",
   "note": "Debugger arranges type, position, guard and RNG; actual capture AI, Square/triangle/Cross, MIPS damage, held poses, shock, physics and pause run normally. Block/counter are explicitly adapted from Obj_Blondie for Zack."
 }

@@ -101,7 +101,7 @@ void combat_enemy_attack_frame(Game *g,int i,int collision,int damage){EnemyBrai
  if(b->mask || !impact_overlap(g,i+1,0,collision))return;
  if(impact_apply(g,i+1,0,damage))b->mask=1;
 }
-void combat_tick(Game *g,float x,float y,int attack,int jump,int special){Combat *c=&g->combat;Actor *p=&g->player;int i,dx=dir(x),dy=dir(y);++c->ticks;fx_tick(g);
+void combat_tick(Game *g,float x,float y,int attack,int jump,int special){if(player_character==PLAYER_MAX){max_tick(g,x,y,attack,jump,special);return;}Combat *c=&g->combat;Actor *p=&g->player;int i,dx=dir(x),dy=dir(y);++c->ticks;fx_tick(g);
  dec(&g->moves.grab_cooldown);dec(&g->moves.invincible);if(g->physics.body[0].phase)physics_body_tick(g,0);else{dec(&g->physics.body[0].inv);dec(&p->stun);}
  g->motion.vx[0]=0;
  if(reaction_player_tick(g,jump,special)){charge_tick(g);if(!bk3_machine_stats.dispatching)for(i=0;i<4;++i)source_ai_tick(g,i);return;}

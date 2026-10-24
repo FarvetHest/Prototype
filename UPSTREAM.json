@@ -1,0 +1,21 @@
+{
+  "branch": "combat-bk3",
+  "commit": "7e8b66a",
+  "files": [
+    "IMPACT-RU.md",
+    "Makefile",
+    "build.py",
+    "src/combat.c",
+    "src/fx.c",
+    "src/fx.h",
+    "src/fx_data.h",
+    "src/game.c",
+    "src/game.h",
+    "src/impact.c",
+    "src/main.c",
+    "src/physics.c",
+    "src/stage.c",
+    "src/stage.h",
+    "tools/prepare_impact_fx.py"
+  ]
+}

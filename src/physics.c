@@ -57,7 +57,7 @@ int physics_rect(const Game *g,int index,float r[4]){const Actor *a=index?&g->en
  else if(index){id=g->pose[index-1].fpg?g->pose[index-1].hurt:enemy_frames(g,index-1,EP_IDLE)[0].hurt;}
  else if(!index && g->bk3.active){unsigned j;for(j=0;j<sizeof(axel_hurt_ids)/sizeof(axel_hurt_ids[0]);++j)if(axel_hurt_ids[j][0]==g->bk3.fpg){id=axel_hurt_ids[j][1];break;}}
  if(!id)return 0;
- if(!index && player_character==PLAYER_MAX){int height=g->bk3.script==BK_TUCK?56:88; /* SoR2 Data_PlayerHitBox, Max: $10 half-width, $58 height */
+ if(!index && player_character==PLAYER_MAX){int height=88; /* SoR2 Data_PlayerHitBox, Max: $10 half-width, $58 height */
   r[0]=a->x*2-16;r[1]=a->x*2+16;r[3]=stage_foot_y(a->y)-g->motion.z[0];r[2]=r[3]-height;return 1;
  }
  box=index?enemy_box(g,index-1,id,1):axel_hurt[id];if(!box)return 0;box+=a->facing>0?4:0;

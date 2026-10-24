@@ -8,7 +8,7 @@ void rules_reset(Game *g){int i;memset(&g->rules,0,sizeof(g->rules));
 }
 unsigned rules_flags(const Game *g,int i){unsigned f=g->rules.actor[i].status58;int phase=g->physics.body[i].phase;
  if(!g->rules.actor[i].enabled || actor(g,i)->hp<=0 || phase==BODY_FLIGHT || phase==BODY_BOUNCE || phase==BODY_GETUP || phase==BODY_VICTIM)f&=~128u;
- if(!i && (g->moves.special || g->moves.roll || g->combat.action==CB_VAULT))f&=~128u;
+ if(!i && ((g->moves.special && (player_character!=PLAYER_MAX || g->max.mode==MX_NEUTRAL)) || g->moves.roll || (g->combat.action==CB_VAULT && player_character!=PLAYER_MAX)))f&=~128u;
  return f;
 }
 int rules_depth_overlap(const Game *g,int a,int b){int y1=(int)(actor(g,a)->y*.76f),y2=(int)(actor(g,b)->y*.76f);int gap=y1-y2;if(gap<0)gap=-gap;

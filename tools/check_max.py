@@ -21,7 +21,7 @@ class PSP:
         status=self.req('game.status');deadline=time.monotonic()+15
         while not status.get('game') and time.monotonic()<deadline:
             time.sleep(.1);status=self.req('game.status')
-        if (status.get('game')or{}).get('id')!='SORL00023':
+        if (status.get('game')or{}).get('id')!='SORL00024':
             raise RuntimeError('Load SoRR PSP Lite EBOOT first; refusing to modify another game')
         nm=args.pspdev/'bin'/('psp-nm.exe' if os.name=='nt' else 'psp-nm')
         raw=subprocess.check_output([str(nm),'-n',str(project/'build/sorr-lite.elf')],text=True)
@@ -126,73 +126,86 @@ def retire(i):
  wr(36*(i+1)+8,0);p.req('memory.write',address=p.symbols['game']+800+52*(i+1),base64=base64.b64encode(bytes(52)).decode());wr(612+i*56,0)
 def player_x(x):p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<f',x)).decode())
 traces=[]
-checks={};seen={};rendered={}
-m=json.loads((project/'assets/max-manifest.json').read_text());aliases={int(k):v for k,v in m['aliases'].items()};poses={f['id']:f for f in m['frames']}
-def write_sym(name,n):p.req('memory.write_u32',address=p.symbols[name],value=n&0xffffffff)
-def quiet(x=220,hp=100):reset();arrange(hp,x=x,one=True);wr(824,10000)
-def observe(seconds):
- ids=set();deadline=time.monotonic()+seconds
- while time.monotonic()<deadline:ids.add(frames()[0]);time.sleep(.008)
- return ids
+abi=list(struct.unpack('<5I',p.read(p.symbols['max_abi'],20)));maxoff=abi[1]
+observations={}
+source=json.loads((project/'assets/max-sor2-source.json').read_text())
+def mx():return list(struct.unpack('<27i',p.read(p.symbols['game']+maxoff,108)))
+def fixture(hp=100,target_x=82.,face=1,back=False):
+ p.send(left=False,right=False,square=False,cross=False,triangle=False)
+ reset();arrange(hp,x=target_x,one=True)
+ p.req('cpu.stepping')
+ try:
+  p.req('memory.write_u32',address=p.symbols['player_character'],value=1)
+  p.req('memory.write',address=p.symbols['game']+abi[3],base64=base64.b64encode(bytes(abi[0]-abi[3])).decode())
+  p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<2f7i',100. if face<0 else 64.,100.,100,face,0,0,0,0,0)).decode())
+  p.req('memory.write_u32',address=p.symbols['game']+824,value=10000)
+  p.req('memory.write',address=p.symbols['game']+36,base64=base64.b64encode(struct.pack('<2f7i',target_x,100.,hp,face if back else -face,10000,10000,0,0,0)).decode())
+ finally:p.req('cpu.resume')
+ time.sleep(.06)
+def wait_mode(mode,timeout=3):
+ end=time.monotonic()+timeout
+ while time.monotonic()<end:
+  v=mx()
+  if v[1]==mode:return v
+  time.sleep(.01)
+ raise AssertionError(('mode timeout',mode,mx(),state()))
+def hold(back=False,face=1):
+ fixture(200,94. if face<0 else 70.,face,back)
+ button('left' if face<0 else 'right',.30)
+ wait_mode(3)
+def holdjump(back=False,face=1):
+ hold(back,face);button('cross',.06);return wait_mode(6)
 try:
- checks['native_selftest']=p.u32('selftest_result')==0
- checks['default_is_Axel']=p.u32('player_character')==0
- button('right',.04);checks['title_selects_Max']=p.u32('player_character')==1
- button('left',.04);checks['title_returns_to_Axel']=p.u32('player_character')==0
- button('right',.04);screenshot(artifacts/'max-title.png');button('start',.04);time.sleep(.9)
- checks['Max_starts_in_family6']=p.u32('actor_family')==6 and frames()[0]in [1,2,3]
- quiet();before=state()['player'][0];t=p.u32('logic_count');p.send(right=True);time.sleep(.30);p.send(right=False);elapsed=p.u32('logic_count')-t;distance=state()['player'][0]-before
- checks['Max_slower_walk']=6<=elapsed<=12 and abs(distance-elapsed)<2
- checks['walking_original_frames']=bool(observe(.2))
- quiet(x=82);p.send(square=True);time.sleep(.035);p.send(square=False);seen['jab']=sorted(observe(.4));checks['heavy_jab_damage3']=state()['enemies'][0][2]==97
- checks['jab_uses_Max10']=10 in seen['jab']
- quiet();p.send(square=True);time.sleep(.78);p.send(square=False);seen['charged']=sorted(observe(.5));checks['held_release_Max_combo']=bool(set(seen['charged'])&{24,25,26,27})
- quiet();p.send(cross=True);time.sleep(.04);p.send(cross=False);seen['jump']=sorted(observe(1.0));checks['jump_original_poses']=bool(set(seen['jump'])&{11,12,13}) and state()['player'][7]==0
- quiet();p.send(triangle=True);time.sleep(.04);p.send(triangle=False);seen['special']=sorted(observe(.7));checks['neutral_special_Max_spin']=len(set(seen['special'])&{24,25,26,27,28})>=3
- checks['full_charge_special_no_HP_cost']=state()['player'][2]==100
- quiet();wr(552,16);p.send(triangle=True);time.sleep(.04);p.send(triangle=False);time.sleep(.8);checks['partial_charge_special_pays_HP']=state()['player'][2]==88
- quiet();p.send(right=True,triangle=True);time.sleep(.04);p.send(right=False,triangle=False);seen['forward']=sorted(observe(.8));checks['forward_special_Max_poses']=len(set(seen['forward'])&{35,36,37,38})>=2
- # Actual grab/throw input; fixture seeds only the hold and freezes the victim AI.
- quiet(x=120);p.req('cpu.stepping')
- for off,n in [(512,1),(524,0),(528,0),(256,0),(576,0),(580,10000),(1088,160),(1120,1),(1136,144),(1164,0),(1324,12)]:wr(off,n)
- p.req('cpu.resume');p.send(left=True,square=True);time.sleep(.035);p.send(left=False,square=False);seen['throw']=sorted(observe(1.4));checks['throw_uses_Max_poses']=len(set(seen['throw'])&{153,154,155,156})>=2
- checks['heavy_throw_lands']=state()['enemies'][0][2]<100 and moves()[16]==-1
- quiet();p.req('cpu.stepping');wr(8,50);p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<2f',120.,112.)).decode());wl(0,'<6ifIiI',1,1,0,1,0,0,260.,2,0,1);wl(68,'<2f2i',380.,112.,0,1);wl(132,'<96s',bytes(96));p.req('cpu.resume');p.send(square=True);pickup_frames=observe(.10);p.send(square=False);time.sleep(.25)
- checks['Max_pickup_pose74']=74 in pickup_frames
- checks['Max_food_heals25']=state()['player'][2]==75
- quiet();checks['new_run_preserves_Max']=p.u32('player_character')==1
- # Pixel and pivot proof for every shipped pose in both orientations at 1:1.
- # Native scale is exercised by dedicated default-view performance tests.
- write_sym('stage_native_view',0);wr(184,1);p.req('cpu.stepping');p.req('memory.write',address=p.symbols['game'],base64=base64.b64encode(struct.pack('<2f',64.,126.)).decode());write_sym('actor_lift',0);p.req('cpu.resume')
- raw=(project/'assets/max.t8').read_bytes();linear=bytearray(len(raw));o=0
- for by in range(0,m['atlas_pages']*512,8):
-  for bx in range(0,512,16):
-   for dy in range(8):linear[(by+dy)*512+bx:(by+dy)*512+bx+16]=raw[o:o+16];o+=16
- for facing in [1,-1]:
-  wr(12,facing);count=0;pixels=0
-  for f in m['frames']:
-   write_sym('actor_frames',f['id']);time.sleep(.08);p.req('cpu.stepping')
-   try:
-    frame=p.read(p.u32('presented_buffer'),512*272*2);matched=total=0
-    for y in range(f['h']):
-     for x in range(f['w']):
-      idx=linear[(f['v']+y)*512+f['u']+x]
-      if not idx:continue
-      sx=128-f['px']+x if facing==1 else 128+f['px']-1-x;sy=258-f['py']+y
-      if not(0<=sx<480 and 145<=sy<272):continue
-      r,g,b,a=m['palette'][idx];want=(r>>3)|((g>>2)<<5)|((b>>3)<<11);matched+=struct.unpack_from('<H',frame,sy*1024+sx*2)[0]==want;total+=1
-    if matched!=total:rendered[str(f['id'])+'_'+str(facing)]=dict(matched=matched,total=total)
-    count+=matched==total;pixels+=total
-   finally:p.req('cpu.resume')
-  checks['all_58_poses_pixels_facing_'+str(facing)]=count==58 and pixels>50000
-  rendered['summary_'+str(facing)]=dict(poses=count,pixels=pixels)
- write_sym('stage_native_view',1);checks['no_missing_frames']=p.u32('missing_sprite_frames')==0
+ checks['mips_original_Max_and_upstream_FX_selftests']=p.u32('selftest_result')==0
+ checks['ABI_legacy_offsets_preserved']=abi[:3]==[2088,1980,108]
+ # Real button attacks, source collision damage and contact-driven combo advancement.
+ fixture(200,82.);button('square',.06);time.sleep(.45)
+ checks['original_first_combo_hit']=state()['enemies'][0][2]<200 and mx()[5]==1
+ button('square',.06);time.sleep(.45)
+ checks['original_second_combo_advances']=mx()[5]==2
+ button('square',.06);time.sleep(.6)
+ checks['third_combo_uses_native_sequence']=mx()[5]in(0,3)
+ fixture(200,220.);button('square',.06);time.sleep(.4)
+ checks['whiff_does_not_advance_combo']=mx()[5]==0
+ # A single direction press never causes an automatic slide.
+ fixture(200,220.);p.send(right=True);time.sleep(.04);p.send(square=True);time.sleep(.04)
+ observations['single_direction']=wait_mode(1,.5);checks['single_direction_attack_not_blitz']=observations['single_direction'][2]==0x3a
+ p.send(right=False,square=False);time.sleep(.6)
+ # Native charged release threshold is 60 source ticks.
+ fixture(200,220.);p.send(square=True);time.sleep(1.25);p.send(square=False);time.sleep(.04)
+ observations['charged_release']=wait_mode(1,.5);checks['charged_release_selects_62']=observations['charged_release'][2]==0x62
+ time.sleep(.6)
+ fixture(200,220.);button('triangle',.06);time.sleep(.85)
+ checks['neutral_whiff_costs_no_HP']=state()['player'][2]==100
+ fixture(200,78.);button('triangle',.06);time.sleep(1.1)
+ checks['neutral_contact_costs_8_HP']=state()['player'][2]==92 and state()['enemies'][0][2]<200
+ fixture(200,220.);p.send(right=True);button('triangle',.06);p.send(right=False);time.sleep(1.0)
+ checks['forward_special_whiff_costs_8_HP']=state()['player'][2]==92
+ # Genuine held jumps keep orientation and side; no Axel vault.
+ for face in [1,-1]:
+  hold(False,face);before=state()['player'][3]
+  button('cross',.06);v=wait_mode(6)
+  checks['held_jump_keeps_facing_'+str(face)]=state()['player'][3]==before and struct.unpack('<i',p.read(p.symbols['game']+528,4))[0]==0
+  button('square',.06);checks['front_ascent_starts_air_slam_'+str(face)]=mx()[1]==10
+  time.sleep(1.4);checks['air_slam_releases_victim_'+str(face)]=moves()[16]==-1 and state()['enemies'][0][2]==160
+ for face in [1,-1]:
+  holdjump(True,face)
+  button('square',.06);checks['back_ascent_B_ignored_'+str(face)]=mx()[1]==6
+  end=time.monotonic()+1.5
+  while mx()[11]<0 and time.monotonic()<end:time.sleep(.006)
+  button('square',.06);v=mx();checks['back_descent_atomic_'+str(face)]=v[1]in(11,12)
+  time.sleep(1.3);checks['atomic_70_HP_and_release_'+str(face)]=state()['enemies'][0][2]==130 and moves()[16]==-1
+ holdjump(False);end=time.monotonic()+1.5
+ while mx()[11]<0 and time.monotonic()<end:time.sleep(.006)
+ button('square',.06);checks['front_descent_B_ignored']=mx()[1]==6
+ time.sleep(1.0);checks['held_jump_without_throw_no_damage_or_knockdown']=state()['enemies'][0][2]==200 and struct.unpack('<i',p.read(p.symbols['game']+852,4))[0]==0 and moves()[16]==-1
+ # Ground throws keep their distinct original pending damage, then one floor hit.
+ for back in [False,True]:
+  hold(back);p.send(left=not back);button('square',.06);p.send(left=False);time.sleep(1.4)
+  checks['ground_throw_damage_'+str(back)]=state()['enemies'][0][2]==200-(62 if back else 34) and moves()[16]==-1
+ checks['native_sprites_resolved']=p.u32('missing_sprite_frames')==0
  checks['no_dispatch_faults']=struct.unpack('<I',p.read(p.symbols['bk3_machine_stats']+12,4))[0]==0
- # Continue and switching back must retain/select the matching mechanics profile.
- quiet();p.req('cpu.stepping');wr(8,0);wr(800,0);p.req('memory.write_u32',address=p.symbols['flow']+4,value=1);p.req('cpu.resume');time.sleep(.15);button('start',.04)
- checks['continue_keeps_Max']=p.u32('player_character')==1 and p.u32('actor_family')==6 and state()['player'][2]==100
- p.req('memory.write_u32',address=p.symbols['flow'],value=0);button('left',.04);button('start',.04);quiet(x=82);p.send(square=True);time.sleep(.035);p.send(square=False);time.sleep(.4)
- checks['switch_back_restores_Axel_damage2']=p.u32('player_character')==0 and p.u32('actor_family')==0 and state()['enemies'][0][2]==98
- result=dict(checks=checks,observed=seen,rendered=rendered,walk=dict(ticks=elapsed,distance=distance),eboot_sha256=hashlib.sha256((project/'build/EBOOT.PBP').read_bytes()).hexdigest(),note='Real selection/controller, Max heavy-profile moves and original-pixel proof at 1:1 for all58 poses/mirrors. Fixtures position targets or seed a grab; Max remains a BK3/Lite mechanics adapter, not original SoR2 code execution.')
+ screenshot(artifacts/'max-combat.png')
+ result=dict(checks=checks,observations=observations,abi=abi,eboot_sha256=hashlib.sha256((project/'build/EBOOT.PBP').read_bytes()).hexdigest(),note='Real PSP input and debugger-arranged isolated targets; original collision/timing extraction is independently checked by check_max_assets.py. Hardware not tested.')
  (artifacts/'max-tests.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2));assert all(checks.values())
-finally:p.send(right=False,left=False,start=False,cross=False,square=False,triangle=False);p.close()
+finally:p.send(left=False,right=False,square=False,cross=False,triangle=False);p.close()
