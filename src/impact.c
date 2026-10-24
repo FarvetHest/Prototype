@@ -13,7 +13,8 @@ int impact_overlap(const Game *g,int from,int to,int id){const Actor *a=actor(g,
  z=from?-(int)(g->motion.z[from]*65536):g->bk3.z;
  x=a->x*2+box[0];y=stage_foot_y(a->y)+z/65536.f+box[2];
  {int width=(unsigned char)box[1];if(!from && player_character==PLAYER_MAX){if(box[0]+width/2<0)x-=12;width+=12;}
- return !(r[1]<x || r[0]>x+width || r[3]<y || r[2]>y+(int)box[3]);}
+ if(r[1]<x || r[0]>x+width || r[3]<y || r[2]>y+(int)box[3])return 0;
+ fx_note_attack_top((int)y);return 1;}
 }
 unsigned impact_sound(int encoded){int d=encoded&63;return d<3?0x18:d<5?0x26:d<7?0x21:0x32;}
 int impact_apply(Game *g,int from,int to,int encoded){int damage,freeze,facing=actor(g,from)->facing;
@@ -29,7 +30,7 @@ int impact_apply(Game *g,int from,int to,int encoded){int damage,freeze,facing=a
  g->physics.body[to].inv=to?5:10;
  if(from)g->impact.freeze[from]=freeze;else g->bk3.hitstop=freeze;
  g->impact.freeze[to]=0;g->impact.last_from[to]=from;g->impact.damage[to]=encoded;++g->impact.contacts[from];sfx_emit(impact_sound(encoded),g->combat.ticks,(int)(actor(g,to)->x*256/240));
- reaction_hit(g,from,to,encoded);
+ reaction_hit(g,from,to,encoded);fx_spark(g,from,to);
  if(to && (g->rules.actor[to].status58&16) && g->physics.body[to].phase==BODY_FLIGHT){rules_end_hold(g);g->moves.grab=-1;g->combat.target=-1;}
  return 1;
 }

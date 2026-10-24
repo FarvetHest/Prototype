@@ -35,7 +35,7 @@ void game_step(Game *g,Input in){
  bk3_machine_step(g,in.x,in.y,0,0,0);
  g->won=1;for(i=0;i<4;++i)if(g->enemies[i].hp>0 || g->physics.body[i+1].phase==BODY_FLIGHT || g->physics.body[i+1].phase==BODY_VICTIM || g->combat.enemy[i].z<0 || death_pending(g,i))g->won=0;
 }
-int game_selftest(void){int result=bk3_selftest();if(result)return result;result=combat_selftest();if(result)return result;result=physics_selftest();if(result)return result;result=rules_selftest();if(result)return result;result=source_ai_selftest();if(result)return result;result=impact_selftest();if(result)return result;result=enemy_selftest();if(result)return result;result=variety_selftest();if(result)return result;result=reaction_selftest();if(result)return result;result=bk3_machine_selftest();if(result)return result;result=death_selftest();return result?result:sfx_selftest();}
+int game_selftest(void){int result=bk3_selftest();if(result)return result;result=combat_selftest();if(result)return result;result=physics_selftest();if(result)return result;result=rules_selftest();if(result)return result;result=source_ai_selftest();if(result)return result;result=impact_selftest();if(result)return result;result=enemy_selftest();if(result)return result;result=variety_selftest();if(result)return result;result=reaction_selftest();if(result)return result;result=bk3_machine_selftest();if(result)return result;result=death_selftest();if(result)return result;result=fx_selftest();return result?result:sfx_selftest();}
 
 int character_selftest(void){
  unsigned saved=player_character;Game g;int result=0,hp,i;float x;

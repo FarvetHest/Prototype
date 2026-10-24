@@ -65,6 +65,8 @@ int physics_rect(const Game *g,int index,float r[4]){const Actor *a=index?&g->en
 }
 static void floor_impact(Game *g,int i){Body *b=&g->physics.body[i];Actor *a=actor(g,i);
  sfx_emit(0x346,g->combat.ticks,(int)(a->x*256/240));
+ /* loc_24380: ScreenShake=1 on the first floor impact; loc_243D8: landing dust on every ground contact. */
+ fx_shake(g);fx_dust(g,i);
  /* loc_24380: throw damage is applied ONCE on the first ground impact. */
  if(b->pending){a->hp-=b->pending;if(a->hp<0)a->hp=0;if(i && a->hp<=0)death_begin(g,i-1);b->pending=0;}
  b->phase=BODY_BOUNCE;b->z=-1;b->vz=BK3_BOUNCE_VZ;b->vx=(b->vx/65536>>1)*65536;
@@ -89,12 +91,12 @@ void physics_body_tick(Game *g,int i){Body *b=&g->physics.body[i];Actor *a=actor
     for(j=1;j<=4;++j)if(j!=i && !(e->mask&(1u<<(j-1))) && g->enemies[j-1].hp>0 && !g->moves.down[j-1] && !g->physics.body[j].inv){
      float box[4],x=a->x*2,y=stage_foot_y(a->y)+b->z/65536.0f;
      if(rules_depth_overlap(g,i,j) && physics_rect(g,j,box) && x>=box[0] && x<=box[1] && y>=box[2] && y<=box[3]){
-      int encoded=0x90;if((b->vx<0?-1:1)!=a->facing)encoded|=64;
+      int encoded=0x90;if((b->vx<0?-1:1)!=a->facing)encoded|=64;fx_note_attack_top((int)y);
       if(impact_apply(g,i,j,encoded)){g->impact.freeze[i]=0;g->physics.body[j].freeze=8;b->freeze=8;e->mask|=1u<<(j-1);g->moves.throw_hit[i-1]=e->mask;}
      }
     }
    }
-   if(b->z>=0 && b->vz>=0){if(b->phase==BODY_FLIGHT)floor_impact(g,i);else b->z=0;}
+   if(b->z>=0 && b->vz>=0){if(b->phase==BODY_FLIGHT)floor_impact(g,i);else {b->z=0;fx_dust(g,i);}}
   }
   if(b->phase==BODY_BOUNCE){dec(&b->timer);if(!b->timer && b->z>=0){
    b->z=0;b->vz=0;b->vx=0;if(a->hp<=0){b->phase=0;b->fpg=i?enemy_frames(g,i-1,EP_FLOOR)[0].fpg:50;}

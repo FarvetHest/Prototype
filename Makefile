@@ -1,5 +1,5 @@
 TARGET = sorr-lite
-OBJS = src/main.o src/level.o src/held.o src/flow.o src/game.o src/machine.o src/death.o src/bk3.o src/combat.o src/sfx.o src/enemy.o src/variety.o src/reactions.o src/impact.o src/rules.o src/ai.o src/physics.o src/sprites.o src/sprite_atlas.o src/max_texture.o src/stage.o src/stage_texture.o src/music.o src/ui.o src/hud_texture.o
+OBJS = src/main.o src/fx.o src/level.o src/held.o src/flow.o src/game.o src/machine.o src/death.o src/bk3.o src/combat.o src/sfx.o src/enemy.o src/variety.o src/reactions.o src/impact.o src/rules.o src/ai.o src/physics.o src/sprites.o src/sprite_atlas.o src/max_texture.o src/stage.o src/stage_texture.o src/music.o src/ui.o src/hud_texture.o
 INCDIR = src
 CFLAGS = -O2 -G0 -std=gnu99 -Wall -Wextra -Werror -ffunction-sections -fdata-sections
 CXXFLAGS = $(CFLAGS)
@@ -32,6 +32,7 @@ src/main.o: src/ui.h
 src/bk3.o: src/bk3.h src/bk3_data.h src/game.h src/stage.h
 src/game.o: src/bk3.h
 
+src/fx.o: src/fx.h src/fx_data.h src/game.h
 src/combat.o: src/combat.h src/combat_data.h src/bk3_data.h src/game.h
 
 src/physics.o: src/physics.h src/physics_data.h src/game.h

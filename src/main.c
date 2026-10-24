@@ -105,7 +105,7 @@ static void render(void) {
     Actor *actors[5] = {&game.player,&game.enemies[0],&game.enemies[1],&game.enemies[2],&game.enemies[3]};
     sceGuStart(GU_DIRECT,commands); sceGuClear(GU_COLOR_BUFFER_BIT);
     vertices = (Vertex *)sceGuGetMemory(MAX_VERTICES * sizeof(Vertex)); vertex_count = batch_start = 0;
-    stage_set_view(game.player.x);stage_draw();
+    stage_set_view(game.player.x);stage_shake_y=game.paused?0:fx_shake_y(&game);stage_draw();
     ui_begin();ui_food();ui_end();
     for(i=1;i<5;++i) { int k=order[i]; j=i; while(j && actors[order[j-1]]->y>actors[k]->y) {order[j]=order[j-1]; --j;} order[j]=k; }
     for(i=0;i<5;++i) if(!i || !level.enabled || (level.slots&(1<<(i-1)))){
@@ -116,6 +116,11 @@ static void render(void) {
     flush_rects();
     sprites_begin();
     for(i=0;i<5;++i) { j=order[i];if(!j || !level.enabled || (level.slots&(1<<(j-1))))sprites_draw(actors[j],j); }
+    {FxSpan spans[640];int n=fx_spans(&game,spans,640),k; /* hit sparks and landing dust: flat spans from the decoded BK3 art */
+     for(k=0;k<n && vertex_count+2<=MAX_VERTICES;++k){Vertex *v=vertices+vertex_count;vertex_count+=2;
+      v[0]=(Vertex){spans[k].color,stage_world_x(spans[k].x),stage_world_y(spans[k].y),0,0};
+      v[1]=(Vertex){spans[k].color,stage_world_x(spans[k].x+spans[k].w),stage_world_y(spans[k].y+spans[k].h),0,0};}
+     flush_rects();}
     stage_draw_foreground();
     if(flow.state==FLOW_TITLE || flow.state>=FLOW_CONTINUE) {
         rect(40,44,160,56,RGB(8,12,24));flush_rects();
@@ -175,7 +180,7 @@ int main(void) {
     if(th>=0) sceKernelStartThread(th,0,0);
     scePowerSetClockFrequency(333,333,166);
     sceCtrlSetSamplingCycle(0); sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
-    selftest_result=game_selftest(); if(!selftest_result)selftest_result=sprites_selftest(); if(!selftest_result)selftest_result=flow_selftest(); if(!selftest_result)selftest_result=held_selftest(); if(!selftest_result)selftest_result=level_selftest(); if(!selftest_result)selftest_result=level_boss_selftest(); if(!selftest_result)selftest_result=level_entry_selftest(); if(!selftest_result)selftest_result=character_selftest(); flow_init(&flow); game_reset(&game); init_gu(); sprites_init(&game); stage_init(); ui_init(&game); music_start();sfx_start();
+    selftest_result=game_selftest(); if(!selftest_result)selftest_result=sprites_selftest(); if(!selftest_result)selftest_result=flow_selftest(); if(!selftest_result)selftest_result=held_selftest(); if(!selftest_result)selftest_result=level_selftest(); if(!selftest_result)selftest_result=level_boss_selftest(); if(!selftest_result)selftest_result=level_entry_selftest(); if(!selftest_result)selftest_result=character_selftest(); if(!selftest_result)selftest_result=fx_selftest(); flow_init(&flow); game_reset(&game); init_gu(); sprites_init(&game); stage_init(); ui_init(&game); music_start();sfx_start();
     prev=sceKernelGetSystemTimeWide()-TICK_US; window=prev; last_vblank=sceDisplayGetVcount();
     while(running) {
         uint64_t now=sceKernelGetSystemTimeWide(), delta=now-prev, a,b;

@@ -10,10 +10,10 @@ unsigned stage_draw_count,stage_slice_count;
    Widescreen field is 395 source pixels. The 480-unit legacy combat arena is
    retained; a bounded local view follows the player within its extra 85 pixels. */
 unsigned stage_native_view=1;
-int stage_view_pan,stage_camera_pixels;
+int stage_view_pan,stage_camera_pixels,stage_shake_y;
 int stage_foot_y(float world_y){return 220+(int)((world_y-76)*.76f);}
 int stage_world_x(int x){return stage_native_view?(x-stage_view_pan)*17/14:x;}
-int stage_world_y(int y){return stage_native_view?(y-48)*17/14:y;}
+int stage_world_y(int y){return stage_native_view?(y-48+stage_shake_y)*17/14:y;}
 void stage_set_view(float player_x){
  int pan=(int)(player_x*2)-197;if(pan<0)pan=0;if(pan>85)pan=85;
  stage_view_pan=stage_native_view?pan:0;
