@@ -1,6 +1,6 @@
-# SoRR PSP Lite v0.24; selftest=0; cpu_mhz=333; samples=35; capacity=900; music_status=1; music_error=0; rate=44100; loops=0
+# SoRR PSP Lite v0.24.1; selftest=0; cpu_mhz=333; samples=35; capacity=900; music_status=1; music_error=0; rate=44100; loops=0
 sample,fps,logic_hz,logic_ms,render_sync_ms,dropped_ticks_total,music_blocks,music_late,music_decode_max_ms
-0,29.123,28.152,0.1854,0.8769,0,22,0,1.4990
+0,29.123,28.152,0.1854,0.8772,0,22,0,1.4990
 1,29.970,29.970,0.3198,0.8814,0,43,0,1.4990
 2,29.970,29.970,0.3130,0.8826,0,65,0,1.4990
 3,29.970,29.970,0.3114,0.8771,0,86,0,1.4990

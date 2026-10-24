@@ -152,7 +152,7 @@ static void save_profile(void) {
     unsigned i; int failed=0;
     FILE *f = fopen("lite-profile.csv","w");
     if (!f) {save_status=-1; return;}
-    if (fprintf(f,"# SoRR PSP Lite v0.24; selftest=%d; cpu_mhz=%d; samples=%u; capacity=900; music_status=%d; music_error=%d; rate=%u; loops=%u\n", selftest_result,scePowerGetCpuClockFrequencyInt(),sample_count,music_stats.status,music_stats.error,music_stats.rate,music_stats.loops)<0) failed=1;
+    if (fprintf(f,"# SoRR PSP Lite v0.24.1; selftest=%d; cpu_mhz=%d; samples=%u; capacity=900; music_status=%d; music_error=%d; rate=%u; loops=%u\n", selftest_result,scePowerGetCpuClockFrequencyInt(),sample_count,music_stats.status,music_stats.error,music_stats.rate,music_stats.loops)<0) failed=1;
     if (fprintf(f,"sample,fps,logic_hz,logic_ms,render_sync_ms,dropped_ticks_total,music_blocks,music_late,music_decode_max_ms\n")<0) failed=1;
     for(i=0;i<sample_count;++i) {
         Sample *s=&samples[i];
