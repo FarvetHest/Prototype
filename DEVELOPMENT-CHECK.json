@@ -31,5 +31,22 @@
     }
   },
   "new_live_ai_performance_verified": false,
-  "hardware_tested": false
+  "hardware_tested": false,
+  "emulator_handoff": {
+    "eboot_sha256": "d5d2a6515150c418ae8578d21b4c0b3ceeba7334f5a0dc04ae21b32b6f7b760b",
+    "selftest": 0,
+    "flow": [
+      1,
+      3,
+      2,
+      0
+    ],
+    "paused": 1,
+    "native_view": 1,
+    "character": 1,
+    "family": 6,
+    "ticks": 42,
+    "controls_restored": true,
+    "visible_launch_requested": true
+  }
 }
