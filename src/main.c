@@ -8,6 +8,8 @@
 #include <string.h>
 #include <stdint.h>
 #include "game.h"
+#include "bk3vm.h"
+#include "bk3gfx.h"
 #include "sprites.h"
 #include "stage.h"
 #include "music.h"
@@ -17,10 +19,10 @@
 #include "held.h"
 #include "level.h"
 
-PSP_MODULE_INFO("SoRR PSP Lite", 0, 0, 25);
+PSP_MODULE_INFO("SoRR PSP Lite", 0, 0, 26);
 PSP_MAIN_THREAD_ATTR(PSP_THREAD_ATTR_USER);
 PSP_MAIN_THREAD_STACK_SIZE_KB(128);
-PSP_HEAP_SIZE_KB(4096);
+PSP_HEAP_SIZE_KB(12288);
 
 #define RGB(r,g,b) (0xff000000u | ((b)<<16) | ((g)<<8) | (r))
 #define WHITE RGB(224,224,208)
@@ -115,7 +117,7 @@ static void render(void) {
     }
     flush_rects();
     sprites_begin();
-    for(i=0;i<5;++i) { j=order[i];if(!j || !level.enabled || (level.slots&(1<<(j-1))))sprites_draw(actors[j],j); }
+    for(i=0;i<5;++i) { j=order[i];if(!j || !level.enabled || (level.slots&(1<<(j-1)))){if(!bk3gfx_preview(j,(int)(actors[j]->x*2),stage_foot_y(actors[j]->y),actors[j]->facing))sprites_draw(actors[j],j);} }
     {FxSpan spans[640];int n=fx_spans(&game,spans,640),k; /* hit sparks and landing dust: flat spans from the decoded BK3 art */
      for(k=0;k<n && vertex_count+2<=MAX_VERTICES;++k){Vertex *v=vertices+vertex_count;vertex_count+=2;
       v[0]=(Vertex){spans[k].color,stage_world_x(spans[k].x),stage_world_y(spans[k].y),0,0};
@@ -152,7 +154,7 @@ static void save_profile(void) {
     unsigned i; int failed=0;
     FILE *f = fopen("lite-profile.csv","w");
     if (!f) {save_status=-1; return;}
-    if (fprintf(f,"# SoRR PSP Lite v0.25; selftest=%d; cpu_mhz=%d; samples=%u; capacity=900; music_status=%d; music_error=%d; rate=%u; loops=%u\n", selftest_result,scePowerGetCpuClockFrequencyInt(),sample_count,music_stats.status,music_stats.error,music_stats.rate,music_stats.loops)<0) failed=1;
+    if (fprintf(f,"# SoRR PSP Lite v0.26; selftest=%d; cpu_mhz=%d; samples=%u; capacity=900; music_status=%d; music_error=%d; rate=%u; loops=%u\n", selftest_result,scePowerGetCpuClockFrequencyInt(),sample_count,music_stats.status,music_stats.error,music_stats.rate,music_stats.loops)<0) failed=1;
     if (fprintf(f,"sample,fps,logic_hz,logic_ms,render_sync_ms,dropped_ticks_total,music_blocks,music_late,music_decode_max_ms\n")<0) failed=1;
     for(i=0;i<sample_count;++i) {
         Sample *s=&samples[i];
@@ -180,9 +182,11 @@ int main(void) {
     if(th>=0) sceKernelStartThread(th,0,0);
     scePowerSetClockFrequency(333,333,166);
     sceCtrlSetSamplingCycle(0); sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
-    selftest_result=game_selftest(); if(!selftest_result)selftest_result=sprites_selftest(); if(!selftest_result)selftest_result=flow_selftest(); if(!selftest_result)selftest_result=held_selftest(); if(!selftest_result)selftest_result=level_selftest(); if(!selftest_result)selftest_result=level_boss_selftest(); if(!selftest_result)selftest_result=level_entry_selftest(); if(!selftest_result)selftest_result=character_selftest(); if(!selftest_result)selftest_result=fx_selftest(); flow_init(&flow); game_reset(&game); init_gu(); sprites_init(&game); stage_init(); ui_init(&game); music_start();sfx_start();
+    bk3vm_init("bk3-ai.dev.bin");bk3gfx_init("bk3-graphics.bin");
+    selftest_result=bk3vm_selftest(); if(!selftest_result)selftest_result=bk3gfx_selftest(); if(!selftest_result)selftest_result=game_selftest(); if(!selftest_result)selftest_result=sprites_selftest(); if(!selftest_result)selftest_result=flow_selftest(); if(!selftest_result)selftest_result=held_selftest(); if(!selftest_result)selftest_result=level_selftest(); if(!selftest_result)selftest_result=level_boss_selftest(); if(!selftest_result)selftest_result=level_entry_selftest(); if(!selftest_result)selftest_result=character_selftest(); if(!selftest_result)selftest_result=fx_selftest(); flow_init(&flow); game_reset(&game); init_gu(); sprites_init(&game); stage_init(); ui_init(&game); music_start();sfx_start();
     prev=sceKernelGetSystemTimeWide()-TICK_US; window=prev; last_vblank=sceDisplayGetVcount();
     while(running) {
+        bk3vm_debug_tick();
         uint64_t now=sceKernelGetSystemTimeWide(), delta=now-prev, a,b;
         unsigned edges, steps=0; Input in;
         prev=now;

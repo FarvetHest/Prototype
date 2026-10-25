@@ -1,0 +1,22 @@
+{
+  "url": "https://github.com/kstenerud/Musashi",
+  "commit": "313ebf1bd9f4d0d93341eb5ce21fd8a119e9dbdd",
+  "generated": "m68kmake m68k_in.c; 68000 only",
+  "modification": "Guard unused FPU/MMU includes with M68K_EMULATE_040",
+  "files": {
+    "m68k.h": "1124004a772eb55887c1cae3c53810b26b58eff4171d75c1ade82868e9786641",
+    "m68kconf.h": "b5f2bb3d442ad9e2fe5766a1652b794b74311c242098b4a3bd9a79183d469683",
+    "m68kcpu.c": "6e699d35cf71ef564455de17b8310ae5e44c9bf31c24e5c4905660f8845cb7b7",
+    "m68kcpu.h": "9cba59992d4e3adfcb6ff9c25ae9c8625df991e73e177305b5df4126308519d6",
+    "m68kops.c": "eb4bb8c9cb12bf10521658f9150d092438623164a11e35c6b46ddc6aa585a3fc",
+    "m68kops.h": "17676951e3eaaebdfd59dc4c4e6d030143ffa693589087be237fd0170c97407e",
+    "readme.txt": "995597498f5f3f8fa7d1c85ec7cbe290856463c1e1ad5c5757cf07daee76af4e",
+    "softfloat/mamesf.h": "75bdc490b75389c78abae0de57ca0b4f40c3cd1a8a17d9d9ad63d33e6f05e74c",
+    "softfloat/milieu.h": "c3af7dd07259773325574bf000bc391fd3b0f50b1ef0a8b66255e0e7d59d8daf",
+    "softfloat/README.txt": "035ad9d003f77a87a311dc7acddb99cc5a03ced506c2db098e9e4c7435cfaa86",
+    "softfloat/softfloat-macros": "12f2c8b581c8ab02ba14e4f1e4e7c5ad76ee45e645debf40306db69b927238d0",
+    "softfloat/softfloat-specialize": "bb06f1a272c951187e6efa0375080ba4ac4b4bf9893d786bfe7b2e82593729ad",
+    "softfloat/softfloat.c": "774708f04a859d39b800cc91925bf2db141c045aabcb747da23ca483e92fb835",
+    "softfloat/softfloat.h": "b0be68f69e91cac7edd795de169f089c65911d432403d38076e313845902de80"
+  }
+}

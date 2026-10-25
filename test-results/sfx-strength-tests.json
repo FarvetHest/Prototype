@@ -46,18 +46,18 @@
       "last_clip": 4
     },
     "522": {
-      "peak": 4176,
-      "rms": 1569.8605836038832,
+      "peak": 4247,
+      "rms": 1557.779236731131,
       "last_clip": 5
     },
     "523": {
-      "peak": 7495,
-      "rms": 2663.7864393257837,
+      "peak": 6494,
+      "rms": 2359.600239455629,
       "last_clip": 6
     },
     "535": {
       "peak": 5893,
-      "rms": 2204.988647708518,
+      "rms": 2169.2775195975387,
       "last_clip": 7
     },
     "536": {
@@ -67,7 +67,7 @@
     },
     "65555": {
       "peak": 7062,
-      "rms": 2371.6895585857537,
+      "rms": 2320.860824731513,
       "last_clip": 9
     },
     "65556": {
@@ -93,6 +93,6 @@
     6144,
     16384
   ],
-  "eboot_sha256": "9b5414f2a0fe49ce1e60dce6f408adee3b29a03f72b40322fddd2b451bbce7ee",
+  "eboot_sha256": "d5d2a6515150c418ae8578d21b4c0b3ceeba7334f5a0dc04ae21b32b6f7b760b",
   "note": "Five event IDs injected into the normal SFX queue to verify the real MIPS audio worker. Separate real Square collision verifies emitter and music ducking. PCM buffers are measured before hardware output, not a microphone recording of PSP speakers."
 }

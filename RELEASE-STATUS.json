@@ -1,0 +1,12 @@
+{
+  "version": "0.26",
+  "ready": false,
+  "status": "development",
+  "remaining": [
+    "Attach original AI to the native live actor/combat bridge",
+    "Dispatch and render original spawned weapons and boss auxiliary objects",
+    "Validate all source mode transitions, grabs, counterattacks and mutable Yamato art",
+    "Validate full-roster combat and 30 FPS in PPSSPP; no physical PSP measurement",
+    "Package and publish the completed v0.26"
+  ]
+}

@@ -1,5 +1,5 @@
 TARGET = sorr-lite
-OBJS = src/main.o src/max.o src/fx.o src/level.o src/held.o src/flow.o src/game.o src/machine.o src/death.o src/bk3.o src/combat.o src/sfx.o src/enemy.o src/variety.o src/reactions.o src/impact.o src/rules.o src/ai.o src/physics.o src/sprites.o src/sprite_atlas.o src/max_texture.o src/stage.o src/stage_texture.o src/music.o src/ui.o src/hud_texture.o
+OBJS = src/main.o src/bk3vm.o src/bk3gfx.o src/vendor/musashi/m68kcpu.o src/vendor/musashi/m68kops.o src/max.o src/fx.o src/level.o src/held.o src/flow.o src/game.o src/machine.o src/death.o src/bk3.o src/combat.o src/sfx.o src/enemy.o src/variety.o src/reactions.o src/impact.o src/rules.o src/ai.o src/physics.o src/sprites.o src/sprite_atlas.o src/max_texture.o src/stage.o src/stage_texture.o src/music.o src/ui.o src/hud_texture.o
 INCDIR = src
 CFLAGS = -O2 -G0 -std=gnu99 -Wall -Wextra -Werror -ffunction-sections -fdata-sections
 CXXFLAGS = $(CFLAGS)
@@ -9,8 +9,8 @@ PSP_LARGE_MEMORY = 0
 LIBS = -lpspaudio -lpspgu -lpsppower -lm
 LDFLAGS = -Wl,--gc-sections
 EXTRA_TARGETS = EBOOT.PBP
-PSP_EBOOT_TITLE = SoRR PSP Lite v0.25
-SFOFLAGS = -s DISC_ID=SORL00025 -s DISC_VERSION=1.01
+PSP_EBOOT_TITLE = SoRR PSP Lite v0.26
+SFOFLAGS = -s DISC_ID=SORL00026 -s DISC_VERSION=1.01
 PSPSDK := $(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
 
@@ -71,3 +71,6 @@ src/max_texture.o: assets/max.t8
 
 src/max.o: src/max.h src/max_sor2_data.h src/game.h
 $(OBJS): src/max.h
+
+VMFLAGS = -DM68K_EMULATE_010=0 -DM68K_EMULATE_EC020=0 -DM68K_EMULATE_020=0 -DM68K_EMULATE_030=0 -DM68K_EMULATE_040=0 -DM68K_EMULATE_PMMU=0 -DM68K_INSTRUCTION_HOOK=1
+src/vendor/musashi/m68kcpu.o src/vendor/musashi/m68kops.o: CFLAGS += $(VMFLAGS) -Wno-unused-variable

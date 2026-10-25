@@ -33,6 +33,7 @@ static unsigned colour(int v){int p=fx_palette[v&15],r=p&15,gr=(p>>4)&15,b=(p>>8
  return 0xff000000u|((b*255/14)<<16)|((gr*255/14)<<8)|(r*255/14);}
 /* Map a sub_30B6 table row to its decoded frame: tiles start at 0x5DD (hit) / 0x5EA (smoke). */
 static int frame_of(int row){int tile=fx_tile_word[row],size=fx_size_word[row]>>8;
+ if(tile==0x5d4)return 6;
  if(tile>=0x5EA)return tile<0x5F6?3+(tile-0x5EA)/4:-1;
  if(tile==0x5DD)return size==0x0A?0:1;
  return tile==0x5E6?2:-1;}
@@ -47,7 +48,7 @@ int fx_spans(const Game *g,FxSpan *out,int max){int i,n=0;
   for(py=0;py<fx_frames[frame].h;++py){px=0;
    while(px<fx_frames[frame].w){int v=p[py*fx_frames[frame].w+px],e=px;
     while(e<fx_frames[frame].w && p[py*fx_frames[frame].w+e]==v)++e;
-    if(v){int sx=s->flip?fx_frames[frame].w-e:px;if(n<max)out[n++]=(FxSpan){x+sx,y+py,e-px,1,colour(v)};}
+    if(v){int sx=s->flip && frame!=6?fx_frames[frame].w-e:px;if(n<max)out[n++]=(FxSpan){x+sx,y+py,e-px,1,colour(v)};}
     px=e;}
   }}
  return n;}
@@ -90,5 +91,8 @@ int fx_selftest(void){Game g;int i,pos[16],view[16],seen=0;
  game_reset(&g);fx_note_attack_top(70);fx_spark(&g,0,1);g.fx.slot[0].idx=0x19;
  for(i=0;i<4;++i){if(!g.fx.slot[0].active || fx_tile_word[(g.fx.slot[0].idx&0xfe)>>1]!=0x5d4 || fx_size_word[(g.fx.slot[0].idx&0xfe)>>1]!=12)return 1617;fx_tick(&g);}
  if(g.fx.slot[0].active)return 1618;
+ game_reset(&g);g.enemies[0].x=100;fx_note_attack_top(70);fx_spark(&g,0,1);g.fx.slot[0].idx=0x19;
+ {FxSpan a[100],b[100];int na=fx_spans(&g,a,100),nb;g.fx.slot[0].flip=1;nb=fx_spans(&g,b,100);if(na<=0 || na!=nb || memcmp(a,b,na*sizeof(*a)) || a[0].x!=188 || a[0].y!=70)return 1619;}
+
  return 0;
 }

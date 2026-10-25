@@ -4,7 +4,7 @@ Usage: python3 tools/prepare_impact_fx.py --asm "Bare Knuckle 3 (J) [!].asm"
 Sources: ArtNem_HitEffect (13 tiles) and ArtNem_SmokeEffect (12 tiles), column-major VDP tiles,
 sprite tables word_3082/word_309C (sub_30B6), palette Pal_MainPal. Pixels are source indices.
 """
-import argparse,re,hashlib
+import argparse,re,hashlib,json
 from pathlib import Path
 ap=argparse.ArgumentParser();ap.add_argument('--asm',type=Path,required=True);ap.add_argument('--out',type=Path,default=Path(__file__).resolve().parents[1]/'src/fx_data.h');a=ap.parse_args()
 raw_asm=a.asm.read_bytes()
@@ -52,10 +52,19 @@ def nemesis(raw):
  return bytes(pixels)
 hit=nemesis(dat('ArtNem_HitEffect'));smoke=nemesis(dat('ArtNem_SmokeEffect'))
 assert len(hit)==13*64 and len(smoke)==12*64
+# Init_InGameMode passes $1F1E0F00 to GetArt. GetArt is one-based.
+# Index $1F -> dword_22AC entry $1E -> command $75600002, ArtNem_Explosion1.
+loads=tokens('dword_22AC');cmd,name=loads[(0x1f-1)*2:(0x1f-1)*2+2];assert num(cmd[1])==0x75600002 and name[1]=='ArtNem_Explosion1'
+command=num(cmd[1]);address=((command>>16)&0x3fff)|((command&3)<<14);first_tile=address//32
+explosion=nemesis(dat(name[1]));assert first_tile==0x5ab and len(explosion)==50*64 and first_tile+len(explosion)//64==0x5dd
+guard=explosion[(0x5d4-first_tile)*64:(0x5d4-first_tile+1)*64];assert len(guard)==64 and any(guard)
+proof=dict(source_sha256=hashlib.sha256(norm).hexdigest(),init='Init_InGameMode: GetArt($1F1E0F00)',getart_index=31,command=command,address=address,art=name[1],first_tile=first_tile,tiles=50,target_tile=0x5d4,tile_offset=0x5d4-first_tile,pixels=list(guard),pixel_sha256=hashlib.sha256(guard).hexdigest(),palette='Pal_MainPal',rows=[12,12,11,11],size=[8,8],x_offset=12,flip=False)
+(a.out.parent.parent/'assets/fx-5d4-source.json').write_text(json.dumps(proof,indent=2))
+
 def sprite(px,first,w,h):
  return [px[(first+(x//8)*h+y//8)*64+(y%8)*8+x%8] for y in range(h*8) for x in range(w*8)]
 # Frame order: 0 = 3x3 star (idx2), 1 = 2x2 from tile 0 (idx3), 2 = 2x2 star tiles 9-12 (idx0/1), 3..5 = smoke 2x2.
-frames=[(24,24,sprite(hit,0,3,3)),(16,16,sprite(hit,0,2,2)),(16,16,sprite(hit,9,2,2))]+[(16,16,sprite(smoke,i*4,2,2)) for i in range(3)]
+frames=[(24,24,sprite(hit,0,3,3)),(16,16,sprite(hit,0,2,2)),(16,16,sprite(hit,9,2,2))]+[(16,16,sprite(smoke,i*4,2,2)) for i in range(3)]+[(8,8,list(guard))]
 w3082=[num(v) for k,v in tokens('word_3082')];w309c=[num(v) for k,v in tokens('word_309C')]
 assert len(w3082)==13 and len(w309c)==13
 pal=[num(v) for k,v in tokens('Pal_MainPal')][:16]
@@ -66,7 +75,7 @@ out.append('static const unsigned short fx_size_word[13]={%s};'%','.join('0x%X'%
 out.append('static const unsigned short fx_palette[16]={%s};'%','.join('0x%X'%v for v in pal))
 for i,(w,h,px) in enumerate(frames):
  out.append('static const unsigned char fx_frame%d[%d]={%s};'%(i,w*h,','.join(str(v) for v in px)))
-out.append('static const struct{int w,h;const unsigned char *px;}fx_frames[6]={%s};'%','.join('{%d,%d,fx_frame%d}'%(w,h,i) for i,(w,h,_) in enumerate(frames)))
+out.append('static const struct{int w,h;const unsigned char *px;}fx_frames[7]={%s};'%','.join('{%d,%d,fx_frame%d}'%(w,h,i) for i,(w,h,_) in enumerate(frames)))
 out.append('#endif')
 a.out.write_text('\n'.join(out)+'\n')
 print('wrote',a.out,[(w,h,sum(1 for v in px if v)) for w,h,px in frames])

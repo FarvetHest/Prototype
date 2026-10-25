@@ -52,6 +52,6 @@
     26,
     48
   ],
-  "eboot_sha256": "9b5414f2a0fe49ce1e60dce6f408adee3b29a03f72b40322fddd2b451bbce7ee",
+  "eboot_sha256": "d5d2a6515150c418ae8578d21b4c0b3ceeba7334f5a0dc04ae21b32b6f7b760b",
   "note": "Real pickup, jump and attack input; debugger fixtures position actors/food and force continue. Native selftests separately cover boss rage, anti-air and death gating."
 }

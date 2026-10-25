@@ -1,0 +1,35 @@
+{
+  "version": "0.26",
+  "status": "development, live AI integration incomplete",
+  "release_ready": false,
+  "eboot_sha256": "d5d2a6515150c418ae8578d21b4c0b3ceeba7334f5a0dc04ae21b32b6f7b760b",
+  "eboot_bytes": 4189758,
+  "native_selftest": 0,
+  "legacy_regression_checks": 198,
+  "new_probe_checks": 6,
+  "original_ids_verified": 32,
+  "steps_per_id": 240,
+  "host_mips_exact_match": true,
+  "t4_pages": 25,
+  "t4_ram_bytes": 3276800,
+  "additional_vram_bytes": 0,
+  "legacy_gameplay_performance": {
+    "level-performance": {
+      "min": 29.97,
+      "median": 29.97,
+      "max": 29.97
+    },
+    "max-level-performance": {
+      "min": 29.97,
+      "median": 29.97,
+      "max": 29.97
+    },
+    "max-boss-performance": {
+      "min": 29.97,
+      "median": 29.97,
+      "max": 29.97
+    }
+  },
+  "new_live_ai_performance_verified": false,
+  "hardware_tested": false
+}

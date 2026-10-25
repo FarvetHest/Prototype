@@ -7,6 +7,6 @@
     "guard_does_not_change_body_phase": true,
     "clearing_source_guard_restores_damage": true
   },
-  "eboot_sha256": "9b5414f2a0fe49ce1e60dce6f408adee3b29a03f72b40322fddd2b451bbce7ee",
+  "eboot_sha256": "d5d2a6515150c418ae8578d21b4c0b3ceeba7334f5a0dc04ae21b32b6f7b760b",
   "note": "Real Square attack through dispatcher after edits to original big-endian SST byte6F. Built-in MIPS regressions also cover all six own-sound IDs, target34, guard precedence and slot-independent Donovan/Galsia attacks."
 }

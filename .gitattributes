@@ -5,3 +5,12 @@ original/vendor/SOR1.asm -text
 original/max.fpg -text
 
 original/vendor/SOR2.asm -text
+
+# Keep pinned CPU sources and diagnostic source hashes byte-exact.
+src/vendor/musashi/** -text -whitespace
+src/bk3vm.c -text
+src/bk3vm.h -text
+src/bk3vm_data.h -text
+src/bk3gfx.c -text
+src/bk3gfx.h -text
+src/bk3gfx_data.h -text

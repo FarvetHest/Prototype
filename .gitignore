@@ -1,7 +1,8 @@
 *.o
 *.pyc
+*.dll
+*.so
 __pycache__/
 music.wav
-build/music.wav
 lite-profile.csv
-build/lite-profile.csv
+build/

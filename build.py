@@ -40,7 +40,10 @@ def main():
     common = ['-O2','-G0','-std=gnu99','-Wall','-Wextra','-Werror',
               '-ffunction-sections','-fdata-sections','-D_PSP_FW_VERSION=600',
               '-I'+(sdk/'psp/sdk/include').as_posix(),'-I'+(sdk/'psp/include').as_posix(),'-Isrc']
-    for name in ('main','fx','max','level','held','flow','game','machine','death','bk3','combat','rules','impact','enemy','variety','reactions','sfx','ai','physics','sprites','stage','music','ui'):
+    vmflags=['-DM68K_EMULATE_010=0','-DM68K_EMULATE_EC020=0','-DM68K_EMULATE_020=0','-DM68K_EMULATE_030=0','-DM68K_EMULATE_040=0','-DM68K_EMULATE_PMMU=0','-DM68K_INSTRUCTION_HOOK=1']
+    for core in ('m68kcpu','m68kops'):
+        run('psp-gcc', *common, *vmflags, '-Wno-unused-variable', '-c', 'src/vendor/musashi/'+core+'.c','-o',(out/(core+'.o')).as_posix())
+    for name in ('main','bk3vm','bk3gfx','fx','max','level','held','flow','game','machine','death','bk3','combat','rules','impact','enemy','variety','reactions','sfx','ai','physics','sprites','stage','music','ui'):
         run('psp-gcc', *common, '-c', 'src/'+name+'.c','-o',(out/(name+'.o')).as_posix())
     run('psp-gcc','-G0','-c','src/sprite_atlas.S','-o',(out/'sprite_atlas.o').as_posix())
     run('psp-gcc','-G0','-c','src/max_texture.S','-o',(out/'max_texture.o').as_posix())
@@ -51,7 +54,7 @@ def main():
         '-specs='+(sdk/'psp/sdk/lib/prxspecs').as_posix(),
         '-Wl,-q,-T'+(sdk/'psp/sdk/lib/linkfile.prx').as_posix(),
         '-Wl,-zmax-page-size=128','-Wl,--gc-sections','-Wl,-Map='+ (out/'sorr-lite.map').as_posix(),
-        '-o',elf.as_posix(),(out/'main.o').as_posix(),(out/'fx.o').as_posix(),(out/'max.o').as_posix(),(out/'level.o').as_posix(),(out/'held.o').as_posix(),(out/'flow.o').as_posix(),(out/'game.o').as_posix(),(out/'machine.o').as_posix(),(out/'death.o').as_posix(),(out/'bk3.o').as_posix(),(out/'combat.o').as_posix(),(out/'physics.o').as_posix(),(out/'rules.o').as_posix(),(out/'impact.o').as_posix(),(out/'enemy.o').as_posix(),(out/'variety.o').as_posix(),(out/'reactions.o').as_posix(),(out/'sfx.o').as_posix(),(out/'ai.o').as_posix(),
+        '-o',elf.as_posix(),(out/'main.o').as_posix(),(out/'bk3vm.o').as_posix(),(out/'bk3gfx.o').as_posix(),(out/'m68kcpu.o').as_posix(),(out/'m68kops.o').as_posix(),(out/'fx.o').as_posix(),(out/'max.o').as_posix(),(out/'level.o').as_posix(),(out/'held.o').as_posix(),(out/'flow.o').as_posix(),(out/'game.o').as_posix(),(out/'machine.o').as_posix(),(out/'death.o').as_posix(),(out/'bk3.o').as_posix(),(out/'combat.o').as_posix(),(out/'physics.o').as_posix(),(out/'rules.o').as_posix(),(out/'impact.o').as_posix(),(out/'enemy.o').as_posix(),(out/'variety.o').as_posix(),(out/'reactions.o').as_posix(),(out/'sfx.o').as_posix(),(out/'ai.o').as_posix(),
         (out/'sprites.o').as_posix(),(out/'sprite_atlas.o').as_posix(),(out/'max_texture.o').as_posix(),
         (out/'stage.o').as_posix(),(out/'music.o').as_posix(),(out/'stage_texture.o').as_posix(),
         (out/'ui.o').as_posix(),(out/'hud_texture.o').as_posix(),
@@ -59,13 +62,14 @@ def main():
         '-lpspge','-lpspctrl','-lm')
     run('psp-fixup-imports',elf)
     run('psp-prxgen',elf,out/'sorr-lite.prx')
-    run('mksfoex','-d','MEMSIZE=0','-s','DISC_ID=SORL00025','-s','DISC_VERSION=1.01','SoRR PSP Lite v0.25',out/'PARAM.SFO')
+    run('mksfoex','-d','MEMSIZE=0','-s','DISC_ID=SORL00026','-s','DISC_VERSION=1.01','SoRR PSP Lite v0.26',out/'PARAM.SFO')
     run('pack-pbp',out/'EBOOT.PBP',out/'PARAM.SFO',*(['NULL']*5),out/'sorr-lite.prx','NULL')
     run('psp-size',elf)
     pbp=out/'EBOOT.PBP'
     (out/'SHA256.txt').write_text(hashlib.sha256(pbp.read_bytes()).hexdigest()+'  EBOOT.PBP\n')
     import shutil
     if (ROOT/'music.wav').exists(): shutil.copy2(ROOT/'music.wav',out/'music.wav')
+    if (ROOT/'assets/bk3-graphics.bin').exists(): shutil.copy2(ROOT/'assets/bk3-graphics.bin',out/'bk3-graphics.bin')
     print('Built:',pbp)
 
 if __name__ == '__main__':
